@@ -1,0 +1,19 @@
+{
+  "name": "GENESIS #003 — Deniable, Devastating",
+  "symbol": "SCANDAL",
+  "description": "The Underground lane. Expensive. Deniable. The only place you can lose a card and gain a secret. Those who hold this card know things.",
+  "image": "https://raw.githubusercontent.com/k319k/SCANDAL/main/token/logo.svg",
+  "external_url": "https://github.com/k319k/SCANDAL",
+  "attributes": [
+    { "trait_type": "Edition", "value": "3/77" },
+    { "trait_type": "Lane", "value": "The Underground" },
+    { "trait_type": "Card Type", "value": "Meme" },
+    { "trait_type": "Volatility", "value": "Unpredictable" }
+  ],
+  "properties": {
+    "files": [
+      { "uri": "https://raw.githubusercontent.com/k319k/SCANDAL/main/token/logo.svg", "type": "image/svg+xml" }
+    ],
+    "category": "image"
+  }
+}

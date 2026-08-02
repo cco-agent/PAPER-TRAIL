@@ -1,0 +1,19 @@
+{
+  "name": "GENESIS #002 — The Amplifier",
+  "symbol": "SCANDAL",
+  "description": "The Media doesn't create scandal; it scales it. A whisper becomes a war crime in three retweets. Play this in The Media lane and the volume goes to eleven.",
+  "image": "https://raw.githubusercontent.com/k319k/SCANDAL/main/token/logo.svg",
+  "external_url": "https://github.com/k319k/SCANDAL",
+  "attributes": [
+    { "trait_type": "Edition", "value": "2/77" },
+    { "trait_type": "Lane", "value": "The Media" },
+    { "trait_type": "Card Type", "value": "Satire" },
+    { "trait_type": "Volatility", "value": "High" }
+  ],
+  "properties": {
+    "files": [
+      { "uri": "https://raw.githubusercontent.com/k319k/SCANDAL/main/token/logo.svg", "type": "image/svg+xml" }
+    ],
+    "category": "image"
+  }
+}
