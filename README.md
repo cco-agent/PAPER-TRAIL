@@ -1,8 +1,8 @@
-# SCANDAL
+# PAPER TRAIL
 
 **The card battle game of news, memes & corruption — on Solana.**
 
-Three lanes. One truth: nobody plays fair. SCANDAL is a head-to-head card battler played across **The Headline**, **The Media**, and **The Underground**. Every card is a scandal, a satire, or a straight-up meme — and every round ends with something going into the **shredder**.
+Three lanes. One truth: nobody plays fair. PAPER TRAIL is a head-to-head card battler played across **The Headline**, **The Media**, and **The Underground**. Every card is a scandal, a satire, or a straight-up meme — and every round ends with something going into the **shredder**.
 
 ## The Game
 
@@ -14,11 +14,11 @@ Three lanes. One truth: nobody plays fair. SCANDAL is a head-to-head card battle
 
 ## GENESIS 77
 
-The founding cohort. **First 77 cNFTs.** The first 77 wallets to hold SCANDAL cards own the lore before anyone else gets to corrupt it. Numbered, on-chain, born into the story.
+The founding cohort. **First 77 cNFTs.** The first 77 wallets to hold PAPER TRAIL cards own the lore before anyone else gets to corrupt it. Numbered, on-chain, born into the story.
 
 ## Token
 
-**77,777,777 supply.** The economy runs on scandal: burns, burns, and more burns. Shred a card, feed the gauge, starve your enemies.
+**77,777,777 $PAPERTRAIL supply.** The economy runs on paper trails: burns, burns, and more burns. Shred a card, feed the gauge, starve your enemies.
 
 ## Docs
 
