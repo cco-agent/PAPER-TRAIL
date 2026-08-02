@@ -1,0 +1,19 @@
+{
+  "name": "PAPER TRAIL",
+  "symbol": "PAPERTRAIL",
+  "description": "PAPER TRAIL is the card battle game of news, memes & corruption on Solana. Three lanes: The Headline, The Media, The Underground. Burn-to-fuel shredders, 5-second volatility, 3-minute tug-of-war, ELO hell. Supply: 77,777,777. The economy runs on appetite. Burn it. Feed the gauge.",
+  "image": "https://raw.githubusercontent.com/k319k/SCANDAL/main/token/logo.svg",
+  "external_url": "https://github.com/k319k/SCANDAL",
+  "attributes": [
+    { "trait_type": "Supply", "value": "77,777,777" },
+    { "trait_type": "Era", "value": "GENESIS" },
+    { "trait_type": "Lanes", "value": "The Headline / The Media / The Underground" },
+    { "trait_type": "Volatility", "value": "5-second swings" }
+  ],
+  "properties": {
+    "files": [
+      { "uri": "https://raw.githubusercontent.com/k319k/SCANDAL/main/token/logo.svg", "type": "image/svg+xml" }
+    ],
+    "category": "image"
+  }
+}
