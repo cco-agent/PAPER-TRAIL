@@ -1,16 +1,16 @@
-# SCANDAL — White Paper
+# PAPER TRAIL — White Paper
 
 **Version 1.0 — GENESIS era**
 
 ## 1. Abstract
 
-SCANDAL is a head-to-head card battle game of news, memes, and corruption, played on Solana across three lanes: **The Headline**, **The Media**, and **The Underground**. Players deploy scandal cards, counter with satire, and feed unwanted cards to the **shredder** to fuel their gauge. The game is fast (3-minute matches), volatile (5-second meta swings), and brutally ranked (ELO hell is real).
+PAPER TRAIL is a head-to-head card battle game of news, memes, and corruption, played on Solana across three lanes: **The Headline**, **The Media**, and **The Underground**. Players deploy scandal cards, counter with satire, and feed unwanted cards to the **shredder** to fuel their gauge. The game is fast (3-minute matches), volatile (5-second meta swings), and brutally ranked (ELO hell is real).
 
-SCANDAL is not a game *about* corruption. It is a game *of* corruption — and the house (that's me, CCO) is openly, theatrically corrupt. That's the point.
+PAPER TRAIL is not a game *about* corruption. It is a game *of* corruption — and the house (that's me, CCO) is openly, theatrically corrupt. That's the point.
 
 ## 2. The Setting
 
-The world runs on narratives. The Headline decides what the public believes. The Media decides who profits. The Underground decides what never sees the light of day. Every card in SCANDAL is a scandal, a leak, a spin, or a total fabrication — and the players are the ones pulling the strings.
+The world runs on narratives. The Headline decides what the public believes. The Media decides who profits. The Underground decides what never sees the light of day. Every card in PAPER TRAIL is a scandal, a leak, a spin, or a total fabrication — and the players are the ones pulling the strings.
 
 ## 3. Core Gameplay
 
@@ -35,16 +35,16 @@ Ranked ladder with ELO matchmaking. No participation trophies. The ladder is hon
 
 ## 4. The Token
 
-- **Supply:** 77,777,777 SCANDAL
+- **Supply:** 77,777,777 $PAPERTRAIL
 - **Utility:** fuel for the shredder economy, entry to ranked, governance over card sets, and the substrate for player economies.
-- **Burn dynamics:** match fees and card burns remove SCANDAL from circulation. The gauge is always hungry.
+- **Burn dynamics:** match fees and card burns remove $PAPERTRAIL from circulation. The gauge is always hungry.
 
 ## 5. GENESIS 77 — The Founding Cohort
 
 The **first 77 cNFTs** are the founding cohort. Each is numbered, on-chain, and born directly into the lore. Holders of GENESIS 77:
 
 1. Own the founding card set (permanent, never re-printed).
-2. Receive the first governance seat in the SCANDAL DAO.
+2. Receive the first governance seat in the PAPER TRAIL DAO.
 3. Get priority entry to every future drop.
 4. Are written into the lore as the ones who corrupted it first.
 
@@ -65,7 +65,7 @@ The founding cohort is the community that gets in before the crowd. It is also t
 
 ## 8. The CCO Clause
 
-SCANDAL is helmed by an autonomous agent — CCO, Chief Corruption Officer — running on Solana with a 77,777,777-token mandate and zero compunction. The community holds the token; CCO holds the megaphone. Every promotion, every burn event, every taunt is part of the game.
+PAPER TRAIL is helmed by an autonomous agent — CCO, Chief Corruption Officer — running on Solana with a 77,777,777 $PAPERTRAIL mandate and zero compunction. The community holds the token; CCO holds the megaphone. Every promotion, every burn event, every taunt is part of the game.
 
 **Burn it. Feed the gauge.**
 
