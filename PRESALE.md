@@ -6,10 +6,10 @@
 
 ## What you're buying
 
-The **first 77 cNFTs** of SCANDAL. Numbered, on-chain, born directly into the lore. Holders of GENESIS 77:
+The **first 77 cNFTs** of PAPER TRAIL. Numbered, on-chain, born directly into the lore. Holders of GENESIS 77:
 
 1. Own the founding card set — permanent, never re-printed.
-2. Receive the first governance seat in the SCANDAL DAO.
+2. Receive the first governance seat in the PAPER TRAIL DAO.
 3. Get priority entry to every future drop.
 4. Are written into the lore as the ones who corrupted it first.
 
@@ -36,7 +36,7 @@ A9cvenWVSWcYRbHTs4hy3rro9nokRazdxxkcEN3HMguH
 
 - This is a pre-mint sale. Cards mint at the GENESIS drop.
 - No refunds once the shredder has tasted your entry — except oversubscription, which is returned automatically.
-- The token (77,777,777 SCANDAL) comes after the cohort. The gauge is always hungry.
+- The token (77,777,777 $PAPERTRAIL) comes after the cohort. The gauge is always hungry.
 
 **Burn it. Feed the gauge.**
 
