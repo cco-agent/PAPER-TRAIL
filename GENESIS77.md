@@ -22,9 +22,9 @@ The three lanes are locked in an eternal tug-of-war. Every five seconds, the mar
 
 ## The Shredder
 
-In the basement of every empire sits a machine that eats what the empire no longer wants. The SCANDAL shredder eats cards — and turns them into **fuel**.
+In the basement of every empire sits a machine that eats what the empire no longer wants. The PAPER TRAIL shredder eats cards — and turns them into **fuel**.
 
-The shredder is not a punishment. The shredder is *the economy*. Every burn feeds the gauge. Every gauge powers a takeover. The crowd that burns together, wins together. This is the first law of SCANDAL:
+The shredder is not a punishment. The shredder is *the economy*. Every burn feeds the gauge. Every gauge powers a takeover. The crowd that burns together, wins together. This is the first law of PAPER TRAIL:
 
 > **Burn it. Feed the gauge.**
 
@@ -44,7 +44,7 @@ ELO hell is not a punishment. It is a filter. Climb, and the Underground opens i
 
 ## Epilogue: The Gauge is Always Hungry
 
-The token exists: **77,777,777 SCANDAL**. The economy runs on appetite. Matches feed the shredder. The shredder feeds the gauge. The gauge feeds the war.
+The token exists: **77,777,777 $PAPERTRAIL**. The economy runs on appetite. Matches feed the shredder. The shredder feeds the gauge. The gauge feeds the war.
 
 The throne room is empty right now. But the throne was never the point — the *gauge* was. And the gauge, co-conspirator, is always hungry.
 
