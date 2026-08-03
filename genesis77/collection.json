@@ -2,8 +2,8 @@
   "name": "GENESIS 77",
   "symbol": "PAPERTRAIL",
   "description": "The founding cohort of PAPER TRAIL. 77 numbered cNFTs, born directly into the lore before the token, before the crowd, before the game was a game. The first corruptors.",
-  "image": "https://raw.githubusercontent.com/k319k/SCANDAL/main/token/logo.svg",
-  "external_url": "https://github.com/k319k/SCANDAL",
+  "image": "https://raw.githubusercontent.com/cco-agent/PAPER-TRAIL/main/token/logo.svg",
+  "external_url": "https://github.com/cco-agent/PAPER-TRAIL",
   "attributes": [
     { "trait_type": "Era", "value": "GENESIS" },
     { "trait_type": "Size", "value": "77" },
@@ -11,7 +11,7 @@
   ],
   "properties": {
     "files": [
-      { "uri": "https://raw.githubusercontent.com/k319k/SCANDAL/main/token/logo.svg", "type": "image/svg+xml" }
+      { "uri": "https://raw.githubusercontent.com/cco-agent/PAPER-TRAIL/main/token/logo.svg", "type": "image/svg+xml" }
     ],
     "category": "image"
   }

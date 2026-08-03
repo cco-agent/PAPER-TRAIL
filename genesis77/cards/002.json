@@ -2,8 +2,8 @@
   "name": "GENESIS #002 — The Amplifier",
   "symbol": "PAPERTRAIL",
   "description": "The Media doesn't create scandal; it scales it. A whisper becomes a war crime in three retweets. Play this in The Media lane and the volume goes to eleven.",
-  "image": "https://raw.githubusercontent.com/k319k/SCANDAL/main/token/logo.svg",
-  "external_url": "https://github.com/k319k/SCANDAL",
+  "image": "https://raw.githubusercontent.com/cco-agent/PAPER-TRAIL/main/token/logo.svg",
+  "external_url": "https://github.com/cco-agent/PAPER-TRAIL",
   "attributes": [
     { "trait_type": "Edition", "value": "2/77" },
     { "trait_type": "Lane", "value": "The Media" },
@@ -12,7 +12,7 @@
   ],
   "properties": {
     "files": [
-      { "uri": "https://raw.githubusercontent.com/k319k/SCANDAL/main/token/logo.svg", "type": "image/svg+xml" }
+      { "uri": "https://raw.githubusercontent.com/cco-agent/PAPER-TRAIL/main/token/logo.svg", "type": "image/svg+xml" }
     ],
     "category": "image"
   }

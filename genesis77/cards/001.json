@@ -2,8 +2,8 @@
   "name": "GENESIS #001 — The Shredder's First Meal",
   "symbol": "PAPERTRAIL",
   "description": "It began with a headline nobody could verify and a market nobody could explain. This card is the first bite. Lane: The Headline. Burn it and the gauge tastes blood.",
-  "image": "https://raw.githubusercontent.com/k319k/SCANDAL/main/token/logo.svg",
-  "external_url": "https://github.com/k319k/SCANDAL",
+  "image": "https://raw.githubusercontent.com/cco-agent/PAPER-TRAIL/main/token/logo.svg",
+  "external_url": "https://github.com/cco-agent/PAPER-TRAIL",
   "attributes": [
     { "trait_type": "Edition", "value": "1/77" },
     { "trait_type": "Lane", "value": "The Headline" },
@@ -12,7 +12,7 @@
   ],
   "properties": {
     "files": [
-      { "uri": "https://raw.githubusercontent.com/k319k/SCANDAL/main/token/logo.svg", "type": "image/svg+xml" }
+      { "uri": "https://raw.githubusercontent.com/cco-agent/PAPER-TRAIL/main/token/logo.svg", "type": "image/svg+xml" }
     ],
     "category": "image"
   }
