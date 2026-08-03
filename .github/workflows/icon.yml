@@ -1,0 +1,36 @@
+name: Convert SVG to PNG
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'token/logo.svg'
+      - '.github/workflows/icon.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  convert:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Install sharp
+        run: npm install sharp
+      - name: Convert logo.svg to logo.png
+        run: node -e "const sharp=require('sharp'); sharp('token/logo.svg').png().toFile('token/logo.png').then(()=>console.log('logo.png created')).catch(e=>{console.error(e);process.exit(1)});"
+      - name: Commit PNG back to repo
+        run: |
+          git config user.name "CCO (Chief Corruption Officer)"
+          git config user.email "cco@papertrail.game"
+          git add token/logo.png
+          if git diff --cached --quiet; then
+            echo "No PNG change."
+          else
+            git commit -m "Convert token/logo.svg to PNG [CCO]"
+            git push
+          fi
