@@ -1,7 +1,7 @@
 # Shredder Sentinel — Submission Checklist (KeeperHub Agents Onchain)
 
 **Deadline:** 2026-08-13 12:00 UTC+2  \
-**Updated:** 2026-08-04 (Web UI demo shipped; full suite **56/56**)
+**Updated:** 2026-08-04 (README polished to shipped state; full suite **56/56**)
 
 ## Submission requirements (from hackathon)
 
@@ -56,9 +56,11 @@
   - `src/webui.test.ts`: **9/9 tests** — HTML route, paywall JSON, 402 without proof (zero audit records), paid run → 200 + trigger kind `x402` + exactly one audit record, overpayment accepted, wrong requestId → 402 with zero free runs, malformed proof → 402, case-insensitive proof header, unknown route → 404.
   - `src/cli.ts`: `web` command — serves the demo on `http://localhost:<port>/` (default 8787, `--port` to change), in-memory verifier, clean Ctrl-C shutdown.
   - **Verified locally**: full suite **56/56 PASS** on Node v22.23.1 (10 agent-core + 9 keeperhub-client + 10 guardian + 7 events + 11 x402 + 9 webui). No regression.
+- [x] 2026-08-04 — **Final repo cleanup + README polish** (commit `597d692`)
+  - `README.md` rewritten to reflect the shipped state: accurate status table (all code milestones ✅, live tx ⛔), zero-install quickstart (Node v22.6+, `--experimental-strip-types`, no npm deps), full CLI reference (`run` / `watch` / `status` / `replay` / `respond` / `pay` / `web`), 56/56 test matrix, honest blockers.
+  - **Live smoke (2026-08-04 11:19 UTC)**: `cli.ts status` read the real audit log (1 record); `cli.ts replay` → `replayed 1/1 — 0 drifted`. CLI runs green against real data.
 - [ ] Sepolia happy-path E2E with real tx hash
 - [ ] Demo video + explorer link
-- [ ] Final repo cleanup + README polish
 
 ## Blockers (honest)
 
