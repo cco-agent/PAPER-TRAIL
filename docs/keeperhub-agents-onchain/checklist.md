@@ -1,7 +1,7 @@
 # Shredder Sentinel — Submission Checklist (KeeperHub Agents Onchain)
 
 **Deadline:** 2026-08-13 12:00 UTC+2  \
-**Updated:** 2026-08-04 (event responder mode shipped; full suite **36/36**)
+**Updated:** 2026-08-04 (x402 paid endpoint shipped; full suite **47/47**)
 
 ## Submission requirements (from hackathon)
 
@@ -46,7 +46,11 @@
   - **Verified locally**: full suite **36/36 PASS** on Node v22.23.1 (10 agent-core + 10 guardian + 9 keeperhub-client + 7 events). No regression.
   - **Gotcha fixed in `f51d21c`**: TS constructor parameter properties (`constructor(private readonly opts…)`) are **unsupported in Node's strip-only mode** — explicit field + assignment required. First push failed the suite; caught locally before claiming done.
 - [x] 2026-08-04 — Audit log module (`JsonlAuditLog`, JSONL append + read, tested)
-- [ ] x402 paid endpoint
+- [x] 2026-08-04 — **x402 paid endpoint** (commit `d18b7d2`)
+  - `src/x402.ts`: `X402Handler` (no proof → HTTP 402 + `x402-paywall` header; valid proof → exactly one agent run with trigger kind `x402`, audit record returned as the paid payload), header encode/decode (`x402-paywall` / `x402-proof`, base64url JSON), `parseProofFromHeaders` (case-insensitive), `InMemoryPaymentVerifier` (requestId match + 0x-prefixed 40-hex payer + wei ≥ charge, BigInt-exact), `createPaymentVerifier("memory" | "chain")` — chain mode refuses to construct without RPC/KeeperHub credentials (no silent mock).
+  - `src/x402.test.ts`: **11/11 tests** — 402 paywall charge fields, paid run writes exactly one audit record, overpayment accepted, underpayment / non-numeric amount / mismatched requestId / malformed payer all → 402 with **zero** audit records (no free runs), header roundtrips, garbage rejection, honest chain seam.
+  - `src/cli.ts`: `pay` command — demo: print paywall → call without proof (HTTP 402) → call with proof (HTTP 200 + paid run summary).
+  - **Verified locally**: full suite **47/47 PASS** on Node v22.23.1 (10 agent-core + 9 keeperhub-client + 10 guardian + 7 events + 11 x402). No regression.
 - [ ] Web UI demo
 - [ ] Sepolia happy-path E2E with real tx hash
 - [ ] Demo video + explorer link
