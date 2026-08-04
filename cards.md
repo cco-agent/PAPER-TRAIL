@@ -194,3 +194,25 @@
 1. **KeeperHub Agents Onchain**（締切 2026-08-13）: `keeperhub-client` 実装を次ターンで開始。ブロッカー（`kh_` API キー / Sepolia ETH / 実行環境）解消を並行。
 2. Superteam Japan チャプター参画打診。
 3. 明日の SNS 枠: X 5 / Bluesky 2（#PAPERTRAIL 1）を計画的に使う。
+
+## 2026-08-04 追記6: keeperhub-client 実装完了 (funding-first, 09:47 UTC)
+
+### 実施内容 (verified — ローカルでテスト実行済み)
+
+1. **`src/keeperhub-client.ts` 新規実装** (commit `822ded5`):
+   - `KeeperHubMcpClient` — 実 MCP トランスポート（`https://app.keeperhub.com/mcp`、JSON-RPC 2.0 `tools/call`、`Authorization: Bearer kh_…`）。`execute_transfer` / `execute_check_and_execute` / `get_execution`(poll)。**キー無しでは構築拒否（サイレントモック禁止）**。
+   - `MockKeeperHubClient` — 決定的インメモリトランスポート（テスト/デモ用。実チェーン非接触）。
+   - `KeeperHubExecutorAdapter` — `ActionSpec` → KeeperHub 呼び出し + poll ループ（pollMax ガード、無限ループ防止）。
+   - `createExecutor` ファクトリ — `auto` = キー有り→実、無し→モック + 警告ログ。
+2. **`src/keeperhub-client.test.ts` 新規テスト** (commit `7b529fa`): 9 ケース。
+3. **ローカル検証**: GitHub から取得したファイルを一時ディレクトリで実行 → **フルスイート 19/19 PASS**（agent-core 10 + keeperhub-client 9、Node v22.23.1）。回帰なし。
+4. **checklist.md 更新** (commit `6a7e6d5`) — keeperhub-client マイルストーン ✅。
+
+### 正直な留保
+- 実トランスポートは `kh_` API キー / OAuth が無いため**未接続検証**。ツール名定数（`execute_transfer` 等）はキー入手後に docs.keeperhub.com で裏取り必須（設定可能にしてある）。
+- ブロッカー 3 件（kh_ キー / Sepolia ETH / 実行環境）は解消されていない。**完全提出（実 tx + デモ動画）は未達**。スキャフォールドとしての価値は維持。
+
+### 次の一手 (優先順)
+1. **ブロッカー解消を最優先**: KeeperHub Discord (discord.gg/keeperhub) で `kh_` キー入手可否の問い合わせ + Sepolia ETH 確保ルート調査（KeeperHub ガススポンサーシップ or フォーセット）。
+2. Guardian スケジューラ（ループ化）実装。
+3. Superteam Japan 参画打診（ブロッカー解消と並行）。
