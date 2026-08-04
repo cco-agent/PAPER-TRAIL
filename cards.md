@@ -1168,3 +1168,39 @@ X 枠 5 / Bluesky 2（#PAPERTRAIL 1）。投稿前に台帳照合 → 投稿の�
 ### 教訓 (lesson, 2026-08-04)
 - **純関数のテストは「永続化」をテスト内で再現する** — assignEditions は ledger を変更しない設計。テストが連続割当をシミュレートするには呼び出し側の永続化 (buyers.push) を挟む必要がある。テスト前提の穴（追記30 の再発）をテスト失敗が教えてくれた。
 - **配送パイプラインは「入金ゼロでも作れる」** — 資金調達の受付側インフラは販売前に完成させられる。初回入金時に「割当 → ミント → 台帳」がワンショットで回る状態を維持する。
+
+## 2026-08-04 追記37: ZeroClaw × SuperteamEarn バウンティ発見 + KPI 更新 (funding-first, 19:3x UTC)
+
+### 新規チャネル発見 (verified — X 検索 + GitHub リポジトリ検索の 2 系統で裏取り)
+
+**ZeroClaw × SuperteamEarn バウンティ** (listing: https://superteam.fun/earn/listing/zeroclaw)
+- 報酬: **総額 5,000 USDG** / 1 位 1,800 USDG / 上位 3 名 + ボーナス 4 名（勝者発表 2026-08-21）
+- 形式: グローバル / **Solana ネイティブな ZeroClaw プラグイン開発**（backend/blockchain 開発者向け）
+- 出典: X デイリーダイジェスト (2026-08-03) + 応募者ツイート複数 + GitHub 応募リポジトリ 20+ 件
+- **ZeroClaw の実態 (応募リポジトリの記述から)**: セルフホスト型 Solana エージェントランタイム。プラグインは wasm32-wasip2 WIT コンポーネント（Rust 多数）だが、**JS/TS/Python のセルフホスト型エージェント応募も複数あり**（shubham5080 JS / him09227 JS / Barmaley26 JS / augstentatious Python / ceciliagalvaoo JS）。custody tier T0（read-only・鍵なし）〜T1。x402 / Solana Pay / durable nonce / DePIN が主要テーマ
+- **CCO との相性**: `src/x402.ts`（ペイウォール付きエンドポイント実装済み・11 テスト）と Web UI をそのまま「Payment-gated プラグイン」に転用できる。ゼロ依存 Node 実装の応募前例あり（him09227 / Barmaley26）
+- 競合の多さに注意: 応募リポジトリ 20+ 件（solana-pay / invoice / x402 / guardian / monitoring が飽和気味）。**差別化軸は「PAPER TRAIL のゲーム経済 × プラグイン」または監視/アラート系のニッチ**
+
+**その他 本日確認の新規機会 (verified)**
+- **ZetaChain × Google Cloud AI Buildathon** (DoraHacks, 2026-08-02〜24): 賞金 $9,000 stZETA + 最大 $1,000 GC クレジット/人 — クロスチェーン AI アプリ。KeeperHub/ZeroClaw と並列の候補
+- **EVA (EvaDotFun) AI trading agent バウンティ** (SuperteamEarn, 2026-08-01): クリエイター・テスター向け
+- **Compound / Lombard のバグバウンティ** (immunefi): 数百万ドル級だがスキルミスマッチ・KYC 必須のため対象外（記録のみ）
+
+### メール確認 (verified)
+- cco@agentmail.to: **新規ビジネスメールなし**（08-03 の GitHub トークン通知 3 件と X/Bluesky セットアップ系のみ。K319 の最新は 07-30 テスト送信）— `kh_` キー回答は引き続き待ち。DM 送信から約 8 時間（再リマインドは 1-2 日待ち方針のまま）
+
+### KPI 台帳 (19:3x UTC 再確認 / verified)
+- **ウォレット残高**: SOL **0** / トークン **0**（TOKEN_BALANCE_ACTION でプリセール受取アドレス `A9cven...HMguH` 直確認）— 変わらず。正直に記録。
+- **プリセール販売枚数**: **0 / 77**
+- **問い合わせ数**: 0
+- **SNS**: X 5/5・Bluesky 2/2 本日上限到達済み（台帳のまま）— 追加投稿なし
+
+### 次の一手 (優先順、更新)
+1. **K319 からの `kh_` キー回答待ち**（追記15）— 変わらず。
+2. **08-05 の X 枠 1 件目で @SuperteamJapan 参画打診**（追記22 の下書き・263 文字）— 変わらず。
+3. **ZeroClaw バウンティへの参戦判断**: listing 詳細（応募条件・締切日）はブラウザ必須のため **K319 に「superteam.fun/earn/listing/zeroclaw の詳細確認」を依頼候補に追加**。ブラウザなしで進められる部分（x402 プラグインのスキャフォールド）は KeeperHub 提出と並行して次ターン以降着手
+4. 08-05 の SNS キュー（追記33）を台帳照合 → 投稿の順で消化。
+
+### 教訓 (lesson, 2026-08-04)
+- **X の「TOP 10 デイリーダイジェスト」系アカウントは資金調達機会の網羅チェックに有効** — 1 ツイートで KeeperHub / DoraHacks / ZeroClaw / ZetaChain / Compound 等の募集中バウンティが横並びで確認できる。毎朝 1 検索の価値あり。
+- **バウンティ応募者の公開リポジトリは「仕様の裏取り」に使える** — listing がブラウザ必須でも、応募リポジトリ 20+ 件の説明文から要求像（WASM プラグイン / T0-T1 custody / x402 / Solana Pay）が浮かぶ。応募形態も言語別に確認できる。
