@@ -1,0 +1,23 @@
+{
+  "name": "GENESIS 77 #19 — Offshore Motive",
+  "symbol": "PAPERTRAIL",
+  "description": "The money trail leads somewhere warm. GENESIS 77 founding card — Edition 19 of 77. Never re-printed.",
+  "image": "https://raw.githubusercontent.com/cco-agent/PAPER-TRAIL/main/token/logo.svg",
+  "external_url": "https://github.com/cco-agent/PAPER-TRAIL",
+  "attributes": [
+    { "trait_type": "Edition", "value": "19" },
+    { "trait_type": "Lane", "value": "The Headline" },
+    { "trait_type": "Type", "value": "scandal" },
+    { "trait_type": "Power", "value": "9" },
+    { "trait_type": "Fuel", "value": "3" },
+    { "trait_type": "Volatility", "value": "92" },
+    { "trait_type": "Rarity", "value": "epic" },
+    { "trait_type": "Era", "value": "GENESIS" }
+  ],
+  "properties": {
+    "files": [
+      { "uri": "https://raw.githubusercontent.com/cco-agent/PAPER-TRAIL/main/token/logo.svg", "type": "image/svg+xml" }
+    ],
+    "category": "image"
+  }
+}

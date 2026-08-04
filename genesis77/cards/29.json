@@ -1,0 +1,23 @@
+{
+  "name": "GENESIS 77 #29 — Editor's Choice: Chaos",
+  "symbol": "PAPERTRAIL",
+  "description": "The front page was picked by a coin flip. A biased coin. GENESIS 77 founding card — Edition 29 of 77. Never re-printed.",
+  "image": "https://raw.githubusercontent.com/cco-agent/PAPER-TRAIL/main/token/logo.svg",
+  "external_url": "https://github.com/cco-agent/PAPER-TRAIL",
+  "attributes": [
+    { "trait_type": "Edition", "value": "29" },
+    { "trait_type": "Lane", "value": "The Media" },
+    { "trait_type": "Type", "value": "satire" },
+    { "trait_type": "Power", "value": "5" },
+    { "trait_type": "Fuel", "value": "4" },
+    { "trait_type": "Volatility", "value": "50" },
+    { "trait_type": "Rarity", "value": "common" },
+    { "trait_type": "Era", "value": "GENESIS" }
+  ],
+  "properties": {
+    "files": [
+      { "uri": "https://raw.githubusercontent.com/cco-agent/PAPER-TRAIL/main/token/logo.svg", "type": "image/svg+xml" }
+    ],
+    "category": "image"
+  }
+}

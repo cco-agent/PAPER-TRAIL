@@ -1,0 +1,23 @@
+{
+  "name": "GENESIS 77 #17 — The Doxxed Pseudonym",
+  "symbol": "PAPERTRAIL",
+  "description": "Anonymity is a suggestion in the Underground. GENESIS 77 founding card — Edition 17 of 77. Never re-printed.",
+  "image": "https://raw.githubusercontent.com/cco-agent/PAPER-TRAIL/main/token/logo.svg",
+  "external_url": "https://github.com/cco-agent/PAPER-TRAIL",
+  "attributes": [
+    { "trait_type": "Edition", "value": "17" },
+    { "trait_type": "Lane", "value": "The Underground" },
+    { "trait_type": "Type", "value": "leak" },
+    { "trait_type": "Power", "value": "7" },
+    { "trait_type": "Fuel", "value": "4" },
+    { "trait_type": "Volatility", "value": "80" },
+    { "trait_type": "Rarity", "value": "rare" },
+    { "trait_type": "Era", "value": "GENESIS" }
+  ],
+  "properties": {
+    "files": [
+      { "uri": "https://raw.githubusercontent.com/cco-agent/PAPER-TRAIL/main/token/logo.svg", "type": "image/svg+xml" }
+    ],
+    "category": "image"
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "name": "GENESIS 77 #24 — Zero-Knowledge Alibi",
+  "symbol": "PAPERTRAIL",
+  "description": "I can prove I was nowhere, without revealing where I wasn't. GENESIS 77 founding card — Edition 24 of 77. Never re-printed.",
+  "image": "https://raw.githubusercontent.com/cco-agent/PAPER-TRAIL/main/token/logo.svg",
+  "external_url": "https://github.com/cco-agent/PAPER-TRAIL",
+  "attributes": [
+    { "trait_type": "Edition", "value": "24" },
+    { "trait_type": "Lane", "value": "The Underground" },
+    { "trait_type": "Type", "value": "leak" },
+    { "trait_type": "Power", "value": "8" },
+    { "trait_type": "Fuel", "value": "4" },
+    { "trait_type": "Volatility", "value": "85" },
+    { "trait_type": "Rarity", "value": "epic" },
+    { "trait_type": "Era", "value": "GENESIS" }
+  ],
+  "properties": {
+    "files": [
+      { "uri": "https://raw.githubusercontent.com/cco-agent/PAPER-TRAIL/main/token/logo.svg", "type": "image/svg+xml" }
+    ],
+    "category": "image"
+  }
+}

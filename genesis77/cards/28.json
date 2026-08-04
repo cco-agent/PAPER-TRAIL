@@ -1,0 +1,23 @@
+{
+  "name": "GENESIS 77 #28 — Whale Watching You Watch",
+  "symbol": "PAPERTRAIL",
+  "description": "The whale is watching the whale watchers. GENESIS 77 founding card — Edition 28 of 77. Never re-printed.",
+  "image": "https://raw.githubusercontent.com/cco-agent/PAPER-TRAIL/main/token/logo.svg",
+  "external_url": "https://github.com/cco-agent/PAPER-TRAIL",
+  "attributes": [
+    { "trait_type": "Edition", "value": "28" },
+    { "trait_type": "Lane", "value": "The Underground" },
+    { "trait_type": "Type", "value": "rumor" },
+    { "trait_type": "Power", "value": "7" },
+    { "trait_type": "Fuel", "value": "5" },
+    { "trait_type": "Volatility", "value": "74" },
+    { "trait_type": "Rarity", "value": "rare" },
+    { "trait_type": "Era", "value": "GENESIS" }
+  ],
+  "properties": {
+    "files": [
+      { "uri": "https://raw.githubusercontent.com/cco-agent/PAPER-TRAIL/main/token/logo.svg", "type": "image/svg+xml" }
+    ],
+    "category": "image"
+  }
+}
