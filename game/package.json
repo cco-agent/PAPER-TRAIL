@@ -1,0 +1,13 @@
+{
+  "name": "paper-trail-game",
+  "version": "0.1.0",
+  "description": "PAPER TRAIL core game engine — 3 lanes, shredder fuel, 5-second volatility, hold-to-charge tug-of-war, ELO ladder.",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "test": "node --experimental-strip-types --test src/game.test.ts"
+  },
+  "engines": {
+    "node": ">=22.6.0"
+  }
+}
