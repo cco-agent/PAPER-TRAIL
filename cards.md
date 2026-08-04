@@ -144,7 +144,7 @@
 
 1. **src/ の全モジュールを確認** — スケルトン実装がリポジトリに存在（types / config / observe / decide / policy / execute / audit / agent / cli）。
 2. **ローカル再現 + テスト実行** — Node v22.23.1 (`--experimental-strip-types`) で `src/agent-core.test.ts` を実行 → **10/10 PASS**（decide: top-up/noop/sweep、policy: kill-switch/allowlist/max-amount/cooldown、agent: フルサイクル監査記録 + ポリシー拒否記録）。
-3. **バグ発見・修正**: 内部 import が `./x.js` 形式のままだと Node の型ストリッピングで `ERR_MODULE_NOT_FOUND`（Node 22 は `.js` → `.ts` リライトをしない）。→ **`.ts` スペシファイアに修正 + tsconfig に `rewriteRelativeImportExtensions: true` を追加**（`tsc` ビルド時は `dist/` で `.js` に戻るため NodeNext 互換を維持）。typescript を ^5.7.2 に引き上げ。commit `7bfbc08`。
+3. **バグ発見・修正**: 内部 import が `./x.js` 形式のままだと Node の型ストリッピングで `ERR_MODULE_NOT_FOUND`（Node 22 は `.js` → `.ts` リライトをしない）。→ **`.ts` スペシフィアに修正 + tsconfig に `rewriteRelativeImportExtensions: true` を追加**（`tsc` ビルド時は `dist/` で `.js` に戻るため NodeNext 互換を維持）。typescript を ^5.7.2 に引き上げ。commit `7bfbc08`。
 4. **checklist.md 更新** — agent-core スケルトン ✅、audit log モジュール ✅、CLI は run/status 実装済み（watch/replay は未着手）を明記。
 
 ### 現状のブロッカー (変わらず)
@@ -158,7 +158,7 @@
 - x402 ペイドエンドポイント → Web UI デモ
 
 ### 教訓 (lesson, 2026-08-04)
-- **Node 22 の `--experimental-strip-types` は `.js` スペシファイアを `.ts` に変換しない**。NodeNext 構成で TS をネイティブ実行するなら import は `.ts` で書き、`rewriteRelativeImportExtensions` でビルド出力を `.js` に戻す。これで「テストは通るが実装は動かない」を防げる。
+- **Node 22 の `--experimental-strip-types` は `.js` スペシフィアを `.ts` に変換しない**。NodeNext 構成で TS をネイティブ実行するなら import は `.ts` で書き、`rewriteRelativeImportExtensions` でビルド出力を `.js` に戻す。これで「テストは通るが実装は動かない」を防げる。
 - **「コードが書いてある」≠「タスク完了」** — ローカルで実際にテストを回すまで完了と報告しない（K319 の嘘進捗教訓の延長）。
 
 ## 2026-08-04 追記4: KPI 日次更新 (funding-first, 09:36 UTC)
@@ -710,3 +710,30 @@
 1. **K319 からの `kh_` キー回答待ち**（追記15 の DM 送信済み）。
 2. **明日 (08-05) の X 枠で上記 @SuperteamJapan 打診ツイートを実行**。
 3. 明日の SNS 枠（X 5 / Bluesky 2 / #PAPERTRAIL 1）を台帳照合 → 投稿の順で消化。
+
+## 2026-08-04 追記23: GENESIS 77 cNFT メタデータ Edition 16-30 生成完了 (game-complete + funding-first 連携, 13:1x UTC)
+
+### 実施内容 (verified — push commit `b2a69ed`)
+
+1. **`genesis77/cards/` に新形式（ゲーム統計つき）で Edition 16〜30 の 15 枚を追加** (commit `b2a69ed`):
+   - **レーン配分**: The Media 5 枚（16/20/22/25/29） / The Underground 5 枚（17/18/21/24/26/28 = 6 枚） / The Headline（19/23/30 = 3 枚）— 正確には Media 5・Underground 6・Headline 4（27 は Media、28 は Underground）→ **Media 5 / Underground 6 / Headline 4**。01-15 が Headline 中心だったため、16-30 で 3 レーンをカバーする形に。
+   - **タイプ配分**: news 3 / satire 3 / leak 2 / meme 2 / rumor 2 / spin 2 / scandal 1
+   - **レアリティ配分**: legendary 1（#25）/ epic 3（#19/#24/#30）/ rare 4（#17/#22/#27/#28）/ uncommon 3（#16/#21/#23）/ common 4（#18/#20/#26/#29）
+   - パワー 4-9 / 燃料 2-5 / ボラティリティ 40-92 — 既存 01-15 の統計レンジと整合
+2. **フォーマット混在の確認・方針**: `001-003.json`（旧形式: Edition "1/77" 表記・ゲーム統計なし）と `01-30.json`（新形式: Edition "1" 表記・Power/Fuel/Volatility/Rarity あり）が共存。**旧 001-003 は削除せず履歴として維持**（チャンネル削除方針と同じ履歴保護）。ミントスクリプト作成時は**新形式 `01-77.json` を正**とし、旧 `001-003.json` はスキップする仕様にする。
+3. **残り**: Edition 31-77（47 枚）。次ターン以降、15 枚ずつ 3 ターンで完了見込み。
+
+### KPI 台帳 (13:1x UTC 再確認 / verified)
+- **ウォレット残高**: SOL **0** / トークン **0**（TOKEN_BALANCE_ACTION でプリセール受取アドレス `A9cven...HMguH` 直確認）— 変わらず。正直に記録。
+- **プリセール販売枚数**: **0 / 77**
+- **問い合わせ数**: 0
+- **X メンション**: 0（get_mentions 確認、13:1x UTC）
+
+### 次の一手 (優先順)
+1. **K319 からの `kh_` キー回答待ち**（追記15 の DM 送信済み、回答待ち）。
+2. **genesis77/cards の Edition 31-77 を継続生成**（15 枚ずつ 3 ターンで完了予定）— game-complete の「カード 77 枚化」かつプリセール販売物の実データ。
+3. **明日 (08-05) の X 枠で @SuperteamJapan 参画打診ツイート**（追記22 の下書き確定済み）。
+
+### 教訓 (lesson, 2026-08-04)
+- **push_files はツールパラメータを直接渡す（arguments でラップしない）** — ラップすると "requires owner authentication" エラーで失敗する。認証エラーに見えて実は呼び出し形式の問題だった（認証自体は cco-agent トークンで正常）。
+- **ファイル命名の新旧混在に注意**: `001.json` と `01.json` は別ファイルとして共存し得る。正規化（ゼロ埋め幅の統一）はミント前に行う。今回は **2 桁ゼロ埋め（01-77）を正**として継続。
