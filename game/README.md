@@ -19,7 +19,7 @@ Requires Node v22.6+ (native TypeScript type-stripping, zero npm installs).
 ```bash
 npm test
 # or directly:
-node --experimental-strip-types --test src/game.test.ts src/sim.test.ts src/genesis-cards.test.ts
+node --experimental-strip-types --test src/game.test.ts src/sim.test.ts src/genesis-cards.test.ts src/webui.test.ts
 ```
 
 ## GENESIS 77 — founding card set
@@ -39,13 +39,26 @@ Bot-vs-bot matches to explore balance. Three strategies:
 - `hoarder` — stocks fuel first, feeds the shredder aggressively, locks late.
 
 ```bash
-npm run sim
-npm run sim -- --grid   # balance grid: offLanePenalty x weightMax sweep
-# equivalent:
+npm run sim          # full 3x3 strategy matrix
+npm run sim -- --grid  # balance grid: offLanePenalty x weightMax sweep
+npm run web          # browser UI: live sims, match replay, card gallery
+# equivalents:
 node --experimental-strip-types src/battle.ts
+node --experimental-strip-types src/battle.ts --grid
+node --experimental-strip-types src/battle.ts web --port 8787
 ```
 
 The `--grid` mode sweeps `offLanePenalty` × `weightMax` and prints greedy-vs-meta win rates per cell, so balance hypotheses can be tested numerically instead of by feel.
+
+The `web` command serves a zero-dependency browser UI (`node:http` only, no npm installs):
+
+- `GET /` — dark-mode dashboard: run bot series, watch a single match replay (weights, actions, fuel per decision round), browse the full GENESIS 77 card gallery grouped by lane with rarity colors.
+- `GET /api/deck` — the canonical 77-card set (editions, stats, rarities, flavor).
+- `POST /api/sim` — `{ strategy0, strategy1, matches, seed, seconds }` → series result (deterministic per seed).
+- `POST /api/match` — `{ strategy0, strategy1, seed, seconds }` → full per-action trace for one match.
+- `GET /health` — liveness probe.
+
+Request routing is a pure `handle(req)` function (no sockets), so every route is covered by the test suite (`src/webui.test.ts`, 12 tests).
 
 | Module | Purpose |
 |---|---|
@@ -55,5 +68,7 @@ The `--grid` mode sweeps `offLanePenalty` × `weightMax` and prints greedy-vs-me
 | `src/genesis.ts` | Metadata loader (`loadGenesisDeck`), used by tests and tooling |
 | `src/game.ts` | Match engine: create/deploy/burn/volatility/lock/score/ELO |
 | `src/sim.ts` | Bot strategies + `playMatch` / `runSeries` / `mulberry32` seeded rng |
-| `src/battle.ts` | CLI: full matrix, `--grid` balance sweep |
+| `src/webui.ts` | Zero-dep HTTP server: `handle()` + `startServer()` + `traceMatch()` |
+| `src/battle.ts` | CLI: full matrix, `--grid` balance sweep, `web` UI server |
 | `src/sim.test.ts` | Simulator test suite (8 tests — incl. engine-option passthrough) |
+| `src/webui.test.ts` | Web UI test suite (12 tests — routes, sim API, match trace) |
