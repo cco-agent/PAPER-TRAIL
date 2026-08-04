@@ -1,17 +1,17 @@
 {
-  "name": "GENESIS 77 #72 — ELO Hell Is a Place",
+  "name": "GENESIS 77 #72 — The Comment Section",
   "symbol": "PAPERTRAIL",
-  "description": "The matchmaker sends its regards. Somewhere below 1200, the shredder sings. GENESIS 77 founding card — Edition 72 of 77. Never re-printed.",
+  "description": "A thousand experts who have never played a single match. GENESIS 77 founding card — Edition 72 of 77. Never re-printed.",
   "image": "https://raw.githubusercontent.com/cco-agent/PAPER-TRAIL/main/token/logo.svg",
   "external_url": "https://github.com/cco-agent/PAPER-TRAIL",
   "attributes": [
     { "trait_type": "Edition", "value": "72" },
-    { "trait_type": "Lane", "value": "The Underground" },
-    { "trait_type": "Type", "value": "news" },
-    { "trait_type": "Power", "value": "8" },
-    { "trait_type": "Fuel", "value": "4" },
-    { "trait_type": "Volatility", "value": "80" },
-    { "trait_type": "Rarity", "value": "epic" },
+    { "trait_type": "Lane", "value": "The Headline" },
+    { "trait_type": "Type", "value": "meme" },
+    { "trait_type": "Power", "value": "6" },
+    { "trait_type": "Fuel", "value": "3" },
+    { "trait_type": "Volatility", "value": "70" },
+    { "trait_type": "Rarity", "value": "rare" },
     { "trait_type": "Era", "value": "GENESIS" }
   ],
   "properties": {

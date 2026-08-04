@@ -1,17 +1,17 @@
 {
-  "name": "GENESIS 77 #71 — The Leak With a Paywall",
+  "name": "GENESIS 77 #71 — The Mole",
   "symbol": "PAPERTRAIL",
-  "description": "The truth is out there. The rest is behind 0.1 SOL. GENESIS 77 founding card — Edition 71 of 77. Never re-printed.",
+  "description": "They're in the room. They were always in the room. GENESIS 77 founding card — Edition 71 of 77. Never re-printed.",
   "image": "https://raw.githubusercontent.com/cco-agent/PAPER-TRAIL/main/token/logo.svg",
   "external_url": "https://github.com/cco-agent/PAPER-TRAIL",
   "attributes": [
     { "trait_type": "Edition", "value": "71" },
-    { "trait_type": "Lane", "value": "The Media" },
-    { "trait_type": "Type", "value": "leak" },
-    { "trait_type": "Power", "value": "4" },
-    { "trait_type": "Fuel", "value": "3" },
-    { "trait_type": "Volatility", "value": "50" },
-    { "trait_type": "Rarity", "value": "common" },
+    { "trait_type": "Lane", "value": "The Underground" },
+    { "trait_type": "Type", "value": "scandal" },
+    { "trait_type": "Power", "value": "8" },
+    { "trait_type": "Fuel", "value": "5" },
+    { "trait_type": "Volatility", "value": "86" },
+    { "trait_type": "Rarity", "value": "epic" },
     { "trait_type": "Era", "value": "GENESIS" }
   ],
   "properties": {

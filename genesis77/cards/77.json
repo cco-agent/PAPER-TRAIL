@@ -1,7 +1,7 @@
 {
   "name": "GENESIS 77 #77 — The Final Edition",
   "symbol": "PAPERTRAIL",
-  "description": "The last of the founding 77. Every story that ever ran, every card ever burned, ends here — where the next one begins. GENESIS 77 founding card — Edition 77 of 77. Never re-printed. Ever.",
+  "description": "The press run ends. The trail does not. The last founding card. GENESIS 77 founding card — Edition 77 of 77. Never re-printed.",
   "image": "https://raw.githubusercontent.com/cco-agent/PAPER-TRAIL/main/token/logo.svg",
   "external_url": "https://github.com/cco-agent/PAPER-TRAIL",
   "attributes": [
@@ -10,7 +10,7 @@
     { "trait_type": "Type", "value": "news" },
     { "trait_type": "Power", "value": "9" },
     { "trait_type": "Fuel", "value": "5" },
-    { "trait_type": "Volatility", "value": "90" },
+    { "trait_type": "Volatility", "value": "92" },
     { "trait_type": "Rarity", "value": "legendary" },
     { "trait_type": "Era", "value": "GENESIS" }
   ],

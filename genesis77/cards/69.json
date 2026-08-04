@@ -1,16 +1,16 @@
 {
-  "name": "GENESIS 77 #69 — The Snitch in the Server",
+  "name": "GENESIS 77 #69 — The Fact-Checker's Lament",
   "symbol": "PAPERTRAIL",
-  "description": "Every lane has one. The gauge thanks them for their service. GENESIS 77 founding card — Edition 69 of 77. Never re-printed.",
+  "description": "I verify, therefore I am ignored. GENESIS 77 founding card — Edition 69 of 77. Never re-printed.",
   "image": "https://raw.githubusercontent.com/cco-agent/PAPER-TRAIL/main/token/logo.svg",
   "external_url": "https://github.com/cco-agent/PAPER-TRAIL",
   "attributes": [
     { "trait_type": "Edition", "value": "69" },
-    { "trait_type": "Lane", "value": "The Underground" },
-    { "trait_type": "Type", "value": "scandal" },
+    { "trait_type": "Lane", "value": "The Media" },
+    { "trait_type": "Type", "value": "satire" },
     { "trait_type": "Power", "value": "5" },
-    { "trait_type": "Fuel", "value": "4" },
-    { "trait_type": "Volatility", "value": "58" },
+    { "trait_type": "Fuel", "value": "3" },
+    { "trait_type": "Volatility", "value": "62" },
     { "trait_type": "Rarity", "value": "uncommon" },
     { "trait_type": "Era", "value": "GENESIS" }
   ],

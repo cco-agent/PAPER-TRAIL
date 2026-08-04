@@ -1,7 +1,7 @@
 {
-  "name": "GENESIS 77 #74 — The Satire Section",
+  "name": "GENESIS 77 #74 — The Editor's Cut",
   "symbol": "PAPERTRAIL",
-  "description": "It's satire. It's also accurate. That's the joke. GENESIS 77 founding card — Edition 74 of 77. Never re-printed.",
+  "description": "The story you saw is not the story that was written. GENESIS 77 founding card — Edition 74 of 77. Never re-printed.",
   "image": "https://raw.githubusercontent.com/cco-agent/PAPER-TRAIL/main/token/logo.svg",
   "external_url": "https://github.com/cco-agent/PAPER-TRAIL",
   "attributes": [
@@ -10,8 +10,8 @@
     { "trait_type": "Type", "value": "satire" },
     { "trait_type": "Power", "value": "7" },
     { "trait_type": "Fuel", "value": "4" },
-    { "trait_type": "Volatility", "value": "70" },
-    { "trait_type": "Rarity", "value": "rare" },
+    { "trait_type": "Volatility", "value": "82" },
+    { "trait_type": "Rarity", "value": "epic" },
     { "trait_type": "Era", "value": "GENESIS" }
   ],
   "properties": {

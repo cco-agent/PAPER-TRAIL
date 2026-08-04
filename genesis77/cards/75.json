@@ -1,17 +1,17 @@
 {
-  "name": "GENESIS 77 #75 — FUD With Footnotes",
+  "name": "GENESIS 77 #75 — The Mole's Mole",
   "symbol": "PAPERTRAIL",
-  "description": "Terrifying headline, immaculate citations. GENESIS 77 founding card — Edition 75 of 77. Never re-printed.",
+  "description": "The spy is spying on the spy. GENESIS 77 founding card — Edition 75 of 77. Never re-printed.",
   "image": "https://raw.githubusercontent.com/cco-agent/PAPER-TRAIL/main/token/logo.svg",
   "external_url": "https://github.com/cco-agent/PAPER-TRAIL",
   "attributes": [
     { "trait_type": "Edition", "value": "75" },
     { "trait_type": "Lane", "value": "The Underground" },
-    { "trait_type": "Type", "value": "rumor" },
-    { "trait_type": "Power", "value": "4" },
-    { "trait_type": "Fuel", "value": "2" },
-    { "trait_type": "Volatility", "value": "46" },
-    { "trait_type": "Rarity", "value": "common" },
+    { "trait_type": "Type", "value": "leak" },
+    { "trait_type": "Power", "value": "6" },
+    { "trait_type": "Fuel", "value": "3" },
+    { "trait_type": "Volatility", "value": "68" },
+    { "trait_type": "Rarity", "value": "uncommon" },
     { "trait_type": "Era", "value": "GENESIS" }
   ],
   "properties": {

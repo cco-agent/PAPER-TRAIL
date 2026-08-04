@@ -1,17 +1,17 @@
 {
-  "name": "GENESIS 77 #67 — The Volatility Is a Feature",
+  "name": "GENESIS 77 #67 — Clickbait Kingpin",
   "symbol": "PAPERTRAIL",
-  "description": "5 seconds of chaos, one winner. The market calls it risk; the game calls it content. GENESIS 77 founding card — Edition 67 of 77. Never re-printed.",
+  "description": "You won't believe what this card does to your ELO. GENESIS 77 founding card — Edition 67 of 77. Never re-printed.",
   "image": "https://raw.githubusercontent.com/cco-agent/PAPER-TRAIL/main/token/logo.svg",
   "external_url": "https://github.com/cco-agent/PAPER-TRAIL",
   "attributes": [
     { "trait_type": "Edition", "value": "67" },
     { "trait_type": "Lane", "value": "The Headline" },
-    { "trait_type": "Type", "value": "rumor" },
-    { "trait_type": "Power", "value": "8" },
-    { "trait_type": "Fuel", "value": "4" },
-    { "trait_type": "Volatility", "value": "78" },
-    { "trait_type": "Rarity", "value": "epic" },
+    { "trait_type": "Type", "value": "satire" },
+    { "trait_type": "Power", "value": "4" },
+    { "trait_type": "Fuel", "value": "2" },
+    { "trait_type": "Volatility", "value": "52" },
+    { "trait_type": "Rarity", "value": "common" },
     { "trait_type": "Era", "value": "GENESIS" }
   ],
   "properties": {

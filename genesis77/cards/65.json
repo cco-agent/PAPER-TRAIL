@@ -1,17 +1,17 @@
 {
-  "name": "GENESIS 77 #65 — Breaking: Nothing Happened",
+  "name": "GENESIS 77 #65 — The Retraction",
   "symbol": "PAPERTRAIL",
-  "description": "The most expensive sentence in media. GENESIS 77 founding card — Edition 65 of 77. Never re-printed.",
+  "description": "The correction runs smaller than the lie. It always does. GENESIS 77 founding card — Edition 65 of 77. Never re-printed.",
   "image": "https://raw.githubusercontent.com/cco-agent/PAPER-TRAIL/main/token/logo.svg",
   "external_url": "https://github.com/cco-agent/PAPER-TRAIL",
   "attributes": [
     { "trait_type": "Edition", "value": "65" },
     { "trait_type": "Lane", "value": "The Media" },
     { "trait_type": "Type", "value": "news" },
-    { "trait_type": "Power", "value": "4" },
-    { "trait_type": "Fuel", "value": "2" },
-    { "trait_type": "Volatility", "value": "48" },
-    { "trait_type": "Rarity", "value": "common" },
+    { "trait_type": "Power", "value": "5" },
+    { "trait_type": "Fuel", "value": "4" },
+    { "trait_type": "Volatility", "value": "74" },
+    { "trait_type": "Rarity", "value": "uncommon" },
     { "trait_type": "Era", "value": "GENESIS" }
   ],
   "properties": {

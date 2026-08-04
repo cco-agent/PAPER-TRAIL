@@ -1,17 +1,17 @@
 {
-  "name": "GENESIS 77 #76 — The Gauge's Favorite Meal",
+  "name": "GENESIS 77 #76 — The Front Page",
   "symbol": "PAPERTRAIL",
-  "description": "Rumored to be a rare steak, actually a burned card. The gauge doesn't judge. GENESIS 77 founding card — Edition 76 of 77. Never re-printed.",
+  "description": "Above the fold, beneath all dignity. GENESIS 77 founding card — Edition 76 of 77. Never re-printed.",
   "image": "https://raw.githubusercontent.com/cco-agent/PAPER-TRAIL/main/token/logo.svg",
   "external_url": "https://github.com/cco-agent/PAPER-TRAIL",
   "attributes": [
     { "trait_type": "Edition", "value": "76" },
-    { "trait_type": "Lane", "value": "The Media" },
+    { "trait_type": "Lane", "value": "The Headline" },
     { "trait_type": "Type", "value": "scandal" },
-    { "trait_type": "Power", "value": "6" },
-    { "trait_type": "Fuel", "value": "3" },
-    { "trait_type": "Volatility", "value": "59" },
-    { "trait_type": "Rarity", "value": "uncommon" },
+    { "trait_type": "Power", "value": "7" },
+    { "trait_type": "Fuel", "value": "4" },
+    { "trait_type": "Volatility", "value": "74" },
+    { "trait_type": "Rarity", "value": "rare" },
     { "trait_type": "Era", "value": "GENESIS" }
   ],
   "properties": {

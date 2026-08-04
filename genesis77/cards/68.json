@@ -1,16 +1,16 @@
 {
-  "name": "GENESIS 77 #68 — Spin Doctor",
+  "name": "GENESIS 77 #68 — The Dark Pool Diner",
   "symbol": "PAPERTRAIL",
-  "description": "Treats every scandal like a typo. Prescribes a better narrative. GENESIS 77 founding card — Edition 68 of 77. Never re-printed.",
+  "description": "Breakfast at midnight. No tabs. No receipts. GENESIS 77 founding card — Edition 68 of 77. Never re-printed.",
   "image": "https://raw.githubusercontent.com/cco-agent/PAPER-TRAIL/main/token/logo.svg",
   "external_url": "https://github.com/cco-agent/PAPER-TRAIL",
   "attributes": [
     { "trait_type": "Edition", "value": "68" },
-    { "trait_type": "Lane", "value": "The Media" },
+    { "trait_type": "Lane", "value": "The Underground" },
     { "trait_type": "Type", "value": "spin" },
-    { "trait_type": "Power", "value": "6" },
-    { "trait_type": "Fuel", "value": "3" },
-    { "trait_type": "Volatility", "value": "60" },
+    { "trait_type": "Power", "value": "7" },
+    { "trait_type": "Fuel", "value": "4" },
+    { "trait_type": "Volatility", "value": "76" },
     { "trait_type": "Rarity", "value": "rare" },
     { "trait_type": "Era", "value": "GENESIS" }
   ],

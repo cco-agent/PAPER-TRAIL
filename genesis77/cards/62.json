@@ -1,17 +1,17 @@
 {
-  "name": "GENESIS 77 #62 — Off the Record, On the Chain",
+  "name": "GENESIS 77 #62 — Don't Read the Comments",
   "symbol": "PAPERTRAIL",
-  "description": "The best scoop lives in a group chat and ends up immortalized in a ledger. GENESIS 77 founding card — Edition 62 of 77. Never re-printed.",
+  "description": "They warned you. You read them anyway. GENESIS 77 founding card — Edition 62 of 77. Never re-printed.",
   "image": "https://raw.githubusercontent.com/cco-agent/PAPER-TRAIL/main/token/logo.svg",
   "external_url": "https://github.com/cco-agent/PAPER-TRAIL",
   "attributes": [
     { "trait_type": "Edition", "value": "62" },
-    { "trait_type": "Lane", "value": "The Media" },
-    { "trait_type": "Type", "value": "scandal" },
-    { "trait_type": "Power", "value": "6" },
+    { "trait_type": "Lane", "value": "The Headline" },
+    { "trait_type": "Type", "value": "meme" },
+    { "trait_type": "Power", "value": "5" },
     { "trait_type": "Fuel", "value": "3" },
-    { "trait_type": "Volatility", "value": "64" },
-    { "trait_type": "Rarity", "value": "rare" },
+    { "trait_type": "Volatility", "value": "66" },
+    { "trait_type": "Rarity", "value": "uncommon" },
     { "trait_type": "Era", "value": "GENESIS" }
   ],
   "properties": {

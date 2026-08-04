@@ -1,17 +1,17 @@
 {
-  "name": "GENESIS 77 #66 — Diamond Hands, Paper Heart",
+  "name": "GENESIS 77 #66 — The Whisper Network",
   "symbol": "PAPERTRAIL",
-  "description": "Holds through every dip, folds at every goodnight text. GENESIS 77 founding card — Edition 66 of 77. Never re-printed.",
+  "description": "Three degrees from the truth and twice as loud. GENESIS 77 founding card — Edition 66 of 77. Never re-printed.",
   "image": "https://raw.githubusercontent.com/cco-agent/PAPER-TRAIL/main/token/logo.svg",
   "external_url": "https://github.com/cco-agent/PAPER-TRAIL",
   "attributes": [
     { "trait_type": "Edition", "value": "66" },
     { "trait_type": "Lane", "value": "The Underground" },
-    { "trait_type": "Type", "value": "meme" },
-    { "trait_type": "Power", "value": "4" },
-    { "trait_type": "Fuel", "value": "3" },
-    { "trait_type": "Volatility", "value": "52" },
-    { "trait_type": "Rarity", "value": "common" },
+    { "trait_type": "Type", "value": "rumor" },
+    { "trait_type": "Power", "value": "8" },
+    { "trait_type": "Fuel", "value": "4" },
+    { "trait_type": "Volatility", "value": "80" },
+    { "trait_type": "Rarity", "value": "epic" },
     { "trait_type": "Era", "value": "GENESIS" }
   ],
   "properties": {
