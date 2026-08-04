@@ -9,6 +9,7 @@ import { LoggingExecutor } from "./execute.ts";
 import { JsonlAuditLog } from "./audit.ts";
 import { Guardian, InMemoryGuardianState } from "./guardian.ts";
 import { EventResponder, StaticEventSource } from "./events.ts";
+import { startServer } from "./webui.ts";
 import {
   X402Handler,
   createPaymentVerifier,
@@ -270,6 +271,46 @@ async function cmdPay(configPath: string | undefined): Promise<void> {
   }
 }
 
+/**
+ * Web UI demo: serve the x402 paid endpoint over HTTP with a browsable
+ * pay-and-run page at http://localhost:<port>/. Open it in a browser, click
+ * "Pay & run", and watch the audit record come back. Production swaps the
+ * in-memory verifier for an on-chain one (RPC / KeeperHub).
+ */
+async function cmdWeb(configPath: string | undefined, port: number): Promise<void> {
+  const { config, agent } = await buildAgent(configPath, "0.01", undefined);
+  const paywall: X402PaymentRequest = {
+    requestId: randomUUID(),
+    amountWei: ethToWei("0.001"),
+    token: "native",
+    chain: config.chain,
+    recipient: config.watch.address || "0xpaywall",
+    description: "Shredder Sentinel — one guarded agent run (observe → decide → policy → execute → audit)"
+  };
+  const handler = new X402Handler({
+    paymentRequest: paywall,
+    verifier: createPaymentVerifier("memory"),
+    agent
+  });
+  const server = startServer(handler, port);
+
+  console.log(
+    `web UI: http://localhost:${port}/  (paywall ${paywall.amountWei} wei on ${config.chain} — in-memory verifier). Ctrl-C to stop.`
+  );
+
+  await new Promise<void>((resolve) => {
+    const shutdown = (): void => {
+      server.closeAllConnections?.();
+      server.close(() => {
+        console.log("\nweb UI stopped.");
+        resolve();
+      });
+    };
+    process.once("SIGINT", shutdown);
+    process.once("SIGTERM", shutdown);
+  });
+}
+
 async function main(): Promise<void> {
   const { values, positionals } = parseArgs({
     options: {
@@ -277,7 +318,8 @@ async function main(): Promise<void> {
       balance: { type: "string", default: "0.01" },
       address: { type: "string" },
       limit: { type: "string", default: "5" },
-      interval: { type: "string", default: "10000" }
+      interval: { type: "string", default: "10000" },
+      port: { type: "string", default: "8787" }
     },
     allowPositionals: true
   });
@@ -307,8 +349,16 @@ async function main(): Promise<void> {
     await cmdRespond(values.config, intervalMs);
   } else if (cmd === "pay") {
     await cmdPay(values.config);
+  } else if (cmd === "web") {
+    const port = parseInt(values.port!, 10);
+    if (!Number.isFinite(port) || port < 1 || port > 65535) {
+      console.error("--port must be a number 1-65535");
+      process.exitCode = 1;
+      return;
+    }
+    await cmdWeb(values.config, port);
   } else {
-    console.error(`unknown command: ${cmd} (expected: run | watch | status | replay | respond | pay)`);
+    console.error(`unknown command: ${cmd} (expected: run | watch | status | replay | respond | pay | web)`);
     process.exitCode = 1;
   }
 }
