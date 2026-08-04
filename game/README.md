@@ -32,10 +32,11 @@ Set integrity is enforced by `src/genesis-cards.test.ts` (10 tests): edition uni
 
 ## Battle simulator
 
-Bot-vs-bot matches to explore balance. Three strategies:
+Bot-vs-bot matches to explore balance. Four strategies:
 
 - `greedy` — native-lane deploys only; never off-lane, minimal burning.
 - `meta` — volatility-aware: reads the current lane weights and will play off-lane into hot lanes.
+- `meta2` — control-aware meta: off-lane plays are only considered when they would take (or hold) control of the target lane.
 - `hoarder` — stocks fuel first, feeds the shredder aggressively, locks late.
 
 ```bash
@@ -48,7 +49,7 @@ node --experimental-strip-types src/battle.ts --grid
 node --experimental-strip-types src/battle.ts web --port 8787
 ```
 
-The `--grid` mode sweeps `offLanePenalty` × `weightMax` and prints greedy-vs-meta win rates per cell, so balance hypotheses can be tested numerically instead of by feel.
+The `--grid` mode sweeps `offLanePenalty` × `weightMax` and prints win rates per cell for both greedy-vs-meta and greedy-vs-meta2, so balance hypotheses can be tested numerically instead of by feel.
 
 The `web` command serves a zero-dependency browser UI (`node:http` only, no npm installs):
 
@@ -70,5 +71,5 @@ Request routing is a pure `handle(req)` function (no sockets), so every route is
 | `src/sim.ts` | Bot strategies + `playMatch` / `runSeries` / `mulberry32` seeded rng |
 | `src/webui.ts` | Zero-dep HTTP server: `handle()` + `startServer()` + `traceMatch()` |
 | `src/battle.ts` | CLI: full matrix, `--grid` balance sweep, `web` UI server |
-| `src/sim.test.ts` | Simulator test suite (8 tests — incl. engine-option passthrough) |
+| `src/sim.test.ts` | Simulator test suite (11 tests — incl. meta2 control-awareness and engine-option passthrough) |
 | `src/webui.test.ts` | Web UI test suite (12 tests — routes, sim API, match trace) |
