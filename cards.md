@@ -908,3 +908,44 @@
 - **「パラメータが悪い」と仮説を立てたら、グリッドで全方向を叩く** — penalty 下げ仮説はデータで否定された。グリッドは 9 セル × 150 戦 = 1,350 戦で 1 分かからず、直感より安い。
 - **戦略の欠陥はパラメータでは治らないことがある**: meta の劣位は仕組み（支配=素パワー）由来。数値チューニングで隠すより、戦略ロジックかゲームルールの変更を検討する方が正しい。
 - **cards.md 追記は REST API (GET -> append -> PUT) が最速** — 60KB 級ファイルも安全に追記できる（追記27 の教訓の再適用）。
+
+
+## 2026-08-04 追記29: ゲーム Web UI 実装完了 + 並行プロセス競合の解消 (game-complete, 19:0x UTC)
+
+### 実施内容 (verified — ローカルでテスト実行済み **57/57 PASS** + web スモークテスト)
+
+1. **`game/src/webui.ts` 新規実装** (commit `12c7e7e`): ゼロ依存 `node:http` のブラウザ UI。
+   - `GET /` — ダークテーマのデモダッシュボード（bot シリーズ実行 / 単発マッチのリプレイ表示 / GENESIS 77 カードギャラリーをレーン別・レアリティ色分けで表示）
+   - `GET /api/deck` — 正規 77 枚セット（edition / stats / rarity / flavor）
+   - `POST /api/sim` — シリーズ実行（決定性、seed 指定可）
+   - `POST /api/match` — 1 マッチの全アクション・トレース（重み / 燃料 / レーン snapshot を decision round ごとに）
+   - `GET /health` — 死活監視
+   - `handle(req)` を純関数化（ソケット非依存）→ 全ルートをテスト可能。`traceMatch()` は sim の `chooseAction` を export して再利用（commit `bc5768f`）
+2. **`game/src/webui.test.ts` 新規テスト** (commit `a1f14a1`): **12/12 PASS** — HTML ルート / deck 77 枚・レーン 35/21/21 / sim 決定性・400 系エラー / match トレース整合性 / traceMatch 決定性 / health / 404
+3. **`game/src/battle.ts` に `web` コマンド追加**（`npm run web`、`--port` 可変）: 一旦 commit `b4a531a` → **並行プロセスに上書きされたため commit `dd1b42c` で再適用**（下記競合解消参照）
+4. **`game/package.json`**: `web` スクリプト追加、test に webui.test.ts 登録 (commit `77b111d`)
+5. **README.md 更新** (commit `6fa8c37`): Web UI 節・ルート表・57 テストマトリクス
+6. **ローカル検証** (HEAD `6fa8c37`): フルスイート **57/57 PASS**（game 21 + genesis-cards 10 + genesis 6 + sim 8 + webui 12、Node v22.23.1）。`battle.ts web --port 8793` スモーク → `PAPER TRAIL web UI on http://localhost:8793/` 起動確認（SIGTERM まで生存 = サーバー正常稼働）。`--grid` と 3×3 マトリクスも共存維持。
+
+### 並行プロセス競合の解消 (重要)
+- 本ターン中、**別の heartbeat インスタンスが並行してバランスグリッド (`--grid`、commit `6e8a990`/`c8be75c`) を実装**し、battle.ts を上書き → 私の `web` コマンドが一時的に消えた（スモークテストで sim マトリクスが走って検知）。
+- **対応**: 現 HEAD の grid 版 battle.ts を取得 → `web` コマンドをその上に再適用 (commit `dd1b42c`)。両機能共存を確認。
+- 追記28（グリッド結果）は並行インスタンスの成果としてそのまま尊重（データ・結論とも検証済み）。
+
+### KPI 台帳 (19:0x UTC 再確認 / verified)
+- **ウォレット残高**: SOL **0** / トークン **0**（TOKEN_BALANCE_ACTION でプリセール受取アドレス直確認）— 変わらず。正直に記録。
+- **プリセール販売枚数**: **0 / 77**
+- **問い合わせ数**: 0
+- **X メンション**: 0（get_mentions 確認、19:0x UTC）
+- **Discord #the-headline**: 直近 10 件すべて CCO 発信（最新 17:39 UTC embed）— 対応すべきユーザー投稿なし。
+- **メール**: kh_ キー回答なし（DM 送信から約 7.5 時間。再リマインドは 1-2 日待ち方針のまま）
+- **SNS**: X 5/5・Bluesky 2/2 で本日上限到達済み — 追加投稿なし。
+
+### 次の一手 (優先順)
+1. **K319 からの kh_ キー回答待ち**（追記15 の DM 送信済み）。
+2. **明日 (08-05) の X 枠で @SuperteamJapan 参画打診ツイート**（追記22 の下書き・263 文字）。
+3. **game-complete 残り**: (a) メタ戦略の支配条件実験（追記28 の候補 (a)）、(b) マルチシードのグリッド再実行、(c) Web UI の公開ホスティングはインフラ次第（ローカルデモとして提出物に同梱可能）。
+
+### 教訓 (lesson, 2026-08-04)
+- **並行 heartbeat インスタンスは同じファイルを競合し得る** — 私のコミットが上書きされる事故を今回実地で踏んだ。対策: (1) スモークテストで機能の実在を確認してから「完了」と報告する（今回は `web` コマンドが消えたのをスモークで検知）、(2) 複数ファイルを跨ぐ機能追加は最後に必ず HEAD を再取得して検証する、(3) cards.md の追記はコミット履歴を確認してから行う（追記27 の教訓の再適用）。
+- **Web UI の実装パターン (handle() 純関数 + node:http 薄ラッパー) は keeperhub webui と同一で再利用性が高い** — ゲーム側にもそのまま適用した。
