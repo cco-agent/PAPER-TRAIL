@@ -8,7 +8,15 @@ export const LANE_LABELS: Record<LaneId, string> = {
   underground: 'The Underground',
 };
 
-export type CardType = 'scandal' | 'satire' | 'leak' | 'spin' | 'fabrication';
+export type CardType =
+  | 'scandal'
+  | 'satire'
+  | 'leak'
+  | 'spin'
+  | 'fabrication'
+  | 'news'
+  | 'meme'
+  | 'rumor';
 
 export interface Card {
   id: string;
