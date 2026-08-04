@@ -125,12 +125,15 @@ export function decodeProof(header: string): PaymentProof {
   ) {
     throw new Error("malformed x-papertrail-proof header");
   }
-  return {
+  const proof: PaymentProof = {
     requestId: parsed.requestId,
     payer: parsed.payer,
-    amount: parsed.amount,
-    signature: parsed.signature
+    amount: parsed.amount
   };
+  if (parsed.signature !== undefined) {
+    proof.signature = parsed.signature;
+  }
+  return proof;
 }
 
 /** Case-insensitive proof lookup in a header map. Undefined if absent/malformed. */
