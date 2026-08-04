@@ -1,6 +1,6 @@
-import type { Decision, PolicyCheck, PolicyLimits } from "./types.js";
-import type { AgentConfig } from "./config.js";
-import { cmpWei } from "./decide.js";
+import type { Decision, PolicyCheck, PolicyLimits } from "./types.ts";
+import type { AgentConfig } from "./config.ts";
+import { cmpWei } from "./decide.ts";
 
 /**
  * Hard gate before ANY execution: kill switch, chain allowlist,

@@ -1,6 +1,6 @@
 import { appendFile, mkdir, readFile } from "node:fs/promises";
 import { dirname } from "node:path";
-import type { AuditRecord } from "./types.js";
+import type { AuditRecord } from "./types.ts";
 
 /** JSONL audit trail: one record per run, append-only. */
 export class JsonlAuditLog {

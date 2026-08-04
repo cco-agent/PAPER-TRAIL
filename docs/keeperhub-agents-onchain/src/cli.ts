@@ -1,12 +1,12 @@
 import { parseArgs } from "node:util";
-import { Agent } from "./agent.js";
-import { defaultConfig, loadConfig } from "./config.js";
-import { StaticObserver } from "./observe.js";
-import { BALANCE_ABOVE_MAX, BALANCE_BELOW_MIN, RulesFirstDecider } from "./decide.js";
-import { PolicyGate } from "./policy.js";
-import { LoggingExecutor } from "./execute.js";
-import { JsonlAuditLog } from "./audit.js";
-import type { ObservationSnapshot, Trigger } from "./types.js";
+import { Agent } from "./agent.ts";
+import { defaultConfig, loadConfig } from "./config.ts";
+import { StaticObserver } from "./observe.ts";
+import { BALANCE_ABOVE_MAX, BALANCE_BELOW_MIN, RulesFirstDecider } from "./decide.ts";
+import { PolicyGate } from "./policy.ts";
+import { LoggingExecutor } from "./execute.ts";
+import { JsonlAuditLog } from "./audit.ts";
+import type { ObservationSnapshot, Trigger } from "./types.ts";
 
 const RULES = [BALANCE_BELOW_MIN, BALANCE_ABOVE_MAX];
 

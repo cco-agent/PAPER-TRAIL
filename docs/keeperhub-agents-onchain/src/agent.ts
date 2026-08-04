@@ -1,11 +1,11 @@
 import { randomUUID } from "node:crypto";
-import type { AuditRecord, ExecutionResult, Trigger } from "./types.js";
-import type { AgentConfig } from "./config.js";
-import type { Observer } from "./observe.js";
-import type { RationaleFn, RulesFirstDecider } from "./decide.js";
-import type { PolicyGate } from "./policy.js";
-import type { KeeperHubExecutor } from "./execute.js";
-import type { JsonlAuditLog } from "./audit.js";
+import type { AuditRecord, ExecutionResult, Trigger } from "./types.ts";
+import type { AgentConfig } from "./config.ts";
+import type { Observer } from "./observe.ts";
+import type { RationaleFn, RulesFirstDecider } from "./decide.ts";
+import type { PolicyGate } from "./policy.ts";
+import type { KeeperHubExecutor } from "./execute.ts";
+import type { JsonlAuditLog } from "./audit.ts";
 
 export interface AgentDeps {
   observer: Observer;

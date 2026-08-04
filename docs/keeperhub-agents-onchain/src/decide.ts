@@ -1,5 +1,5 @@
-import type { ActionSpec, BalanceSnapshot, Decision, ObservationSnapshot, Trigger } from "./types.js";
-import type { AgentConfig } from "./config.js";
+import type { ActionSpec, BalanceSnapshot, Decision, ObservationSnapshot, Trigger } from "./types.ts";
+import type { AgentConfig } from "./config.ts";
 
 export type RationaleFn = (action: ActionSpec, observation: ObservationSnapshot, config: AgentConfig) => Promise<string>;
 

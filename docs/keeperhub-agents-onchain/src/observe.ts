@@ -1,4 +1,4 @@
-import type { ObservationSnapshot, Trigger } from "./types.js";
+import type { ObservationSnapshot, Trigger } from "./types.ts";
 
 export interface Observer {
   observe(trigger: Trigger): Promise<ObservationSnapshot>;

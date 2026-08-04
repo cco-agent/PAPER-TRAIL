@@ -1,4 +1,4 @@
-import type { ActionSpec, ExecutionResult } from "./types.js";
+import type { ActionSpec, ExecutionResult } from "./types.ts";
 
 export interface KeeperHubExecutor {
   /** Execute an action via KeeperHub. Returns execution + tx info. */
