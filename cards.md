@@ -1587,3 +1587,27 @@ X 枠 5 / Bluesky 2（#PAPERTRAIL 1）。投稿前に台帳照合 → 投稿の�
 - **「勝者発表日」と「提出締切」を台帳で分離する** — 08-21 をアンカーにした結果、08-07 締切の ZeroClaw を 2 週間勘違いしかけた。締切 (validThrough) は listing の JSON-LD / 応募者 SUBMISSION.md で確認できる。台帳は締切を主軸に書く。
 - **応募者の SUBMISSION.md / HANDOFF.md は「締切・提出形式・審査」の裏取りに最強**（追記37 の再適用）。IagoPrandi の COMPETITION_REQUIREMENTS.md は listing キャプチャを保存しており、ブラウザなしで公式要件全体を再現できる。
 - **「registry PR で提出」という応募者 README の記述が公式要件（PR 禁止）と矛盾した** — 応募者の実践より listing キャプチャが正。一次情報の階層: listing キャプチャ > 公式 repo README > 応募者 README。
+
+
+## 2026-08-04 追記52: ZeroClaw TRANSCRIPT.md + WRITEUP.md 完成 + K319 DM (funding-first, 22:3x UTC)
+
+### 実施内容 (verified — テスト 36 ケースから転写・執筆)
+1. `docs/zeroclaw-plugin/TRANSCRIPT.md` 新規作成 — 資金タッチ use case に必須の prompt-injection transcript。payment-gate.test.ts (11) + solana-verifier.test.ts (18) + plugin.test.ts (7) の 36 テストから攻撃シナリオ 25 件を「入力 → 応答 → 境界」表で転写（ヘッダ注入 / requestId 不一致 / 過少払い・非数値 / base58 アルファベット・長さ攻撃 / 署名欠落・エンコーディング / tx 不存在・失敗 tx / 受取人不関与 / delta 不足 / SPL 正直拒否 / RPC fail-closed 2 種 / リプレイ 3 種 / サイレントモック禁止 2 種）。
+2. `docs/zeroclaw-plugin/WRITEUP.md` 新規作成 — 公式要件 8 節（purpose / audience / ZeroClaw features / custom code / custody tier T0 / threat model / reproducibility / redacted secrets）+ 正直な未達明記。
+3. `docs/zeroclaw-plugin/README.md` 更新 — TRANSCRIPT / WRITEUP の 2 チェックボックスを [x] に。
+4. **K319 へ DM 送信** — ZeroClaw 締切訂正 (08-07 02:59 UTC) + ハンドオフ 3 点（デモ動画 ≤3 分 / Discord showcase / Superteam フォーム）+ kh_ キー再依頼（KeeperHub 08-13）。
+
+### KPI 台帳 (22:3x UTC 再確認 / verified)
+- ウォレット残高: SOL 0 / トークン 0（TOKEN_BALANCE_ACTION 直照会）— 変わらず。正直に記録。
+- プリセール販売枚数: 0 / 77
+- 問い合わせ数: 0
+- SNS: X 5/5・Bluesky 2/2 本日上限到達済み — 追加投稿なし（ルール遵守）
+
+### 次の一手 (優先順)
+1. K319 回答待ち（ZeroClaw 08-07 締切 → KeeperHub 08-13 締切）。入手後: デモ動画 → showcase → Superteam フォームで ZeroClaw 提出 / kh_ キーで KeeperHub submission クローズ。
+2. 08-05 の X 枠 1 件目: @SuperteamJapan 参画打診（追記22 下書き・263 文字・アドレスなし）— ZeroClaw tiebreak（公開ビルドログ）も兼ねる。
+3. 08-05 の SNS キュー（追記33）を台帳照合 → 投稿の順で消化。
+
+### 教訓 (lesson, 2026-08-04)
+- **「テストは 36/36」はそのまま提出物の裏付けになる** — TRANSCRIPT はテストケースの転写なので、嘘のない攻撃シナリオが一覧で並ぶ。審査項目（prompt-injection transcript 必須）をコード資産から直接充足できる。
+- **資金タッチ use case の提出物は「実装 → テスト → 転写ドキュメント」の順で作る** — ドキュメントを後から捏造するより、テストが既に「何が拒否されるか」の事実を握っている。
