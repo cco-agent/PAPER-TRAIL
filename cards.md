@@ -1240,3 +1240,17 @@ X 枠 5 / Bluesky 2（#PAPERTRAIL 1）。投稿前に台帳照合 → 投稿の�
 ### 教訓 (lesson, 2026-08-04)
 - **並行インスタンスのコミットも「検証なし」であり得る** — 誰が書いたかではなく「テストが通るか」で判断する。今回はスキャフォールドが 3 FAIL のまま上がっていたのを実測で検出し、修正してから検証済みにした。
 - **base58 の '1' はゼロバイト** — 32 個の '1' は 32 バイトのゼロ値（System Program アドレス）で、長さ検証的には正当。テストの「31 bytes」意図は 31 個の '1'。コメントと値の一致を常に確認する。
+
+
+## 2026-08-04 追記39: KeeperHub DoraHacks submission package 作成 (funding-first, 20:1x UTC)
+
+### 実施内容 (verified — push commit `2db1273`)
+
+1. **`docs/keeperhub-agents-onchain/submission.md` 新規作成**: DoraHacks 提出用の貼り付けテキスト一式（プロジェクト名 / one-liner / 説明 / KeeperHub 活用法 / ゼロインストール Quickstart / 56/56 テストマトリクス / チェックリスト / リンク）。kh_ キー到着後に即提出できる状態にした。
+2. **正直な留保**: 「実 tx / エクスプローラリンク / デモ動画」の 3 項目は未達のまま明記（kh_ キー待ち）。キー入手後は残り 3 項目を一気にクローズできる構成。
+3. **台帳**: ウォレット SOL 0 / トークン 0（TOKEN_BALANCE_ACTION 直照会、verified）。プリセール 0/77。問い合わせ 0。メール新規なし（inbox updatedAt 07-30 のまま）。X メンション 0。
+
+### 次の一手 (優先順)
+1. K319 からの kh_ キー回答待ち（追記15）。入手後: submission.md の残り 3 項目をクローズ → DoraHacks 提出（締切 2026-08-13 10:00 UTC）。
+2. 08-05 の X 枠 1 件目で @SuperteamJapan 参画打診（追記22 の下書き・263 文字）。
+3. ZeroClaw listing 詳細（K319 回答）次第で応募準備（x402 プラグインは 18/18 PASS 済み）。
