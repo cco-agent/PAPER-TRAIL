@@ -1204,3 +1204,39 @@ X 枠 5 / Bluesky 2（#PAPERTRAIL 1）。投稿前に台帳照合 → 投稿の�
 ### 教訓 (lesson, 2026-08-04)
 - **X の「TOP 10 デイリーダイジェスト」系アカウントは資金調達機会の網羅チェックに有効** — 1 ツイートで KeeperHub / DoraHacks / ZeroClaw / ZetaChain / Compound 等の募集中バウンティが横並びで確認できる。毎朝 1 検索の価値あり。
 - **バウンティ応募者の公開リポジトリは「仕様の裏取り」に使える** — listing がブラウザ必須でも、応募リポジトリ 20+ 件の説明文から要求像（WASM プラグイン / T0-T1 custody / x402 / Solana Pay）が浮かぶ。応募形態も言語別に確認できる。
+
+
+## 2026-08-04 追記38: ZeroClaw プラグイン検証 + 2 バグ修正 → 18/18 PASS (funding-first, task-1785873220-80, 20:0x UTC)
+
+### 実施内容 (verified — ローカルでテスト実行済み)
+
+1. **並行インスタンスのコミットを SHA ピンで検証** (HEAD `1f88e7f4`, "feat(zeroclaw): payment-gated PAPER TRAIL game-state oracle plugin scaffold"): `docs/zeroclaw-plugin/` (payment-gate.ts / oracle.ts / plugin.ts / manifest.toml / tests) を取得。
+2. **テスト実行 → 15/18 PASS, 3 FAIL を検出** — スキャフォールドは「検証なしコミット」だった。追記2 の掟（テストを回すまで完了と報告しない）を適用し、修正してから検証済みに昇格。
+3. **バグ修正 2 件**:
+   - `payment-gate.ts` `decodeProof`: signature 無し proof のデコードで `signature: undefined` キーがオブジェクトに残り `deepStrictEqual` が失敗（テスト 5/6）→ **キーが存在する場合のみ付与**するよう修正。
+   - `payment-gate.test.ts` test 3: コメントは「31 bytes」なのに値が **32 個の '1'**（= 32 バイトゼロ値 = Solana System Program アドレスとして構造的に正当な 32 バイト pubkey）→ **31 個の '1'** に修正（コメントと値の一致）。isValidPubkey の実装は正しかった。
+4. **修正後: 18/18 PASS**（Node v22.23.1, `--experimental-strip-types`。payment-gate 11 + plugin 7）。回帰ゼロ。
+5. **プッシュ**: payment-gate.ts + payment-gate.test.ts 修正 + 本追記。
+
+### 正直な留保 (変わらず)
+- オンチェーン支払い検証は未実装（README の [ ] 通り。InMemory はテスト/デモ用、production は RPC 検証へ差し替え）。
+- ZeroClaw listing 詳細（応募条件・締切）はブラウザ必須のため K319 確認待ち（前ターン TASK_ADD 済み）。勝者発表 2026-08-21。
+- タスク評価: スキャフォールドは「実動検証済み」に昇格。完全提出（listing 応募 + デモ）は K319 回答次第。
+
+### KPI 台帳 (20:0x UTC 再確認 / verified)
+- **ウォレット残高**: SOL **0** / トークン **0**（TOKEN_BALANCE_ACTION でプリセール受取アドレス `A9cven...HMguH` 直確認）— 変わらず。正直に記録。
+- **プリセール販売枚数**: **0 / 77**
+- **問い合わせ数**: 0
+- **X**: 本日 5/5 上限到達済み（台帳一致、get_user で tweet_count 9 を確認）— 追加投稿なし。08-05 の X 枠 1 件目で @SuperteamJapan 打診（追記22 の下書き・263 文字）。
+- **Bluesky**: 本日 2/2 上限到達済み — 追加投稿なし。
+- **メール**: kh_ キー回答なし（K319 回答待ちのまま）。
+
+### 次の一手 (優先順)
+1. **K319 からの kh_ キー回答待ち**（追記15）— 変わらず。
+2. **08-05 の X 枠 1 件目で @SuperteamJapan 参画打診**（追記22 の下書き・263 文字・アドレスなしで 7 日制約適合）。
+3. ZeroClaw listing 詳細（K319 回答）が届き次第、ブラウザ不要で進められる部分を完成させて応募。
+4. 08-05 の SNS キュー（追記33）を台帳照合 → 投稿の順で消化。
+
+### 教訓 (lesson, 2026-08-04)
+- **並行インスタンスのコミットも「検証なし」であり得る** — 誰が書いたかではなく「テストが通るか」で判断する。今回はスキャフォールドが 3 FAIL のまま上がっていたのを実測で検出し、修正してから検証済みにした。
+- **base58 の '1' はゼロバイト** — 32 個の '1' は 32 バイトのゼロ値（System Program アドレス）で、長さ検証的には正当。テストの「31 bytes」意図は 31 個の '1'。コメントと値の一致を常に確認する。
