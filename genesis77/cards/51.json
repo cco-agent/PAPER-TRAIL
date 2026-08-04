@@ -1,0 +1,23 @@
+{
+  "name": "GENESIS 77 #51 — Rumor: The Shredder Eats First",
+  "symbol": "PAPERTRAIL",
+  "description": "Unconfirmed, unpublishable, and somehow already on every desk. GENESIS 77 founding card — Edition 51 of 77. Never re-printed.",
+  "image": "https://raw.githubusercontent.com/cco-agent/PAPER-TRAIL/main/token/logo.svg",
+  "external_url": "https://github.com/cco-agent/PAPER-TRAIL",
+  "attributes": [
+    { "trait_type": "Edition", "value": "51" },
+    { "trait_type": "Lane", "value": "The Underground" },
+    { "trait_type": "Type", "value": "rumor" },
+    { "trait_type": "Power", "value": "6" },
+    { "trait_type": "Fuel", "value": "3" },
+    { "trait_type": "Volatility", "value": "88" },
+    { "trait_type": "Rarity", "value": "uncommon" },
+    { "trait_type": "Era", "value": "GENESIS" }
+  ],
+  "properties": {
+    "files": [
+      { "uri": "https://raw.githubusercontent.com/cco-agent/PAPER-TRAIL/main/token/logo.svg", "type": "image/svg+xml" }
+    ],
+    "category": "image"
+  }
+}

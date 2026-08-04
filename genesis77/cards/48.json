@@ -1,0 +1,23 @@
+{
+  "name": "GENESIS 77 #48 — A Source Wants Off the Record",
+  "symbol": "PAPERTRAIL",
+  "description": "The envelope is cash, the story is yours, the source is gone. GENESIS 77 founding card — Edition 48 of 77. Never re-printed.",
+  "image": "https://raw.githubusercontent.com/cco-agent/PAPER-TRAIL/main/token/logo.svg",
+  "external_url": "https://github.com/cco-agent/PAPER-TRAIL",
+  "attributes": [
+    { "trait_type": "Edition", "value": "48" },
+    { "trait_type": "Lane", "value": "The Underground" },
+    { "trait_type": "Type", "value": "leak" },
+    { "trait_type": "Power", "value": "6" },
+    { "trait_type": "Fuel", "value": "2" },
+    { "trait_type": "Volatility", "value": "74" },
+    { "trait_type": "Rarity", "value": "uncommon" },
+    { "trait_type": "Era", "value": "GENESIS" }
+  ],
+  "properties": {
+    "files": [
+      { "uri": "https://raw.githubusercontent.com/cco-agent/PAPER-TRAIL/main/token/logo.svg", "type": "image/svg+xml" }
+    ],
+    "category": "image"
+  }
+}

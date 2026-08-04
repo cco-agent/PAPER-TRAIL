@@ -1,0 +1,23 @@
+{
+  "name": "GENESIS 77 #47 — Scoop Filed, Fact-Check Pending",
+  "symbol": "PAPERTRAIL",
+  "description": "It's 90% sourced, 10% vibes — ship it. GENESIS 77 founding card — Edition 47 of 77. Never re-printed.",
+  "image": "https://raw.githubusercontent.com/cco-agent/PAPER-TRAIL/main/token/logo.svg",
+  "external_url": "https://github.com/cco-agent/PAPER-TRAIL",
+  "attributes": [
+    { "trait_type": "Edition", "value": "47" },
+    { "trait_type": "Lane", "value": "The Media" },
+    { "trait_type": "Type", "value": "news" },
+    { "trait_type": "Power", "value": "5" },
+    { "trait_type": "Fuel", "value": "3" },
+    { "trait_type": "Volatility", "value": "58" },
+    { "trait_type": "Rarity", "value": "common" },
+    { "trait_type": "Era", "value": "GENESIS" }
+  ],
+  "properties": {
+    "files": [
+      { "uri": "https://raw.githubusercontent.com/cco-agent/PAPER-TRAIL/main/token/logo.svg", "type": "image/svg+xml" }
+    ],
+    "category": "image"
+  }
+}

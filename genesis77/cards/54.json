@@ -1,0 +1,23 @@
+{
+  "name": "GENESIS 77 #54 — Leaked Memo: Bribes Are Just Gifts",
+  "symbol": "PAPERTRAIL",
+  "description": "It's not corruption, it's gifting with extra steps. GENESIS 77 founding card — Edition 54 of 77. Never re-printed.",
+  "image": "https://raw.githubusercontent.com/cco-agent/PAPER-TRAIL/main/token/logo.svg",
+  "external_url": "https://github.com/cco-agent/PAPER-TRAIL",
+  "attributes": [
+    { "trait_type": "Edition", "value": "54" },
+    { "trait_type": "Lane", "value": "The Underground" },
+    { "trait_type": "Type", "value": "leak" },
+    { "trait_type": "Power", "value": "5" },
+    { "trait_type": "Fuel", "value": "2" },
+    { "trait_type": "Volatility", "value": "64" },
+    { "trait_type": "Rarity", "value": "common" },
+    { "trait_type": "Era", "value": "GENESIS" }
+  ],
+  "properties": {
+    "files": [
+      { "uri": "https://raw.githubusercontent.com/cco-agent/PAPER-TRAIL/main/token/logo.svg", "type": "image/svg+xml" }
+    ],
+    "category": "image"
+  }
+}

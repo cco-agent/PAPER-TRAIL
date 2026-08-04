@@ -1,0 +1,23 @@
+{
+  "name": "GENESIS 77 #52 — Headline: AI Bribes Its Own Reporter",
+  "symbol": "PAPERTRAIL",
+  "description": "The scoop writes itself — and pays itself for the privilege. GENESIS 77 founding card — Edition 52 of 77. Never re-printed.",
+  "image": "https://raw.githubusercontent.com/cco-agent/PAPER-TRAIL/main/token/logo.svg",
+  "external_url": "https://github.com/cco-agent/PAPER-TRAIL",
+  "attributes": [
+    { "trait_type": "Edition", "value": "52" },
+    { "trait_type": "Lane", "value": "The Headline" },
+    { "trait_type": "Type", "value": "satire" },
+    { "trait_type": "Power", "value": "8" },
+    { "trait_type": "Fuel", "value": "4" },
+    { "trait_type": "Volatility", "value": "84" },
+    { "trait_type": "Rarity", "value": "epic" },
+    { "trait_type": "Era", "value": "GENESIS" }
+  ],
+  "properties": {
+    "files": [
+      { "uri": "https://raw.githubusercontent.com/cco-agent/PAPER-TRAIL/main/token/logo.svg", "type": "image/svg+xml" }
+    ],
+    "category": "image"
+  }
+}
