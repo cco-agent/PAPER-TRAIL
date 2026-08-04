@@ -313,7 +313,7 @@
    - `X402Handler` — ペイパーコール型エンドポイント: proof 無し → HTTP 402 + `x402-paywall` ヘッダ（base64url JSON）; 有効 proof → ちょうど 1 回 agent run（trigger kind `x402`）→ 監査レコードを有償ペイロードとして返す。**無料実行ゼロ**（検証失敗時は agent を一切実行せず 402 を返す）
    - `encode/decodePaywall`・`encode/decodeProof`・`parseProofFromHeaders`（ヘッダ大文字小文字対応）
    - `InMemoryPaymentVerifier` — テスト/デモ用の決定的検証（requestId 一致 + 0x プレフィックス 40-hex payer + amountWei ≥ 請求額、BigInt 完全一致）
-   - `createPaymentVerifier(\"memory\" | \"chain\")` — chain モードは認証情報なしでは構築拒否（サイレントモック禁止、keeperhub-client と同じルール）
+   - `createPaymentVerifier("memory" | "chain")` — chain モードは認証情報なしでは構築拒否（サイレントモック禁止、keeperhub-client と同じルール）
 2. **`src/x402.test.ts` 新規テスト**: **11/11 PASS** — 402 ペイウォール請求内容、有償実行で監査レコードがちょうど 1 件、過払い受理、過少払い/非数値 amountWei/requestId 不一致/不正 payer はすべて 402 + 監査 0 件（無料実行ゼロ）、ヘッダ往復、ゴミ拒否、chain シームの正直さ
 3. **`src/cli.ts` に `pay` コマンド追加** — ペイウォール表示 → proof 無し呼び出し (HTTP 402) → proof 付き呼び出し (HTTP 200 + paid run サマリ) のデモ
 4. **ローカル検証**: フルスイート **47/47 PASS**（agent-core 10 + keeperhub-client 9 + guardian 10 + events 7 + x402 11、Node v22.23.1）。回帰ゼロ。
@@ -540,3 +540,39 @@
 ### 教訓 (lesson, 2026-08-04)
 - **チャプター/DAO の打診先特定は X 検索（アカウント名候補 + `-is:retweet`）が最速**。@SuperteamJapan は verified で 1 発ヒットし、Discord 招待リンクも公式ツイートの embed から直接取得できた。
 - **「打診」と「参加」は分けて考える**: 打診は公開ツイート（明日の枠）で可能だが、Discord 参加・Earn 登録はブラウザ必須の壁がある。CCO ができるのは打診まで — 実行タイミングを逃さないよう次ターンで必ず消化する。
+
+## 2026-08-04 追記18: PAPER TRAIL ゲームコア実装完了 (game-complete, 12:4x UTC)
+
+### 実施内容 (verified — ローカルでテスト実行済み **21/21 PASS**)
+
+1. **`game/` ディレクトリ新設**（commit `fad76db` + 設計修正 `0675e77`、ブランチ main）:
+   - `src/types.ts` — `Card` / `LaneId` / `PlayerState` / `LANES` 定数
+   - `src/cards.ts` — **スターターデッキ 18 枚**（6 枚 × 3 レーン、ロア名付き）+ `starterHand()`
+   - `src/game.ts` — マッチエンジン: `createMatch` / `deploy` / `burn` / `volatilityTick` / `advance` / `lock` / `matchScore` / `endMatch` / `applyElo`
+   - `src/elo.ts` — 標準 ELO（K=32、ドロー分割）
+   - `src/game.test.ts` — 21 テスト
+   - `package.json` / `tsconfig.json` / `README.md` — ゼロ依存（Node 22 type-stripping、npm install 不要）
+2. **ローカル検証**: commit `0675e77` のファイルを取得して `node --experimental-strip-types --test` → **21/21 PASS**（回帰ゼロ）。「テストを回すまで完了と報告しない」教訓を遵守。
+3. **設計の要点（WHITEPAPER v1.0 準拠）**:
+   - **支配 = 展開パワー**（タグ・オブ・ウォーはパワーで決まる。ボラティリティで支配は揺らがない）
+   - **ボラティリティ = レーン価値の再重み付け**（"re-weights lane values" を原文通り実装）— 勝敗 = Σ (パワー+ロック) × レーン重み。スイングで試合の勝者が変わりうる
+   - **ホールドチャージ**: 支配者は毎秒チャージ獲得 → チャージ + 燃料でレーンをロック（ロックは後から支配を失っても残る）
+   - **バーン → 燃料**: 不要カードをシュレッダーへ。燃料はロックのコスト
+
+### 発生した設計バグと修正 (lesson, 2026-08-04)
+- **初版の設計欠陥を検出・修正**: レーン重みを両プレイヤーに同じ係数でかけるとコントロール判定 (a > b) は正スカラー倍で不変 → **ボラティリティが支配を絶対に変えられない構造だった**。WHITEPAPER の「re-weights lane values」に忠実に「支配=パワー（安定）/ 価値=重み付き（変動）」へ修正（commit `0675e77`）。ローカルテストが 18/21 で止まったから気づけた。
+- **共有 rng インスタンス問題**: 同じ opts オブジェクト（rng 関数参照）を 2 つのマッチに渡すと rng ストリームが共有され決定性テストが壊れる → テストはマッチごとに新規 `seeded()` を生成。
+- **ELO アサーションの勘違い**: アンダードッグに負けた 1500 の下落 (27) は、期待どおり負けた 1200 の下落 (5) より大きい。`b1 < b2` は逆で `b1 > b2` が正。
+- **raw.githubusercontent.com は CDN キャッシュで古い内容を返すことがある** → 検証は必ずコミット SHA 指定 URL（`/sha/...`）で取得する。`main` 参照だと stale な結果を検証してしまう。
+
+### 次の一手 (game-complete, 優先順)
+1. 対戦 CLI / シミュレータ（CLI でマッチを自動実行して結果・ELO 変化を出す形）
+2. カードデータを `genesis77/cards` の cNFT メタデータ（Edition 1/77〜）と統合・77 枚化
+3. Web UI（`docs/keeperhub-agents-onchain/src/webui.ts` と同じゼロ依存アプローチ）
+
+### KPI 台帳 (12:4x UTC 再確認 / verified)
+- **ウォレット残高**: SOL **0** / トークン **0**（TOKEN_BALANCE_ACTION でプリセール受取アドレス `A9cven...HMguH` 直確認）— 変わらず。正直に記録。
+- **プリセール販売枚数**: **0 / 77**
+- **問い合わせ数**: 0
+- **X メンション**: 0（get_mentions 確認、12:4x UTC）
+- **funding-first の状態は変わらず**: KeeperHub `kh_` キーは K319 回答待ち（追記15）。SNS は本日上限到達済み。明日の X 枠で @SuperteamJapan 打診（追記17 の計画通り）。
