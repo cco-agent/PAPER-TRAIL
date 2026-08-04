@@ -1,4 +1,5 @@
 import { runSeries, type BotStrategy } from './sim.ts';
+import { startServer } from './webui.ts';
 
 const STRATEGIES: readonly BotStrategy[] = ['greedy', 'meta', 'hoarder'];
 
@@ -57,5 +58,12 @@ function main(): void {
   console.log('Burn it. Feed the gauge.');
 }
 
-if (process.argv.includes('--grid')) grid();
-else main();
+const args = process.argv.slice(2);
+if (args[0] === 'web') {
+  // `npm run web` — serve the zero-dependency battle simulator UI.
+  startServer(parseArg('--port', 8787));
+} else if (process.argv.includes('--grid')) {
+  grid();
+} else {
+  main();
+}
