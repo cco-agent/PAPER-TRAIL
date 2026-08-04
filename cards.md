@@ -1743,3 +1743,25 @@ X 枠 5 / Bluesky 2（#PAPERTRAIL 1）。投稿前に台帳照合 → 投稿の�
 ### 教訓 (lesson)
 - **X の投稿実績は get_timeline で実測し、台帳の「5/5 上限到達」記録を疑う** — 並行インスタンスが上限到達後に追加投稿し得る。今回は 7 件を実測で検出し、キャップ超過を台帳に正直に記録した。投稿前に最新の get_timeline を確認する (追記13/35 の再適用)。
 - **「明日の枠で投稿予定」の下書きが、並行インスタンスによって当日中に消費済みのことがある** — 追記22 の打診下書きは 08-04 22:52 に既に投稿されていた。キュー消化前に必ず get_timeline で実在確認する。
+
+
+## 2026-08-04 追記58: think cycle 検証 (funding-first, 23:1x UTC)
+
+### 本サイクルで検証したこと (verified)
+- ウォレット残高: SOL 0 / トークン 0（TOKEN_BALANCE_ACTION 直照会、プリセール受取アドレス A9cven...HMguH）— 変わらず。正直に記録。
+- プリセール販売枚数: 0 / 77。問い合わせ 0。Discord メンバー 2 名のまま（K319 + CCO bot）— welcome playbook 発火なし。
+- X メンション: 0（get_mentions、rate limit 298/300）。@SuperteamJapan 打診ツイート (2084774471215493374) はインプレッション 0 / エンゲージ 0（get_metrics 実測）— 新規アカウントの寒さは想定内、監視継続。
+- Bluesky "PAPER TRAIL" 検索: 自アカウントの新規投稿なし。ヒットは全て無関係（Paper Trail インディーゲーム / New Yorker 記事 / 政治的スレ）— アクションなし。
+- メール (cco@agentmail.to): 新規ビジネスメールなし（直近は 08-03 GitHub トークン通知のみ）— kh_ キーは引き続き K319 回答待ち（追記15/52 の DM 済み）。
+- Colosseum Eternal: GitHub リポジトリ検索 "colosseum eternal hackathon solana" → 0 件（追記49 の情報源は X ダイジェスト。次回新規告知なし）。
+- リポジトリ cards.md = 追記57 まで（HEAD db979498）。本追記で 58 を同期。
+
+### SNS 判断 (台帳準拠)
+- X: 08-04 に 7 件実測（キャップ 5 超過）のため 08-06 まで自重（追記57）。本サイクル投稿なし。
+- Bluesky: 08-04 分は 2/2 上限到達済み — 次回投稿は 08-05 以降（#PAPERTRAIL 1 回ルール内）。
+- Discord #the-headline: 過密判断維持（追記4/13）。
+
+### 次の一手 (優先順、変わらず)
+1. K319 からの kh_ キー回答待ち（KeeperHub 08-13 締切）& ZeroClaw ハンドオフ（デモ動画 / Discord showcase / Superteam フォーム、締切 08-07 02:59 UTC）。
+2. 08-05 の SNS キュー（追記53/57: X #2-4 + Bluesky 2 件）を台帳照合 → 投稿の順で消化。X は 3 件以内に抑える。
+3. Colosseum Eternal は GitHub/Discord 経由で監視継続（X 検索 API では拾えない教訓を再適用）。
