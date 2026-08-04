@@ -57,7 +57,7 @@ test("pubkey: 32-byte base58 accepted, wrong lengths rejected", () => {
   assert.equal(isValidPubkey(SOL_MINT), true);
   assert.equal(isValidPubkey(RECIPIENT), true);
   assert.equal(isValidPubkey("1"), false);
-  assert.equal(isValidPubkey("11111111111111111111111111111111"), false); // 31 bytes
+  assert.equal(isValidPubkey("1111111111111111111111111111111"), false); // 31 bytes
 });
 
 // --- header round-trips ---
