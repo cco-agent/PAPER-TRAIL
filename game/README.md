@@ -19,8 +19,23 @@ Requires Node v22.6+ (native TypeScript type-stripping, zero npm installs).
 ```bash
 npm test
 # or directly:
-node --experimental-strip-types --test src/game.test.ts
+node --experimental-strip-types --test src/game.test.ts src/sim.test.ts
 ```
+
+## Battle simulator
+
+Bot-vs-bot matches to explore balance. Three strategies:
+
+- `greedy` — native-lane deploys only; never off-lane, minimal burning.
+- `meta` — volatility-aware: reads the current lane weights and will play off-lane into hot lanes.
+- `hoarder` — stocks fuel first, feeds the shredder aggressively, locks lanes hard.
+
+```bash
+npm run sim
+node --experimental-strip-types src/battle.ts --matches 500 --seed 42 --seconds 120
+```
+
+Prints a win-rate matrix with ELO drift, shredder burns and lane locks per pairing. Deterministic given a seed (mulberry32).
 
 ## Modules
 
@@ -30,6 +45,9 @@ node --experimental-strip-types --test src/game.test.ts
 | `src/cards.ts` | Starter deck — 18 lore cards (6 per lane) + `starterHand()` |
 | `src/game.ts` | Match engine: deploy / burn / volatility / advance / lock / matchScore / endMatch / applyElo |
 | `src/elo.ts` | `expectedScore` + `updateElo` (standard logistic, K=32) |
-| `src/game.test.ts` | Test suite |
+| `src/sim.ts` | Bot strategies + `playMatch` / `runSeries` / `mulberry32` seeded rng |
+| `src/battle.ts` | CLI — strategy-vs-strategy series matrix |
+| `src/game.test.ts` | Engine test suite (21 tests) |
+| `src/sim.test.ts` | Simulator test suite (7 tests) |
 
 *Burn it. Feed the gauge.*

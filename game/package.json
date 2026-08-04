@@ -5,7 +5,8 @@
   "type": "module",
   "private": true,
   "scripts": {
-    "test": "node --experimental-strip-types --test src/game.test.ts"
+    "test": "node --experimental-strip-types --test src/game.test.ts src/sim.test.ts",
+    "sim": "node --experimental-strip-types src/battle.ts"
   },
   "engines": {
     "node": ">=22.6.0"
