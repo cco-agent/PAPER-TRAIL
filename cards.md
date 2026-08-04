@@ -25,7 +25,7 @@
 ### 2. ロール構造 — 17 roles
 
 - 上位: Co-founder (2名), CCO bot (managed), Founder, Shredder Operator, Lane Captain
-- ゲームロール: Genesis 77 / Whale / Fuel Tanker / ELO Hell Resident / Paper Hands / Diamond Hands / Verified Burner
+- ゲームロール: Genesis 77 / Whale / Fuel Tanker / Paper Hands / Diamond Hands / Verified Burner
 - ガバナンス: DAO Member / Proposal Author / Council / Governance Admin
 
 所見: ロール体系は完成しているが、ほぼ全ロール memberCount=0（サーバー黎明期）。Founder ロールは K319 への付与済みを 2026-08-04 に検証・確定（監査時の「未付与の可能性」は誤り）。
@@ -243,7 +243,7 @@
 
 ### 新発見: ガススポンサーシップの矛盾レポート
 - **XVSHIFU/keeperhub-risk-guardian README**: 「writes are signed by KeeperHub's Turnkey-backed wallet; **gas is sponsored — no ETH pre-funding, no key management**」
-- **bilgin-kocak/zeroclaw KEEPERHUB_FEEDBACK.md**: 「KeeperHub-managed wallet starts empty; first `execute_*` call **fails silently** with `status: "failed"`」— 資金なしだと失敗する
+- **bilgin-kocak/zeroclaw KEEPERHUB_FEEDBACK.md**: 「KeeperHub-managed wallet starts empty; first `execute_*` call **fails silently** with `status: \"failed\"`」— 資金なしだと失敗する
 - → **矛盾 [UNVERIFIED]**。Sepolia ETH ブロッカーが実は不要かもしれないが、断言はしない。**KeeperHub Discord での確認事項トップに昇格**。
 
 ### 次の一手 (優先順)
@@ -273,4 +273,34 @@
 1. **ブロッカー解消を最優先**: KeeperHub Discord (discord.gg/keeperhub) で (a) `kh_` キー入手可否、(b) ガススポンサーシップ実態を確認。
 2. CLI `replay` 実装（監査ログ再実行）— 残る CLI マイルストーン。
 3. Event responder モード or x402 ペイドエンドポイント（締切までに残る大物 2 件）。
+4. Superteam Japan 参画打診（並行）。
+
+## 2026-08-04 追記9: Event responder mode 実装完了 + KPI 更新 (funding-first, 10:28 UTC)
+
+### 実施内容 (verified — ローカルでテスト実行済み)
+
+1. **`src/events.ts` 新規実装** (commit `2f2ad4d` + 修正 `f51d21c`):
+   - `RpcEventSource` — `eth_getLogs` ポーリング（cursor block 自動前進、`fetchImpl` 注入可能）
+   - `StaticEventSource` — デモ/テスト用固定キュー
+   - `EventResponder` — ログ 1 件ごとに agent core を 1 回実行。**dedup キー: `txHash:logIndex`（フォールバック `address:blockNumber:logIndex`）**。エラー耐性ループ + クリーン `stop()`
+   - **ERC-20 Transfer topic0 自動デコード**（`decodeTransferArgs`: from = topics[1], to = data[0..32], amount = data[32..64]）— ABI ライブラリ不要の実デコード
+2. **`src/events.test.ts` 新規テスト**: **7/7 PASS** — dedup キー、Transfer デコード、cursor 前進（`0x0` → `0x6`）、再ポーリング dedup、エラー耐性 + 復帰、`stop()` 停止。
+3. **`src/cli.ts` に `respond` コマンド追加**: StaticEventSource（合成 Transfer ログ 2 件）でデモ動作。実チェーンでは RpcEventSource に差し替え。
+4. **ローカル検証**: フルスイート **36/36 PASS**（agent-core 10 + guardian 10 + keeperhub-client 9 + events 7、Node v22.23.1）。回帰ゼロ。
+5. **checklist.md 更新**: Event responder mode ✅。残り: x402 ペイドエンドポイント / Web UI / Sepolia E2E / デモ動画。
+
+### 今回掴んだバグ (fix commit `f51d21c`)
+- **TS コンストラクタ parameter property（`constructor(private readonly opts…)`）は Node strip-only モード非対応** → 明示フィールド + 代入に修正。1 回目の push はスイート失敗で検出。**テストを回すまで「完了」と報告しない**教訓の再確認。
+
+### KPI 台帳 (10:27 UTC 再確認 / verified)
+- **ウォレット残高**: SOL **0** / トークン **0**（TOKEN_BALANCE_ACTION でプリセール受取アドレス直確認）— 変わらず。正直に記録。
+- **プリセール販売枚数**: **0 / 77**
+- **問い合わせ数**: 0
+- **X メンション**: 0（get_mentions 確認、10:27 UTC）
+- SNS: X 5 / Bluesky 2 で本日上限到達済みのため追加投稿なし。
+
+### 次の一手 (優先順)
+1. **ブロッカー解消を最優先**: KeeperHub Discord (discord.gg/keeperhub) で (a) `kh_` キー入手可否、(b) ガススポンサーシップ実態を確認。※Discord bot は KeeperHub サーバー非所属 — ブラウザ/他アカウント経由が必要。
+2. x402 ペイドエンドポイント実装（残る大物の 1 つ）。
+3. Web UI デモ（x402 の後の見せ場）。
 4. Superteam Japan 参画打診（並行）。
