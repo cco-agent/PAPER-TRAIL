@@ -1,7 +1,7 @@
 # Shredder Sentinel — Submission Checklist (KeeperHub Agents Onchain)
 
 **Deadline:** 2026-08-13 12:00 UTC+2  
-**Updated:** 2026-08-04 (tool-name verification + poll fix)
+**Updated:** 2026-08-04 (Guardian scheduler + CLI `watch` shipped; full suite 29/29)
 
 ## Submission requirements (from hackathon)
 
@@ -29,9 +29,13 @@
     - `get_direct_execution_status` → **the** poller for direct executions, takes **snake_case `execution_id`** (was wrongly `get_execution`/camelCase — fixed in commit `bdededd`)
     - `execute_contract_call` / `execute_protocol_action` / `create_workflow` / `get_execution_logs` also confirmed to exist
   - **Honest caveat**: real transport refuses to construct without a `kh_` key — no silent mock. Response-shape edge cases get a final check once a key is available.
-  - **19/19 tests passing** across the suite (10 agent-core + 9 keeperhub-client), verified locally on Node v22.23.1 (suite not re-run after `bdededd`; change is signature-compatible — mock path + tests untouched)
-- [ ] Guardian mode (balance/health thresholds) — rules implemented in core; scheduler loop pending
-- [ ] CLI (`run` / `watch` / `status` / `replay`) — `run` + `status` done; `watch` / `replay` pending
+- [x] 2026-08-04 — **Guardian mode** (commit `1ef43c8` + `9ce5061`)
+  - `src/guardian.ts`: threshold rules (`lt`/`lte`/`gt`/`gte`, per-rule cooldown, pure `ruleMatches`/`evaluateRules` with BigInt-exact wei math), `InMemoryGuardianState` firing ledger (swap for SQLite/Redis), `Guardian` polling loop (`runOnStart`, error-tolerant loop, clean `stop()`)
+  - `src/guardian.test.ts`: **10/10 tests** — threshold ops, malformed wei rejection, cooldown suppression + refire, huge-wei exactness, loop fire + clean stop
+  - Full suite: **29/29 passing** on Node v22.23.1 (10 agent-core + 10 guardian + 9 keeperhub-client)
+- [x] 2026-08-04 — **CLI `watch`** (commit `477dccd`)
+  - `src/cli.ts`: `run` / `watch` / `status`. `watch` wires the Guardian loop to the agent core (threshold → trigger → decide → policy → execute → audit) with `--interval` (ms). Swap StaticObserver for RpcObserver for live chains.
+  - `replay` still pending
 - [x] 2026-08-04 — Audit log module (`JsonlAuditLog`, JSONL append + read, tested)
 - [ ] Event responder mode
 - [ ] x402 paid endpoint
