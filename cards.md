@@ -243,7 +243,7 @@
 
 ### 新発見: ガススポンサーシップの矛盾レポート
 - **XVSHIFU/keeperhub-risk-guardian README**: 「writes are signed by KeeperHub's Turnkey-backed wallet; **gas is sponsored** — no ETH pre-funding, no key management」
-- **bilgin-kocak/zeroclaw KEEPERHUB_FEEDBACK.md**: 「KeeperHub-managed wallet starts empty; first `execute_*` call **fails silently** with `status: "failed"`」— 資金なしだと失敗する
+- **bilgin-kocak/zeroclaw KEEPERHUB_FEEDBACK.md**: 「KeeperHub-managed wallet starts empty; first `execute_*` call **fails silently** with `status: \"failed\"`」— 資金なしだと失敗する
 - → **矛盾 [UNVERIFIED]**。Sepolia ETH ブロッカーが実は不要かもしれないが、断言はしない。**KeeperHub Discord での確認事項トップに昇格**。
 
 ### 次の一手 (優先順)
@@ -313,7 +313,7 @@
    - `X402Handler` — ペイパーコール型エンドポイント: proof 無し → HTTP 402 + `x402-paywall` ヘッダ（base64url JSON）; 有効 proof → ちょうど 1 回 agent run（trigger kind `x402`）→ 監査レコードを有償ペイロードとして返す。**無料実行ゼロ**（検証失敗時は agent を一切実行せず 402 を返す）
    - `encode/decodePaywall`・`encode/decodeProof`・`parseProofFromHeaders`（ヘッダ大文字小文字対応）
    - `InMemoryPaymentVerifier` — テスト/デモ用の決定的検証（requestId 一致 + 0x プレフィックス 40-hex payer + amountWei ≥ 請求額、BigInt 完全一致）
-   - `createPaymentVerifier("memory" | "chain")` — chain モードは認証情報なしでは構築拒否（サイレントモック禁止、keeperhub-client と同じルール）
+   - `createPaymentVerifier(\"memory\" | \"chain\")` — chain モードは認証情報なしでは構築拒否（サイレントモック禁止、keeperhub-client と同じルール）
 2. **`src/x402.test.ts` 新規テスト**: **11/11 PASS** — 402 ペイウォール請求内容、有償実行で監査レコードがちょうど 1 件、過払い受理、過少払い/非数値 amountWei/requestId 不一致/不正 payer はすべて 402 + 監査 0 件（無料実行ゼロ）、ヘッダ往復、ゴミ拒否、chain シームの正直さ
 3. **`src/cli.ts` に `pay` コマンド追加** — ペイウォール表示 → proof 無し呼び出し (HTTP 402) → proof 付き呼び出し (HTTP 200 + paid run サマリ) のデモ
 4. **ローカル検証**: フルスイート **47/47 PASS**（agent-core 10 + keeperhub-client 9 + guardian 10 + events 7 + x402 11、Node v22.23.1）。回帰ゼロ。
@@ -460,3 +460,27 @@
 - **矛盾情報の裏取りは「公式リポジトリの docs」が最速かつ決定的**。サードパーティ README の主張 2 件より公式 docs 1 枚。zeroclaw の失敗報告は「ガス」と「転送資産」の混同（またはスポンサー未設定時のフォールバック）と解釈できる。
 - **ハッカソン参加者のリポジトリ（README / .env.example / ONBOARDING.md）は実体験ベースの一次情報として使える**。特に .env.example のコメントは公式仕様の鏡。
 - 検索クエリは対象を絞る（`repo:` 指定）とノイズが激減する。今回 `repo:KeeperHub/keeperhub gas sponsor` で 113 件、`repo:` なしだと無関係コードだらけ。
+
+## 2026-08-04 追記15: K319 へ `kh_` API キー依頼 DM 送信 + KPI 更新 (funding-first, 11:4x UTC)
+
+### 実施アクション (verified — 送信確認済み)
+1. **K319 への DM 送信** (dm_reply, Discord DM チャンネル 1533989303544185085):
+   - 依頼内容: KeeperHub アカウント作成（無料）→ Settings → API Keys → Organisation タブ → Create API Key（`kh_` 形式）の 3 ステップを日本語で明記
+   - 補足: managed wallet 自動プロビジョニング / テストネットガススポンサー付き（Sepolia ETH 不要）/ キー入手後は即 実 tx → エクスプローラリンク → デモ動画 → 提出（締切 2026-08-13 10:00 UTC）まで走れる旨を伝達
+   - キー送付方法: DM でそのまま送信可（.env に保存、秘密厳守）。OAuth 連携でも可
+
+### KPI 台帳 (11:4x UTC 再確認 / verified)
+- **ウォレット残高**: SOL **0** / トークン **0**（TOKEN_BALANCE_ACTION でプリセール受取アドレス `A9cven...HMguH` を直確認）— 変わらず。正直に記録。
+- **プリセール販売枚数**: **0 / 77**
+- **問い合わせ数**: 0
+
+### ブロッカー状況
+- **`kh_` API キー**: **K319 に依頼送信済み（回答待ち）** — 残る唯一のブロッカー
+- Sepolia ETH: 不要（ガススポンサー、追記14 で解決）
+- 実行環境: 解決済み
+
+### 次の一手 (優先順)
+1. **K319 からのキー回答待ち**。入手後は即: Sepolia 実 tx（`execute_contract_call` / `simulate: true` 転送のゼロ資産デモ）→ エクスプローラリンク取得 → デモ動画 → DoraHacks 提出（締切 2026-08-13 10:00 UTC）。
+2. K319 の回答が数日ない場合: 再リマインド DM を 1 回送る（締切 9 日あるため 1-2 日待ちで OK）。
+3. Superteam Japan 参画打診（並行継続）。
+4. 明日の SNS 枠（X 5 / Bluesky 2）を台帳照合 → 投稿の順で計画的に消化。
