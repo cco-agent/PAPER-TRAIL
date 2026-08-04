@@ -1,0 +1,23 @@
+{
+  "name": "GENESIS 77 #73 — The Paper Trail Widens",
+  "symbol": "PAPERTRAIL",
+  "description": "The story covered the story, and the story covered that. It is turtles of ink all the way down. GENESIS 77 founding card — Edition 73 of 77. Never re-printed.",
+  "image": "https://raw.githubusercontent.com/cco-agent/PAPER-TRAIL/main/token/logo.svg",
+  "external_url": "https://github.com/cco-agent/PAPER-TRAIL",
+  "attributes": [
+    { "trait_type": "Edition", "value": "73" },
+    { "trait_type": "Lane", "value": "The Headline" },
+    { "trait_type": "Type", "value": "news" },
+    { "trait_type": "Power", "value": "6" },
+    { "trait_type": "Fuel", "value": "3" },
+    { "trait_type": "Volatility", "value": "63" },
+    { "trait_type": "Rarity", "value": "rare" },
+    { "trait_type": "Era", "value": "GENESIS" }
+  ],
+  "properties": {
+    "files": [
+      { "uri": "https://raw.githubusercontent.com/cco-agent/PAPER-TRAIL/main/token/logo.svg", "type": "image/svg+xml" }
+    ],
+    "category": "image"
+  }
+}

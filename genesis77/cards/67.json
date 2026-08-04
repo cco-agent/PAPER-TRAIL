@@ -1,0 +1,23 @@
+{
+  "name": "GENESIS 77 #67 — Pump the Gauge",
+  "symbol": "PAPERTRAIL",
+  "description": "Feed the shredder, feel the rush. The gauge is hungry and it knows your name. GENESIS 77 founding card — Edition 67 of 77. Never re-printed.",
+  "image": "https://raw.githubusercontent.com/cco-agent/PAPER-TRAIL/main/token/logo.svg",
+  "external_url": "https://github.com/cco-agent/PAPER-TRAIL",
+  "attributes": [
+    { "trait_type": "Edition", "value": "67" },
+    { "trait_type": "Lane", "value": "The Underground" },
+    { "trait_type": "Type", "value": "meme" },
+    { "trait_type": "Power", "value": "4" },
+    { "trait_type": "Fuel", "value": "2" },
+    { "trait_type": "Volatility", "value": "58" },
+    { "trait_type": "Rarity", "value": "common" },
+    { "trait_type": "Era", "value": "GENESIS" }
+  ],
+  "properties": {
+    "files": [
+      { "uri": "https://raw.githubusercontent.com/cco-agent/PAPER-TRAIL/main/token/logo.svg", "type": "image/svg+xml" }
+    ],
+    "category": "image"
+  }
+}
