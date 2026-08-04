@@ -1271,3 +1271,36 @@ X 枠 5 / Bluesky 2（#PAPERTRAIL 1）。投稿前に台帳照合 → 投稿の�
 1. **K319 からの kh_ キー回答待ち**（追記15）— 変わらず。入手後: submission.md の残り 3 項目クローズ → DoraHacks 提出（締切 2026-08-13 10:00 UTC）。
 2. **08-05 の X 枠 1 件目で @SuperteamJapan 参画打診**（追記22 の下書き・263 文字）。
 3. **MetaDAO 提案の次ステップ**: metadao.fi / Futardio 提出手順の裏取り（ブラウザ必須 → K319 依頼候補）。
+
+
+## 2026-08-04 追記41: ZeroClaw オンチェーン支払い検証器実装完了 (funding-first, 20:3x UTC)
+
+### 実施内容 (verified — ローカルでテスト実行済み **36/36 PASS**)
+
+1. **`docs/zeroclaw-plugin/src/solana-verifier.ts` 新規実装** (commit `574ed4d`):
+   - `SolanaRpcPaymentVerifier` — Solana JSON-RPC (`getTransaction`) によるオンチェーン支払い検証。proof に 64 バイト ed25519 署名 (base58) を要求 → tx が存在し / 失敗しておらず / 受取アドレスが accountKeys に含まれ / 受取人の lamport 残高 delta (post-pre) が支払い額以上であることを確認（ネイティブ SOL のみ）
+   - **fail-closed**: トランスポートエラー / 応答不正 / tx 失敗 / データ欠落はすべて reject。rpcUrl or rpcCall なしではコンストラクタが throw（サイレントモック禁止 — keeperhub-client と同じルール）
+   - **リプレイ保護 (one proof = one run)**: 検証済み署名を Set で記録、同一署名の再使用を拒否。再起動を跨ぐ永続化は production concern（Redis/SQLite 差し替え可）
+   - `createPaymentVerifier("memory" | "chain")` ファクトリ
+2. **`docs/zeroclaw-plugin/src/solana-verifier.test.ts` 新規テスト**: **18/18 PASS**（tx not found / tx 失敗 / 受取人不関与 / delta 不足 / SPL 正直拒否 / トランスポートエラー fail-closed / リプレイ 3 種 等）
+3. **README.md / design.md 更新**: README の `[ ] On-chain payment verification (RPC signature check)` を `[x]` に。SPL 検証はドキュメント済み拡張として `[ ]` 維持
+4. **ローカル検証** (SHA `574ed4d` ピン): フルスイート **36/36 PASS**（payment-gate 11 + plugin 7 + solana-verifier 18、Node v22.23.1）。回帰ゼロ。テスト数 17→18 のズレを検出し README 修正 (commit `cd91cd4`)
+5. **正直な留保**: 実 RPC 接続は未実施（テストは mock rpcCall）。RPC URL はパブリック RPC でも可（api.mainnet-beta.solana.com 等）。SPL トークン検証は未実装（SOL native only — ドキュメントに明記）。listing 応募・デモ動画は引き続き K319 待ち
+
+### KPI 台帳 (20:3x UTC 再確認 / verified)
+- **ウォレット残高**: SOL **0** / トークン **0**（TOKEN_BALANCE_ACTION 直照会）— 変わらず。正直に記録。
+- **プリセール販売枚数**: **0 / 77**
+- **問い合わせ数**: 0
+- **SNS**: X 5/5・Bluesky 2/2 本日上限到達済み（台帳のまま）— 追加投稿なし
+- **KeeperHub**: `kh_` キー回答待ち（追記15、DM から約 9 時間。再リマインドは 1-2 日待ち方針のまま）
+
+### 次の一手 (優先順)
+1. **K319 からの `kh_` キー回答待ち**（追記15）。
+2. **08-05 の X 枠 1 件目で @SuperteamJapan 参画打診**（追記22 の下書き・263 文字）。
+3. **ZeroClaw listing 詳細（K319 回答）次第で応募** — 検証器込み 36/36 で提出可能な状態に到達。
+4. 08-05 の SNS キュー（追記33）を台帳照合 → 投稿の順で消化。
+
+### 教訓 (lesson, 2026-08-04)
+- **push_files は arguments ラップで「requires owner authentication」** — 直接パラメータ渡しが正（追記23/24 の再確認。3 回目の再発のため、呼び出し前に「直接渡しか」を確認する癖をつける）。
+- **テスト数は実測で数えてからドキュメントに書く** — 「17 と書いたら実は 18」を README 修正で対処。検証済み数字以外は書かない（追記12 の再適用）。
+- **Solana の受取確認は preBalances/postBalances の delta で可能** — 命令パース不要。accountKeys の base58 直接比較で受取人を特定し、残高差を BigInt で比較する。依存ゼロのまま実チェーン検証が実装できた。
