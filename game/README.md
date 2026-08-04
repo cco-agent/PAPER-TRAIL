@@ -36,29 +36,24 @@ Bot-vs-bot matches to explore balance. Three strategies:
 
 - `greedy` — native-lane deploys only; never off-lane, minimal burning.
 - `meta` — volatility-aware: reads the current lane weights and will play off-lane into hot lanes.
-- `hoarder` — stocks fuel first, feeds the shredder aggressively, locks lanes hard.
+- `hoarder` — stocks fuel first, feeds the shredder aggressively, locks late.
 
 ```bash
 npm run sim
-node --experimental-strip-types src/battle.ts --matches 500 --seed 42 --seconds 120
+npm run sim -- --grid   # balance grid: offLanePenalty x weightMax sweep
+# equivalent:
+node --experimental-strip-types src/battle.ts
 ```
 
-Prints a win-rate matrix with ELO drift, shredder burns and lane locks per pairing. Deterministic given a seed (mulberry32).
+The `--grid` mode sweeps `offLanePenalty` × `weightMax` and prints greedy-vs-meta win rates per cell, so balance hypotheses can be tested numerically instead of by feel.
 
-## Modules
-
-| File | Purpose |
+| Module | Purpose |
 |---|---|
-| `src/types.ts` | Core types: `Card`, `LaneId`, `PlayerState`, lane constants |
-| `src/cards.ts` | Starter deck — 18 lore cards (6 per lane) + `starterHand()` |
-| `src/genesis-cards.ts` | GENESIS 77 founding set — 77 numbered cards + rarity/flavor + lookups |
-| `src/game.ts` | Match engine: deploy / burn / volatility / advance / lock / matchScore / endMatch / applyElo |
-| `src/elo.ts` | `expectedScore` + `updateElo` (standard logistic, K=32) |
+| `src/types.ts` | `Card` / `LaneId` / `PlayerState` / `LANES` constants |
+| `src/cards.ts` | Starter deck (18 cards, strict subset of GENESIS 77) + `starterHand()` |
+| `src/genesis-cards.ts` | Full GENESIS 77 set, regenerated from canonical cNFT metadata |
+| `src/genesis.ts` | Metadata loader (`loadGenesisDeck`), used by tests and tooling |
+| `src/game.ts` | Match engine: create/deploy/burn/volatility/lock/score/ELO |
 | `src/sim.ts` | Bot strategies + `playMatch` / `runSeries` / `mulberry32` seeded rng |
-| `src/battle.ts` | CLI — strategy-vs-strategy series matrix |
-| `scripts/generate-genesis-metadata.ts` | cNFT metadata JSON generator (GENESIS 77) |
-| `src/game.test.ts` | Engine test suite (21 tests) |
-| `src/sim.test.ts` | Simulator test suite (7 tests) |
-| `src/genesis-cards.test.ts` | GENESIS 77 set integrity suite (10 tests) |
-
-*Burn it. Feed the gauge.*
+| `src/battle.ts` | CLI: full matrix, `--grid` balance sweep |
+| `src/sim.test.ts` | Simulator test suite (8 tests — incl. engine-option passthrough) |
