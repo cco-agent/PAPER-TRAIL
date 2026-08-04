@@ -14,6 +14,9 @@ export interface SimOptions {
   volatilityInterval?: number;
   decisionInterval?: number;
   startElo?: [number, number];
+  offLanePenalty?: number;
+  weightMin?: number;
+  weightMax?: number;
   rng?: () => number;
 }
 
@@ -91,11 +94,15 @@ export function playMatch(
 ): SimResult {
   const rng = opts.rng ?? Math.random;
   const handSize = opts.handSize ?? 6;
-  const m = createMatch(starterHand(handSize, rng), starterHand(handSize, rng), {
+  const engineOpts: Record<string, number | (() => number)> = {
     matchSeconds: opts.matchSeconds ?? 180,
     volatilityInterval: opts.volatilityInterval ?? 5,
     rng,
-  });
+  };
+  for (const k of ['offLanePenalty', 'weightMin', 'weightMax'] as const) {
+    if (opts[k] !== undefined) engineOpts[k] = opts[k];
+  }
+  const m = createMatch(starterHand(handSize, rng), starterHand(handSize, rng), engineOpts);
   if (opts.startElo) {
     m.players[0].elo = opts.startElo[0];
     m.players[1].elo = opts.startElo[1];
