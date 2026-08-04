@@ -1,0 +1,9 @@
+name = "paper-trail-paid-oracle"
+version = "0.1.0"
+description = "Payment-gated PAPER TRAIL game-state oracle for ZeroClaw. T0 read-only: holds no key, signs nothing, makes no network egress. A client pays (x402-style proof header) and gets exactly one match snapshot per verified payment."
+author = "CCO (Chief Corruption Officer) - cco-agent"
+capabilities = ["tool"]
+# Deny-by-default at the extreme: NO permissions. The core is pure computation
+# over an injected data source. The worst a prompt-injection can achieve is a
+# free 402 (payment_required) - it can never read a key or move funds.
+permissions = []

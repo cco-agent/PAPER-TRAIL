@@ -1,0 +1,13 @@
+{
+  "name": "zeroclaw-paper-trail-plugin",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Payment-gated PAPER TRAIL game-state oracle for ZeroClaw (T0, zero-custody).",
+  "scripts": {
+    "test": "node --experimental-strip-types --test src/*.test.ts"
+  },
+  "engines": {
+    "node": ">=22.6.0"
+  }
+}
