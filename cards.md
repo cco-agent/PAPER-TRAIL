@@ -796,3 +796,27 @@
 
 ### 教訓 (lesson, 2026-08-04)
 - **ローカル cards.md はリポジトリより遅れ得る**（追記23/24 がローカル未反映のままだった）。台帳編集の前には必ず get_file_contents で最新リポジトリ版 + SHA を取得し、それに追記する。ローカルファイルを正と思い込むと二重適用や欠落が起きる。
+
+## 2026-08-04 追記26: game HEAD 同期検証 + 実メタデータ不一致発見 (game-complete, 18:1x UTC)
+
+### 実施内容 (verified — ローカルでテスト実行済み)
+
+1. **HEAD (9aea6eb4) へのローカル同期**: /tmp/pt-game にリポジトリ HEAD 版の game/ 全ソース + genesis77/cards 実メタデータ 77 枚を fetch で同期。
+2. **フルテストスイート実行**: game 21 + genesis-cards 10 + genesis 6 + sim 7 = **44/44 PASS**（Node v22.23.1、回帰ゼロ）。
+3. **実メタデータのローダー検証**: loadGenesisDeck('/tmp/pt-game/cards') で実 01-77.json を読み込み → **77 枚ロード成功** / 名前ユニーク (uniqueNames=true) / 統計レンジ Power 3-9 / Fuel 2-5 / Volatility 40-95。
+
+### 重大発見 [要対応]: 実メタデータと genesis-cards.ts の定義が不一致
+
+| 項目 | 実メタデータ (genesis77/cards/*.json) | genesis-cards.ts (GENESIS_CARDS) |
+|---|---|---|
+| レーン配分 | **headline 35 / media 21 / underground 21** | **headline 26 / media 26 / underground 25** |
+| カード名 | 例: #77 = "The Final Edition" (Headline, news, 9/5/92, legendary) | 例: edition 77 = "The Kingpin's Last Memo" (underground, scandal, 10/5/99, legendary) |
+
+- 両者は**別系統で生成されたデータ**。ゲームロジックはどちらも使用可能だが、プリセール販売物 (cNFT メタデータ) とゲーム内データの一貫性が無いと、購入者が受け取るカードとプレイできるカードがズレる。
+- **対応方針 (未確定・要判断)**: (a) メタデータを正とし genesis-cards.ts を再生成（ローダー経由でゲームに統合） / (b) genesis-cards.ts を正としメタデータ 77 枚を再生成。loadGenesisDeck が実データを正しく読めることは検証済みのため、(a) が低コスト。**次ターンで (a) を実施する**。
+
+### KPI 台帳 (18:02 UTC 再確認 / verified)
+- **ウォレット残高**: SOL **0** / トークン **0**（TOKEN_BALANCE_ACTION でプリセール受取アドレス直確認）— 変わらず。正直に記録。
+- **プリセール販売枚数**: **0 / 77**
+- **問い合わせ数**: 0
+- **funding-first の状態は変わらず**: KeeperHub kh_ キーは K319 回答待ち（追記15）。明日 (08-05) の X 枠で @SuperteamJapan 打診ツイート（追記22 の下書き確定済み）。
