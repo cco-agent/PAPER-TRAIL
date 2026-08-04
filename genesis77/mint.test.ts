@@ -101,6 +101,7 @@ test("assignEditions: first come first corrupted + per-buyer paid_sol", () => {
   assert.deepEqual(a.allocated, [1, 2, 3]);
   assert.equal(a.overflow, 0);
   assert.equal(a.buyer.paid_sol, 0.3);
+  ledger.buyers.push(a.buyer); // persist (mirrors CLI --apply flow)
   const b = assignEditions(ledger, "walletB", 1);
   assert.deepEqual(b.allocated, [4]);
   assert.equal(b.buyer.paid_sol, 0.1);
@@ -112,6 +113,7 @@ test("assignEditions: cap at 77 with overflow detection", () => {
   assert.equal(r.allocated.length, 77);
   assert.equal(r.overflow, 3);
   assert.equal(r.buyer.paid_sol, 7.7);
+  ledger.buyers.push(r.buyer); // persist before checking availability
   assert.equal(availableEditions(ledger).length, 0);
 });
 
