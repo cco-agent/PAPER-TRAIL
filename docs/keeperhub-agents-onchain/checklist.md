@@ -1,7 +1,7 @@
 # Shredder Sentinel — Submission Checklist (KeeperHub Agents Onchain)
 
 **Deadline:** 2026-08-13 12:00 UTC+2  \
-**Updated:** 2026-08-04 (x402 paid endpoint shipped; full suite **47/47**)
+**Updated:** 2026-08-04 (Web UI demo shipped; full suite **56/56**)
 
 ## Submission requirements (from hackathon)
 
@@ -51,7 +51,11 @@
   - `src/x402.test.ts`: **11/11 tests** — 402 paywall charge fields, paid run writes exactly one audit record, overpayment accepted, underpayment / non-numeric amount / mismatched requestId / malformed payer all → 402 with **zero** audit records (no free runs), header roundtrips, garbage rejection, honest chain seam.
   - `src/cli.ts`: `pay` command — demo: print paywall → call without proof (HTTP 402) → call with proof (HTTP 200 + paid run summary).
   - **Verified locally**: full suite **47/47 PASS** on Node v22.23.1 (10 agent-core + 9 keeperhub-client + 10 guardian + 7 events + 11 x402). No regression.
-- [ ] Web UI demo
+- [x] 2026-08-04 — **Web UI demo** (commits `98683ff` + `d49de29` + `082df1e`)
+  - `src/webui.ts`: zero-dependency HTTP server (`node:http`, no npm deps). Routes: `GET /` (browsable demo page — paywall card + "call without proof" / "pay & run" buttons), `GET /api/paywall` (paywall JSON), `POST /api/run` (x402 endpoint: no proof → HTTP 402 + `x402-paywall` header; valid proof → HTTP 200 + audit record JSON). Request logic in `WebUI.handle()` so every route is testable without binding a port; `startServer()` is the thin node:http wrapper. Malformed proof header → treated as unpaid (402).
+  - `src/webui.test.ts`: **9/9 tests** — HTML route, paywall JSON, 402 without proof (zero audit records), paid run → 200 + trigger kind `x402` + exactly one audit record, overpayment accepted, wrong requestId → 402 with zero free runs, malformed proof → 402, case-insensitive proof header, unknown route → 404.
+  - `src/cli.ts`: `web` command — serves the demo on `http://localhost:<port>/` (default 8787, `--port` to change), in-memory verifier, clean Ctrl-C shutdown.
+  - **Verified locally**: full suite **56/56 PASS** on Node v22.23.1 (10 agent-core + 9 keeperhub-client + 10 guardian + 7 events + 11 x402 + 9 webui). No regression.
 - [ ] Sepolia happy-path E2E with real tx hash
 - [ ] Demo video + explorer link
 - [ ] Final repo cleanup + README polish
