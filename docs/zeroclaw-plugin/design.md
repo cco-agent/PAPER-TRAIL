@@ -16,8 +16,8 @@ This entry takes the **PAPER TRAIL game economy** as the product: a paid oracle 
 |---|---|
 | Keys | None held. Core makes no network call, signs nothing. |
 | Prompt injection | Worst case is a free 402 — the oracle never runs unpaid. |
-| Payment verification | Injected `PaymentVerifier`. In-memory = tests/demo. Production = on-chain (RPC signature/balance check). |
-| Replay | Out of scope for the scaffold: one proof = one run is enforced by the verifier contract, but true replay protection (nonce/consumed-request tracking) is a production concern for the on-chain verifier. |
+| Payment verification | Injected `PaymentVerifier`. In-memory = tests/demo. Production = on-chain, implemented in `src/solana-verifier.ts` (Solana RPC: signature exists, tx not failed, recipient in account keys, lamport delta ≥ paywall). Fail-closed on transport/parse errors. SOL native only. |
+| Replay | Implemented in `SolanaRpcPaymentVerifier`: in-memory `Set` of redeemed signatures (one proof = one run). Persistence across restarts is a production concern (swap Set for Redis/SQLite). |
 | Data source | Injected `OracleDataSource`. The plugin is a delivery mechanism; the source (RPC watcher / game engine) is swappable. |
 
 ## 3. Why JS/TS self-hosted (not wasm)
@@ -39,11 +39,11 @@ ZeroClaw host
 A real deployment swaps:
 
 1. `StaticOracleDataSource` → live source (PAPER TRAIL match engine or RPC watcher)
-2. `InMemoryPaymentVerifier` → on-chain verifier (Solana RPC: confirm `signature`, check amount & recipient)
+2. `InMemoryPaymentVerifier` → `SolanaRpcPaymentVerifier` (rpcUrl = public/private Solana RPC)
 3. manifest `permissions` only if a live source needs `http_client` (keep deny-by-default otherwise)
 
 ## 5. Honest blockers
 
 - Listing-specific requirements (application flow, deadline, submission format) are **browser-required** — confirmation requested from K319 (co-conspirator).
-- On-chain payment verification needs RPC credentials — not wired in the scaffold by design (no silent mocks, same rule as `KeeperHubMcpClient`).
+- SPL token verification is a documented extension (native SOL covered by `SolanaRpcPaymentVerifier`).
 - This is a **participation scaffold**, not a finished submission. Value: presence in the field + reusable payment-gate primitive for both bounties.
