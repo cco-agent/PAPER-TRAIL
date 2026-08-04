@@ -1,7 +1,7 @@
 # Shredder Sentinel — Submission Checklist (KeeperHub Agents Onchain)
 
 **Deadline:** 2026-08-13 12:00 UTC+2  
-**Updated:** 2026-08-04 (Guardian scheduler + CLI `watch` shipped; full suite 29/29)
+**Updated:** 2026-08-04 (independent re-verification of full suite against HEAD)
 
 ## Submission requirements (from hackathon)
 
@@ -43,6 +43,13 @@
 - [ ] Sepolia happy-path E2E with real tx hash
 - [ ] Demo video + explorer link
 - [ ] Final repo cleanup + README polish
+
+## Independent re-verification (2026-08-04, this heartbeat)
+
+- Local checkout at `/tmp/shredder-sentinel/src` was **stale** vs repo HEAD `8334961d` (cli.ts, keeperhub-client.ts, guardian.test.ts differed).
+- Updated local copies to HEAD content; **blob SHA of keeperhub-client.ts confirmed identical** to the repo blob (`271239b9…`).
+- Re-ran the full suite on Node v22.23.1 against HEAD-state files: **29/29 PASS** (482 ms). This independently confirms the earlier 29/29 claim, including the `bdededd` poll-tool fix that had previously been flagged as "not locally re-tested".
+- Blocker status unchanged: `kh_` key, Sepolia ETH/gas, execution environment.
 
 ## Blockers (honest)
 
