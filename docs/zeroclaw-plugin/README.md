@@ -2,11 +2,13 @@
 
 Payment-gated game-state oracle for [ZeroClaw](https://superteam.fun/earn/listing/zeroclaw), built from the existing `x402.ts` + Web UI work in `docs/keeperhub-agents-onchain/`.
 
+> **⚠ DEADLINE CORRECTED (verified 2026-08-04): submission closes 2026-08-07 02:59:59 UTC — BEFORE the KeeperHub deadline (08-13). Winners announced 08-21. Full verified requirements + judging criteria + K319 handoff checklist: see [SUBMISSION.md](./SUBMISSION.md).**
+
 **The pitch:** external agents pay (SOL/SPL, x402-style proof) and get exactly **one** PAPER TRAIL match snapshot per payment — lane scores, 5-second volatility window, leader, ELO, burns, locks. Game economy × payment rails. The plugin itself is **T0 / zero-custody**: no key, no signing, no network egress from the core.
 
 ## Why this differentiates
 
-The ZeroClaw listing field is crowded with solana-pay / invoice / x402 / guardian clones (20+ public applicant repos). This entry is not another payment primitive — it is a **paid data product**: the PAPER TRAIL game state as a monetizable oracle. Differentiation: game-economy × payment-gate, not payment-gate alone.
+The ZeroClaw listing field is crowded with solana-pay / invoice / x402 / guardian clones (20+ public applicant repos, ~70 submissions total). This entry is not another payment primitive — it is a **paid data product**: the PAPER TRAIL game state as a monetizable oracle. Differentiation: game-economy × payment-gate, not payment-gate alone.
 
 ## Design
 
@@ -46,8 +48,12 @@ node --experimental-strip-types --test src/*.test.ts
 - [x] Oracle core (pure, deterministic, testable)
 - [x] Plugin surface + manifest (T0, zero-custody)
 - [x] On-chain payment verification (`src/solana-verifier.ts` — Solana JSON-RPC: tx must exist, not fail, name the recipient, and its lamport balance delta must cover the paywall. Fail-closed; replay protection = one proof one run; construction without RPC refuses — no silent mocks). **SOL native only.**
+- [x] Verified listing requirements + judging criteria + submission format (SUBMISSION.md, 2026-08-04)
 - [ ] SPL token verification (documented extension: `postTokenBalances` check)
-- [ ] Listing-specific requirements (browser-required; pending confirmation from K319)
-- [ ] Demo video / final submission (winner announcement 2026-08-21)
+- [ ] Prompt-injection transcript extraction (`TRANSCRIPT.md` — test cases exist, extraction pending)
+- [ ] Submission write-up body (`WRITEUP.md`)
+- [ ] Demo video ≤3 min + Discord #solana-bounty showcase + Superteam form — **human/browser (K319 handoff, checklist in SUBMISSION.md)**
 
 The in-memory verifier is for tests/demo only. Production swaps in `SolanaRpcPaymentVerifier` (needs a public or private RPC URL); replay-set persistence across restarts is a production concern.
+
+**Submission rules that matter (verified):** no ZeroClaw registry PR during the bounty; a standalone plugin is NOT a valid submission (ours is a working paid oracle use case); reproducibility is explicitly scored; prompt-injection transcript required for funds-touching use cases.
