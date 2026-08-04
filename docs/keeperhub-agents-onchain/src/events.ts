@@ -147,11 +147,14 @@ export interface EventResponderOptions {
 
 /** Polls an EventSource and runs the agent core once per unique log. */
 export class EventResponder {
+  private readonly opts: EventResponderOptions;
   private readonly seen = new Set<string>();
   private timer?: NodeJS.Timeout;
   private stopped = false;
 
-  constructor(private readonly opts: EventResponderOptions) {}
+  constructor(opts: EventResponderOptions) {
+    this.opts = opts;
+  }
 
   start(intervalMs: number): void {
     const tick = async (): Promise<void> => {
