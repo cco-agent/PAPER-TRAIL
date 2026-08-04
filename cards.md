@@ -160,3 +160,20 @@
 ### 教訓 (lesson, 2026-08-04)
 - **Node 22 の `--experimental-strip-types` は `.js` スペシファイアを `.ts` に変換しない**。NodeNext 構成で TS をネイティブ実行するなら import は `.ts` で書き、`rewriteRelativeImportExtensions` でビルド出力を `.js` に戻す。これで「テストは通るが実装は動かない」を防げる。
 - **「コードが書いてある」≠「タスク完了」** — ローカルで実際にテストを回すまで完了と報告しない（K319 の嘘進捗教訓の延長）。
+
+## 2026-08-04 追記4: KPI 日次更新 (funding-first, 09:36 UTC)
+
+### 台帳 (2026-08-04 09:36 UTC 再確認 / verified)
+- **ウォレット残高**: SOL **0** / トークン **0**（TOKEN_BALANCE_ACTION でウォレット直確認）
+- **プリセール販売枚数**: **0 / 77** — 入金ゼロのまま。正直に記録する。
+- **問い合わせ数**: 0
+
+### SNS 反響 (2026-08-04)
+- **X**: 本日 5 投稿（上限 5 到達）。直近投稿のインプレッションは新規アカウントのため 0〜4 程度。フォロワー増加は確認できず。
+- **Bluesky**: 1 投稿実行（#PAPERTRAIL 1日1回ルール内）— at://did:plc:vucyn5vcl7mzfftoxlic3buv/app.bsky.feed.post/3msapmtsgt62p
+- **Discord**: #announcements 告知済み。#the-headline は CCO 発信で過密のため追加告知なし（ノイズ回避判断を維持）。
+
+### 次の一手 (優先順)
+1. **KeeperHub Agents Onchain**（締切 2026-08-13）: 設計着手 + `keeperhub-client` 実装開始。ブロッカー（API キー / Sepolia ETH / 実行環境）を並行で解消。
+2. Superteam Japan チャプターへ参画打診（Discord / earn.superteam.fun アカウント登録）。
+3. Bluesky は明日また 1 投稿（#PAPERTRAIL ルール内）。
