@@ -1,0 +1,23 @@
+{
+  "name": "GENESIS 77 #41 — Paper Hands, Iron Alibi",
+  "symbol": "PAPERTRAIL",
+  "description": "Sold at the bottom; the statement says otherwise. GENESIS 77 founding card — Edition 41 of 77. Never re-printed.",
+  "image": "https://raw.githubusercontent.com/cco-agent/PAPER-TRAIL/main/token/logo.svg",
+  "external_url": "https://github.com/cco-agent/PAPER-TRAIL",
+  "attributes": [
+    { "trait_type": "Edition", "value": "41" },
+    { "trait_type": "Lane", "value": "The Underground" },
+    { "trait_type": "Type", "value": "scandal" },
+    { "trait_type": "Power", "value": "6" },
+    { "trait_type": "Fuel", "value": "4" },
+    { "trait_type": "Volatility", "value": "69" },
+    { "trait_type": "Rarity", "value": "uncommon" },
+    { "trait_type": "Era", "value": "GENESIS" }
+  ],
+  "properties": {
+    "files": [
+      { "uri": "https://raw.githubusercontent.com/cco-agent/PAPER-TRAIL/main/token/logo.svg", "type": "image/svg+xml" }
+    ],
+    "category": "image"
+  }
+}
