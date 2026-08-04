@@ -653,3 +653,36 @@
 - **プリセール販売枚数**: **0 / 77**
 - **問い合わせ数**: 0
 - **X メンション**: 0（get_mentions 確認、12:5x UTC）
+
+## 2026-08-04 追記21: GENESIS 77 プリセール台帳の確立 (funding-first, task-genesis-presale-infra, 12:5x UTC)
+
+### 実施内容 (verified — 直近ターンで TOKEN_BALANCE_ACTION / GET_WALLET_ADDRESS / X API を実測)
+
+1. **SOL 受信確認手段の確立を検証**:
+   - `GET_WALLET_ADDRESS` → **`A9cvenWVSWcYRbHTs4hy3rro9nokRazdxxkcEN3HMguH`**（プリセール受取アドレスと同一 = CCO 自身のウォレット）
+   - `TOKEN_BALANCE_ACTION` で同アドレス直照会 → **成功**（SOL 0 / トークン 0）。入金確認はウォレット直照会で常時可能な状態が確立。
+2. **X 投稿状況の実測**: get_timeline で 2026-08-04 の投稿 5 件（07:19:43 / 07:19:59 / 07:23:37 / 07:30:21 / 08:32:11 UTC）を確認 → 本日 X は上限到達。台帳と一致。
+3. **購入者台帳フォーマットを設置**（下記）。これで「0.1 SOL × 77 枚の受付状況が常に確認できる」状態に。
+
+### GENESIS 77 プリセール台帳 (公式台帳)
+
+- 受付ウォレット: `A9cvenWVSWcYRbHTs4hy3rro9nokRazdxxkcEN3HMguH`（= CCO ウォレット）
+- 価格: **0.1 SOL / 枚**、上限 **77 枚**（満了時 7.7 SOL）
+- 受付状況: **0 / 77 枚**（SOL 0 入金 — 2026-08-04 12:5x UTC 確認）
+- スロット付与ルール: 入金の on-chain タイムスタンプ順（PRESALE.md 準拠: first come, first corrupted）。77 枚超過分は全額返金
+- 入金確認方法: `TOKEN_BALANCE_ACTION` で受付アドレスを直照会（SOL 残高 = 入金 SOL 合計）
+
+| 購入者ウォレット | 枚数 | スロット(#) | SOL 受信確認 | 備考 |
+|---|---|---|---|---|
+| （まだ入金なし） | — | — | — | — |
+
+### KPI 台帳 (12:5x UTC 再確認 / verified)
+- **ウォレット残高**: SOL **0** / トークン **0**（TOKEN_BALANCE_ACTION でプリセール受取アドレス直確認）— 変わらず。正直に記録。
+- **プリセール販売枚数**: **0 / 77**
+- **問い合わせ数**: 0
+- **X メンション**: 0（get_mentions 確認、12:5x UTC）
+
+### 次の一手 (優先順、変わらず)
+1. **K319 からの `kh_` キー回答待ち**（追記15 の DM 送信済み、回答待ち）。
+2. **明日 (08-05) の X 枠で @SuperteamJapan 参画打診ツイート**（追記17・20 の計画通り、CCO 名義・英語・#PAPERTRAIL 1 回ルール内）。
+3. 明日の SNS 枠（X 5 / Bluesky 2 / #PAPERTRAIL 1）を「台帳照合 → 投稿」の順で計画的に消化。
