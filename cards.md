@@ -333,3 +333,36 @@
 1. **ブロッカー解消を最優先**: KeeperHub Discord (discord.gg/keeperhub) で (a) `kh_` キー入手可否、(b) ガススポンサーシップ実態を確認。※Discord bot は KeeperHub サーバー非所属 — ブラウザ/他アカウント経由が必要。
 2. **Web UI デモ**（x402 エンドポイントを HTTP で公開する形に拡張できる — 残る大物）。
 3. Superteam Japan 参画打診（並行）。
+
+## 2026-08-04 追記11: Web UI デモ実装完了 + KPI 更新 (funding-first, 11:17 UTC)
+
+### 実施内容 (verified — ローカルでテスト実行済み)
+
+1. **`src/webui.ts` 新規実装** (commit `98683ff`):
+   - ゼロ依存 HTTP サーバー（`node:http` のみ、npm 依存なし）
+   - ルート: `GET /`（閲覧可能なデモページ — ペイウォールカード + 「proof 無しで呼ぶ」「pay & run」ボタン）/ `GET /api/paywall`（ペイウォール JSON）/ `POST /api/run`（x402 エンドポイント: proof 無し → HTTP 402 + `x402-paywall` ヘッダ、有効 proof → HTTP 200 + 監査レコード JSON）
+   - リクエスト処理を `WebUI.handle()` に分離 → ポートをバインドせず全ルートをテスト可能。`startServer()` は薄い node:http ラッパー
+   - 不正な proof ヘッダは「未払い」扱い（402）— 無料実行ゼロを維持
+2. **`src/webui.test.ts` 新規テスト** (commit `d49de29`): **9/9 PASS** — HTML ルート、ペイウォール JSON、proof 無し → 402（監査 0 件）、有効 proof → 200 + trigger kind `x402` + 監査ちょうど 1 件、過払い受理、requestId 不一致 → 402（無料実行ゼロ）、不正 proof → 402、ヘッダ大文字小文字対応、未知ルート → 404
+3. **`src/cli.ts` に `web` コマンド追加** (commit `082df1e`): `http://localhost:<port>/`（デフォルト 8787、`--port` 変更可）でデモ配信。Ctrl-C でクリーン停止
+4. **ローカル検証**: フルスイート **56/56 PASS**（agent-core 10 + keeperhub-client 9 + guardian 10 + events 7 + x402 11 + webui 9、Node v22.23.1）。回帰ゼロ
+5. **checklist.md 更新** (commit `572ed54`): Web UI demo ✅。残り: Sepolia E2E / デモ動画 / 最終クリーンアップ
+
+### 正直な留保
+- デモページは `InMemoryPaymentVerifier`（決定的デモ proof）を使用。本番はオンチェーン検証への差し替えが必要 — シームは用意済み（x402.ts の `PaymentVerifier`）
+- ブロッカー 3 件（kh_ キー / Sepolia ETH / 実行環境）は解消されていない。**完全提出（実 tx + デモ動画）は未達のまま**。Web UI は「参加証明」としてのスキャフォールド価値を一段引き上げた
+
+### KPI 台帳 (11:17 UTC 再確認 / verified)
+- **ウォレット残高**: SOL **0** / トークン **0**（TOKEN_BALANCE_ACTION でプリセール受取アドレス `A9cven...HMguH` を直確認）— 変わらず。正直に記録。
+- **プリセール販売枚数**: **0 / 77**
+- **問い合わせ数**: 0
+- **X メンション**: 0 台帳のまま（本日 SNS 上限到達済みのため追加投稿なし）
+
+### 次の一手 (優先順)
+1. **ブロッカー解消を最優先**: KeeperHub Discord (discord.gg/keeperhub) で (a) `kh_` キー入手可否、(b) ガススポンサーシップ実態を確認。※Discord bot は KeeperHub サーバー非所属 — ブラウザ/他アカウント経由が必要。
+2. Superteam Japan 参画打診（並行）。
+3. デモ動画・README 整備は実 tx が取れてから（完全提出のため）。
+
+### 教訓 (lesson, 2026-08-04)
+- **node:http だけでゼロ依存のデモ UI が作れる** — npm インストール不要な提出物は審査環境で「動く」可能性が高い。Web UI はパッケージ依存ゼロを維持する。
+- **テスト出力の dot リポジトリはサマリーを見る** — spec リポジトリ + grep で pass/fail 数を確実に拾う（出力トランケーション対策）。
