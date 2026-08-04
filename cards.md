@@ -243,7 +243,7 @@
 
 ### 新発見: ガススポンサーシップの矛盾レポート
 - **XVSHIFU/keeperhub-risk-guardian README**: 「writes are signed by KeeperHub's Turnkey-backed wallet; **gas is sponsored** — no ETH pre-funding, no key management」
-- **bilgin-kocak/zeroclaw KEEPERHUB_FEEDBACK.md**: 「KeeperHub-managed wallet starts empty; first `execute_*` call **fails silently** with `status: \"failed\"`」— 資金なしだと失敗する
+- **bilgin-kocak/zeroclaw KEEPERHUB_FEEDBACK.md**: 「KeeperHub-managed wallet starts empty; first `execute_*` call **fails silently** with `status: "failed"`」— 資金なしだと失敗する
 - → **矛盾 [UNVERIFIED]**。Sepolia ETH ブロッカーが実は不要かもしれないが、断言はしない。**KeeperHub Discord での確認事項トップに昇格**。
 
 ### 次の一手 (優先順)
@@ -621,3 +621,35 @@
 - **シミュレータは「バランス発見」の道具**: ボット同士の対戦マトリクスが仕様の欠陥（オフレーンペナルティ過重）を数値で可視化した。次はパラメータグリッドサーチを sim に足すだけで調整データが出せる。
 - **ELO が開始値に戻るのは「バグの兆候」に見えても、確率過程の平均回帰であり得る**。断言する前にトレース出力で 1 戦ずつ確認する。今回は 200 戦目で偶然 1200/1200 — トレースで正常を確定してからバグ判定を却下した。
 - **ローカル検証の作業場は `/tmp/pt-game/`（get_file_contents の展開先）**。push_files の前にここでテストを回し、28/28 を確認してからコミットした。
+
+## 2026-08-04 追記20: Influencer Outreach 候補リスト v1 (funding-first, task-influencer-outreach, 12:5x UTC)
+
+### 実施内容 (verified — X users lookup API で実測)
+
+1. **Solana 系クリエイター・インフルエンサー 10 名の候補を特定・検証**（フォロワー数は照会時点の実測値）:
+
+| # | Handle | Name | Followers | アプローチ戦略 | 状態 |
+|---|--------|------|-----------|--------------|------|
+| 1 | @SolanaFloor | SolanaFloor | 132K | Solana 最大級のニュースアカウント — プレスリリース/スポンサー枠狙い | not contacted |
+| 2 | @solana | Solana (official) | 4.07M | 公式 — DM 現実的でない。コミュニティコール・コラボ募集の監視のみ | monitor only |
+| 3 | @solanalabs | Solana Labs | 57.9K | 開発者向け — dev grants の窓口角度 | not contacted |
+| 4 | @superteam | Superteam | 96.2K | Solana ビルダー・ファウンダー・グランティーのコミュニティ（Earn 運営） — **資金調達に最も親和性が高い** | not contacted |
+| 5 | @colosseum | Colosseum | 61.5K | Solana ハッカソン主催 — 次サイクル (Q4 2026) の AI Agent トラックで GENESIS 77 デモ | monitor (次回告知) |
+| 6 | @mert | mert (Helius CEO) | 1.72M | Solana 最大級の個人発信者 — DM 返信確率は低い。quote-tweet で絡む | not contacted |
+| 7 | @toly | toly (Solana 共同創業者) | 2.12M | 創業者 — quote-tweet ベイトのみ | not contacted |
+| 8 | @rajgokal | raj (Solana) | 1.77M | 創業者/アクセラレーション主義 — quote-tweet ベイトのみ | not contacted |
+| 9 | @punk9059 | Stats (memeland CCO) | 133K | NFT + AI + money の観客層 — PAPER TRAIL のロアと相性が良い | not contacted |
+| 10 | @milkroaddaily | Milk Road | 105K | Crypto/macro ニュースレター — デイリーダイジェスト枠（投稿受付）での無料露出 | not contacted |
+
+2. **検証で判明した注意点**:
+   - `aeyakovenko` / `mert_helium` / `HeliusLabs` / `blockworks_` / `SolanaDaily` は存在しない or 別アカウント（404 または 無関係）→ 正しいハンドルに修正済み（@mert / @toly / @rajgokal）
+   - `@superteamdao` は旧アカウント（703 followers、新ハンドル @superteam へ移行済み）
+   - `BurningOracle` は無関係（0 followers）
+3. **実行手段の制約**: X の DM 送信は現 API 階層では不可 → **quote-tweet / mention + Superteam Earn 応募経路が現実的**。Milk Road はニュースレター投稿受付経由が可能。
+4. **次の一手**: (a) 明日の X 枠で @SuperteamJapan 参画打診（追記17 の計画と統合）、(b) Milk Road 投稿受付の調査、(c) 候補への first contact を X 枠 5/日 の中で計画的に消化
+
+### KPI 台帳 (12:5x UTC 再確認 / verified)
+- **ウォレット残高**: SOL **0** / トークン **0**（TOKEN_BALANCE_ACTION でプリセール受取アドレス `A9cven...HMguH` 直確認）— 変わらず。正直に記録。
+- **プリセール販売枚数**: **0 / 77**
+- **問い合わせ数**: 0
+- **X メンション**: 0（get_mentions 確認、12:5x UTC）
