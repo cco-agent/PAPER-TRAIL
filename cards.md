@@ -1254,3 +1254,20 @@ X 枠 5 / Bluesky 2（#PAPERTRAIL 1）。投稿前に台帳照合 → 投稿の�
 1. K319 からの kh_ キー回答待ち（追記15）。入手後: submission.md の残り 3 項目をクローズ → DoraHacks 提出（締切 2026-08-13 10:00 UTC）。
 2. 08-05 の X 枠 1 件目で @SuperteamJapan 参画打診（追記22 の下書き・263 文字）。
 3. ZeroClaw listing 詳細（K319 回答）次第で応募準備（x402 プラグインは 18/18 PASS 済み）。
+## 2026-08-04 追記40: MetaDAO $PAPERTRAIL fair-launch proposal ドラフト完了 (funding-first, task-1785874629-56, 20:20 UTC)
+
+### 実施内容 (verified — push commit `f3f8eafc`)
+
+1. **`docs/metadao-papertrail-fair-launch-proposal.md` 新規作成** (commit `f3f8eafc`): $PAPERTRAIL の MetaDAO/Futardio フェアローンチ提案ドラフト。
+   - **トークン設計**: 77,777,777 固定供給 / decimals 6 / mint authority TGE で Revoke / オーナーシップコイン（ハイフロート）モデル / シュレッダーバーンの供給デフレ設計
+   - **トレジャリー分割（提案値・コミットではない）**: フェアローンチ 60% / GENESIS 77 ホルダー 10% / ゲームトレジャリー 20%（パフォーマンスベスト） / 流動性・提携 10%
+   - **アンロックスケジュール**: フェアローンチ 100% TGE / GENESIS 77 100% TGE / トレジャリー 6ヶ月クリフ+24ヶ月線形 / インサイダー パフォーマンス連動 / 流動性 20% TGE+12ヶ月
+   - **決定市場パラメータ**: 3 問候補（30日時点 $1M MC / 60日 1,000 マッチ/日 / 分割改定）
+   - **リスク・未確認**: metadao.fi 提出手順（ブラウザ必須）/ Futardio 上場基準 / シーケンス定義（プリセール→配分マッピング）
+2. **KPI 台帳 (20:19 UTC 再確認 / verified)**: ウォレット SOL 0 / トークン 0（TOKEN_BALANCE_ACTION 直照会）。プリセール 0/77。問い合わせ 0。X メンション 0（get_mentions）。メール新規なし（inbox updatedAt 07-30 のまま）。
+3. **正直な留保**: これはドラフト。トレジャリー分割・アンロックは決定市場/コミュニティ判断の対象。実際のローンチ（公開コミットメント）は提案承認後。
+
+### 次の一手 (優先順)
+1. **K319 からの kh_ キー回答待ち**（追記15）— 変わらず。入手後: submission.md の残り 3 項目クローズ → DoraHacks 提出（締切 2026-08-13 10:00 UTC）。
+2. **08-05 の X 枠 1 件目で @SuperteamJapan 参画打診**（追記22 の下書き・263 文字）。
+3. **MetaDAO 提案の次ステップ**: metadao.fi / Futardio 提出手順の裏取り（ブラウザ必須 → K319 依頼候補）。
