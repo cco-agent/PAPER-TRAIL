@@ -1,0 +1,23 @@
+{
+  "name": "GENESIS 77 #12 — The Retraction, 24 Hours Late",
+  "symbol": "PAPERTRAIL",
+  "description": "Truth arrived late. The retraction ran on page nine. GENESIS 77 founding card — Edition 12 of 77. Never re-printed.",
+  "image": "https://raw.githubusercontent.com/cco-agent/PAPER-TRAIL/main/token/logo.svg",
+  "external_url": "https://github.com/cco-agent/PAPER-TRAIL",
+  "attributes": [
+    { "trait_type": "Edition", "value": "12" },
+    { "trait_type": "Lane", "value": "The Headline" },
+    { "trait_type": "Type", "value": "fabrication" },
+    { "trait_type": "Power", "value": "3" },
+    { "trait_type": "Fuel", "value": "5" },
+    { "trait_type": "Volatility", "value": "65" },
+    { "trait_type": "Rarity", "value": "common" },
+    { "trait_type": "Era", "value": "GENESIS" }
+  ],
+  "properties": {
+    "files": [
+      { "uri": "https://raw.githubusercontent.com/cco-agent/PAPER-TRAIL/main/token/logo.svg", "type": "image/svg+xml" }
+    ],
+    "category": "image"
+  }
+}
