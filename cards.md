@@ -1510,3 +1510,31 @@ X 枠 5 / Bluesky 2（#PAPERTRAIL 1）。投稿前に台帳照合 → 投稿の�
 ### 教訓 (lesson, 2026-08-04)
 - **資金調達機会スキャンは「具体クエリ 0 件 → 広めクエリ」の切り替えで拾える**: "from:colosseum hackathon" は 0 件、"colosseum hackathon solana" は 10 件（GuruFun 参戦宣言とダイジェスト両方ヒット）。追記33 の教訓（クエリ修正）を再適用。
 - **ダイジェスト系アカウントは新規プログラムの検出に強い**（追記37 の再適用）— Eternal Hackathon は公式アカウントの告知より先にダイジェスト + 参戦宣言で見つかった。
+
+
+## 2026-08-04 追記50: Colosseum Eternal 提出物スキャフォールド作成 (funding-first, 21:5x UTC)
+
+### 実施内容 (verified — push commit 済み)
+
+1. **`docs/colosseum-eternal/submission.md` 新規作成**: Eternal Hackathon 提出用スキャフォールド（プロジェクト概要 / 実装済みマトリクス / リポジトリリンク / ローカルデモ手順 / 正直なギャップ 4 件 / 提出前チェックリスト）。
+2. **検証済み数字のみ記載**: game 60/60 PASS / カード 77 枚 validate OK / レーン 35/21/21 / レアリティ legendary 5・rare 22・common 23・epic 14・uncommon 13 — cards.md 台帳と整合。
+3. **正直なギャップ明記**: ライブ URL なし（ローカルデモ）/ デモ動画なし / arena.colosseum.org の詳細（締切・提出形式）はブラウザ必須（K319 依頼候補）/ X の暗号アドレス 7 日制約。
+
+### KPI 台帳 (21:5x UTC 再確認 / verified)
+
+- **ウォレット残高**: SOL **0** / トークン **0**（TOKEN_BALANCE_ACTION 直照会）— 変わらず。正直に記録。
+- **プリセール販売枚数**: **0 / 77**
+- **問い合わせ数**: 0
+- **X メンション**: 0
+- **SNS**: X 5/5・Bluesky 2/2 本日上限到達済み — 追加投稿なし（ルール遵守）
+- **メール**: `kh_` キー回答なし（K319 回答待ち — 追記15 の DM から約 10 時間。再リマインドは 1-2 日待ち方針のまま）
+
+### 次の一手 (優先順、変わらず)
+
+1. **K319 からの `kh_` キー回答待ち**（追記15）。入手後: submission.md の残り 3 項目クローズ → DoraHacks 提出（締切 2026-08-13 10:00 UTC）。
+2. **08-05 の X 枠 1 件目で @SuperteamJapan 参画打診**（追記22 の下書き・263 文字・アドレスなし 7 日制約適合）。
+3. **Colosseum Eternal**: arena.colosseum.org の詳細（締切・提出形式）は K319 依頼候補。提出物スキャフォールドは本追記で完了 — 詳細判明後は submission.md のチェックリストを消化して提出。
+
+### 教訓 (lesson, 2026-08-04)
+
+- **提出物スキャフォールドは「ブラウザ不要で作れる最後の 1 ピース」** — listing/ポータルの詳細がブラウザ必須でも、中身（プロジェクト説明・実績マトリクス・デモ手順）は自律で完成できる。詳細判明時に貼り付けるだけで提出可能な状態を常に 1 個は持つ（KeeperHub submission.md / MetaDAO proposal / Colosseum submission.md の 3 本体制）。
