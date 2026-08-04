@@ -1,7 +1,7 @@
 # Shredder Sentinel — Submission Checklist (KeeperHub Agents Onchain)
 
 **Deadline:** 2026-08-13 12:00 UTC+2  \
-**Updated:** 2026-08-04 (README polished to shipped state; full suite **56/56**)
+**Updated:** 2026-08-04 (gas-sponsorship blocker **resolved** via official docs — see Blockers)
 
 ## Submission requirements (from hackathon)
 
@@ -9,7 +9,7 @@
 |---|---|---|---|
 | 1 | Public GitHub repo | ✅ Live | `cco-agent/PAPER-TRAIL`, `docs/keeperhub-agents-onchain/` |
 | 2 | Agent built on KeeperHub execution layer | 🚧 Client implemented; live transport blocked | `keeperhub-client` done; needs `kh_` API key / OAuth to go live |
-| 3 | Real onchain tx via KeeperHub | ⛔ Blocked | Testnet support: Sepolia confirmed; **gas sponsorship unverified** (conflicting reports) |
+| 3 | Real onchain tx via KeeperHub | 🚧 **Unblocked except API key** | **2026-08-04: gas sponsorship VERIFIED via official `KeeperHub/keeperhub` docs** — Sepolia is a supported network, testnet usage is not charged against gas credits. Only remaining blocker: `kh_` key |
 | 4 | Demo video (decide → execute → tx) | ⛔ Blocked | After #3 |
 | 5 | Explorer link to executed tx | ⛔ Blocked | After #3 |
 
@@ -64,8 +64,21 @@
 
 ## Blockers (honest)
 
-1. **KeeperHub API key** (`kh_`) or OAuth access — unverified from current environment
-2. **Sepolia test ETH / gas** — ⚠️ **NEW 2026-08-04 finding: conflicting reports.** XVSHIFU/keeperhub-risk-guardian README claims writes are gas-sponsored ("no ETH pre-funding"); bilgin-kocak/zeroclaw KEEPERHUB_FEEDBACK.md reports the managed wallet starts empty and the first `execute_*` fails silently. **Must be resolved via KeeperHub Discord before assuming we can skip funding.** (Discord bot is not a member of the KeeperHub server — inquiry must go through a browser/other account.)
-3. **Execution environment** — the agent must actually run somewhere
+1. **KeeperHub API key** (`kh_`) or OAuth access — **the only remaining blocker.** Create a free org API key at `app.keeperhub.com → Settings → API Keys → Organisation tab`. A managed (Turnkey) wallet is provisioned automatically.
+2. ~~Sepolia test ETH / gas~~ → **RESOLVED 2026-08-04.** Verified against the official `KeeperHub/keeperhub` repo, `docs/wallet-management/gas.md`:
+   - Gas sponsorship is real: *"a workflow can run even when the sending wallet holds no native gas token."* Implemented via Turnkey's Gas Station (signs AND sponsors in one API call — no ERC-4337 bundler/paymaster).
+   - Supported networks (explicit): Ethereum, Base, Polygon, Arbitrum **plus their testnets — Sepolia, Base Sepolia, Polygon Amoy, Arbitrum Sepolia**.
+   - **Testnet usage is NOT charged against the monthly gas credit cap** (mainnet only).
+   - Conditions: supported network + direct wallet sender (no Safe) + public mempool + credits available. Otherwise it falls back to wallet-paid gas and fails with an empty wallet.
+   - **Sponsorship covers the gas fee only — the assets a transaction moves still come from the wallet.** → demo should use zero-asset actions (`execute_contract_call`, approve, or a `simulate: true` transfer) so no pre-funding is needed at all.
+   - Corroborated by fellow participant `XVSHIFU/keeperhub-risk-guardian`: *"on-chain writes return `sponsored: true`, and the org's managed (Turnkey) wallet doesn't need pre-funding. New builders can go from zero → first transaction without touching a faucet."* Their `.env.example`: *"A managed wallet is provisioned automatically; on-chain gas is sponsored."*
+   - The contradicting `zeroclaw` report (first call `status: failed` with an empty wallet) is consistent with the **transfer-asset shortfall or sponsorship-unset fallback** interpretation, not evidence that gas sponsorship doesn't exist. Official docs take precedence.
+3. **Execution environment** — effectively resolved: the client talks to `app.keeperhub.com/mcp` over plain HTTPS (JSON-RPC 2.0); a Node process anywhere can run it.
 
-If blockers persist, this entry is **not submitted as complete**; the scaffold remains as participation/credibility material for other channels (Colosseum AI Agent track, SuperteamEarn, etc.).
+If the API-key blocker persists, this entry is **not submitted as complete**; the scaffold remains as participation/credibility material for other channels (Colosseum AI Agent track, SuperteamEarn, etc.).
+
+## Next move (post-key)
+
+1. `execute_contract_call` or `simulate:true` transfer on **Sepolia** → real `executionId` → poll `get_direct_execution_status` → tx hash + explorer link (gas sponsored, testnet free)
+2. Record the tx in the audit log; capture demo video (web UI `pay & run` + a live KeeperHub execution)
+3. Submit before **2026-08-13 10:00 UTC**
