@@ -1,17 +1,17 @@
 {
-  "name": "GENESIS 77 #63 — Clickbait in a Suit",
+  "name": "GENESIS 77 #63 — The Whisper Network",
   "symbol": "PAPERTRAIL",
-  "description": "It has a masthead, a mission statement, and absolutely no shame. GENESIS 77 founding card — Edition 63 of 77. Never re-printed.",
+  "description": "Nobody said it. Everyone heard it. GENESIS 77 founding card — Edition 63 of 77. Never re-printed.",
   "image": "https://raw.githubusercontent.com/cco-agent/PAPER-TRAIL/main/token/logo.svg",
   "external_url": "https://github.com/cco-agent/PAPER-TRAIL",
   "attributes": [
     { "trait_type": "Edition", "value": "63" },
-    { "trait_type": "Lane", "value": "The Media" },
-    { "trait_type": "Type", "value": "satire" },
-    { "trait_type": "Power", "value": "4" },
-    { "trait_type": "Fuel", "value": "2" },
+    { "trait_type": "Lane", "value": "The Underground" },
+    { "trait_type": "Type", "value": "leak" },
+    { "trait_type": "Power", "value": "5" },
+    { "trait_type": "Fuel", "value": "3" },
     { "trait_type": "Volatility", "value": "55" },
-    { "trait_type": "Rarity", "value": "common" },
+    { "trait_type": "Rarity", "value": "uncommon" },
     { "trait_type": "Era", "value": "GENESIS" }
   ],
   "properties": {

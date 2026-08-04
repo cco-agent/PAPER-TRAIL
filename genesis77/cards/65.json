@@ -1,7 +1,7 @@
 {
-  "name": "GENESIS 77 #65 — Breaking: Nothing Broke",
+  "name": "GENESIS 77 #65 — Breaking: Nothing Happened",
   "symbol": "PAPERTRAIL",
-  "description": "A slow news day at full volume. Volatility sold separately. GENESIS 77 founding card — Edition 65 of 77. Never re-printed.",
+  "description": "The most expensive sentence in media. GENESIS 77 founding card — Edition 65 of 77. Never re-printed.",
   "image": "https://raw.githubusercontent.com/cco-agent/PAPER-TRAIL/main/token/logo.svg",
   "external_url": "https://github.com/cco-agent/PAPER-TRAIL",
   "attributes": [
@@ -10,7 +10,7 @@
     { "trait_type": "Type", "value": "news" },
     { "trait_type": "Power", "value": "4" },
     { "trait_type": "Fuel", "value": "2" },
-    { "trait_type": "Volatility", "value": "49" },
+    { "trait_type": "Volatility", "value": "48" },
     { "trait_type": "Rarity", "value": "common" },
     { "trait_type": "Era", "value": "GENESIS" }
   ],

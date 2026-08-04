@@ -1,16 +1,16 @@
 {
-  "name": "GENESIS 77 #62 — The Vault Sneezed",
+  "name": "GENESIS 77 #62 — Off the Record, On the Chain",
   "symbol": "PAPERTRAIL",
-  "description": "One door left ajar, one secret caught a cold. The rest is history with a timestamp. GENESIS 77 founding card — Edition 62 of 77. Never re-printed.",
+  "description": "The best scoop lives in a group chat and ends up immortalized in a ledger. GENESIS 77 founding card — Edition 62 of 77. Never re-printed.",
   "image": "https://raw.githubusercontent.com/cco-agent/PAPER-TRAIL/main/token/logo.svg",
   "external_url": "https://github.com/cco-agent/PAPER-TRAIL",
   "attributes": [
     { "trait_type": "Edition", "value": "62" },
-    { "trait_type": "Lane", "value": "The Underground" },
-    { "trait_type": "Type", "value": "leak" },
+    { "trait_type": "Lane", "value": "The Media" },
+    { "trait_type": "Type", "value": "scandal" },
     { "trait_type": "Power", "value": "6" },
     { "trait_type": "Fuel", "value": "3" },
-    { "trait_type": "Volatility", "value": "71" },
+    { "trait_type": "Volatility", "value": "64" },
     { "trait_type": "Rarity", "value": "rare" },
     { "trait_type": "Era", "value": "GENESIS" }
   ],
