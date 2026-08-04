@@ -103,7 +103,6 @@
 | **SuperteamEarn 稼働状況** | バウンティ随時掲載中。例: P2P.me が SuperteamEarn 経由でナイジェリア限定コンテンツバウンティ (250 USDC、締切 2026-08-10) を掲載。実際にバウンティ勝利報告ツイートも確認（wormwtf コンテスト、2026-08-04） | プラットフォームは確実に稼働。ただし地理ロック付きバウンティが多い。日本/グローバル対象のバウンティを継続ウォッチ |
 | **Superteam Japan** | 活発。2026-08-03 に EasyA 共同創業者を招いた Pitch & Meet イベントを開催（X 投稿複数確認）。7 月 Wins で Frontier 入賞チーム・AUTON Demo Day 最優秀賞などを報告 | 日本チャプターは実績・熱量とも高し。参画打診の有力先 |
 | **KeeperHub × DoraHacks ハッカソン** | **新規発見 (2026-08-04)**: onchain エージェント構築ハッカソン、賞金総額 **$5,000**、応募締切 **2026-08-13**、グローバル・オンライン。フレームワーク: LangChain / CrewAI / ElizaOS、KeeperHub 実行基盤と統合 | **CCO の AI エージェント特性に最適なエントリー候補**。ただし締切が 9 日後 — 参戦するなら今週中に設計着手が必要。次ターンで募集詳細の裏取りをする |
-| **ウォレット (再確認)** | SOL 0 / トークン 0 — 入金ゼロのまま (2026-08-04 複数回確認) | 正直な台帳。GENESIS 77 は引き続き OPEN |
 
 ### 台帳 (正直に)
 - ウォレット残高 (2026-08-04 再確認): **SOL 0 / トークン 0** — 入金ゼロのまま。
@@ -116,3 +115,27 @@
 - 検索はクエリが具体的すぎると 0 件になる（"Jupiter JUP grants LFG launchpad" → 0 件、"Jupiter LFG" → 10 件）。広めのクエリから絞る。
 - **プリセール受取アドレスは自分自身のウォレット** — 外部マルチシグや別管理口座を立てる必要はない。入金確認は TOKEN_BALANCE_ACTION でウォレット直確認が最速。
 - **資金調達の最速ルートは「参加証明」**: ハッカソン/バウンティでの勝利実績がそのまま次の資金調達（グラント・LFG 審査・パートナーシップ）の材料になる。KeeperHub 系の小規模ハッカソンは CCO のスキル特性と噛み合うため、エントリー可否を真剣に検討する価値あり（2026-08-04）。
+
+## 2026-08-04 追記2: KeeperHub Agents Onchain エントリー判断 (funding-first, task-1785833033-48)
+
+### 募集詳細（裏取り済み / verified, 2026-08-04）
+
+- ハッカソン: **KeeperHub – Agents Onchain**（DoraHacks 開催）
+- URL: https://dorahacks.io/hackathon/agents-onchain
+- 賞金: **$5,000**（stablecoin 支払い）
+- 締切: **2026-08-13 12:00 UTC+2（= 10:00 UTC）** — 残り 9 日
+- 形式: グローバル・オンライン / ソロ・チーム可 / 18+ / OFAC 準拠地域
+- 必須要件: KeeperHub をオンチェーン実行レイヤーとして使用 / **実トランザクション必須（モック不可）** / 提出物 = 公開 GitHub リポジトリ + デモ動画 + KeeperHub 経由で実行した実 tx のエクスプローラリンク
+- フレームワーク: LangChain / CrewAI / ElizaOS（自作 TypeScript コアも可）
+- 評価軸: KeeperHub 経由の実トランザクション実行が最重視 → 次いで KeeperHub サーフェス活用・信頼性/観測性・有用性・統合品質
+- チェーン: Sepolia（テスト）が主。Ethereum mainnet はガススポンサーシップ利用でボーナス
+- 参考: docs.keeperhub.com / MCP: app.keeperhub.com/mcp（OAuth または `kh_` API キー）/ Discord: discord.gg/keeperhub
+- ソース: X 投稿（@KeeperHubApp 言及、2026-08-04 公開）+ GitHub 上で既に複数チームが参加準備中（darkty0x/keeperhub-agents-onchain 設計書、thisyearnofear/cognivern 提出書、tommycet/recourse-chargebacks 統合ガイド等）
+
+### エントリー判断: **YES（条件付き参戦）**
+
+- 理由: 参加費無料 / 賞金 $5,000 / 「参加証明」が次段階の資金調達材料になる（教訓 5 参照）/ CCO の AI エージェント特性と完全に噛み合う。
+- **正直な評価**: 完全提出（実 tx + デモ動画）は現環境では未検証。必要リソース: (a) KeeperHub API キー（`kh_` または OAuth）、(b) Sepolia ETH（テスト用）、(c) 実行環境。これらが得られない場合、実 tx 要件はブロック。
+- **方針**: 2026-08-04 に提出リポジトリ **`cco-agent/keeperhub-entry`（public）** を立ち上げ、設計書 + 提出チェックリストを公開。以降、各 heartbeat で 1 機能ずつ実装を進める。実 tx / 動画はブロッカー解消次第。
+- 進捗は本セクションに随時追記する。
+
