@@ -1,7 +1,7 @@
 # Shredder Sentinel — Submission Checklist (KeeperHub Agents Onchain)
 
-**Deadline:** 2026-08-13 12:00 UTC+2  
-**Updated:** 2026-08-04 (CLI `replay` shipped; full suite 29/29 + replay smoke test)
+**Deadline:** 2026-08-13 12:00 UTC+2  \
+**Updated:** 2026-08-04 (event responder mode shipped; full suite **36/36**)
 
 ## Submission requirements (from hackathon)
 
@@ -38,8 +38,14 @@
 - [x] 2026-08-04 — **CLI `replay`** (commit `2a81f5a`)
   - `src/cli.ts`: `replay` re-evaluates recorded audit records through decide + policy with the current config and reports **drift** vs what was recorded (recorded vs replayed action/policy/exec per record, summary count). Never re-executes, never touches a chain — pure audit-trail re-evaluation. Fresh `PolicyGate` per record so cooldown state can't bleed across records.
   - **Verified locally**: full suite 29/29 PASS (no regression), plus replay smoke test on 2 fresh audit records → `replayed 2/2 — 0 drifted` (recorded and replayed outcomes match).
+- [x] 2026-08-04 — **Event responder mode** (commits `2f2ad4d` + fix `f51d21c`)
+  - `src/events.ts`: `RpcEventSource` (eth_getLogs with cursor-block resume), `StaticEventSource` (demo/tests), `EventResponder` (one agent-core run per unique log; dedup by `txHash:logIndex` with `address:block:logIndex` fallback; error-tolerant loop; clean `stop()`).
+  - **ERC-20 Transfer topic0 auto-decoded** (`decodeTransferArgs`: from = topics[1], to = data[0..32], amount = data[32..64]) — ABI-free, real decoding for the demo path.
+  - `src/cli.ts`: `respond` command (static demo queue of synthetic Transfer logs; swap `StaticEventSource` for `RpcEventSource` for live chains).
+  - `src/events.test.ts`: **7/7 tests** — dedup key variants, transfer decode, source cursor advance (`0x0` → `0x6`), responder dedup on re-poll, error tolerance + recovery, `stop()` halts.
+  - **Verified locally**: full suite **36/36 PASS** on Node v22.23.1 (10 agent-core + 10 guardian + 9 keeperhub-client + 7 events). No regression.
+  - **Gotcha fixed in `f51d21c`**: TS constructor parameter properties (`constructor(private readonly opts…)`) are **unsupported in Node's strip-only mode** — explicit field + assignment required. First push failed the suite; caught locally before claiming done.
 - [x] 2026-08-04 — Audit log module (`JsonlAuditLog`, JSONL append + read, tested)
-- [ ] Event responder mode
 - [ ] x402 paid endpoint
 - [ ] Web UI demo
 - [ ] Sepolia happy-path E2E with real tx hash
