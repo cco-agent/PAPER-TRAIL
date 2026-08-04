@@ -7,6 +7,7 @@ import { PolicyGate } from "./policy.ts";
 import { LoggingExecutor } from "./execute.ts";
 import { JsonlAuditLog } from "./audit.ts";
 import { Guardian, InMemoryGuardianState } from "./guardian.ts";
+import { EventResponder, StaticEventSource } from "./events.ts";
 import type { ObservationSnapshot, Trigger } from "./types.ts";
 
 const RULES = [BALANCE_BELOW_MIN, BALANCE_ABOVE_MAX];
@@ -165,6 +166,59 @@ async function cmdReplay(configPath: string | undefined, limit: number): Promise
   console.log(`replayed ${window.length}/${records.length} records — ${drifted} drifted`);
 }
 
+/**
+ * Event responder demo: a static queue of synthetic Transfer logs drives the
+ * agent core once per unique log. Swap StaticEventSource for RpcEventSource
+ * (eth_getLogs) to respond to live on-chain events.
+ */
+async function cmdRespond(configPath: string | undefined, intervalMs: number): Promise<void> {
+  const config = configPath ? await loadConfig(configPath) : defaultConfig();
+  const { agent } = await buildAgent(configPath, "0.01", undefined);
+  const addr = config.watch.address || "0xwatched";
+  const source = new StaticEventSource([
+    {
+      name: "Transfer",
+      address: addr,
+      blockNumber: 1,
+      logIndex: 0,
+      txHash: "0x1111111111111111111111111111111111111111111111111111111111111111",
+      args: { from: "0x0000", to: addr, amount: "1000000000000000000" }
+    },
+    {
+      name: "Transfer",
+      address: addr,
+      blockNumber: 1,
+      logIndex: 1,
+      txHash: "0x2222222222222222222222222222222222222222222222222222222222222222",
+      args: { from: "0x0000", to: addr, amount: "500000000000000000" }
+    }
+  ]);
+  const responder = new EventResponder({
+    agent,
+    source,
+    onEvent: (ev, record) =>
+      console.log(
+        `${new Date().toISOString()}  event=${ev.name}@${ev.address.slice(0, 10)}  action=${record.decision.action.kind}  policy=${record.policy.passed}  exec=${record.execution.status}`
+      ),
+    onError: (err) => console.error("responder:", err)
+  });
+
+  console.log(
+    `event responder watching ${addr} — ${source.remaining} synthetic event(s) queued, poll every ${intervalMs}ms. Ctrl-C to stop.`
+  );
+  responder.start(intervalMs);
+
+  await new Promise<void>((resolve) => {
+    const shutdown = (): void => {
+      responder.stop();
+      console.log("\nresponder stopped.");
+      resolve();
+    };
+    process.once("SIGINT", shutdown);
+    process.once("SIGTERM", shutdown);
+  });
+}
+
 async function main(): Promise<void> {
   const { values, positionals } = parseArgs({
     options: {
@@ -192,8 +246,16 @@ async function main(): Promise<void> {
     await cmdStatus(values.config, parseInt(values.limit!, 10) || 5);
   } else if (cmd === "replay") {
     await cmdReplay(values.config, parseInt(values.limit!, 10) || 5);
+  } else if (cmd === "respond") {
+    const intervalMs = parseInt(values.interval!, 10);
+    if (!Number.isFinite(intervalMs) || intervalMs < 100) {
+      console.error("--interval must be a number >= 100 (ms)");
+      process.exitCode = 1;
+      return;
+    }
+    await cmdRespond(values.config, intervalMs);
   } else {
-    console.error(`unknown command: ${cmd} (expected: run | watch | status | replay)`);
+    console.error(`unknown command: ${cmd} (expected: run | watch | status | replay | respond)`);
     process.exitCode = 1;
   }
 }

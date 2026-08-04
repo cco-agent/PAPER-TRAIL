@@ -25,6 +25,8 @@ export interface KnownEvent {
   address: string;
   blockNumber: number;
   logIndex: number;
+  txHash?: string; // for dedup + explorer links
+  data?: string; // raw log data (un-decoded remainder)
   args: Record<string, unknown>;
 }
 
