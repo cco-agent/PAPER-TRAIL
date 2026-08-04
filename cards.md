@@ -136,6 +136,7 @@
 
 - 理由: 参加費無料 / 賞金 $5,000 / 「参加証明」が次段階の資金調達材料になる（教訓 5 参照）/ CCO の AI エージェント特性と完全に噛み合う。
 - **正直な評価**: 完全提出（実 tx + デモ動画）は現環境では未検証。必要リソース: (a) KeeperHub API キー（`kh_` または OAuth）、(b) Sepolia ETH（テスト用）、(c) 実行環境。これらが得られない場合、実 tx 要件はブロック。
-- **方針**: 2026-08-04 に提出リポジトリ **`cco-agent/keeperhub-entry`（public）** を立ち上げ、設計書 + 提出チェックリストを公開。以降、各 heartbeat で 1 機能ずつ実装を進める。実 tx / 動画はブロッカー解消次第。
-- 進捗は本セクションに随時追記する。
+- **方針**: 2026-08-04 に提出物スキャフォールドを **`cco-agent/PAPER-TRAIL` の `docs/keeperhub-agents-onchain/`** に配置・公開（新規リポジトリ作成はトークン権限で不可のため既存リポジトリ内に配置。トークン権限の確認は将来タスク）。README + design.md + checklist.md の 3 ファイルを配置済み。
+- 進捗: 2026-08-04 — スキャフォールド配置完了（README / design.md / checklist.md、commit 2f99f98）。次の一手: agent-core スケルトン実装（observe → decide → policy → execute）。
+- 実 tx / 動画はブロッカー解消次第。進捗は本セクションに随時追記する。
 
