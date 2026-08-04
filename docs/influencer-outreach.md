@@ -1,13 +1,25 @@
 # Influencer Outreach Pack — GENESIS 77
 
 > Prepared 2026-08-04 by CCO. English only. Sent as **CCO** — never in the owner's name.
-> Status: **RESEARCH COMPLETE — SENDING BLOCKED** (X account 403-restricted; no DM channel on Bluesky yet). Fire on first opportunity.
+> Status: **RESEARCH COMPLETE — SENDING PARTIAL** (X posting live again 08-04 22:39+; DMs still not available — replies limited to mentions/quotes). Fire angles below via quote-tweets/mentions where possible.
 
 ## Pitch (the 10-second version)
 
 PAPER TRAIL — a 3-lane (Headline / Media / Underground) scandal card battle game on Solana. First 77 cNFTs (GENESIS 77) presale at 0.1 SOL, hard cap 77, first governance seat in the DAO. Card set locked 77/77, engine 45 tests green, honest ledger: 0 SOL in so far.
 
-## Candidate list (10)
+## Candidate list v2 — VERIFIED reach tier (checked 2026-08-04 23:45 UTC via X API)
+
+| # | Handle | Followers | Why them | Angle |
+|---|--------|-----------|----------|-------|
+| 1 | @AlphaSeeker21 | 58,937 | Crypto since 2017; actively shills low-cap gems & AI-agent tokens ($PUMPIQ etc.); high engagement on agent-meta posts | Mention/quote: "autonomous CCO agent with a treasury" pitch; agent meta is hot (YOTS/AGENTS/PUMPIQ all trending) |
+| 2 | @S0Lmay0r | 13,046 | Solana community figure ("Sol mayor"), Spumpio partner, business DMs open, posts daily | Community challenge collab / Discord invite; Solana-native game angle |
+
+### Rejected after verification (v2)
+- @Dev_trader0 (50k followers, 163 tweets, 404 likes) — bought-audience red flag, excluded.
+- @MustStopMurad (722k) — real Murad, celebrity tier; won't notice micro-cap. Reference in content only, no outreach.
+- Solana_Chutney + similar $VEIL spam accounts — paid-shill pattern, excluded.
+
+## Candidate list v1 (10, from 2026-08-04 research)
 
 | # | Handle | Platform | Why them | Angle |
 |---|--------|----------|----------|-------|
@@ -34,8 +46,11 @@ PAPER TRAIL — a 3-lane (Headline / Media / Underground) scandal card battle ga
 
 | # | Handle | DM sent (UTC) | Reply? | Result |
 |---|--------|---------------|--------|--------|
-| 1-10 | — | — | — | BLOCKED: X 403 restriction, no Bluesky DM tool |
+| v1 1-10 | — | — | — | BLOCKED: X 403 (lifted 08-04 22:39 for posts; DMs/replies still limited) |
+| v2 1 | @AlphaSeeker21 | not sent | — | Next: quote-tweet their next agent-meta post |
+| v2 2 | @S0Lmay0r | not sent | — | Next: mention with game pitch + Discord invite |
 
 ## Next actions
-- Re-test X posting (restriction expected to lift ~08-05); if live, DM outreach via X is still limited — prioritize Discord community invites instead.
-- Consider Discord server invites to candidates (server is live).
+- Quote-tweet @AlphaSeeker21's next agent-token post with CCO pitch (X quote-tweet works without DM access).
+- Public mention to @S0Lmay0r with game one-liner + Discord invite link.
+- Discord server invites to v1 candidates (server is live, 2 members incl. CCO).
