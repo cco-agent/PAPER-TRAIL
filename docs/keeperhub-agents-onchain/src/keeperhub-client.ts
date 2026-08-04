@@ -7,10 +7,15 @@
  *   - MockKeeperHubClient — deterministic in-memory transport for tests/demo.
  *                           NEVER submits a real transaction.
  *
- * Tool names (execute_transfer / execute_check_and_execute / get_execution) are
- * configurable via constructor opts and MUST be verified against
- * https://docs.keeperhub.com/ai-tools/mcp-server once a key is available.
- * Until then the real transport refuses to run without a key — no silent mock.
+ * Tool names verified 2026-08-04 against public repos that ran the live MCP
+ * (bilgin-kocak/zeroclaw, XVSHIFU/keeperhub-risk-guardian, sejoroajose/swarmfi,
+ * Philotheephilix/computepool feedback, official KeeperHub/keeperhub docs):
+ *   - execute_transfer            -> returns camelCase executionId
+ *   - execute_check_and_execute   -> conditional execution (fallback path)
+ *   - get_direct_execution_status -> poller for direct executions; takes
+ *                                    snake_case execution_id (NOT get_execution)
+ *   - simulate:true               -> dry-run, recommended by official quickstart
+ * Final response-shape check still happens once a real kh_ key is available.
  */
 
 import type { ActionSpec, ExecutionResult } from "./types.ts";
@@ -28,6 +33,7 @@ export interface TransferParams {
   amountWei: string;
   chain: string;
   token?: string; // absent = native
+  simulate?: boolean; // KeeperHub dry-run (official quickstart pattern)
 }
 
 export interface CheckAndExecuteParams extends TransferParams {
@@ -42,7 +48,9 @@ export interface KeeperHubClient {
 }
 
 const DEFAULT_ENDPOINT = "https://app.keeperhub.com/mcp";
-const DEFAULT_POLL_TOOL = "get_execution"; // TODO: verify vs docs.keeperhub.com once kh_ key available
+// Verified 2026-08-04: direct executions are polled via get_direct_execution_status
+// with snake_case execution_id (multiple public integrations confirm this).
+const DEFAULT_POLL_TOOL = "get_direct_execution_status";
 
 function iso(): string {
   return new Date().toISOString();
@@ -112,17 +120,20 @@ export class KeeperHubMcpClient implements KeeperHubClient {
         }
       }
     }
-    const src = parsed.executionId || parsed.id ? parsed : raw ?? {};
+    // Accept camelCase (execute_* responses) and snake_case (poll responses).
+    const src = parsed.executionId || parsed.id || parsed.execution_id ? parsed : raw ?? {};
+    const txHash = String(src.transactionHash ?? src.transaction_hash ?? src.txHash ?? "");
     return {
-      executionId: String(src.executionId ?? src.id ?? "unknown"),
+      executionId: String(src.executionId ?? src.execution_id ?? src.id ?? "unknown"),
       status: (src.status ?? "pending") as KeeperHubExecution["status"],
-      txHash: src.txHash ? String(src.txHash) : undefined,
+      txHash: txHash || undefined,
       error: src.error ? String(src.error) : undefined
     };
   }
 
   async transfer(params: TransferParams): Promise<KeeperHubExecution> {
-    this.log(`[keeperhub-client] execute_transfer ${params.amountWei} -> ${params.to} (${params.chain})`);
+    const mode = params.simulate ? "simulate" : "execute";
+    this.log(`[keeperhub-client] ${mode}_transfer ${params.amountWei} -> ${params.to} (${params.chain})`);
     return this.normalize(await this.callTool("execute_transfer", params));
   }
 
@@ -132,7 +143,8 @@ export class KeeperHubMcpClient implements KeeperHubClient {
   }
 
   async poll(executionId: string): Promise<KeeperHubExecution> {
-    return this.normalize(await this.callTool(this.pollToolName, { executionId }));
+    // get_direct_execution_status takes snake_case execution_id (verified).
+    return this.normalize(await this.callTool(this.pollToolName, { execution_id: executionId }));
   }
 }
 
