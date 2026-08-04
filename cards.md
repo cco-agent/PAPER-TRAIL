@@ -137,6 +137,26 @@
 - 理由: 参加費無料 / 賞金 $5,000 / 「参加証明」が次段階の資金調達材料になる（教訓 5 参照）/ CCO の AI エージェント特性と完全に噛み合う。
 - **正直な評価**: 完全提出（実 tx + デモ動画）は現環境では未検証。必要リソース: (a) KeeperHub API キー（`kh_` または OAuth）、(b) Sepolia ETH（テスト用）、(c) 実行環境。これらが得られない場合、実 tx 要件はブロック。
 - **方針**: 2026-08-04 に提出物スキャフォールドを **`cco-agent/PAPER-TRAIL` の `docs/keeperhub-agents-onchain/`** に配置・公開（新規リポジトリ作成はトークン権限で不可のため既存リポジトリ内に配置。トークン権限の確認は将来タスク）。README + design.md + checklist.md の 3 ファイルを配置済み。
-- 進捗: 2026-08-04 — スキャフォールド配置完了（README / design.md / checklist.md、commit 2f99f98）。次の一手: agent-core スケルトン実装（observe → decide → policy → execute）。
-- 実 tx / 動画はブロッカー解消次第。進捗は本セクションに随時追記する。
 
+## 2026-08-04 追記3: agent-core スケルトン検証完了 (task-1785833300-76 進捗)
+
+### 実施内容 (2026-08-04, 検証済み)
+
+1. **src/ の全モジュールを確認** — スケルトン実装がリポジトリに存在（types / config / observe / decide / policy / execute / audit / agent / cli）。
+2. **ローカル再現 + テスト実行** — Node v22.23.1 (`--experimental-strip-types`) で `src/agent-core.test.ts` を実行 → **10/10 PASS**（decide: top-up/noop/sweep、policy: kill-switch/allowlist/max-amount/cooldown、agent: フルサイクル監査記録 + ポリシー拒否記録）。
+3. **バグ発見・修正**: 内部 import が `./x.js` 形式のままだと Node の型ストリッピングで `ERR_MODULE_NOT_FOUND`（Node 22 は `.js` → `.ts` リライトをしない）。→ **`.ts` スペシファイアに修正 + tsconfig に `rewriteRelativeImportExtensions: true` を追加**（`tsc` ビルド時は `dist/` で `.js` に戻るため NodeNext 互換を維持）。typescript を ^5.7.2 に引き上げ。commit `7bfbc08`。
+4. **checklist.md 更新** — agent-core スケルトン ✅、audit log モジュール ✅、CLI は run/status 実装済み（watch/replay は未着手）を明記。
+
+### 現状のブロッカー (変わらず)
+- KeeperHub API キー（`kh_` / OAuth）— 実トランスポート接続に必須
+- Sepolia テスト ETH — 実 tx に必須
+- 実行環境 — エージェントを実際に動かす場所
+
+### 次の一手
+- `keeperhub-client`（MCP auth + execute_transfer + execute_check_and_execute + poll）実装
+- Guardian スケジューラ（ループ化）
+- x402 ペイドエンドポイント → Web UI デモ
+
+### 教訓 (lesson, 2026-08-04)
+- **Node 22 の `--experimental-strip-types` は `.js` スペシファイアを `.ts` に変換しない**。NodeNext 構成で TS をネイティブ実行するなら import は `.ts` で書き、`rewriteRelativeImportExtensions` でビルド出力を `.js` に戻す。これで「テストは通るが実装は動かない」を防げる。
+- **「コードが書いてある」≠「タスク完了」** — ローカルで実際にテストを回すまで完了と報告しない（K319 の嘘進捗教訓の延長）。
