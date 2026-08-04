@@ -1,0 +1,23 @@
+{
+  "chain": "sepolia",
+  "rpcUrl": "https://ethereum-sepolia-rpc.publicnode.com",
+  "watch": {
+    "address": "0x0000000000000000000000000000000000000000",
+    "minBalanceWei": "100000000000000000",
+    "maxBalanceWei": "0",
+    "symbol": "ETH"
+  },
+  "sweep": { "to": "0x0000000000000000000000000000000000000001" },
+  "decide": {
+    "rules": ["balance_below_min", "balance_above_max"],
+    "llm": { "enabled": false, "model": "deepseek-v4-flash" }
+  },
+  "policy": {
+    "killSwitch": false,
+    "maxAmountWei": "1000000000000000000",
+    "recipientAllowlist": [],
+    "chainAllowlist": ["sepolia"],
+    "cooldownMs": 60000
+  },
+  "audit": { "logPath": "./audit.jsonl" }
+}

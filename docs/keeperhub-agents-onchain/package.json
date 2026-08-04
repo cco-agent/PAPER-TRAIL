@@ -1,0 +1,19 @@
+{
+  "name": "shredder-sentinel-agent-core",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Policy-gated onchain execution agent core (observe → decide → policy → execute). KeeperHub Agents Onchain entry.",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "test": "node --experimental-strip-types --test src/*.test.ts",
+    "cli": "node --experimental-strip-types src/cli.ts",
+    "demo": "node --experimental-strip-types src/cli.ts run --balance 0.01"
+  },
+  "engines": {
+    "node": ">=22.6"
+  },
+  "devDependencies": {
+    "typescript": "^5.5.4"
+  }
+}
