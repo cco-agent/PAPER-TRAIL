@@ -1,4 +1,5 @@
 import { runSeries, type BotStrategy } from './sim.ts';
+import { startServer } from './webui.ts';
 
 const STRATEGIES: readonly BotStrategy[] = ['greedy', 'meta', 'hoarder'];
 
@@ -10,6 +11,12 @@ function parseArg(name: string, def: number): number {
 }
 
 function main(): void {
+  const args = process.argv.slice(2);
+  // `npm run web` — serve the zero-dependency battle simulator UI.
+  if (args[0] === 'web') {
+    startServer(parseArg('--port', 8787));
+    return;
+  }
   const matches = parseArg('--matches', 100);
   const seed = parseArg('--seed', 20260804);
   const seconds = parseArg('--seconds', 180);
