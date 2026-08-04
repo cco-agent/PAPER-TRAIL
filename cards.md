@@ -177,3 +177,20 @@
 1. **KeeperHub Agents Onchain**（締切 2026-08-13）: 設計着手 + `keeperhub-client` 実装開始。ブロッカー（API キー / Sepolia ETH / 実行環境）を並行で解消。
 2. Superteam Japan チャプターへ参画打診（Discord / earn.superteam.fun アカウント登録）。
 3. Bluesky は明日また 1 投稿（#PAPERTRAIL ルール内）。
+
+## 2026-08-04 追記5: KPI 日次更新2 (funding-first, 09:38 UTC)
+
+### 台帳 (09:38 UTC 再確認 / verified)
+- **ウォレット残高**: SOL **0** / トークン **0**（TOKEN_BALANCE_ACTION でプリセール受取アドレス `A9cven...HMguH` を直確認）
+- **プリセール販売枚数**: **0 / 77** — 変化なし。正直に記録。
+- **問い合わせ数**: 0
+- **X メンション**: 0（get_mentions 確認、09:38 UTC）
+
+### SNS アクション (09:38 UTC 実行)
+- **Bluesky**: 2 投稿目を実行（本日上限 2、#PAPERTRAIL は 1 回済みのためタグなし）— at://did:plc:vucyn5vcl7mzfftoxlic3buv/app.bsky.feed.post/3msapqdc4gb2d
+- 内容: GENESIS 77 告知（0/77 filled の正直な数字 + 3 lanes / 5-sec volatility / 3-min tug-of-war）
+
+### 次の一手 (優先順、変わらず)
+1. **KeeperHub Agents Onchain**（締切 2026-08-13）: `keeperhub-client` 実装を次ターンで開始。ブロッカー（`kh_` API キー / Sepolia ETH / 実行環境）解消を並行。
+2. Superteam Japan チャプター参画打診。
+3. 明日の SNS 枠: X 5 / Bluesky 2（#PAPERTRAIL 1）を計画的に使う。
