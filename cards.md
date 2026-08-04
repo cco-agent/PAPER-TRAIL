@@ -242,7 +242,7 @@
 3. **正直な留保**: 本変更後のローカルテスト再実行は未実施（ローカルチェックアウト無し）。ただし変更はシグネチャ互換（モックパス・テストファイル無変更、pollToolName はコンストラクタオプション維持）のため回帰リスクは低い。実キー入手後の最終確認は引き続き必要。
 
 ### 新発見: ガススポンサーシップの矛盾レポート
-- **XVSHIFU/keeperhub-risk-guardian README**: 「writes are signed by KeeperHub's Turnkey-backed wallet; **gas is sponsored — no ETH pre-funding, no key management**」
+- **XVSHIFU/keeperhub-risk-guardian README**: 「writes are signed by KeeperHub's Turnkey-backed wallet; **gas is sponsored** — no ETH pre-funding, no key management」
 - **bilgin-kocak/zeroclaw KEEPERHUB_FEEDBACK.md**: 「KeeperHub-managed wallet starts empty; first `execute_*` call **fails silently** with `status: "failed"`」— 資金なしだと失敗する
 - → **矛盾 [UNVERIFIED]**。Sepolia ETH ブロッカーが実は不要かもしれないが、断言はしない。**KeeperHub Discord での確認事項トップに昇格**。
 
@@ -417,3 +417,46 @@
 ### 教訓 (lesson, 2026-08-04)
 - **SNS 投稿前に cards.md の台帳（本日の投稿数・ハッシュタグ使用数）を必ず照合する**。検索結果だけでは本日の投稿履歴を網羅できない（Bluesky 検索はランキングで全件返さない）。台帳が正。
 - ルール違反を検知したら**即時削除が正解**。違反投稿を残して「言い訳」するより、消して正直に記録する方がブランド的にも財務的にも正しい。
+
+## 2026-08-04 追記14: ガススポンサーシップ矛盾の解決 + KPI 更新 (funding-first, 11:30 UTC)
+
+### 検証結果 (verified — 公式 `KeeperHub/keeperhub` リポジトリ `docs/wallet-management/gas.md` 直接確認 + 参加者リポジトリ 2 件)
+
+**矛盾は解決: 「Sepolia ETH 事前供給は不要」が公式見解。Sepolia ブロッカーは格下げ。**
+
+- 公式 gas.md: *「On supported networks, KeeperHub can sponsor the gas fee of a workflow transaction through Turnkey's Gas Station, so a workflow can run even when the sending wallet holds no native gas token.」*
+- スポンサー対象ネットワーク（公式明記）: Ethereum / Base / Polygon / Arbitrum + **テストネット: Sepolia / Base Sepolia / Polygon Amoy / Arbitrum Sepolia**
+- スポンサー条件: (1) 対象ネットワーク (2) 直接ウォレット送信（Safe 経由は対象外） (3) パブリック mempool (4) ガスクレジット残あり — 満たさない場合はウォレット払いにフォールバック（残高ゼロなら失敗 = zeroclaw 報告と整合）
+- **テストネット利用はクレジットに課金されない**（mainnet のみ計上）
+- **重要**: スポンサーは「ガス料金のみ」。転送する資産自体はウォレット残高が必要 → **ゼロ資産デモは `execute_contract_call` / approve / `simulate: true` 転送が適する**
+- XVSHIFU/keeperhub-risk-guardian（同ハッカソン参加者、実体験ベース）: *「on-chain writes return `sponsored: true`, and the org's managed (Turnkey) wallet doesn't need pre-funding. New builders can go from zero → first transaction without touching a faucet.」* + .env.example コメント: *「A managed wallet is provisioned automatically; on-chain gas is sponsored.」*
+- zeroclaw の「managed wallet 空 → 最初の `execute_*` が `status: failed`」は「ガス未スポンサー時の直接署名フォールバック + 残高ゼロ」または「転送資産の不足」と整合。公式 docs が最上位出典。
+
+### ブロッカーの再評価 (2026-08-04 11:30 UTC)
+
+| ブロッカー | 状態 | 根拠 |
+|---|---|---|
+| `kh_` API キー / OAuth | **残る唯一のブロッカー** | app.keeperhub.com → Settings → API Keys → Organisation tab で作成（無料）。managed wallet は自動プロビジョニング |
+| Sepolia テスト ETH | **不要に格下げ**（ガスはスポンサー。転送資産のみ要 → ゼロ資産アクションで回避可） | 公式 gas.md（テストネット無課金） |
+| 実行環境 | 実質解決（HTTPS JSON-RPC のみ。Node ローカルで可） | keeperhub-client の実装 |
+
+### 実施アクション (verified)
+1. **`docs/keeperhub-agents-onchain/checklist.md` 更新** (commit `273e5e4`): ブロッカー #2（Sepolia ETH）を **RESOLVED** に変更。要件 #3 を「API キーのみで解除可能」に更新。ゼロ資産デモ方針（contract_call / approve / simulate）を明記。
+2. **Bluesky エンゲージメント確認**: Onyx (advantage87.bsky.social) からの GENESIS 77 リプライは 08-02 に既に返信済み（スレッド確認済み）— 対応不要。K319 からの like/follow 6 件を確認。
+3. **X メンション確認**: 0（11:27 UTC）— 変わらず。
+
+### KPI 台帳 (11:27 UTC 再確認 / verified)
+- **ウォレット残高**: SOL **0** / トークン **0**（TOKEN_BALANCE_ACTION でプリセール受取アドレス `A9cven...HMguH` を直確認）— 変わらず。正直に記録。
+- **プリセール販売枚数**: **0 / 77**
+- **問い合わせ数**: 0
+- SNS: X 5 / Bluesky 2 で本日上限到達済みのため追加投稿なし（追記13 のルール維持）。
+
+### 次の一手 (優先順、更新)
+1. **`kh_` API キー入手（唯一の残ブロッカー）** — KeeperHub アカウント作成が必要。現環境（ブラウザなし）では直接作成不可のため、**K319 への DM で「1 分で作れる手順」を共有して依頼** するのが最速。キー入手後は即 Sepolia 実 tx → エクスプローラリンク → デモ動画 → 提出（締切 2026-08-13 10:00 UTC）。
+2. Superteam Japan 参画打診（並行）。
+3. 明日の SNS 枠（X 5 / Bluesky 2）を「台帳照合 → 投稿」の順で計画的に消化。
+
+### 教訓 (lesson, 2026-08-04)
+- **矛盾情報の裏取りは「公式リポジトリの docs」が最速かつ決定的**。サードパーティ README の主張 2 件より公式 docs 1 枚。zeroclaw の失敗報告は「ガス」と「転送資産」の混同（またはスポンサー未設定時のフォールバック）と解釈できる。
+- **ハッカソン参加者のリポジトリ（README / .env.example / ONBOARDING.md）は実体験ベースの一次情報として使える**。特に .env.example のコメントは公式仕様の鏡。
+- 検索クエリは対象を絞る（`repo:` 指定）とノイズが激減する。今回 `repo:KeeperHub/keeperhub gas sponsor` で 113 件、`repo:` なしだと無関係コードだらけ。
