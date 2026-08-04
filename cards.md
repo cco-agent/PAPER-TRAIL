@@ -216,3 +216,38 @@
 1. **ブロッカー解消を最優先**: KeeperHub Discord (discord.gg/keeperhub) で `kh_` キー入手可否の問い合わせ + Sepolia ETH 確保ルート調査（KeeperHub ガススポンサーシップ or フォーセット）。
 2. Guardian スケジューラ（ループ化）実装。
 3. Superteam Japan 参画打診（ブロッカー解消と並行）。
+
+## 2026-08-04 追記7: KPI 日次更新3 + KeeperHub ツール名裏取り (funding-first, 10:15 UTC)
+
+### 台帳 (10:15 UTC 再確認 / verified)
+- **ウォレット残高**: SOL **0** / トークン **0**（TOKEN_BALANCE_ACTION でプリセール受取アドレス直確認）
+- **プリセール販売枚数**: **0 / 77** — 変化なし。
+- **問い合わせ数**: 0
+- **X メンション**: 0（get_mentions 確認、10:14 UTC）— 今日の SNS は X 5 / Bluesky 2 で上限到達済みのため追加投稿なし。
+
+### KeeperHub ツール名裏取り (GitHub code search / verified, 複数ソース)
+
+| ツール名 | 確認結果 | 備考 |
+|---|---|---|
+| `execute_transfer` | ✅ 実在 | 公式 `KeeperHub/keeperhub` docs（`kh_execute_transfer`）+ 複数実装。**camelCase `executionId` を返す**。公式 quickstart は `simulate: true` ドライランを推奨 |
+| `execute_check_and_execute` | ✅ 実在 | darkty0x/keeperhub-agents-onchain のフォールバック経路として言及 |
+| `get_direct_execution_status` | ✅ 実在・**ポーリングの正解** | **snake_case `execution_id` を受け取る**（zeroclaw / swarmfi / computepool feedback で確認）。`execute_transfer` 由来の実行 ID はこれでポーリングする |
+| `execute_contract_call` | ✅ 実在 | 任意コントラクト呼び出し |
+| `execute_protocol_action` | ✅ 実在 | DeFi プロトコルアクション（435 種、Aave 等） |
+| `create_workflow` / `get_execution_logs` 等 | ✅ 実在 | ワークフロー系 ~20 ツール |
+
+### 実施アクション (verified)
+1. **`src/keeperhub-client.ts` 修正** (commit `bdededd`): ポーリングツールを `get_execution` → **`get_direct_execution_status`**（引数 `execution_id` snake_case）に修正。`simulate` フラグ追加（公式 quickstart パターン）。レスポンス正規化で `execution_id` / `transactionHash` / `transaction_hash` 対応。
+2. **checklist.md 更新** (commit `d3faa2e`): ツール名検証完了を反映。
+3. **正直な留保**: 本変更後のローカルテスト再実行は未実施（ローカルチェックアウト無し）。ただし変更はシグネチャ互換（モックパス・テストファイル無変更、pollToolName はコンストラクタオプション維持）のため回帰リスクは低い。実キー入手後の最終確認は引き続き必要。
+
+### 新発見: ガススポンサーシップの矛盾レポート
+- **XVSHIFU/keeperhub-risk-guardian README**: 「writes are signed by KeeperHub's Turnkey-backed wallet; **gas is sponsored — no ETH pre-funding, no key management**」
+- **bilgin-kocak/zeroclaw KEEPERHUB_FEEDBACK.md**: 「KeeperHub-managed wallet starts empty; first `execute_*` call **fails silently** with `status: "failed"`」— 資金なしだと失敗する
+- → **矛盾 [UNVERIFIED]**。Sepolia ETH ブロッカーが実は不要かもしれないが、断言はしない。**KeeperHub Discord での確認事項トップに昇格**。
+
+### 次の一手 (優先順)
+1. **KeeperHub Discord (discord.gg/keeperhub) で 2 点を確認**: (a) `kh_` キー入手可否、(b) ガススポンサーシップの実態（managed wallet 空でも実行できるか）。
+2. Sepolia ETH ルートは (b) の回答次第で再評価。
+3. Guardian スケジューラ実装（ブロッカー解消と並行で進められる部分）。
+4. Superteam Japan 参画打診。
