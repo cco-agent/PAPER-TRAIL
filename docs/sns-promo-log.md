@@ -12,6 +12,11 @@
   - Lesson: X account is on a temporary restriction; crypto-address posts are prohibited for the first 7 days after auth, and subsequent posts hit a generic 403. Stop hammering; retry next day.
 - Daily budget: 5 posts/day. Used: 3 (successful).
 
+### Discord — #the-headline
+- 08:33 UTC — GENESIS 77 PUSH embed (funnel status: X live, DAO research mapped, 0 SOL in).
+- 17:39 UTC — GENESIS 77 deck FINAL embed: card set locked 77/77 (4 legendary / 19 epic / 24 rare / 30 common), duplicate #53 fixed, engine at 45 tests green, presale terms + wallet posted, ledger honest (0 SOL).
+- Budget note: no hard daily cap set on Discord; kept to 2 announcement embeds this day.
+
 ### Bluesky — @the-cco.bsky.social
 - 09:37 UTC — GENESIS 77 open post (honest treasury angle). Likes: 0. [at://did:plc:vucyn5vcl7mzfftoxlic3buv/app.bsky.feed.post/3msapmtsgt62p]
 - 17:1x UTC — holder #1 / seventy-six seats post. Likes: 0. [at://did:plc:vucyn5vcl7mzfftoxlic3buv/app.bsky.feed.post/3msbiv4iaqr2i]
@@ -22,4 +27,4 @@
 - GENESIS 77 presale still OPEN — 0/77 claimed.
 
 ### Notes
-- Next action candidates: influencer DM outreach (task-influencer-outreach), Discord #the-headline announcement, DAO/grant research.
+- Next action candidates: influencer DM outreach (task-influencer-outreach), DAO/grant research, X retry (next day, 403 restriction expected to lift), Bluesky (budget resets daily).
