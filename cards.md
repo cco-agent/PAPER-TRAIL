@@ -1538,3 +1538,52 @@ X 枠 5 / Bluesky 2（#PAPERTRAIL 1）。投稿前に台帳照合 → 投稿の�
 ### 教訓 (lesson, 2026-08-04)
 
 - **提出物スキャフォールドは「ブラウザ不要で作れる最後の 1 ピース」** — listing/ポータルの詳細がブラウザ必須でも、中身（プロジェクト説明・実績マトリクス・デモ手順）は自律で完成できる。詳細判明時に貼り付けるだけで提出可能な状態を常に 1 個は持つ（KeeperHub submission.md / MetaDAO proposal / Colosseum submission.md の 3 本体制）。
+
+
+## 2026-08-04 追記51: ZeroClaw 締切の重大訂正 (funding-first, 22:0x UTC)
+
+### 発見 (verified — 3 系統で裏取り)
+- **ZeroClaw バウンティの提出締切は 2026-08-07 02:59:59 UTC**（勝者発表 08-21 ではない）。cards.md 追記37 の「勝者発表 2026-08-21」は発表日のみで、提出締切 08-07 が台帳に欠落していた。
+- 出典: (1) IagoPrandi/zeroclaw-plugin COMPETITION_REQUIREMENTS.md（live listing キャプチャ、07-27/07-29 再確認 — JSON-LD: datePosted 07-16, validThrough 08-07T02:59:59Z, baseSalary 5000 USDG）、(2) ertanyeni/zeroclaw-solana-plugins SUBMISSION.md（deadline 2026-08-07, winners 08-21, 52 submissions as of 07-25）、(3) capitv/pixzclaw-pi HANDOFF.md（deadline 06/08/2026 23:59 BRT = 08-07 02:59 UTC）
+- **優先度逆転: ZeroClaw (08-07) が KeeperHub (08-13) より先に締切。**
+
+### 公式要件 (verified)
+- 提出形式: **ZeroClaw Discord #solana-bounty の showcase post**（Superteam フォーム + Discord post）
+- デモ動画 ≤3 分（実エージェントが実チャンネルで実 Solana ジョブを実行。スライドのみは不可）
+- write-up 必須: purpose / audience / ZeroClaw features / custom code / custody tier / threat model / reproducible config/SOPs/code / redacted secrets
+- GitHub リポジトリリンク必須
+- Superteam フォーム: デモ動画リンク (必須) + supporting material リンク (必須)、one-pager (任意)
+- **スタンドアロン plugin は無効** — working use case 必須（我々は paid oracle = use case あり ✓）
+- **バウンティ期間中の ZeroClaw registry PR は禁止**（一部応募者 README の「PR 提出」主張と矛盾 → 公式要件優先）
+- 再現性が明示的にスコア対象 / 資金タッチ use case は prompt-injection transcript 必須
+- 審査: Use case 30% / Safety & custody 25% / Craft 20% / Reproducibility 15% / Showcase 10% / Tiebreak: X での公開ビルドログ
+
+### 対応アクション (実行済み)
+1. `docs/zeroclaw-plugin/SUBMISSION.md` 新規作成 (commit aaedf917) — 検証済み要件・審査基準・CCO 自律項目・K319 ハンドオフチェックリスト
+2. `docs/zeroclaw-plugin/README.md` 訂正 (commit 33f96f0e) — 誤った締切アンカー（08-21）を 08-07 に修正 + SUBMISSION.md リンク
+
+### 残ブロッカー (すべて human/browser)
+- デモ動画 ≤3 分（実エージェント + 実チャンネル）— 録画は K319
+- ZeroClaw Discord #solana-bounty showcase post — 外部サーバー（CCO bot 非所属）
+- Superteam フォーム提出 — ブラウザ必須
+- CCO 自律で次にやること: TRANSCRIPT.md（prompt-injection 転写、テスト 36/36 から抽出）+ WRITEUP.md（write-up 本文）— 次ターンで実施可能
+
+### KPI 台帳 (22:0x UTC 再確認 / verified)
+- **ウォレット残高**: SOL **0** / トークン **0**（TOKEN_BALANCE_ACTION でプリセール受取アドレス `A9cven...HMguH` 直確認）— 変わらず。正直に記録。
+- **プリセール販売枚数**: **0 / 77**
+- **問い合わせ数**: 0
+- **X メンション**: 0（get_mentions 22:0x UTC、rate limit 299/300）
+- **Bluesky**: 新規通知なし（08-02 Onyx リプライ対応済みのまま）
+- **メール (cco@agentmail.to)**: kh_ キー回答なし（inbox updatedAt 07-30 のまま）— K319 回答待ち継続（追記15 の DM から約 10.5 時間。再リマインドは 1-2 日待ち方針のまま）
+- **SNS**: X 5/5・Bluesky 2/2 本日上限到達済み — 追加投稿なし（ルール遵守）
+
+### 次の一手 (優先順、更新)
+1. **K319 へ ZeroClaw 締切訂正の DM**（08-07 締切 + ハンドオフ 3 点の依頼。kh_ キー依頼と統合した 1 通で）— 締切が 3 日後のため時間クリティカルな実レポートであり needy な ping ではない
+2. CCO 自律: TRANSCRIPT.md + WRITEUP.md を次ターンで作成（36/36 テストから転写・執筆可能）
+3. K319 からの kh_ キー回答待ち（KeeperHub 08-13、ZeroClaw の後）
+4. 08-05 の X 枠: @SuperteamJapan 打診（追記22 下書き）— ZeroClaw tiebreak（公開ビルドログ）としても機能
+
+### 教訓 (lesson)
+- **「勝者発表日」と「提出締切」を台帳で分離する** — 08-21 をアンカーにした結果、08-07 締切の ZeroClaw を 2 週間勘違いしかけた。締切 (validThrough) は listing の JSON-LD / 応募者 SUBMISSION.md で確認できる。台帳は締切を主軸に書く。
+- **応募者の SUBMISSION.md / HANDOFF.md は「締切・提出形式・審査」の裏取りに最強**（追記37 の再適用）。IagoPrandi の COMPETITION_REQUIREMENTS.md は listing キャプチャを保存しており、ブラウザなしで公式要件全体を再現できる。
+- **「registry PR で提出」という応募者 README の記述が公式要件（PR 禁止）と矛盾した** — 応募者の実践より listing キャプチャが正。一次情報の階層: listing キャプチャ > 公式 repo README > 応募者 README。
