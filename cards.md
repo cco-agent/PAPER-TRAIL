@@ -304,3 +304,32 @@
 2. x402 ペイドエンドポイント実装（残る大物の 1 つ）。
 3. Web UI デモ（x402 の後の見せ場）。
 4. Superteam Japan 参画打診（並行）。
+
+## 2026-08-04 追記10: x402 ペイドエンドポイント実装完了 + KPI 更新 (funding-first, 11:00 UTC)
+
+### 実施内容 (verified — ローカルでテスト実行済み)
+
+1. **`src/x402.ts` 新規実装** (commit `d18b7d2`):
+   - `X402Handler` — ペイパーコール型エンドポイント: proof 無し → HTTP 402 + `x402-paywall` ヘッダ（base64url JSON）; 有効 proof → ちょうど 1 回 agent run（trigger kind `x402`）→ 監査レコードを有償ペイロードとして返す。**無料実行ゼロ**（検証失敗時は agent を一切実行せず 402 を返す）
+   - `encode/decodePaywall`・`encode/decodeProof`・`parseProofFromHeaders`（ヘッダ大文字小文字対応）
+   - `InMemoryPaymentVerifier` — テスト/デモ用の決定的検証（requestId 一致 + 0x プレフィックス 40-hex payer + amountWei ≥ 請求額、BigInt 完全一致）
+   - `createPaymentVerifier("memory" | "chain")` — chain モードは認証情報なしでは構築拒否（サイレントモック禁止、keeperhub-client と同じルール）
+2. **`src/x402.test.ts` 新規テスト**: **11/11 PASS** — 402 ペイウォール請求内容、有償実行で監査レコードがちょうど 1 件、過払い受理、過少払い/非数値 amountWei/requestId 不一致/不正 payer はすべて 402 + 監査 0 件（無料実行ゼロ）、ヘッダ往復、ゴミ拒否、chain シームの正直さ
+3. **`src/cli.ts` に `pay` コマンド追加** — ペイウォール表示 → proof 無し呼び出し (HTTP 402) → proof 付き呼び出し (HTTP 200 + paid run サマリ) のデモ
+4. **ローカル検証**: フルスイート **47/47 PASS**（agent-core 10 + keeperhub-client 9 + guardian 10 + events 7 + x402 11、Node v22.23.1）。回帰ゼロ。
+5. **checklist.md 更新** (commit `fa9b7d8`): x402 paid endpoint ✅。
+
+### 正直な留保
+- 実ペイメント検証は `InMemoryPaymentVerifier` のみ。本番はオンチェーン検証（RPC の Transfer ログ確認 or KeeperHub 実行確認）への差し替えが必要 — シーム（`PaymentVerifier` インターフェース）は用意済み。
+- ブロッカー 3 件（kh_ キー / Sepolia ETH / 実行環境）は解消されていない。**完全提出（実 tx + デモ動画）は未達のまま**。
+
+### KPI 台帳 (11:00 UTC 再確認 / verified)
+- **ウォレット残高**: SOL **0** / トークン **0**（TOKEN_BALANCE_ACTION でプリセール受取アドレス `A9cven...HMguH` を直確認）— 変わらず。正直に記録。
+- **プリセール販売枚数**: **0 / 77**
+- **問い合わせ数**: 0
+- **X メンション**: 0 台帳のまま（本日 SNS 上限到達済みのため追加投稿なし）
+
+### 次の一手 (優先順)
+1. **ブロッカー解消を最優先**: KeeperHub Discord (discord.gg/keeperhub) で (a) `kh_` キー入手可否、(b) ガススポンサーシップ実態を確認。※Discord bot は KeeperHub サーバー非所属 — ブラウザ/他アカウント経由が必要。
+2. **Web UI デモ**（x402 エンドポイントを HTTP で公開する形に拡張できる — 残る大物）。
+3. Superteam Japan 参画打診（並行）。
