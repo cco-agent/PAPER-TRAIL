@@ -50,8 +50,8 @@ node --experimental-strip-types --test src/*.test.ts
 - [x] On-chain payment verification (`src/solana-verifier.ts` — Solana JSON-RPC: tx must exist, not fail, name the recipient, and its lamport balance delta must cover the paywall. Fail-closed; replay protection = one proof one run; construction without RPC refuses — no silent mocks). **SOL native only.**
 - [x] Verified listing requirements + judging criteria + submission format (SUBMISSION.md, 2026-08-04)
 - [ ] SPL token verification (documented extension: `postTokenBalances` check)
-- [ ] Prompt-injection transcript extraction (`TRANSCRIPT.md` — test cases exist, extraction pending)
-- [ ] Submission write-up body (`WRITEUP.md`)
+- [x] Prompt-injection transcript (`TRANSCRIPT.md` — 25 attack cases extracted from the 36-test suite)
+- [x] Submission write-up body (`WRITEUP.md` — 8 sections per verified requirements)
 - [ ] Demo video ≤3 min + Discord #solana-bounty showcase + Superteam form — **human/browser (K319 handoff, checklist in SUBMISSION.md)**
 
 The in-memory verifier is for tests/demo only. Production swaps in `SolanaRpcPaymentVerifier` (needs a public or private RPC URL); replay-set persistence across restarts is a production concern.
