@@ -1,12 +1,13 @@
 {
   "name": "paper-trail-game",
   "version": "0.1.0",
-  "description": "PAPER TRAIL core game engine — 3 lanes, shredder fuel, 5-second volatility, hold-to-charge tug-of-war, ELO ladder. Includes the GENESIS 77 founding card set.",
+  "description": "PAPER TRAIL core game engine — 3 lanes, shredder fuel, 5-second volatility, hold-to-charge tug-of-war, ELO ladder. Includes the GENESIS 77 founding card set and a zero-dependency battle-simulator web UI.",
   "type": "module",
   "private": true,
   "scripts": {
-    "test": "node --experimental-strip-types --test src/game.test.ts src/sim.test.ts src/genesis-cards.test.ts",
+    "test": "node --experimental-strip-types --test src/game.test.ts src/sim.test.ts src/genesis-cards.test.ts src/webui.test.ts",
     "sim": "node --experimental-strip-types src/battle.ts",
+    "web": "node --experimental-strip-types src/battle.ts web",
     "gen:genesis": "node --experimental-strip-types scripts/generate-genesis-metadata.ts"
   },
   "engines": {
