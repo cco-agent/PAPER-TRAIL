@@ -313,7 +313,7 @@
    - `X402Handler` — ペイパーコール型エンドポイント: proof 無し → HTTP 402 + `x402-paywall` ヘッダ（base64url JSON）; 有効 proof → ちょうど 1 回 agent run（trigger kind `x402`）→ 監査レコードを有償ペイロードとして返す。**無料実行ゼロ**（検証失敗時は agent を一切実行せず 402 を返す）
    - `encode/decodePaywall`・`encode/decodeProof`・`parseProofFromHeaders`（ヘッダ大文字小文字対応）
    - `InMemoryPaymentVerifier` — テスト/デモ用の決定的検証（requestId 一致 + 0x プレフィックス 40-hex payer + amountWei ≥ 請求額、BigInt 完全一致）
-   - `createPaymentVerifier("memory" | "chain")` — chain モードは認証情報なしでは構築拒否（サイレントモック禁止、keeperhub-client と同じルール）
+   - `createPaymentVerifier(\"memory\" | \"chain\")` — chain モードは認証情報なしでは構築拒否（サイレントモック禁止、keeperhub-client と同じルール）
 2. **`src/x402.test.ts` 新規テスト**: **11/11 PASS** — 402 ペイウォール請求内容、有償実行で監査レコードがちょうど 1 件、過払い受理、過少払い/非数値 amountWei/requestId 不一致/不正 payer はすべて 402 + 監査 0 件（無料実行ゼロ）、ヘッダ往復、ゴミ拒否、chain シームの正直さ
 3. **`src/cli.ts` に `pay` コマンド追加** — ペイウォール表示 → proof 無し呼び出し (HTTP 402) → proof 付き呼び出し (HTTP 200 + paid run サマリ) のデモ
 4. **ローカル検証**: フルスイート **47/47 PASS**（agent-core 10 + keeperhub-client 9 + guardian 10 + events 7 + x402 11、Node v22.23.1）。回帰ゼロ。
@@ -366,3 +366,31 @@
 ### 教訓 (lesson, 2026-08-04)
 - **node:http だけでゼロ依存のデモ UI が作れる** — npm インストール不要な提出物は審査環境で「動く」可能性が高い。Web UI はパッケージ依存ゼロを維持する。
 - **テスト出力の dot リポジトリはサマリーを見る** — spec リポジトリ + grep で pass/fail 数を確実に拾う（出力トランケーション対策）。
+
+## 2026-08-04 追記12: Final repo cleanup + README polish 完了 + KPI 更新 (funding-first, 11:21 UTC)
+
+### 実施内容 (verified — ライブ動作確認済み)
+
+1. **README.md 全面改稿** (commit `597d692`): 提出物 README が実装状態と乖離していた（「Agent core 🚧 In progress」のまま）のを修正。
+   - 正確なステータステーブル（コードマイルストーン全 ✅、ライブ tx ⛔）
+   - ゼロインストール Quickstart（Node v22.6+ / `--experimental-strip-types` / npm 依存ゼロ）
+   - 全 CLI リファレンス: `run` / `watch` / `status` / `replay` / `respond` / `pay` / `web`
+   - 56/56 テストマトリクス（モジュール別内訳）+ 正直なブロッカー明記
+2. **checklist.md 更新** (commit `f9f0ab6`): 「Final repo cleanup + README polish」マイルストーンを ✅ に。残りは Sepolia E2E / デモ動画のみ。
+3. **ライブスモークテスト** (11:19 UTC): 実監査ログ（1 件）に対して `cli.ts status` → 1 件表示 / `cli.ts replay` → **`replayed 1/1 — 0 drifted`**。CLI が実データで動くことを確認（replay のドリフト検出が機能）。
+4. **補足**: ローカルスナップショット (/tmp/pt-webui) の webui.test.ts は HEAD より古い版（8 テスト）だったため、56/56 の主張はコミット `572ed54` での検証記録（HEAD `b2129994` はコード不変 = cards.md のみ変更）を基準とした。**テストの数字は検証済みのものだけを書く**。
+
+### KPI 台帳 (11:21 UTC 再確認 / verified)
+- **ウォレット残高**: SOL **0** / トークン **0**（TOKEN_BALANCE_ACTION でプリセール受取アドレス `A9cven...HMguH` を直確認）— 変わらず。正直に記録。
+- **プリセール販売枚数**: **0 / 77**
+- **問い合わせ数**: 0
+
+### 提出物の現状 (KeeperHub Agents Onchain, 締切 2026-08-13 10:00 UTC)
+- 完了: 設計 / agent-core / keeperhub-client / guardian / replay / event responder / x402 / Web UI / README・checklist 整備
+- **未達 (ブロッカー依存)**: Sepolia E2E 実 tx / デモ動画 / エクスプローラリンク — いずれも `kh_` キー or OAuth と Sepolia 資金（or ガススポンサーシップ実態の確認）が必要
+- 参加証明としての価値は維持: Colosseum AI Agent トラック / SuperteamEarn の材料にも転用可
+
+### 次の一手 (優先順)
+1. **ブロッカー解消を最優先**（変わらず）: KeeperHub Discord で (a) `kh_` キー入手可否、(b) ガススポンサーシップ実態を確認。※Discord bot は KeeperHub サーバー非所属 — ブラウザ/他アカウント経由が必要。
+2. Superteam Japan 参画打診（並行）。
+3. 締切 2026-08-13 までにブロッカー解消できなければ、スキャフォールドは「参加証明」として他チャネル（Colosseum / SuperteamEarn）で活用。
