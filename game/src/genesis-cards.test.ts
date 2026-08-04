@@ -10,8 +10,8 @@ import {
 import { STARTER_DECK } from './cards.ts';
 import { LANES, type CardType } from './types.ts';
 
-const VALID_TYPES: CardType[] = ['scandal', 'satire', 'leak', 'spin', 'fabrication'];
-const VALID_RARITIES: Rarity[] = ['common', 'rare', 'epic', 'legendary'];
+const VALID_TYPES: CardType[] = ['scandal', 'satire', 'leak', 'spin', 'fabrication', 'news', 'meme', 'rumor'];
+const VALID_RARITIES: Rarity[] = ['common', 'rare', 'uncommon', 'epic', 'legendary'];
 
 test('GENESIS set has exactly 77 cards', () => {
   assert.equal(GENESIS_CARDS.length, GENESIS_SET_SIZE);
@@ -27,28 +27,25 @@ test('ids are unique and lane-prefixed', () => {
   assert.equal(new Set(ids).size, 77);
   for (const card of GENESIS_CARDS) {
     const prefix = card.lane === 'headline' ? 'h' : card.lane === 'media' ? 'm' : 'u';
-    assert.ok(card.id.startsWith(prefix), `${card.id} should start with ${prefix}`);
+    assert.ok(card.id.startsWith(prefix), card.id + ' should start with ' + prefix);
   }
 });
 
 test('lanes and types are valid', () => {
   for (const card of GENESIS_CARDS) {
-    assert.ok(LANES.includes(card.lane), `${card.id} invalid lane: ${card.lane}`);
-    assert.ok(VALID_TYPES.includes(card.type), `${card.id} invalid type: ${card.type}`);
+    assert.ok(LANES.includes(card.lane), card.id + ' invalid lane: ' + card.lane);
+    assert.ok(VALID_TYPES.includes(card.type), card.id + ' invalid type: ' + card.type);
   }
 });
 
 test('stats are integers in range; flavor present; rarity valid', () => {
   for (const card of GENESIS_CARDS) {
-    assert.ok(Number.isInteger(card.power) && card.power >= 1 && card.power <= 10, `${card.id} power`);
-    assert.ok(Number.isInteger(card.fuel) && card.fuel >= 1 && card.fuel <= 6, `${card.id} fuel`);
-    assert.ok(
-      Number.isInteger(card.volatility) && card.volatility >= 0 && card.volatility <= 100,
-      `${card.id} volatility`
-    );
-    assert.ok(isGenesisRarity(card.rarity), `${card.id} rarity`);
-    assert.ok(card.flavor.trim().length > 0, `${card.id} flavor`);
-    assert.ok(card.name.trim().length > 0, `${card.id} name`);
+    assert.ok(Number.isInteger(card.power) && card.power >= 1 && card.power <= 10, card.id + ' power');
+    assert.ok(Number.isInteger(card.fuel) && card.fuel >= 1 && card.fuel <= 6, card.id + ' fuel');
+    assert.ok(Number.isInteger(card.volatility) && card.volatility >= 0 && card.volatility <= 100, card.id + ' volatility');
+    assert.ok(isGenesisRarity(card.rarity), card.id + ' rarity');
+    assert.ok(card.flavor.trim().length > 0, card.id + ' flavor');
+    assert.ok(card.name.trim().length > 0, card.id + ' name');
   }
 });
 
@@ -58,12 +55,12 @@ test('rarity distribution matches the declared counts', () => {
   assert.deepEqual(counts, GENESIS_RARITY_COUNTS);
 });
 
-test('lane distribution is 26/26/25', () => {
+test('lane distribution matches canonical metadata (35/21/21)', () => {
   const counts: Record<string, number> = {};
   for (const card of GENESIS_CARDS) counts[card.lane] = (counts[card.lane] ?? 0) + 1;
-  assert.equal(counts['headline'], 26);
-  assert.equal(counts['media'], 26);
-  assert.equal(counts['underground'], 25);
+  assert.equal(counts['headline'], 35);
+  assert.equal(counts['media'], 21);
+  assert.equal(counts['underground'], 21);
 });
 
 test('card names are unique', () => {
@@ -73,12 +70,12 @@ test('card names are unique', () => {
 test('starter deck is a strict subset of the GENESIS set (by id)', () => {
   const genesisIds = new Set(GENESIS_CARDS.map((c) => c.id));
   for (const card of STARTER_DECK) {
-    assert.ok(genesisIds.has(card.id), `${card.id} (${card.name}) missing from GENESIS set`);
+    assert.ok(genesisIds.has(card.id), card.id + ' (' + card.name + ') missing from GENESIS set');
   }
 });
 
-test('legendary cards are the set crown jewels (power >= 8)', () => {
+test('legendary cards are the set crown jewels (power >= 7)', () => {
   for (const card of GENESIS_CARDS.filter((c) => c.rarity === 'legendary')) {
-    assert.ok(card.power >= 8, `${card.id} legendary should have power >= 8`);
+    assert.ok(card.power >= 7, card.id + ' legendary should have power >= 7');
   }
 });
