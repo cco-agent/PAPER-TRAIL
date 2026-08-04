@@ -1,3 +1,4 @@
+import { randomUUID } from "node:crypto";
 import { parseArgs } from "node:util";
 import { Agent } from "./agent.ts";
 import { defaultConfig, loadConfig } from "./config.ts";
@@ -8,6 +9,13 @@ import { LoggingExecutor } from "./execute.ts";
 import { JsonlAuditLog } from "./audit.ts";
 import { Guardian, InMemoryGuardianState } from "./guardian.ts";
 import { EventResponder, StaticEventSource } from "./events.ts";
+import {
+  X402Handler,
+  createPaymentVerifier,
+  encodePaywall,
+  X402_PAYWALL_HEADER
+} from "./x402.ts";
+import type { X402PaymentRequest, X402Proof } from "./x402.ts";
 import type { ObservationSnapshot, Trigger } from "./types.ts";
 
 const RULES = [BALANCE_BELOW_MIN, BALANCE_ABOVE_MAX];
@@ -219,6 +227,49 @@ async function cmdRespond(configPath: string | undefined, intervalMs: number): P
   });
 }
 
+/**
+ * x402 paid endpoint demo: show the 402 paywall (HTTP 402 + x402-paywall
+ * header), then complete one paid run with a deterministic in-memory proof.
+ * Swap InMemoryPaymentVerifier for an on-chain verifier (RPC / KeeperHub) in
+ * production.
+ */
+async function cmdPay(configPath: string | undefined): Promise<void> {
+  const { config, agent } = await buildAgent(configPath, "0.01", undefined);
+  const paywall: X402PaymentRequest = {
+    requestId: randomUUID(),
+    amountWei: ethToWei("0.001"), // 0.001 ETH per run
+    token: "native",
+    chain: config.chain,
+    recipient: config.watch.address || "0xpaywall",
+    description: "Shredder Sentinel — one guarded agent run (observe → decide → policy → execute → audit)"
+  };
+  const handler = new X402Handler({
+    paymentRequest: paywall,
+    verifier: createPaymentVerifier("memory"),
+    agent
+  });
+
+  console.log("paywall:", JSON.stringify(paywall, null, 2));
+  console.log(`${X402_PAYWALL_HEADER}: ${encodePaywall(paywall)}`);
+
+  const unpaid = await handler.handle();
+  console.log(`call without proof  → HTTP ${unpaid.status}`);
+
+  const proof: X402Proof = {
+    requestId: paywall.requestId,
+    payer: "0x1111111111111111111111111111111111111111",
+    amountWei: paywall.amountWei,
+    txHash: `0x${"ab".repeat(32)}`
+  };
+  const paid = await handler.handle(proof);
+  console.log(`call with proof     → HTTP ${paid.status}`);
+  if (paid.status === 200) {
+    console.log(
+      `paid run: runId=${paid.record.runId.slice(0, 8)}  trigger=${paid.record.trigger.source}  action=${paid.record.decision.action.kind}  policy=${paid.record.policy.passed}  exec=${paid.record.execution.status}`
+    );
+  }
+}
+
 async function main(): Promise<void> {
   const { values, positionals } = parseArgs({
     options: {
@@ -254,8 +305,10 @@ async function main(): Promise<void> {
       return;
     }
     await cmdRespond(values.config, intervalMs);
+  } else if (cmd === "pay") {
+    await cmdPay(values.config);
   } else {
-    console.error(`unknown command: ${cmd} (expected: run | watch | status | replay | respond)`);
+    console.error(`unknown command: ${cmd} (expected: run | watch | status | replay | respond | pay)`);
     process.exitCode = 1;
   }
 }
