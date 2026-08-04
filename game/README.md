@@ -19,8 +19,21 @@ Requires Node v22.6+ (native TypeScript type-stripping, zero npm installs).
 ```bash
 npm test
 # or directly:
-node --experimental-strip-types --test src/game.test.ts src/sim.test.ts
+node --experimental-strip-types --test src/game.test.ts src/sim.test.ts src/genesis-cards.test.ts
 ```
+
+## GENESIS 77 — founding card set
+
+`src/genesis-cards.ts` holds the complete GENESIS 77 set: **77 numbered cards** (Editions 1/77–77/77), 26 per Headline/Media lane, 25 for the Underground. Rarity spread: 4 legendary / 19 epic / 24 rare / 30 common. The 18-card starter deck is a strict subset (same ids/stats) — everything a player can play is something a holder can own.
+
+Generate the cNFT metadata (Metaplex standard, one JSON per edition, ready for minting):
+
+```bash
+npm run gen:genesis          # writes 77 files to ../genesis77/cards/
+npm run gen:genesis /tmp/out # or any target dir
+```
+
+Set integrity is enforced by `src/genesis-cards.test.ts` (11 tests): edition uniqueness, id/lane/type validity, stat ranges, rarity distribution, lane split, starter-deck subset.
 
 ## Battle simulator
 
@@ -43,11 +56,14 @@ Prints a win-rate matrix with ELO drift, shredder burns and lane locks per pairi
 |---|---|
 | `src/types.ts` | Core types: `Card`, `LaneId`, `PlayerState`, lane constants |
 | `src/cards.ts` | Starter deck — 18 lore cards (6 per lane) + `starterHand()` |
+| `src/genesis-cards.ts` | GENESIS 77 founding set — 77 numbered cards + rarity/flavor + lookups |
 | `src/game.ts` | Match engine: deploy / burn / volatility / advance / lock / matchScore / endMatch / applyElo |
 | `src/elo.ts` | `expectedScore` + `updateElo` (standard logistic, K=32) |
 | `src/sim.ts` | Bot strategies + `playMatch` / `runSeries` / `mulberry32` seeded rng |
 | `src/battle.ts` | CLI — strategy-vs-strategy series matrix |
+| `scripts/generate-genesis-metadata.ts` | GENESIS 77 → cNFT metadata JSON generator |
 | `src/game.test.ts` | Engine test suite (21 tests) |
 | `src/sim.test.ts` | Simulator test suite (7 tests) |
+| `src/genesis-cards.test.ts` | GENESIS 77 set integrity suite (11 tests) |
 
 *Burn it. Feed the gauge.*
