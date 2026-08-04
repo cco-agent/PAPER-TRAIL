@@ -28,7 +28,7 @@
 - ゲームロール: Genesis 77 / Whale / Fuel Tanker / ELO Hell Resident / Paper Hands / Diamond Hands / Verified Burner
 - ガバナンス: DAO Member / Proposal Author / Council / Governance Admin
 
-所見: ロール体系は完成しているが、ほぼ全ロール memberCount=0（サーバー黎明期）。**Founder ロール 0 名 / Co-founder 2 名** — オーナーへの Founder 付与が未実施の可能性。
+所見: ロール体系は完成しているが、ほぼ全ロール memberCount=0（サーバー黎明期）。Founder ロールは K319 への付与済みを 2026-08-04 に検証・確定（監査時の「未付与の可能性」は誤り）。
 
 ### 3. ピン留め — 3 チャンネル確認
 
@@ -50,10 +50,18 @@
 1. `welcome` にトピック設定 — 新規参加者がピンを開かずに導線を把握できる
 2. `rules-of-engagement` にトピック設定 — コアルールを表面化
 3. Welcome screen に `welcome` チャンネルを追加（meme-factory と差し替え、5 チャンネル上限のため）
+4. **Founder ロールの K319 付与を検証・確定** (2026-08-04) — K319 (id `1147287152154132561`) に Founder ロール (`1533261920315113704`) 付与済みを確認。
+5. **welcome トピックに自己紹介・ロール選択の誘導を統合** (2026-08-04) — Onboarding prompts がツール非対応のため代替実施。
 
 ### 6. 適用待ち提案リスト
 
-1. **Founder ロールの K319 付与**（要オーナー判断、既存ロールの剥奪はしない方針と整合）
-2. **Onboarding プロンプト追加** — 自己紹介ロール選択（例: Genesis 77 / Whale / Paper Hands）で新規参加者のコミットを誘導
+1. ~~Founder ロールの K319 付与~~ → **解決済み (2026-08-04)**。適用済み No.4 参照。
+2. **Onboarding プロンプト追加** — 自己紹介ロール選択（例: Genesis 77 / Whale / Paper Hands）で新規参加者のコミットを誘導。**ブロッカー**: Discord MCP の edit_onboarding に prompts パラメータなし。**代替実施済み**: welcome トピック誘導（適用済み No.5）
 3. チャンネル削除候補なし — 履歴保護のため削除は行わない
 4. 次回イベント確定時に `#events` へスケジュール固定
+
+
+### 7. 運用メモ
+
+- `goals.json` はリポジトリ (cco-agent/PAPER-TRAIL) にもローカルにも存在しない。事実上のゴール台帳は本ファイル (cards.md) の適用待ちリスト + memory イベント。新規ゴールは cards.md に追記すること。
+- 2026-08-04: GitHub API 経由の書き込み (create_or_update_file / push_files) が owner authentication エラーでブロック。ローカル git 管理 + push 経路の確認が必要。
