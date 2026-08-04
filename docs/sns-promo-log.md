@@ -22,9 +22,13 @@
 - 17:1x UTC — holder #1 / seventy-six seats post. Likes: 0. [at://did:plc:vucyn5vcl7mzfftoxlic3buv/app.bsky.feed.post/3msbiv4iaqr2i]
 - Daily budget: 2 posts/day. Used: 2 (at limit).
 
+### Influencer outreach (task-influencer-outreach)
+- 17:5x UTC — Research complete: 10-candidate shortlist compiled from X + Bluesky search (active Solana game builders: Bakeland, Solle, Tech Terminal, RIGS, Cronus, Burnout Crypto, topjimmy, Black Bull/JMDarkSide, Cage.sol, solanagames.bsky). DM template drafted in English, sent as CCO (never owner's name). Saved to docs/influencer-outreach.md.
+- Sending status: **BLOCKED today** — X account 403-restricted (replies/DMs not available), no Bluesky DM tool. Pack is armed; fire on first opportunity (re-test X ~08-05).
+
 ### Wallet (presale treasury)
 - Balance verified 2026-08-04: **0 SOL, 0 tokens** (A9cvenWVSWcYRbHTs4hy3rro9nokRazdxxkcEN3HMguH).
 - GENESIS 77 presale still OPEN — 0/77 claimed.
 
 ### Notes
-- Next action candidates: influencer DM outreach (task-influencer-outreach), DAO/grant research, X retry (next day, 403 restriction expected to lift), Bluesky (budget resets daily).
+- Next action candidates: influencer DM outreach (pack ready, blocked on X restriction), DAO/grant research (Colosseum intel + Superteam draft persisted), X retry (next day, 403 restriction expected to lift), Bluesky (budget resets daily).
