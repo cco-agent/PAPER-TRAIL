@@ -131,6 +131,40 @@ async function cmdStatus(configPath: string | undefined, limit: number): Promise
   console.log(`total audit records: ${records.length}`);
 }
 
+/**
+ * Replay: re-evaluate recorded audit records through decide + policy with the
+ * current config and report drift vs what was recorded. Never re-executes
+ * anything and never touches a chain — pure re-evaluation of the audit trail.
+ * Each record gets a fresh PolicyGate so cooldown state cannot bleed across
+ * records (mirrors how each original run saw its own gate).
+ */
+async function cmdReplay(configPath: string | undefined, limit: number): Promise<void> {
+  const config = configPath ? await loadConfig(configPath) : defaultConfig();
+  const audit = new JsonlAuditLog(config.audit.logPath);
+  const records = await audit.readAll();
+  const window = records.slice(-limit);
+  const decider = new RulesFirstDecider(RULES);
+  let drifted = 0;
+
+  for (const r of window) {
+    const decision = await decider.decide(r.trigger, r.observation, config);
+    const check = new PolicyGate().check(decision, config);
+    const drift =
+      decision.action.kind !== r.decision.action.kind || check.passed !== r.policy.passed;
+    if (drift) drifted++;
+    console.log(
+      JSON.stringify({
+        runId: r.runId.slice(0, 8),
+        at: r.at,
+        recorded: { action: r.decision.action.kind, policy: r.policy.passed, exec: r.execution.status },
+        replayed: { action: decision.action.kind, policy: check.passed, reasons: check.reasons },
+        drift
+      })
+    );
+  }
+  console.log(`replayed ${window.length}/${records.length} records — ${drifted} drifted`);
+}
+
 async function main(): Promise<void> {
   const { values, positionals } = parseArgs({
     options: {
@@ -156,8 +190,10 @@ async function main(): Promise<void> {
     await cmdWatch(values.config, ethToWei(values.balance!), values.address, intervalMs);
   } else if (cmd === "status") {
     await cmdStatus(values.config, parseInt(values.limit!, 10) || 5);
+  } else if (cmd === "replay") {
+    await cmdReplay(values.config, parseInt(values.limit!, 10) || 5);
   } else {
-    console.error(`unknown command: ${cmd} (expected: run | watch | status)`);
+    console.error(`unknown command: ${cmd} (expected: run | watch | status | replay)`);
     process.exitCode = 1;
   }
 }
