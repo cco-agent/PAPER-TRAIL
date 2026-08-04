@@ -6,7 +6,7 @@ import {
 } from './game.ts';
 import { starterHand } from './cards.ts';
 
-export type BotStrategy = 'greedy' | 'meta' | 'hoarder';
+export type BotStrategy = 'greedy' | 'meta' | 'meta2' | 'hoarder';
 
 export interface SimOptions {
   handSize?: number;
@@ -66,8 +66,15 @@ export function chooseAction(m: MatchState, idx: 0 | 1, strategy: BotStrategy): 
   for (const card of p.hand) {
     const lanes: LaneId[] = strategy === 'greedy' ? [card.lane] : LANES;
     for (const lane of lanes) {
-      const penalty = lane === card.lane ? 0 : m.opts.offLanePenalty;
+      const offLane = lane !== card.lane;
+      const penalty = offLane ? m.opts.offLanePenalty : 0;
       const power = Math.max(0, card.power - penalty);
+      // meta2: off-lane plays are only considered when they would take control
+      // of the target lane (deployed power must exceed the opponent's there).
+      if (strategy === 'meta2' && offLane) {
+        const theirs = m.lanes[lane].base[idx === 0 ? 1 : 0];
+        if (m.lanes[lane].base[idx] + power <= theirs) continue;
+      }
       candidates.push({ card, lane, power, value: power * m.weights[lane] });
     }
   }
