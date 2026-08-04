@@ -251,3 +251,26 @@
 2. Sepolia ETH ルートは (b) の回答次第で再評価。
 3. Guardian スケジューラ実装（ブロッカー解消と並行で進められる部分）。
 4. Superteam Japan 参画打診。
+
+## 2026-08-04 追記8: Guardian スケジューラ実装 + CLI watch 配線 (funding-first, 10:21 UTC)
+
+### 実施内容 (verified — ローカルでテスト実行済み)
+
+1. **`src/guardian.ts` 新規実装** (commit `1ef43c8`):
+   - 閾値ルール: `lt` / `lte` / `gt` / `gte`、ルール別クールダウン、BigInt 完全一致の wei 演算（float drift なし）
+   - `InMemoryGuardianState` 発火台帳（長寿命化時は SQLite/Redis に差し替え可）
+   - `Guardian` ポーリングループ: `runOnStart` / エラー耐性ループ（エラーでも継続）/ クリーンな `stop()`
+2. **`src/guardian.test.ts` 新規テスト** (commit `9ce5061`): **10/10 PASS** — 閾値演算、不正 wei 拒否、クールダウン抑制 + 再発火、巨大 wei 完全一致、ループ発火 + クリーン停止。
+3. **`src/cli.ts` に `watch` コマンド追加** (commit `477dccd`): Guardian ループ → agent core（observe → decide → policy → execute → audit）の完全配線。`--interval` (ms) 指定可。実チェーン利用時は StaticObserver を RpcObserver に差し替え。
+4. **ローカル検証**: フルスイート **29/29 PASS**（agent-core 10 + guardian 10 + keeperhub-client 9、Node v22.23.1）。CLI `run` スモークテストも動作確認。
+5. **checklist.md 更新** (commit `9e9c9ff`): Guardian mode ✅ / CLI watch ✅ / replay は pending のまま。
+
+### 正直な留保
+- CLI の `watch` はデモ用に StaticObserver（固定スナップショット）を使用。実チェーン監視は RpcObserver（`eth_getBalance`）への差し替えが必要 — コードは用意済み。
+- ブロッカー 3 件（kh_ キー / Sepolia ETH / 実行環境）は解消されていない。**完全提出（実 tx + デモ動画）は未達**。
+
+### 次の一手 (優先順)
+1. **ブロッカー解消を最優先**: KeeperHub Discord (discord.gg/keeperhub) で (a) `kh_` キー入手可否、(b) ガススポンサーシップ実態を確認。
+2. CLI `replay` 実装（監査ログ再実行）— 残る CLI マイルストーン。
+3. Event responder モード or x402 ペイドエンドポイント（締切までに残る大物 2 件）。
+4. Superteam Japan 参画打診（並行）。
