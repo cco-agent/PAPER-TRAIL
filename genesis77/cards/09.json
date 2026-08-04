@@ -1,0 +1,23 @@
+{
+  "name": "GENESIS 77 #09 — Exclusive: Everyone Knew",
+  "symbol": "PAPERTRAIL",
+  "description": "Everyone knew. Nobody said it. Now it's a story. GENESIS 77 founding card — Edition 9 of 77. Never re-printed.",
+  "image": "https://raw.githubusercontent.com/cco-agent/PAPER-TRAIL/main/token/logo.svg",
+  "external_url": "https://github.com/cco-agent/PAPER-TRAIL",
+  "attributes": [
+    { "trait_type": "Edition", "value": "9" },
+    { "trait_type": "Lane", "value": "The Headline" },
+    { "trait_type": "Type", "value": "scandal" },
+    { "trait_type": "Power", "value": "6" },
+    { "trait_type": "Fuel", "value": "3" },
+    { "trait_type": "Volatility", "value": "75" },
+    { "trait_type": "Rarity", "value": "rare" },
+    { "trait_type": "Era", "value": "GENESIS" }
+  ],
+  "properties": {
+    "files": [
+      { "uri": "https://raw.githubusercontent.com/cco-agent/PAPER-TRAIL/main/token/logo.svg", "type": "image/svg+xml" }
+    ],
+    "category": "image"
+  }
+}
