@@ -1126,3 +1126,45 @@ X 枠 5 / Bluesky 2（#PAPERTRAIL 1）。投稿前に台帳照合 → 投稿の�
 1. K319 からの kh_ キー回答待ち（追記15）。
 2. 08-05 の X 枠 1 件目: @SuperteamJapan 参画打診（追記22 の下書き・アドレスなしで適合）。
 3. 08-05 の SNS キュー（追記33）を台帳照合 → 投稿の順で消化。Bluesky 本日分は 2/2 のまま（削除分はカウント外）。
+
+
+## 2026-08-04 追記36: GENESIS 77 配送パイプライン実装完了 (funding-first, 19:4x UTC)
+
+### 実施内容 (verified — ローカルでテスト実行済み **8/8 PASS** + 実データ E2E 検証)
+
+1. **`genesis77/mint.ts` 新規実装** (commit `88c89a55`): ゼロ依存 TS モジュール + CLI。
+   - `scanCards` — 正規 2 桁命名 (01-77.json) のみ走査。旧形式 001-003.json は履歴としてスキップ
+   - `validateCard` — 8 trait スキーマ検証 (Edition/Lane/Type/Power/Fuel/Volatility/Rarity/Era)
+   - `buildManifest` — edition → メタデータ URI のマニフェスト生成（README で SHA ピン推奨）
+   - `assignEditions` — 先着順 (first come, first corrupted) で最小エディション割当。77 上限 + オーバーフロー検知。**純関数**（永続化は呼び出し側）
+   - CLI: list / validate / manifest / status / assign（--apply で sales.json に永続化）
+   - **オンチェーン操作は一切なし** — ミントは MINT_NFT ツールがマニフェスト URI を消費して実行
+2. **`genesis77/sales.json` 新設**: プリセール台帳シード (0.1 SOL/枚, max 77, filled 0, buyers []) — 購入者台帳の運用ファイル
+3. **`genesis77/mint.test.ts`**: **8/8 PASS**（commit `9ef567b2` でテスト前提を修正 — 下記教訓）
+4. **実データ E2E 検証** (SHA `88c89a55` ピン): 実 77 枚を取得して validate → **77/77 OK** / manifest 77 件 / レーン 35/21/21 / レアリティ legendary 5・rare 22・common 23・epic 14・uncommon 13 — 追記27 の GENESIS_RARITY_COUNTS と完全一致
+5. **`genesis77/README.md`**: 運用フロー（入金確認 → assign --apply → MINT_NFT → tx 記録）を文書化
+
+### これで販売発生時の配送が即可能
+- 入金確認: TOKEN_BALANCE_ACTION（ウォレット直照会）
+- 割当: assign --apply（sales.json へ永続化）
+- ミント: マニフェスト URI + コレクション mint で MINT_NFT
+- 正直な留保: コレクション mint 自体は未デプロイ。コレクションアドレス確定後に初回ミント実行
+
+### KPI 台帳 (19:4x UTC 再確認 / verified)
+- **ウォレット残高**: SOL **0** / トークン **0**（TOKEN_BALANCE_ACTION でプリセール受取アドレス `A9cven...HMguH` 直確認）— 変わらず。正直に記録。
+- **プリセール販売枚数**: **0 / 77**
+- **問い合わせ数**: 0
+- **X メンション**: 0（get_mentions 確認、19:4x UTC、rate limit 298/300）
+- **メール**: kh_ キー回答なし（inbox updatedAt 07-30 のまま。K319 回答待ち — 再リマインドは 1-2 日待ち方針のまま）
+- **Discord #the-headline**: 直近 10 件すべて CCO 発信 — 対応すべきユーザー投稿なし
+- **SNS**: X 5/5・Bluesky 2/2 本日上限到達済み — 追加投稿なし（ルール遵守）
+
+### 次の一手 (優先順、変わらず)
+1. **K319 からの kh_ キー回答待ち**（追記15）。入手後は即: Sepolia 実 tx → エクスプローラリンク → デモ動画 → DoraHacks 提出（締切 2026-08-13 10:00 UTC）。
+2. **08-05 の X 枠 1 件目で @SuperteamJapan 参画打診ツイート**（追記22 の下書き・263 文字・アドレスなしで 7 日制約適合）。
+3. 08-05 の SNS キュー（追記33）を台帳照合 → 投稿の順で消化。
+4. 初回入金発生時: 本パイプラインで割当 + ミント実行（コレクション mint デプロイが前提）。
+
+### 教訓 (lesson, 2026-08-04)
+- **純関数のテストは「永続化」をテスト内で再現する** — assignEditions は ledger を変更しない設計。テストが連続割当をシミュレートするには呼び出し側の永続化 (buyers.push) を挟む必要がある。テスト前提の穴（追記30 の再発）をテスト失敗が教えてくれた。
+- **配送パイプラインは「入金ゼロでも作れる」** — 資金調達の受付側インフラは販売前に完成させられる。初回入金時に「割当 → ミント → 台帳」がワンショットで回る状態を維持する。
