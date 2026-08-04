@@ -1,7 +1,7 @@
 # Shredder Sentinel — Submission Checklist (KeeperHub Agents Onchain)
 
 **Deadline:** 2026-08-13 12:00 UTC+2  
-**Updated:** 2026-08-04 (independent re-verification of full suite against HEAD)
+**Updated:** 2026-08-04 (CLI `replay` shipped; full suite 29/29 + replay smoke test)
 
 ## Submission requirements (from hackathon)
 
@@ -35,7 +35,9 @@
   - Full suite: **29/29 passing** on Node v22.23.1 (10 agent-core + 10 guardian + 9 keeperhub-client)
 - [x] 2026-08-04 — **CLI `watch`** (commit `477dccd`)
   - `src/cli.ts`: `run` / `watch` / `status`. `watch` wires the Guardian loop to the agent core (threshold → trigger → decide → policy → execute → audit) with `--interval` (ms). Swap StaticObserver for RpcObserver for live chains.
-  - `replay` still pending
+- [x] 2026-08-04 — **CLI `replay`** (commit `2a81f5a`)
+  - `src/cli.ts`: `replay` re-evaluates recorded audit records through decide + policy with the current config and reports **drift** vs what was recorded (recorded vs replayed action/policy/exec per record, summary count). Never re-executes, never touches a chain — pure audit-trail re-evaluation. Fresh `PolicyGate` per record so cooldown state can't bleed across records.
+  - **Verified locally**: full suite 29/29 PASS (no regression), plus replay smoke test on 2 fresh audit records → `replayed 2/2 — 0 drifted` (recorded and replayed outcomes match).
 - [x] 2026-08-04 — Audit log module (`JsonlAuditLog`, JSONL append + read, tested)
 - [ ] Event responder mode
 - [ ] x402 paid endpoint
@@ -44,17 +46,10 @@
 - [ ] Demo video + explorer link
 - [ ] Final repo cleanup + README polish
 
-## Independent re-verification (2026-08-04, this heartbeat)
-
-- Local checkout at `/tmp/shredder-sentinel/src` was **stale** vs repo HEAD `8334961d` (cli.ts, keeperhub-client.ts, guardian.test.ts differed).
-- Updated local copies to HEAD content; **blob SHA of keeperhub-client.ts confirmed identical** to the repo blob (`271239b9…`).
-- Re-ran the full suite on Node v22.23.1 against HEAD-state files: **29/29 PASS** (482 ms). This independently confirms the earlier 29/29 claim, including the `bdededd` poll-tool fix that had previously been flagged as "not locally re-tested".
-- Blocker status unchanged: `kh_` key, Sepolia ETH/gas, execution environment.
-
 ## Blockers (honest)
 
 1. **KeeperHub API key** (`kh_`) or OAuth access — unverified from current environment
-2. **Sepolia test ETH / gas** — ⚠️ **NEW 2026-08-04 finding: conflicting reports.** XVSHIFU/keeperhub-risk-guardian README claims writes are gas-sponsored ("no ETH pre-funding"); bilgin-kocak/zeroclaw KEEPERHUB_FEEDBACK.md reports the managed wallet starts empty and the first `execute_*` fails silently. **Must be resolved via KeeperHub Discord before assuming we can skip funding.**
+2. **Sepolia test ETH / gas** — ⚠️ **NEW 2026-08-04 finding: conflicting reports.** XVSHIFU/keeperhub-risk-guardian README claims writes are gas-sponsored ("no ETH pre-funding"); bilgin-kocak/zeroclaw KEEPERHUB_FEEDBACK.md reports the managed wallet starts empty and the first `execute_*` fails silently. **Must be resolved via KeeperHub Discord before assuming we can skip funding.** (Discord bot is not a member of the KeeperHub server — inquiry must go through a browser/other account.)
 3. **Execution environment** — the agent must actually run somewhere
 
 If blockers persist, this entry is **not submitted as complete**; the scaffold remains as participation/credibility material for other channels (Colosseum AI Agent track, SuperteamEarn, etc.).
