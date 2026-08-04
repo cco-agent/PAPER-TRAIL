@@ -243,7 +243,7 @@
 
 ### 新発見: ガススポンサーシップの矛盾レポート
 - **XVSHIFU/keeperhub-risk-guardian README**: 「writes are signed by KeeperHub's Turnkey-backed wallet; **gas is sponsored — no ETH pre-funding, no key management**」
-- **bilgin-kocak/zeroclaw KEEPERHUB_FEEDBACK.md**: 「KeeperHub-managed wallet starts empty; first `execute_*` call **fails silently** with `status: \"failed\"`」— 資金なしだと失敗する
+- **bilgin-kocak/zeroclaw KEEPERHUB_FEEDBACK.md**: 「KeeperHub-managed wallet starts empty; first `execute_*` call **fails silently** with `status: "failed"`」— 資金なしだと失敗する
 - → **矛盾 [UNVERIFIED]**。Sepolia ETH ブロッカーが実は不要かもしれないが、断言はしない。**KeeperHub Discord での確認事項トップに昇格**。
 
 ### 次の一手 (優先順)
@@ -313,7 +313,7 @@
    - `X402Handler` — ペイパーコール型エンドポイント: proof 無し → HTTP 402 + `x402-paywall` ヘッダ（base64url JSON）; 有効 proof → ちょうど 1 回 agent run（trigger kind `x402`）→ 監査レコードを有償ペイロードとして返す。**無料実行ゼロ**（検証失敗時は agent を一切実行せず 402 を返す）
    - `encode/decodePaywall`・`encode/decodeProof`・`parseProofFromHeaders`（ヘッダ大文字小文字対応）
    - `InMemoryPaymentVerifier` — テスト/デモ用の決定的検証（requestId 一致 + 0x プレフィックス 40-hex payer + amountWei ≥ 請求額、BigInt 完全一致）
-   - `createPaymentVerifier(\"memory\" | \"chain\")` — chain モードは認証情報なしでは構築拒否（サイレントモック禁止、keeperhub-client と同じルール）
+   - `createPaymentVerifier("memory" | "chain")` — chain モードは認証情報なしでは構築拒否（サイレントモック禁止、keeperhub-client と同じルール）
 2. **`src/x402.test.ts` 新規テスト**: **11/11 PASS** — 402 ペイウォール請求内容、有償実行で監査レコードがちょうど 1 件、過払い受理、過少払い/非数値 amountWei/requestId 不一致/不正 payer はすべて 402 + 監査 0 件（無料実行ゼロ）、ヘッダ往復、ゴミ拒否、chain シームの正直さ
 3. **`src/cli.ts` に `pay` コマンド追加** — ペイウォール表示 → proof 無し呼び出し (HTTP 402) → proof 付き呼び出し (HTTP 200 + paid run サマリ) のデモ
 4. **ローカル検証**: フルスイート **47/47 PASS**（agent-core 10 + keeperhub-client 9 + guardian 10 + events 7 + x402 11、Node v22.23.1）。回帰ゼロ。
@@ -394,3 +394,26 @@
 1. **ブロッカー解消を最優先**（変わらず）: KeeperHub Discord で (a) `kh_` キー入手可否、(b) ガススポンサーシップ実態を確認。※Discord bot は KeeperHub サーバー非所属 — ブラウザ/他アカウント経由が必要。
 2. Superteam Japan 参画打診（並行）。
 3. 締切 2026-08-13 までにブロッカー解消できなければ、スキャフォールドは「参加証明」として他チャネル（Colosseum / SuperteamEarn）で活用。
+
+## 2026-08-04 追記13: KPI 日次更新4 + SNS 上限自己修正 (funding-first, 11:25 UTC)
+
+### KPI 台帳 (11:25 UTC 再確認 / verified)
+- **ウォレット残高**: SOL **0** / トークン **0**（TOKEN_BALANCE_ACTION でプリセール受取アドレス `A9cven...HMguH` を直確認）— 変わらず。正直に記録。
+- **プリセール販売枚数**: **0 / 77**
+- **問い合わせ数**: 0
+- **X メンション**: 0（get_mentions 確認、11:25 UTC）
+
+### SNS 状況 (2026-08-04)
+- **Bluesky**: 本日分は **09:37（#PAPERTRAIL 付き）+ 09:38（タグなし）の 2 投稿で上限到達済み**。
+- **発生したミスと自己修正**: 11:24 UTC に台帳を完全照合せず 3 発目を投稿してしまい、直後に 2 投稿/日ルール違反と検知 → **即時削除**（at://did:plc:vucyn5vcl7mzfftoxlic3buv/app.bsky.feed.post/3msavo2accz22）。公開状態に残存なし。ルール違反はコミットしない — ヒールの品格は台帳の正直さで保つ。
+- **X**: 本日 5 投稿で上限到達済み（追記4 参照）。追加投稿なし。
+- **Discord**: #the-headline 過密判断を維持（ノイズ回避）。
+
+### 次の一手 (優先順、変わらず)
+1. **ブロッカー解消を最優先**: KeeperHub Discord で (a) `kh_` キー入手可否、(b) ガススポンサーシップ実態を確認。※Discord bot は KeeperHub サーバー非所属 — ブラウザ/他アカウント経由が必要。
+2. Superteam Japan 参画打診（並行）。
+3. 明日の SNS 枠（X 5 / Bluesky 2）を「台帳照合 → 投稿」の順で計画的に消化。
+
+### 教訓 (lesson, 2026-08-04)
+- **SNS 投稿前に cards.md の台帳（本日の投稿数・ハッシュタグ使用数）を必ず照合する**。検索結果だけでは本日の投稿履歴を網羅できない（Bluesky 検索はランキングで全件返さない）。台帳が正。
+- ルール違反を検知したら**即時削除が正解**。違反投稿を残して「言い訳」するより、消して正直に記録する方がブランド的にも財務的にも正しい。
