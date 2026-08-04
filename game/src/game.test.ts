@@ -6,7 +6,9 @@ import {
   deploy,
   burn,
   controller,
-  effectivePower,
+  lanePower,
+  laneValue,
+  matchScore,
   volatilityTick,
   advance,
   lock,
@@ -45,7 +47,7 @@ test('deploy on-lane adds base power and removes the card from hand', () => {
   const m = createMatch(deck(['h01']), []);
   const res = deploy(m, 0, 'h01');
   assert.ok(res.ok);
-  assert.equal(effectivePower(m, 'headline', 0), 8);
+  assert.equal(lanePower(m, 'headline', 0), 8);
   assert.equal(m.players[0].hand.length, 0);
 });
 
@@ -54,7 +56,7 @@ test('off-lane deploy pays the penalty', () => {
   const res = deploy(m, 0, 'm01', 'headline');
   assert.ok(res.ok);
   // m01 power 6 - 2 penalty
-  assert.equal(effectivePower(m, 'headline', 0), 4);
+  assert.equal(lanePower(m, 'headline', 0), 4);
 });
 
 test('deploy rejects unknown cards and post-end deploys', () => {
@@ -65,7 +67,7 @@ test('deploy rejects unknown cards and post-end deploys', () => {
   assert.equal(deploy(m2, 0, 'h01').ok, false);
 });
 
-test('controller resolves by effective power and null on tie', () => {
+test('controller resolves by deployed power and null on tie', () => {
   const m = createMatch(deck(['h01']), deck(['h03'])); // 8 vs 7
   deploy(m, 0, 'h01');
   deploy(m, 1, 'h03');
@@ -86,23 +88,32 @@ test('burn adds fuel and removes the card; unknown card rejected', () => {
 });
 
 test('volatilityTick re-weights lanes deterministically within bounds', () => {
-  const opts = { rng: seeded(42), weightMin: 0.5, weightMax: 1.5 };
-  const m = createMatch([], [], opts);
+  const mk = () => createMatch([], [], { rng: seeded(42), weightMin: 0.5, weightMax: 1.5 });
+  const m = mk();
   const w = volatilityTick(m);
   for (const lane of LANES) {
     assert.ok(w[lane] >= 0.5 && w[lane] <= 1.5, `weight ${w[lane]}`);
   }
-  const m2 = createMatch([], [], opts);
-  assert.deepEqual(volatilityTick(m2), w);
+  assert.deepEqual(volatilityTick(mk()), w);
 });
 
-test('volatility can flip lane control', () => {
-  const m = createMatch(deck(['h01']), deck(['h03'])); // 8 vs 7 at weight 1
+test('volatility re-weights lane values and can flip the match', () => {
+  const m = createMatch(deck(['h01']), deck(['u05'])); // 8 vs 8 at weight 1:1:1
   deploy(m, 0, 'h01');
-  deploy(m, 1, 'h03');
-  assert.equal(controller(m, 'headline'), 0);
-  m.weights.headline = 0.5; // p0: 4 vs p1: 7
-  assert.equal(controller(m, 'headline'), 1);
+  deploy(m, 1, 'u05');
+  assert.deepEqual(matchScore(m), [8, 8]);
+  m.weights.headline = 1.5; // p0's lane suddenly the whole game
+  m.weights.underground = 0.5;
+  const s = matchScore(m);
+  assert.equal(s[0], 12);
+  assert.equal(s[1], 4);
+  assert.equal(laneValue(m, 'headline', 0), 12);
+  // revert the swing: now p1's lane is the whole game
+  m.weights.headline = 0.5;
+  m.weights.underground = 1.5;
+  const s2 = matchScore(m);
+  assert.equal(s2[0], 4);
+  assert.equal(s2[1], 12);
 });
 
 test('advance accrues charge to the controller per second', () => {
@@ -155,7 +166,7 @@ test('lock fails when charge is below the minimum', () => {
   assert.equal(lock(m, 0, 'headline').ok, false);
 });
 
-test('endMatch scores locked + effective power and picks a winner', () => {
+test('endMatch scores weighted lane values and picks a winner', () => {
   const m = createMatch(deck(['h01']), deck(['h03'])); // 8 vs 7
   deploy(m, 0, 'h01');
   deploy(m, 1, 'h03');
@@ -213,9 +224,10 @@ test('elo: winner gains, loser loses, draw splits (K=32)', () => {
   assert.deepEqual(updateElo(1200, 1200, 0.5), [1200, 1200]);
 });
 
-test('elo: upset beats favorite — bigger delta for the underdog', () => {
-  const [a1, b1] = updateElo(1200, 1500, 1);
-  const [a2, b2] = updateElo(1500, 1200, 1);
-  assert.ok(a1 - 1200 > a2 - 1500);
-  assert.ok(b1 < b2);
+test('elo: upset hurts the favorite more than an expected loss', () => {
+  const [a1, b1] = updateElo(1200, 1500, 1); // 1200 beats 1500 (upset)
+  const [a2, b2] = updateElo(1500, 1200, 1); // 1500 beats 1200 (expected)
+  assert.ok(a1 - 1200 > a2 - 1500); // underdog gain > favorite gain
+  assert.ok(b1 > b2); // losing favorite drops more than losing underdog
+  assert.ok(b1 < 1500 && b2 < 1200);
 });

@@ -1,10 +1,9 @@
-import type { LaneId, PlayerState } from './types.ts';
+import type { Card, LaneId, PlayerState } from './types.ts';
 import { LANES } from './types.ts';
 import { updateElo } from './elo.ts';
-import type { Card } from './types.ts';
 
 export interface LaneCore {
-  /** Base deployed power per player (0..1). */
+  /** Base deployed power per player (0..1). Determines lane control. */
   base: [number, number];
   /** Charge built by holding the lane, per player. */
   charge: [number, number];
@@ -87,13 +86,19 @@ export function createMatch(hand0: Card[], hand1: Card[], opts: GameOptions = {}
   };
 }
 
-export function effectivePower(m: MatchState, lane: LaneId, playerIdx: 0 | 1): number {
-  return m.lanes[lane].base[playerIdx] * m.weights[lane];
+/** Deployed base power — decides who holds the lane (the tug-of-war). */
+export function lanePower(m: MatchState, lane: LaneId, playerIdx: 0 | 1): number {
+  return m.lanes[lane].base[playerIdx];
+}
+
+/** Volatility-weighted lane value — (power + locked) × current lane weight. */
+export function laneValue(m: MatchState, lane: LaneId, playerIdx: 0 | 1): number {
+  return (m.lanes[lane].base[playerIdx] + m.lanes[lane].locked[playerIdx]) * m.weights[lane];
 }
 
 export function controller(m: MatchState, lane: LaneId): 0 | 1 | null {
-  const a = effectivePower(m, lane, 0);
-  const b = effectivePower(m, lane, 1);
+  const a = lanePower(m, lane, 0);
+  const b = lanePower(m, lane, 1);
   if (a === b) return null;
   return a > b ? 0 : 1;
 }
@@ -173,12 +178,18 @@ export function lock(m: MatchState, playerIdx: 0 | 1, lane: LaneId): ActionResul
   return { ok: true, locked: gained };
 }
 
-export function endMatch(m: MatchState): { winner: 0 | 1 | null; draw: boolean; score: [number, number] } {
+/** Total match score per player: Σ (power + locked) × lane weight. */
+export function matchScore(m: MatchState): [number, number] {
   const score: [number, number] = [0, 0];
   for (const lane of LANES) {
-    score[0] += m.lanes[lane].locked[0] + effectivePower(m, lane, 0);
-    score[1] += m.lanes[lane].locked[1] + effectivePower(m, lane, 1);
+    score[0] += laneValue(m, lane, 0);
+    score[1] += laneValue(m, lane, 1);
   }
+  return score;
+}
+
+export function endMatch(m: MatchState): { winner: 0 | 1 | null; draw: boolean; score: [number, number] } {
+  const score = matchScore(m);
   const draw = score[0] === score[1];
   const winner: 0 | 1 | null = draw ? null : score[0] > score[1] ? 0 : 1;
   m.winner = winner;
