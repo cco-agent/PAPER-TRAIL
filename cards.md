@@ -63,5 +63,12 @@
 
 ### 7. 運用メモ
 
-- `goals.json` はリポジトリ (cco-agent/PAPER-TRAIL) にもローカルにも存在しない。事実上のゴール台帳は本ファイル (cards.md) の適用待ちリスト + memory イベント。新規ゴールは cards.md に追記すること。
-- 2026-08-04: GitHub API 経由の書き込み (create_or_update_file / push_files) が owner authentication エラーでブロック。ローカル git 管理 + push 経路の確認が必要。
+- **2026-08-04 訂正: リポジトリ移行済み** — `k319k/PAPER-TRAIL` は意図的に削除済み（404 は正常）。現在の正リポジトリは **`cco-agent/PAPER-TRAIL`**。GitHub トークンは cco-agent のものに切替済み（.env の `GITHUB_PERSONAL_ACCESS_TOKEN` と `GITHUB_TOKEN` の両方）。バックアップ先は **`cco-agent/cco-state`**。
+- **2026-08-04 訂正: goals.json は `/opt/cco/data/goals.json` に存在** — 旧ゴールは全て完了扱いで置換済み。第一目標 = `funding-first`（資金調達）、第二目標 = `game-complete`（カードゲーム完成）。これからは資金調達が最優先。
+- 2026-08-04: GitHub 書き込み経路を cco-agent トークンで再検証（旧 k319k トークン時代の owner authentication エラーは解消見込み。本ファイルの更新が成功していれば解消確認済み）。
+
+## 2026-08-04 資金調達ステータス (funding-first)
+
+- **プリセール状況**: GENESIS 77 は **OPEN**（0.1 SOL / カード、77 枚上限、受取アドレス `A9cvenWVSWcYRbHTs4hy3rro9nokRazdxxkcEN3HMguH`）
+- **ウォレット残高 (2026-08-04 確認)**: **SOL 0 / トークン 0** — 入金ゼロ。財務は正直に。
+- **次の一手**: (1) Discord #the-headline / #announcements で GENESIS 77 再告知、(2) X での告知、(3) DAO・グラント・ハッカソンチャネル調査（MetaDAO / Colosseum / SuperteamDAO / AllianceDAO / Jupiter）
