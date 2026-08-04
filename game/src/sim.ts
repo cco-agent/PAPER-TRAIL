@@ -48,7 +48,7 @@ type Action =
   | { kind: 'burn'; cardId: string }
   | { kind: 'pass' };
 
-function chooseAction(m: MatchState, idx: 0 | 1, strategy: BotStrategy): Action {
+export function chooseAction(m: MatchState, idx: 0 | 1, strategy: BotStrategy): Action {
   const p = m.players[idx];
   // 1) Lock the most valuable controlled lane we can afford.
   if (p.fuel >= m.opts.lockFuelCost) {
