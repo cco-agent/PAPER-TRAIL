@@ -29,7 +29,7 @@ node --experimental-strip-types --test src/*.test.ts
 ```
 ▶ payment-gate.test.ts    11 tests
 ▶ plugin.test.ts           7 tests
-▶ solana-verifier.test.ts 17 tests
+▶ solana-verifier.test.ts 18 tests
 ```
 
 ## How a client uses it
