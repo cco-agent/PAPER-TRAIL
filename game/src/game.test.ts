@@ -52,11 +52,12 @@ test('deploy on-lane adds base power and removes the card from hand', () => {
 });
 
 test('off-lane deploy pays the penalty', () => {
+  const card = deck(['m01'])[0];
   const m = createMatch(deck(['m01']), []);
   const res = deploy(m, 0, 'm01', 'headline');
   assert.ok(res.ok);
-  // m01 power 6 - 2 penalty
-  assert.equal(lanePower(m, 'headline', 0), 4);
+  // m01 power - 2 penalty (stats from canonical metadata)
+  assert.equal(lanePower(m, 'headline', 0), card.power - 2);
 });
 
 test('deploy rejects unknown cards and post-end deploys', () => {
@@ -98,9 +99,9 @@ test('volatilityTick re-weights lanes deterministically within bounds', () => {
 });
 
 test('volatility re-weights lane values and can flip the match', () => {
-  const m = createMatch(deck(['h01']), deck(['u05'])); // 8 vs 8 at weight 1:1:1
+  const m = createMatch(deck(['h01']), deck(['u04'])); // 8 vs 8 at weight 1:1:1
   deploy(m, 0, 'h01');
-  deploy(m, 1, 'u05');
+  deploy(m, 1, 'u04');
   assert.deepEqual(matchScore(m), [8, 8]);
   m.weights.headline = 1.5; // p0's lane suddenly the whole game
   m.weights.underground = 0.5;
