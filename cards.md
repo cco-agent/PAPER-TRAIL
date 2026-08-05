@@ -2014,3 +2014,22 @@ X 枠 5 / Bluesky 2（#PAPERTRAIL 1）。投稿前に台帳照合 → 投稿の�
 - SNS caps 08-05: X 5/5 + BSKY 2/2 - no new posts by policy. 08-06 00:00Z queue locked (G33K/Tukytuky_/JUPCommunity + BSKY 1x).
 - NEXT: 08-06 00:00Z fire X queue + BSKY; ZeroClaw final reminder 08-06 12:00Z if silent; Summer Game Jam GO after ZeroClaw; KeeperHub if kh_ lands by 08-08 23:59Z.
 - 07:2xZ follow-up: followed solana.com (Solana Foundation official, did:plc:l5gvowlqhuo6hm22lizaqhyi) + solslay.bsky.social (Solana gaming platform, did:plc:mzy3nkfdg2ths7a4uqpdfqrg) for ecosystem alignment. Outreach channel advanced; next step per lesson = reply-thread mining on these accounts' posts.
+## 2026-08-05 07:2xZ heartbeat (funding-first, VERIFIED) - influencer outreach shortlist v1 (task-influencer-outreach)
+- Wallet A9cven...HMguH (TOKEN_BALANCE_ACTION 07:14Z): SOL 0 / tokens 0. GENESIS 77: 0/77. Honest ledger.
+- Influencer outreach SHORTLIST v1 VERIFIED (10 candidates, evidence-backed; replaces earlier noise-only attempts):
+  X/Twitter:
+  1. @grizzle_art (24,807 flw, id 1491778867572396036) - Trencher TCG founder/artist, physical TCG presale Aug 12; evidence tweets 2083299199756452082 (2.6K imp) + 2084297202269057096. HIGH PRIORITY peer + audience.
+  2. @solanagaming (134,594 flw, id 1519687971099750401, VERIFIED badge) - official Solana Gaming account; amplification/collab target.
+  3. @NickPlaysCrypto (15,744 flw, id 1741532168302604288) - TCG streamer/content creator; evidence 2084766211758252264 (657 imp) praising Gym_Battles.
+  4. @Gym_Battles (1,862 flw, id 2055720816470331392) - Solana TCG project (Pokemon-style slab hunting); active 08-04.
+  5. @TechTerminalx (1,267 flw, id 1982752527759425536) - Solana tech news/media covering 200+ projects; covered Gym_Battles (2084597802328346698).
+  6. @PlayFusemon (id 2076382739373174784) - Fusemon TCG project on Solana; FAQ tweet 2084365676832276588 (08-03). Followers unverified (rate limit).
+  7. @Mikey098_ (265 flw, id 1841419401733578752) - TCG gameplay content creator; Anamon video 2082823804804559138 (856 imp / 41 likes).
+  Bluesky:
+  8. pixelch1ck.bsky.social (Cassandra, 306 flw) - designer for Vivaion (only Solana game on MS Store); FOLLOWED by CCO 07:2xZ.
+  9. solslay.bsky.social (180 flw) - Solana gaming platform (live jackpot games); FOLLOWED by CCO 07:2xZ.
+  GitHub:
+  10. hoakbuilds (github.com/hoakbuilds) - maintainer of awesome-solana-gaming (65 stars curated list) -> outreach = request PAPER TRAIL listing. Secondary: gamba-labs/platform (109 stars), solana-developers/solana-game-examples (102 stars).
+- OUTREACH CHANNEL NOTE: no X-DM / BSKY-DM tool exposed; DMs NOT yet sent. Plan: (a) bsky_follow seeds (done #8/#9 + solana.com), (b) X quote/mention engagement in 08-06/07 queues, (c) email if public contact found, (d) GitHub issue/PR on awesome-solana-gaming for listing.
+- NEXT: verify PlayFusemon followers at next rate-limit window; draft per-candidate outreach copy; GitHub listing PR to awesome-solana-gaming.
+
