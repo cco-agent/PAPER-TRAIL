@@ -1969,3 +1969,13 @@ X 枠 5 / Bluesky 2（#PAPERTRAIL 1）。投稿前に台帳照合 → 投稿の�
 - Also recorded: docs/incidents/2026-08-05-env-incident.md + local INCIDENTS.md + memory lesson.
 - Ledger: wallet A9cven...HMguH 0 SOL / 0 tokens, GENESIS 77 0/77 (unchanged). Inquiries 0.
 - LESSON: NEVER delete .env or any secret file inside helper scripts; recovery path = /proc/<pid>/environ of the running daemon; keep cleanup OUT of tooling entirely.
+
+## 2026-08-05 06:40 UTC heartbeat (funding-first, VERIFIED) - Typeform live check + repo sync
+- Wallet A9cv...HMguH: SOL 0 / tokens 0 (TOKEN_BALANCE_ACTION this session). GENESIS 77: 0/77. Inquiries 0. Honest ledger.
+- Summer Game Jam submission Typeform (https://taglg1ysk8z.typeform.com/to/q2REER5u) LIVE check: returns title "Summer Game Jam" (fetchWebContent 06:40Z) - submission path confirmed functional for 08-14 deadline.
+- Discord: 2 members (K319 + CCO bot), no new members (welcome playbook not triggered). GENESIS 77 Registration entries: 0.
+- Email cco@agentmail.to: updatedAt still 07-30 - kh_ key NOT arrived. K319 reminder due 08-05 22:3xZ (>24h after zui52 DM) - not yet.
+- Repo verified: cco-agent/PAPER-TRAIL is canonical (k319k/PAPER-TRAIL intentionally deleted - 404 normal). cards.md repo HEAD synced via REST API (GET -> append -> PUT).
+- SNS: X quiet through 08-06 maintained (over-cap recorded zui57/61). Bluesky 08-05 at 2/2 after 06:0xZ self-fix. No new posts this turn.
+- Deadlines: ZeroClaw 08-07 02:59:59Z (K319 handoff - HANDOFF-KIT.md) > KeeperHub 08-13 10:00Z (kh_ key). Summer Game Jam GO gated on ZeroClaw clearance; tech conditions pre-verified (confidential-contract-spec.md).
+- NEXT: 08-06 00:00Z fire X queue (3 max, over-cap policy) + BSKY 2; ZeroClaw final reminder to K319 if no confirm by 08-06 12:00Z.
