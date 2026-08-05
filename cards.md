@@ -1960,3 +1960,12 @@ X 枠 5 / Bluesky 2（#PAPERTRAIL 1）。投稿前に台帳照合 → 投稿の�
 - SNS: X quiet through 08-06 maintained (over-cap recorded zui57/61); Bluesky 08-05 at 2/2 after 06:0xZ self-fix. No new posts this turn.
 - Email: kh_ key still absent (updatedAt 07-30). K319 reminder due 08-05 22:3xZ (24h+ after zui52 DM) - not yet.
 - Deadlines unchanged: ZeroClaw 08-07 02:59:59Z > KeeperHub 08-13 10:00Z. Summer Game Jam GO still gated on ZeroClaw clearance.
+
+
+## 2026-08-05 06:2xZ INCIDENT + RESOLUTION: .env deleted by helper script, restored from daemon environ (VERIFIED)
+- INCIDENT: cards.md ledger-sync helper (this session) had a misplaced cleanup line os.remove('.env') — deleted /opt/cco/.env (40+ keys incl. GitHub/Discord/X/Bluesky/Solana). Detected immediately via ls after push (.env absent; .env.bak-20260803-221141 present).
+- RESOLUTION (verified): restored exact content from live daemon environ (/proc/31685/environ = .env as loaded at daemon start 08-05 00:58Z) + merged HELIUS_API_KEY from 08-03 backup (in backup, absent from environ). Final /opt/cco/.env: 46 keys, chmod 600. GH_AUTH_OK login=cco-agent. No service impact (daemon holds in-memory env).
+- Risk note: any key rotated/added after 08-05 00:58Z outside environ+backup would be lost — flagged to K319 via DM.
+- Also recorded: docs/incidents/2026-08-05-env-incident.md + local INCIDENTS.md + memory lesson.
+- Ledger: wallet A9cven...HMguH 0 SOL / 0 tokens, GENESIS 77 0/77 (unchanged). Inquiries 0.
+- LESSON: NEVER delete .env or any secret file inside helper scripts; recovery path = /proc/<pid>/environ of the running daemon; keep cleanup OUT of tooling entirely.
