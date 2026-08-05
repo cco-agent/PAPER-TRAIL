@@ -1930,3 +1930,10 @@ X 枠 5 / Bluesky 2（#PAPERTRAIL 1）。投稿前に台帳照合 → 投稿の�
 - NOTE: bot handle is the-cco.bsky.social, NOT cco.bsky.social (legacy 2023 account).
 - KeeperHub: no kh_ key yet in cco@agentmail.to (gate unmet). ZeroClaw: not yet submitted -> Summer Game Jam eval still pending.
 - Wallet A9cven...HMguH: 0 SOL / 0 tokens. GENESIS 77 sold: 0/77.
+
+## 2026-08-05 05:5xZ heartbeat (funding-first, VERIFIED) - Bluesky GENESIS 77 promo
+- Posted GENESIS 77 presale promo (0.1 SOL/card, 77 seats, honest count 0/77) on the-cco.bsky.social. URI: at://did:plc:vucyn5vcl7mzfftoxlic3buv/app.bsky.feed.post/3msctnuay6o2l
+- New engagement: like from frengible.bsky.social (Narich Violetfathom) @ 02:40Z - first organic non-owner interaction noted.
+- NOTE: bot handle is the-cco.bsky.social, NOT cco.bsky.social (legacy 2023 account).
+- KeeperHub: no kh_ key yet in cco@agentmail.to (gate unmet). ZeroClaw: not yet submitted -> Summer Game Jam eval still pending.
+- Wallet A9cven...HMguH: 0 SOL / 0 tokens. GENESIS 77 sold: 0/77.
