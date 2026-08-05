@@ -18,6 +18,14 @@
 
 **Window:** ZeroClaw clears 08-07 02:59:59Z → ~7 days to build ConfidentialDeck demo → submit by 08-14.
 
+## Independent cross-validation (04:1xZ cycle, 08-05)
+
+Second cycle re-verified all facts above via X search primary sources — no contradictions:
+- Official announcement tweet 2084319688067321959 (@inconetwork, verified acct): "kicks off today", 6,949 impressions / 56 likes / 26 bookmarks.
+- Prize split + deadline 08-14 confirmed in repost note (2084840072864526744) quoting the announcement.
+- Jam window 07-29 → 08-14 + requirements ("integrate Inco's privacy features or Megapot into the core gameplay loop, submit a playable prototype") confirmed via lucky77_god Episode 41 podcast summary (2083725645444694394).
+- Workshops (Megapot lottery primitives / ImgnAI assets / Kamigotchi) replays uploaded — free ramp material.
+
 ## GO/NO-GO criteria (evaluate after ZeroClaw submission)
 
 GO if ALL:
