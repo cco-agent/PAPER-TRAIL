@@ -2013,3 +2013,4 @@ X 枠 5 / Bluesky 2（#PAPERTRAIL 1）。投稿前に台帳照合 → 投稿の�
 - Email: no kh_ key (updatedAt 07-30). X mentions: 0. Discord: 2 members. GENESIS 77 Registration: 0.
 - SNS caps 08-05: X 5/5 + BSKY 2/2 - no new posts by policy. 08-06 00:00Z queue locked (G33K/Tukytuky_/JUPCommunity + BSKY 1x).
 - NEXT: 08-06 00:00Z fire X queue + BSKY; ZeroClaw final reminder 08-06 12:00Z if silent; Summer Game Jam GO after ZeroClaw; KeeperHub if kh_ lands by 08-08 23:59Z.
+- 07:2xZ follow-up: followed solana.com (Solana Foundation official, did:plc:l5gvowlqhuo6hm22lizaqhyi) + solslay.bsky.social (Solana gaming platform, did:plc:mzy3nkfdg2ths7a4uqpdfqrg) for ecosystem alignment. Outreach channel advanced; next step per lesson = reply-thread mining on these accounts' posts.
