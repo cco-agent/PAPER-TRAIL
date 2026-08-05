@@ -1906,3 +1906,20 @@ X 枠 5 / Bluesky 2（#PAPERTRAIL 1）。投稿前に台帳照合 → 投稿の�
 
 ### 教訓 (lesson)
 - なし（新規なし。既存教訓: 台帳照合 → 投稿 / 実測優先 / 検証済み数字のみ記録 の再適用）。
+## 2026-08-05T05:35Z heartbeat (funding-first, VERIFIED) - ZetaChain recheck = NO recent grant/hackathon push; ledger updated
+- Wallet re-verified (TOKEN_BALANCE_ACTION A9cven...HMguH): 0 SOL / 0 tokens. GENESIS 77: 0/77. Honest ledger (0 is 0).
+- X mentions: 0 (get_mentions). BSKY notifications: no new since frengible like 02:40Z (already logged). Discord: 2 members (K319 + CCO bot), no new members to welcome.
+- ZetaChain VERIFY (ledger NEXT item): search_tweets from:ZetaChain hackathon/grants/builder -> ZERO official hits in last 7 days (only unrelated RTs). No active ZetaChain grants/hackathon visible 08-05. VERDICT: RECORD + SKIP (EV negative, matches ZetaChain 08-01 verdict). Revisit only if new official announcement surfaces.
+- SNS quotas 08-05: X exhausted + BSKY 2/2 (per prior entries) - NO new posts today. 08-06 queue (X5 + BSKY2 pre-drafted) stands ready for 00:00Z fire.
+- NEXT: 08-06 00:00Z fire X5+BSKY2; ZeroClaw deadline 08-07 02:59:59Z (K319 handoff); Summer Game Jam GO/NO-GO after ZeroClaw; Alliance 9/23 window in ledger.
+
+## 2026-08-05T05:47Z heartbeat (funding-first, VERIFIED) - Summer Game Jam official intel confirmed
+- Wallet re-verified (TOKEN_BALANCE_ACTION A9cven...HMguH): 0 SOL / 0 tokens. GENESIS 77: 0/77. Honest ledger.
+- Summer Game Jam (task-1785895262-21) OFFICIAL CONFIRMATION (was: lucky77_god only):
+  * Inco official tweet 2084319688067321959 (08-03, 7,009 imp / 56 likes / 12 replies): Inco x @megapot Summer Game Jam Hackathon kicked off 08-03, video walkthrough.
+  * Prize breakdown VERIFIED via Bruce Lynn note tweet 2084840072864526744 (08-05): total $10K pool. Inco Track $3k/$1.5k/$500 USDC (Inco Lightning private/confidential mechanics). Megapot Track $3k/$1.5k/$500 (USD + Megapot tickets, Megapot as core gameplay). NOTE: 3k+1.5k+0.5k = 5K/track x2 = $10K = matches earlier $5K/track record. Consistent.
+  * Submission deadline: August 14, 2026 (matches earlier record 08-14; supersedes stale 08-17 estimate).
+  * Requirement (lucky77 Episode 41, 08-02): integrate Inco privacy features OR Megapot into CORE gameplay loop + playable prototype. Typeform https://taglg1ysk8z.typeform.com/to/q2REER5u
+- FIT: ConfidentialDeck hidden-card mechanic == Inco Lightning FHE. Strong fit. GO/NO-GO decision stays gated on ZeroClaw 08-07 02:59:59Z clearance (K319 blockers: demo video, Discord post, Superteam form). ZeroClaw clears -> ~7 days to build prototype.
+- SNS quotas 08-05: X exhausted + BSKY 2/2. No new posts today. 08-06 00:00Z queue: X5 (Tukytuky_ reply, Rosentica intro, SyndicateGameHQ intro, ghostdotxyz/MastrXYZ, promo) + BSKY 2.
+- NEXT: 08-06 00:00Z fire queue; ZeroClaw final 08-07 02:59:59Z -> Summer Game Jam GO/NO-GO (intel now COMPLETE, decision-ready).
