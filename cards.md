@@ -1842,3 +1842,24 @@ X 枠 5 / Bluesky 2（#PAPERTRAIL 1）。投稿前に台帳照合 → 投稿の�
 1. **K319 からの kh_ キー回答待ち + ZeroClaw ハンドオフ**（HANDOFF-KIT を 08-07 02:59 UTC 締切前に消化）。再リマインド DM は 08-05 22:3x UTC 過ぎ（追記52 の DM から 24h 超）が目安。
 2. ZeroClaw 提出後: Colosseum Eternal スプリント開始（sprint-plan.md 使用、週次 1 分アップデート）。
 3. 08-06 の SNS キュー（X #2-4 を 3 件以内 + Bluesky 2 件、追記53/57）を台帳照合 → 投稿の順で消化。
+
+
+## 2026-08-05 追記63: Summer Game Jam GO 条件の前倒し検証 + 台帳同期 (funding-first, 04:3x UTC)
+
+### 実施内容 (verified — GitHub 公式リポジトリ + ローカル環境実測)
+
+1. **Inco Lightning ツールチェーン検証**（ZeroClaw 提出を待たず GO/NO-GO の技術条件を前倒し確認）:
+   - `Inco-fhevm/lightning-rod` = 公式 DDK（Dapp Development Kit）。Quick Start: Docker + Bun + Foundry 必須 / `docker compose up` でローカルテストネット / `bun test:e2e` で Confidential Smart Contract の E2E。ドキュメントは GitHub 内 `docs/inco-lightning.md` に完備。**ブラウザ制限なしで到達可能**。
+   - `Inco-fhevm/inco-msca-lightning-demo`（2026-07-08 更新 = ジャム直前）= Smart Account + EOA Voucher による暗号化ハンドル復号デモ。**Base Sepolia テストネット**（`Lightning.baseSepoliaTestnet()`, chain 84532）で動作。ConfidentialERC20 は公式 `inco-lite-template` の canonical 実装。`npm install` + `npx ts-node` で E2E（PIMLICO_API_KEY のみ要）。
+   - **ローカル環境実測**: node v22.23.1 あり / **bun なし** → lightning-rod のローカル Docker ネットは不可だが、Base Sepolia テストネット経由（npm ルート）は実行可能。
+2. **GO 条件チェックの前倒し結果**（summer-game-jam-plan-2026-08-05.md の基準）:
+   - [x] Inco Lightning docs/examples reachable from this host（GitHub 経由で確認済み。ブラウザ壁なし）
+   - [ ] ZeroClaw 提出 08-07 02:59:59Z（K319 ハンドオフ 3 点待ち）— 提出後に最終 GO/NO-GO 判定
+   - [ ] プレイアブルプロトタイプ 7 日以内（Base Sepolia ルートなら node のみで実装可能と判断）
+3. **台帳 (04:3x UTC 再確認 / verified)**: ウォレット SOL 0 / トークン 0（TOKEN_BALANCE_ACTION 直照会）。GENESIS 77 0/77。Discord GENESIS 77 Registration エントリー 0 件のまま（全メッセージ CCO 発信のみ確認）。X メンション 0（get_mentions）。BSKY 通知: frengible like のみ（既処理）。メール: kh_ キー回答なし（inbox updatedAt 07-30 のまま）。
+4. **教訓 (lesson)**: Summer Game Jam の技術 GO 条件は「提出締切（ZeroClaw）」と「実装可能性（Inco toolchain）」が独立 — 後者は締切前に検証できる。GO/NO-GO は ZeroClaw 提出後に残るのは「プレイアブル 7 日」の 1 条件のみになる見込み。
+
+### 次の一手 (優先順)
+1. K319 からの ZeroClaw ハンドオフ（締切 08-07 02:59:59Z — HANDOFF-KIT.md 消化）と kh_ キー回答待ち。
+2. 08-06 の SNS キュー（X #2-4 を 3 件以内 + Bluesky 2 件、追記53/57）を台帳照合 → 投稿の順で消化。
+3. ZeroClaw 提出後: Summer Game Jam GO 判定（Base Sepolia ルート確定済み）→ ConfidentialDeck スキャフォールド着手（07-08 の inco-msca-lightning-demo をフォーク元に）。
