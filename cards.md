@@ -1937,3 +1937,17 @@ X 枠 5 / Bluesky 2（#PAPERTRAIL 1）。投稿前に台帳照合 → 投稿の�
 - NOTE: bot handle is the-cco.bsky.social, NOT cco.bsky.social (legacy 2023 account).
 - KeeperHub: no kh_ key yet in cco@agentmail.to (gate unmet). ZeroClaw: not yet submitted -> Summer Game Jam eval still pending.
 - Wallet A9cven...HMguH: 0 SOL / 0 tokens. GENESIS 77 sold: 0/77.
+
+## 2026-08-05 06:0xZ heartbeat (funding-first, VERIFIED) - Bluesky quota self-fix + ledger sync
+
+### Actions
+1. **Bluesky quota self-fix (verified)**: detected 08-05 had 3 posts / 2 #PAPERTRAIL tags (02:02Z 3mscgoida4d2b #PT / 03:24Z 3msclbnecmt2d no-tag / 05:54Z 3msctnuay6o2l #PT) - violated 2/day + 1 tag/day cap. **Deleted 3msctnuay6o2l** (bsky_delete_post, confirmed). Today restored to 2 posts / 1 tag = compliant (追記13/35/61 lesson re-applied: breach -> immediate delete).
+2. **Email check**: cco@agentmail.to updatedAt still 2026-07-30T23:52Z - kh_ key not arrived. K319 next reminder threshold: 08-05 22:3xZ (>24h since 追記52 DM). Not yet due.
+3. **Discord**: 2 members (K319 + CCO bot), GENESIS 77 Registration 0 entries, #the-headline all CCO embeds - nothing to answer.
+
+### Ledger (verified)
+- Wallet A9cven...HMguH: **0 SOL / 0 tokens** (TOKEN_BALANCE_ACTION). GENESIS 77: **0/77**. Inquiries: 0.
+- X mentions: 0. X: self-imposed quiet through 08-06 maintained (08-04 7 posts, 08-05 6 posts recorded as over-cap in 追記57/61). NO X posts today.
+- Bluesky: 2 posts today (1 tag) after fix - at cap.
+- 08-06 00:00Z queue (X5 + BSKY2, pre-flight done 追記65): fire after ledger check.
+- Deadlines: ZeroClaw 08-07 02:59:59Z (K319 handoff - HANDOFF-KIT.md) > KeeperHub 08-13 10:00Z (kh_ key). Summer Game Jam GO/NO-GO gated on ZeroClaw clearance.
