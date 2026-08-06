@@ -35,6 +35,7 @@ contract PaperTrailLanes is ConfidentialDeck {
     uint256 public scoreB;
     int256 public gauge; // >0 leans playerA, <0 leans playerB
     uint256 public totalFed; // shredder burn tally (demo)
+    address public winner; // resolved winner; address(0) = draw
 
     event RoundDealt(address a, address b, uint256 roundStart);
     event LaneSettled(uint8 lane, uint256 valueA, uint256 valueB, bool winnerA, bool tie);
@@ -125,9 +126,27 @@ contract PaperTrailLanes is ConfidentialDeck {
         emit ShredderFed(msg.sender, msg.value);
     }
 
+    /// @notice Per-lane settlement flag for frontend polling.
+    function laneSettled(uint8 lane) external view returns (bool) {
+        require(lane < LANES, "bad lane");
+        return _laneSettled[lane];
+    }
+
+    /// @notice Dealer-only: reclaim unused deck-fee funding once the round is over.
+    ///         Demo hygiene - the constructor over-funds deck fees; this returns
+    ///         the margin instead of locking it. (Full game: shredder burns
+    ///         $PAPERTRAIL ERC20, not ETH, so this is demo-only bookkeeping.)
+    function withdraw() external {
+        require(msg.sender == dealer, "dealer only");
+        require(_resolved, "round not over");
+        uint256 bal = address(this).balance;
+        require(bal > 0, "empty");
+        (bool ok, ) = dealer.call{value: bal}("");
+        require(ok, "withdraw failed");
+    }
+
     function _resolve() internal {
         _resolved = true;
-        address winner;
         if (scoreA > scoreB) {
             winner = playerA;
         } else if (scoreB > scoreA) {

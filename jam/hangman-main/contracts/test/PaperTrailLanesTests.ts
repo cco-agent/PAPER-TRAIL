@@ -12,7 +12,7 @@
 // FLOW: deploy -> 6 hidden cards dealt (3 per player) -> each player
 //       attested-decrypts their own hand (ACL: allow(player)) ->
 //       every lane settles on covalidator-signed attestations (Model A) ->
-//       round resolves -> shredder burn tally verified.
+//       round resolves -> shredder burn tally verified -> winner invariant.
 //
 // NOTE: the winning card per lane is revealed face-up on-chain (crowd-facing).
 
@@ -27,6 +27,7 @@ const paperAbi = paperJson.abi as Abi;
 const LANES = 3;
 const DECK_SIZE = 24;
 const ETypesUint256 = 7; // @inco/lightning ETypes.Uint256
+const ZERO = "0x0000000000000000000000000000000000000000";
 
 // Lightning ABI slice needed to price the deck (range + shuffle) fees.
 const lightningAbi = [
@@ -138,6 +139,16 @@ describe("PaperTrailLanes: 3-lane hidden-card tug-of-war (Inco testnet)", functi
     })) as [boolean, boolean, bigint, bigint, bigint, bigint, bigint];
     expect(s1[1]).to.equal(true); // resolved
     expect(s1[2]).to.equal(BigInt(LANES)); // settledLanes == 3
+
+    // 7b) Winner invariant: must be alice, bob, or draw (address(0)) -
+    //     never an arbitrary address. Frontend reads this getter directly.
+    const winner = (await publicClient.readContract({
+      address: gameAddress,
+      abi: paperAbi,
+      functionName: "winner",
+    })) as Hex;
+    console.log("winner =", winner);
+    expect([alice.account.address, bob.account.address, ZERO]).to.include(winner);
 
     // 8) Shredder: burn-to-feed tally
     const burn = 123456789n;

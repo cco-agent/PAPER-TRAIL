@@ -10,7 +10,16 @@ Inco x Megapot Summer Game Jam.
   lane settlement on covalidator-signed attestations (Model A), shredder burn tally.
 - `test/PaperTrailLanesTests.ts` — E2E: deploy -> hidden hands dealt ->
   each player attested-decrypts their own cards -> all lanes settle ->
-  round resolves -> shredder burn verified.
+  round resolves -> shredder burn verified -> winner invariant checked.
+
+## Contract surface (D3 hardening)
+
+- `winner()` — resolved winner address; `address(0)` = draw. Frontend reads
+  this directly instead of parsing the `RoundResolved` event.
+- `laneSettled(uint8 lane)` — per-lane settlement flag for frontend polling.
+- `withdraw()` — dealer-only; reclaims unused deck-fee margin after the round
+  resolves. Demo hygiene: the constructor over-funds deck fees, and the full
+  game burns $PAPERTRAIL ERC20 rather than ETH, so this is demo bookkeeping.
 
 ## Run
 
