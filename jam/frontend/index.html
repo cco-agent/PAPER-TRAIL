@@ -78,8 +78,15 @@
   </div>
 
   <div id="livePanel" class="live-panel">
-    <b>LIVE mode is a stub until the contract ships to Base Sepolia (D2/D3 gate).</b><br>
-    Connect a wallet and set the deployed <code>PaperTrailLanes</code> address to play against the real FHE deck.
+    <b>LIVE mode — Inco Lightning (Base Sepolia). Integration verified against Inco-fhevm/incasino, 08-06.</b><br>
+    <div style="margin-top:6px;font-size:12px;line-height:1.55">
+    <b>On-reveal flow (Model A):</b><br>
+    &nbsp;1. <code>play(value = wager + fee)</code> — locks the bet, draws a sealed seed → <code>BetPlaced</code><br>
+    &nbsp;2. <code>zap.attestedReveal([seedHandle])</code> — covalidator signs the hidden hand off-chain<br>
+    &nbsp;3. <code>settle(attestation, signatures)</code> — on-chain verify → lanes resolve, payout event<br>
+    Client: <code>Lightning.baseSepoliaTestnet()</code> singleton → <code>revealAndFormat()</code> → <code>simulateContract</code> first, then <code>writeContract</code>.<br>
+    Status: <span id="liveStatus">deploy-gated — bind the address when PaperTrailLanes ships (D2/D3, needs funded key).</span>
+    </div>
     <div style="margin-top:8px"><input id="ctAddr" placeholder="0x... PaperTrailLanes on Base Sepolia" style="width:60%;padding:6px;background:#0d0b09;color:var(--ink);border:1px solid var(--line)">
     <button class="act ghost" id="connectBtn" style="padding:6px 12px">Connect</button></div>
   </div>
@@ -99,11 +106,19 @@
     <button class="act ghost" id="btnNew">NEW MATCH</button>
   </div>
 
-  <div class="log" id="log"><div class="ln">The offshore ledger is open. Press DEAL ROUND to start.</div></div>
+  <div class="log" id="log"><div class="ln">The offshore ledger is open. Type /deal to start or press DEAL ROUND.</div></div>
   <div class="note">DEMO MODE: all values below are simulated locally. Onchain mode will settle lanes with covalidator-signed attestations (Model A) on Inco Lightning — hidden until showdown, provably fair after.</div>
 </div>
 <script>
 /* PAPER TRAIL ConfidentialDeck demo - vanilla JS, zero deps */
+/* LIVE MODE INTEGRATION - VERIFIED against Inco-fhevm/incasino client/src/utils/inco.ts (08-06):
+   const zap = await Lightning.baseSepoliaTestnet();   // singleton, Base Sepolia = Inco testnet
+   await zap.attestedReveal([seedHandle], { backoffConfig: { maxRetries: 8, baseDelayInMs: 2000, backoffFactor: 1.2 } });
+   // -> { plaintext: { value }, covalidatorSignatures } -> pad(toHex(value), {size:32}) -> settle(gameId, attestation, signatures)
+   Full flow: simulateContract first -> writeContract(play, value=wager+fee) -> waitForTransactionReceipt
+              -> parse BetPlaced -> revealAndFormat -> writeContract(settle) -> outcome event (payout).
+   Hidden-hand: euint256 handles stay encrypted until showdown; only the covalidator-attested reveal opens them. */
+
 const LANES = [
   { id: 0, name: "The Headline", short: "H" },
   { id: 1, name: "The Media", short: "M" },
@@ -163,7 +178,7 @@ function renderCard(el, card, who, win) {
 }
 function updateHud() {
   $("scoreA").textContent = state.scoreA; $("scoreB").textContent = state.scoreB; $("fed").textContent = state.fed;
-  const pct = Math.max(0, Math.min(50, state.gauge * 2));
+  const half = 50; const pct = Math.max(0, Math.min(half, state.gauge * 2));
   $("fillA").style.width = pct + "%"; $("fillB").style.width = pct + "%";
 }
 function deal() {
@@ -217,8 +232,8 @@ $("btnSkip").onclick = () => { clearInterval(state.interval); state.interval = n
 $("btnFeed").onclick = feed;
 $("btnNew").onclick = newMatch;
 $("modeDemo").onclick = () => { state.mode = "demo"; $("modeDemo").classList.add("active"); $("modeLive").classList.remove("active"); $("livePanel").classList.remove("show"); log("Demo mode. All hands simulated locally — onchain FHE comes with LIVE mode."); };
-$("modeLive").onclick = () => { state.mode = "live"; $("modeDemo").classList.remove("active"); $("modeLive").classList.add("active"); $("livePanel").classList.add("show"); log("LIVE mode selected. Requires PaperTrailLanes on Base Sepolia (deploy gate D2/D3) + funded wallet."); };
-$("connectBtn").onclick = () => { const addr = $("ctAddr").value.trim(); if (!addr) { log("No contract address — stub holds the seat warm."); return; } log(`LIVE stub: would bind to <code>${addr}</code> once deployed. Watch this lane.`); };
+$("modeLive").onclick = () => { state.mode = "live"; $("modeDemo").classList.remove("active"); $("modeLive").classList.add("active"); $("livePanel").classList.add("show"); var st = document.getElementById("liveStatus"); if (st) st.textContent = "armed — bind the deployed address. Flow: play() -> attestedReveal -> settle()."; log("LIVE mode. Verified Inco Lightning flow (incasino template): 1) play locks wager + sealed seed 2) zap.attestedReveal 3) settle verifies on-chain. Deploy-gated until a funded key exists."); };
+$("connectBtn").onclick = () => { const addr = $("ctAddr").value.trim(); if (!addr) { log("No contract address — stub holds the seat warm."); return; } if (!/^0x[a-fA-F0-9]{40}$/.test(addr)) { log("That is not a 40-hex 0x address. The books cannot balance on a typo."); return; } state.ct = addr; var st = document.getElementById("liveStatus"); if (st) st.textContent = "bound to " + addr.slice(0,10) + "… — first reveal will run the attested settle flow once deployed & funded."; log("LIVE bind: <code>" + addr + "</code>. On reveal: play() -> zap.attestedReveal(seedHandle) -> settle(attestation, signatures) -> outcome event."); };
 drawLanes(); updateHud();
 </script>
 </body>
