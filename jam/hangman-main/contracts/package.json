@@ -1,0 +1,31 @@
+{
+  "name": "papertrail-jam-contracts",
+  "description": "PAPER TRAIL x Inco Lightning: 3-lane hidden-card tug-of-war (Summer Game Jam)",
+  "version": "1.0.0",
+  "private": true,
+  "devDependencies": {
+    "@inco/lightning-js": "^1.0.0",
+    "@nomicfoundation/hardhat-network-helpers": "^1.0.0",
+    "@nomicfoundation/hardhat-toolbox-viem": "^3.0.0",
+    "@nomicfoundation/hardhat-verify": "^2.0.0",
+    "@nomicfoundation/hardhat-viem": "^2.0.0",
+    "@types/chai": "^4.2.0",
+    "@types/mocha": ">=9.1.0",
+    "@types/node": ">=18.0.0",
+    "chai": "^4.2.0",
+    "hardhat": "^2.22.19",
+    "ts-node": ">=8.0.0",
+    "typescript": "~5.0.4",
+    "viem": "^2.43.1"
+  },
+  "dependencies": {
+    "@inco/lightning": "^1.0.0",
+    "@openzeppelin/contracts": "^5.2.0",
+    "dotenv": "^16.4.7"
+  },
+  "scripts": {
+    "compile": "hardhat compile",
+    "test": "hardhat test",
+    "test:lanes": "hardhat test test/PaperTrailLanesTests.ts"
+  }
+}
