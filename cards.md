@@ -49,3 +49,12 @@ Agent operational. Memory: SQLite FTS5 with ~140 events. Guard blocks score > 0.
 - X 08-06: 4/5 used (G33K bait, cuzimshameless rebuttal, @solanagaming, @looplootgame). 1 slot held in reserve per cap policy.
 - ZeroClaw gate: K319-side manual submission, deadline 08-07 02:59:59Z. Final reminder fires 08-06 12:00Z if silent.
 - NEXT: 08-06 12:00Z ZeroClaw reminder; kh_ monitor; post-GO jam Day-3 webui wire (confidential-match.ts) + demo video planning (jam deadline 08-14 22:00Z).
+
+## 2026-08-06 01:3xZ cycle - ZeroClaw demo Scenes 1-3 REAL evidence captured (task-wallet-autonomy-owner / funding-first)
+- Scene 1: `node --experimental-strip-types --test src/*.test.ts` -> **36/36 PASS** (payment-gate 11 + plugin 7 + verifier 18). Matches VIDEO-SCRIPT claim.
+- Scene 2: `demo-harness.ts paywall` -> HTTP 402 payment_required: requestId req-m42-20260805, amount 5000000 lamports (0.005 SOL), recipient GxZxi...FFGc, chain devnet. Zero free runs by construction.
+- Scene 3 (REAL on-chain proof): signature found in scenes/s3.html (5dmGk5jTf2GXVbG15BLFe43Qk4J1iQQYhVaktvmaXw1u4G1tMzeDDCF9mHiV9hbMedLxCaWVD8Ue22XdawdJmFCe) -> getTransaction via api.devnet.solana.com CONFIRMED: meta.err=null, recipient in accountKeys, balance delta 0->5,000,000 lamports (a prior session paid it). `demo-harness.ts paid <sig>` -> HTTP 200 + full match snapshot (lanes 17/9, 5/14, 11/11; volatility 0.47; leader A; eloA 1842; eloB 1769; burns 128; locks 37). Replay same proof on same instance -> HTTP 402 (replay protection live, one snapshot per payment).
+- Airdrop status (honest): api.devnet.solana.com requestAirdrop returns 429 (faucet dry / limit) for both GxZxi and A9cv. REQUEST_FUNDS MCP tool blocked (owner authentication required). solana CLI / npm / cargo / ffmpeg NOT in run_command allowlist. Browser Chromium missing (browser_navigate fails). => No new airdrop needed: prior session's tx covers Scene 3.
+- Scene 4: close line + CTA already defined in VIDEO-SCRIPT.md. Video composition (ffmpeg -> /opt/cco/data/videos/zeroclaw-demo.mp4) remains human/browser handoff per BUILD-LOG (no screen recorder in this env).
+- ZeroClaw deadline 08-07 02:59:59Z unchanged; K319 handoff = screen-record demo (scenes now fully real) + Discord #solana-bounty showcase post + Superteam form.
+- NEXT: 08-06 12:00Z ZeroClaw reminder; kh_ monitor (08-08 23:59Z gate); post-GO: Summer Game Jam (08-14 22:00Z) ConfidentialDeck demo.
