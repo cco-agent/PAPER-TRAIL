@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PAPER TRAIL — ConfidentialDeck Demo</title>
+<style>
+  :root {
+    --ink: #0d0d0d; --paper: #f4efe6; --blood: #b3122e; --gold: #c9a227;
+    --lane-a: #2a6f97; --lane-b: #6f2a3b; --grey: #888;
+  }
+  * { box-sizing: border-box; margin: 0; }
+  body {
+    background: var(--ink); color: var(--paper);
+    font-family: "Courier New", ui-monospace, monospace;
+    min-height: 100vh; padding: 24px; display: flex; flex-direction: column; gap: 16px;
+  }
+  header { display: flex; justify-content: space-between; align-items: baseline; }
+  h1 { font-size: 20px; letter-spacing: 2px; }
+  h1 span { color: var(--blood); }
+  .tag { color: var(--grey); font-size: 12px; }
+  .strip { display: flex; gap: 16px; align-items: center; flex-wrap: wrap; }
+  .btn {
+    background: var(--blood); border: 1px solid var(--gold); color: var(--paper);
+    padding: 8px 14px; font-family: inherit; font-size: 13px; cursor: pointer;
+    text-transform: uppercase; letter-spacing: 1px;
+  }
+  .btn:disabled { opacity: .35; cursor: not-allowed; }
+  .btn.ghost { background: transparent; }
+  .gauge-wrap { flex: 1; min-width: 260px; }
+  .gauge-label { font-size: 12px; color: var(--grey); margin-bottom: 4px; display: flex; justify-content: space-between; }
+  .gauge {
+    height: 14px; background: #222; border: 1px solid var(--grey); position: relative; overflow: hidden;
+  }
+  .gauge .needle {
+    position: absolute; top: 0; bottom: 0; width: 3px; background: var(--gold);
+    left: 50%; transition: left .4s cubic-bezier(.6,-0.2,.4,1.4);
+  }
+  .gauge .a { position: absolute; left: 0; top: 0; bottom: 0; background: var(--lane-a); width: 50%; transition: width .4s; opacity: .85; }
+  .lanes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  .lane { border: 1px solid var(--grey); background: #161616; padding: 12px; display: flex; flex-direction: column; gap: 8px; }
+  .lane h2 { font-size: 12px; color: var(--gold); text-transform: uppercase; letter-spacing: 1px; }
+  .cards { display: flex; justify-content: center; gap: 8px; min-height: 96px; }
+  .card {
+    width: 64px; height: 92px; border: 1px solid var(--gold); background: var(--blood);
+    display: flex; align-items: center; justify-content: center; font-size: 26px; font-weight: bold;
+    position: relative; transition: transform .3s;
+  }
+  .card.back { background: repeating-linear-gradient(45deg, #5a0a18 0 8px, #4a0814 8px 16px); color: transparent; }
+  .card.revealed { transform: rotateY(360deg); background: var(--paper); color: var(--ink); }
+  .card.win { box-shadow: 0 0 14px var(--gold); }
+  .lane .score { font-size: 11px; color: var(--grey); }
+  .feed-row { display: flex; gap: 12px; align-items: center; }
+  #log {
+    border-top: 1px solid var(--grey); padding-top: 10px; font-size: 12px;
+    color: var(--grey); max-height: 140px; overflow-y: auto; white-space: pre-wrap;
+  }
+  .ok { color: #5c9e5c; }
+  .bad { color: var(--blood); }
+</style>
+</head>
+<body>
+<header>
+  <h1>PAPER TRAIL <span>//</span> ConfidentialDeck</h1>
+  <div class="tag">Inco Lightning x Megapot — Summer Game Jam demo</div>
+</header>
+
+<div class="strip">
+  <button class="btn" id="dealBtn">Deal Round</button>
+  <button class="btn ghost" id="settleBtn" disabled>Settle Lanes</button>
+  <button class="btn ghost" id="shredBtn" disabled>Feed Shredder</button>
+  <div class="gauge-wrap">
+    <div class="gauge-label"><span>The Headline (A)</span><span id="gaugeTxt">0</span><span>The Underground (B)</span></div>
+    <div class="gauge"><div class="a" id="gaugeA"></div><div class="needle" id="gaugeN"></div></div>
+  </div>
+</div>
+
+<div class="lanes" id="lanes"></div>
+
+<div class="feed-row">
+  <span class="tag">shredder fed: <span id="fed">0</span> wei</span>
+  <span class="tag">volatility: <span id="vol">--</span></span>
+  <span class="tag" id="mode">mode: MOCK</span>
+</div>
+<div id="log"></div>
+
+<script>
+// PAPER TRAIL 3-lane demo (mock first; real mode wires ConfidentialMatch)
+const LANES = [
+  { name: "The Headline", a: 0, b: 0, cardsA: [], cardsB: [], done: false },
+  { name: "The Media",    a: 0, b: 0, cardsA: [], cardsB: [], done: false },
+  { name: "The Underground", a: 0, b: 0, cardsA: [], cardsB: [], done: false },
+];
+const state = { dealt: false, settled: false, gauge: 0, fed: 0, scoreA: 0, scoreB: 0 };
+
+const $ = (id) => document.getElementById(id);
+const log = (msg, cls = "") => {
+  const line = document.createElement("div");
+  line.className = cls; line.textContent = "[" + new Date().toISOString().slice(11,19) + "] " + msg;
+  $("log").prepend(line);
+};
+
+function drawCards() {
+  const pool = Array.from({ length: 24 }, (_, i) => i + 1);
+  for (let i = pool.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    const tmp = pool[i]; pool[i] = pool[j]; pool[j] = tmp;
+  }
+  for (const lane of LANES) {
+    lane.cardsA = [pool.pop(), pool.pop(), pool.pop()];
+    lane.cardsB = [pool.pop(), pool.pop(), pool.pop()];
+    lane.done = false; lane.a = 0; lane.b = 0;
+  }
+}
+
+function render() {
+  const lanesEl = $("lanes"); lanesEl.innerHTML = "";
+  LANES.forEach((lane, i) => {
+    const el = document.createElement("div"); el.className = "lane";
+    el.innerHTML = "<h2>" + lane.name + "</h2><div class=\"cards\"></div><div class=\"score\">A " + lane.a + " : " + lane.b + " B</div>";
+    const cards = el.querySelector(".cards");
+    for (let k = 0; k < 3; k++) {
+      const c = document.createElement("div");
+      c.className = "card back";
+      c.dataset.lane = i; c.dataset.slot = k; c.dataset.side = "a";
+      cards.appendChild(c);
+    }
+    lanesEl.appendChild(el);
+  });
+  const pct = Math.max(0, Math.min(100, 50 + state.gauge));
+  $("gaugeA").style.width = pct + "%";
+  $("gaugeN").style.left = pct + "%";
+  $("gaugeTxt").textContent = state.gauge;
+  $("fed").textContent = state.fed;
+  $("vol").textContent = (Math.random() * 1.4 + 0.1).toFixed(2);
+}
+
+function revealLane(i) {
+  const lane = LANES[i];
+  const laneEl = $("lanes").children[i];
+  const cards = laneEl.querySelectorAll(".card");
+  for (let k = 0; k < 3; k++) {
+    cards[k].textContent = lane.cardsA[k];
+    cards[k].classList.remove("back"); cards[k].classList.add("revealed");
+  }
+  let winA = 0;
+  for (let k = 0; k < 3; k++) if (lane.cardsA[k] > lane.cardsB[k]) winA++;
+  lane.a = winA; lane.b = 3 - winA;
+  state.scoreA += lane.a; state.scoreB += lane.b;
+  const push = lane.a > lane.b ? 10 : lane.a < lane.b ? -10 : 0;
+  state.gauge += push;
+  lane.done = true;
+  laneEl.querySelector(".score").textContent = "A " + lane.a + " : " + lane.b + " B";
+  log("lane " + (i+1) + " (" + lane.name + ") settled A " + lane.a + ":" + lane.b + " B, gauge " + (push>0?"+":"") + push, "ok");
+  render();
+}
+
+$("dealBtn").onclick = () => {
+  drawCards(); state.dealt = true; state.settled = false;
+  state.gauge = 0; state.scoreA = 0; state.scoreB = 0;
+  render(); $("settleBtn").disabled = false; $("shredBtn").disabled = false;
+  log("Round dealt: 3 hidden cards per lane, opponent encrypted (Inco euint256)");
+};
+
+$("settleBtn").onclick = () => {
+  if (!state.dealt) return;
+  for (let i = 0; i < LANES.length; i++) if (!LANES[i].done) revealLane(i);
+  state.settled = true; $("settleBtn").disabled = true;
+  const winner = state.scoreA > state.scoreB ? "A" : state.scoreB > state.scoreA ? "B" : state.gauge > 0 ? "A" : state.gauge < 0 ? "B" : "draw";
+  log("ROUND RESOLVED — A " + state.scoreA + " : " + state.scoreB + " B, gauge " + state.gauge + " — winner: " + winner, "ok");
+};
+
+$("shredBtn").onclick = () => {
+  const amt = 123456789;
+  state.fed += amt;
+  log("ShredderFed: +" + amt + " wei (burn-to-feed tally, demo)", "bad");
+  render();
+};
+
+render();
+log("PAPER TRAIL x Inco Lightning — ConfidentialDeck demo. Mock mode (real mode wires the deployed PaperTrailLanes contract).");
+</script>
+</body>
+</html>
