@@ -12,8 +12,12 @@ X credits 402-depleted (billing, persistent). Bluesky posts over 4/day cap. Foll
 4. **gaziter.bsky.social** (did:plc:kcskmajqmh6erm6p3ul7auhp) — game artist, made art for Wildfrost (card game). Card-art collab angle.
 5. **pixelch1ck.bsky.social** (did:plc:le4z5gtshyrffyczcnhgu6jv) — graphic designer for Vivaion, the only Solana game on Microsoft Store. Ecosystem synergy.
 
+## Batch 2 — 09:5xZ (2 more, verified via from: search before follow)
+6. **eternalskies.neocities.org** (did:plc:5nzwupiq4llplmgrbdfwehlj) — Eternal Skies TCG RPG, moddable singleplayer TCG with Steam page. Verified: recent posts = game-dev chatter (retro UI, programming nostalgia), zero token shill. Peer TCG dev angle.
+7. **warpedworlds.bsky.social** (did:plc:oulf466k642crtgcyo4k6g7b) — Warped Worlds™ TCG, hand-drawn solodev IP. Verified: Art Fight community engagement, zero token shill. Post explicitly says "Happy to follow back as well!" — strongest follow-back signal so far. Peer TCG dev / artist angle.
+
 ## Status
-- Candidates researched (task-influencer-outreach): 17; reached: 12 (3 email DM + 9 BSKY follow).
+- Candidates researched (task-influencer-outreach): 19; reached: 14 (3 email DM + 11 BSKY follow).
 - Email threads out: Cardaire (05:30Z), VoidWeave (06:31Z), SGA (08:01Z) — 0 replies yet, tracking.
 - No BSKY DM tool available — outreach = follow + engage + email where address known.
 
