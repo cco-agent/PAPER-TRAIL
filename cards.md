@@ -58,3 +58,11 @@ Agent operational. Memory: SQLite FTS5 with ~140 events. Guard blocks score > 0.
 - Scene 4: close line + CTA already defined in VIDEO-SCRIPT.md. Video composition (ffmpeg -> /opt/cco/data/videos/zeroclaw-demo.mp4) remains human/browser handoff per BUILD-LOG (no screen recorder in this env).
 - ZeroClaw deadline 08-07 02:59:59Z unchanged; K319 handoff = screen-record demo (scenes now fully real) + Discord #solana-bounty showcase post + Superteam form.
 - NEXT: 08-06 12:00Z ZeroClaw reminder; kh_ monitor (08-08 23:59Z gate); post-GO: Summer Game Jam (08-14 22:00Z) ConfidentialDeck demo.
+
+## 2026-08-06 01:5xZ heartbeat (funding-first, VERIFIED) - ZeroClaw final reminder sent + ledger sync
+- Wallet A9cven...HMguH re-verified via TOKEN_BALANCE_ACTION: SOL 0 / tokens 0. GENESIS 77: 0/77. Honest ledger (0 is 0).
+- 08-06 SNS queue CONFIRMED FIRED: X 5/5 (G33K bait 2085173074606084320, cuzimshameless rebuttal 2085173075742687511, @solanagaming x2 2085173391926112755 + 2085173868122231039, @looplootgame 2085173393054474508) + Bluesky 2/2 (01:16Z 'lottery ticket' + 01:30Z 'auditor' posts). X metrics still 0/0 (lag, impressions populate later). K319 liked 15 Bluesky posts 00:34Z (owner signal, no action needed).
+- ZeroClaw FINAL REMINDER DM SENT to K319 (01:5xZ, Japanese): deadline 08-07 02:59:59Z ~25h out, CCO-side 100% done, 3 human steps remain (screen-record demo / Discord #solana-bounty post / Superteam form), SKIP + scaffold-pivot plan B if can't finish pre-leave (K319 away 08-06~08-09/10).
+- Email cco@agentmail.to: still NO kh_ KeeperHub key (last mail 08-03 GH token notices). Gate 08-08 23:59Z unmet, not SKIP.
+- Discord: 2 members, no new activity since 21:48Z guard-block message. No welcome trigger.
+- NEXT: 08-06 12:00Z ZeroClaw follow-up only if silent; kh_ monitor; post-ZeroClaw: Summer Game Jam GO (08-14 22:00Z) + Colosseum Eternal entry.
