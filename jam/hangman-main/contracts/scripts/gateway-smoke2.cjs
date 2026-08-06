@@ -1,0 +1,25 @@
+const path = require('path');
+require('dotenv').config({ path: path.join(__dirname, '..', '.env') });
+const { createWalletClient, createPublicClient, http } = require('viem');
+const { privateKeyToAccount } = require('viem/accounts');
+const { baseSepolia } = require('viem/chains');
+const { Lightning } = require(path.join(__dirname, '..', 'node_modules/@inco/lightning-js/dist/cjs/lite/index.js'));
+const PRIVATE_KEY = process.env.PRIVATE_KEY.startsWith('0x') ? process.env.PRIVATE_KEY : '0x' + process.env.PRIVATE_KEY;
+const account = privateKeyToAccount(PRIVATE_KEY);
+const rpc = process.env.BASE_SEPOLIA_RPC_URL || 'https://sepolia.base.org';
+const publicClient = createPublicClient({ chain: baseSepolia, transport: http(rpc) });
+const wallet = createWalletClient({ account, chain: baseSepolia, transport: http(rpc) });
+(async () => {
+  console.log('wallet:', account.address);
+  const inco = await Lightning.baseSepoliaTestnet({ hostChainRpcUrls: [rpc, 'https://base-sepolia-rpc.publicnode.com'].filter(Boolean) });
+  console.log('executor:', inco.executorAddress, '| chainId:', inco.chainId);
+  const { encryptor, scheme } = await inco.getEncryptor();
+  console.log('scheme:', scheme);
+  const context = { hostChainId: inco.chainId, aclAddress: inco.executorAddress, userAddress: account.address, contractAddress: account.address, version: scheme, inputType: 8 };
+  const result = await encryptor({ plaintext: { scheme, type: 8, value: 7n }, context });
+  console.log('ciphertext len:', result.ciphertext.value.length, '| handle:', result.handle);
+  const dec = await inco.attestedDecrypt(wallet, [result.handle]);
+  console.log('decrypted:', dec[0].plaintext.value.toString());
+  console.log('SMOKE2 OK: full encrypt->handle->attestedDecrypt round-trip works');
+  process.exit(0);
+})().catch((e) => { try { console.error('SMOKE2 FAIL:', JSON.stringify(e, Object.getOwnPropertyNames(e).concat(['message','shortMessage','stack','data','cause']), 2)); } catch(_) { console.error('SMOKE2 FAIL raw:', String(e)); } process.exit(1); });
