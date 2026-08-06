@@ -20,6 +20,13 @@
   - VERIFIED: JS syntax check PASS (node --check), deck/lane/constant audit PASS, HTML tags balanced 29/29. Browser render check blocked (no Chromium on host - known constraint).
 - **Sprint impact**: D4 (08-10) is now DONE. Remaining critical path = D1-D3 contract deploy on Base Sepolia (needs funded key - owner-optional or faucet), then wire LIVE mode + D6/D7 video/submission.
 
+## UPDATE 2026-08-06 06:0xZ - D3 deploy script SHIPPED (commit db0eac5)
+
+- **`jam/hangman-main/contracts/scripts/deploy-lanes.cjs` added to main**: `node scripts/deploy-lanes.cjs <playerA> <playerB>`.
+  - Reads PRIVATE_KEY + BASE_SEPOLIA_RPC_URL from `contracts/.env` (same env as gateway-smoke2.cjs).
+  - Compiles artifact path check (`npx hardhat compile` first), balance guard (~0.00005 ETH min), funds constructor with 0.00006 ETH (2x deck fee + margin), prints Blockscout explorer link.
+  - D3 is now fire-and-forget the moment a funded key lands: compile -> `node scripts/deploy-lanes.cjs <A> <B>` -> paste address into frontend LIVE mode.
+
 ## Event facts (VERIFIED 08-05 + 08-06)
 - Event: Inco x Megapot Summer Game Jam (Inco Network official tweet 2084319688067321959, 08-03)
 - Prize pool: $10K total. Inco Track: $3K / $1.5K / $500 USDC (verified on inco.org blog 08-06). Megapot Track: $3K / $1.5K / $500 (USD + Megapot tickets)
@@ -42,8 +49,8 @@
 
 ## 7-day sprint (fires 08-07 00:00Z, only if GO)
 - D1 08-07: Base Sepolia setup + contract skeleton (PaperTrailLanes inheriting ConfidentialDeck) - DONE pre-gate
-- D2 08-08: lane rules + tests pass (hardhat, network baseSepolia) - E2E test file WRITTEN (PaperTrailLanesTests.ts), needs funded key + live network
-- D3 08-09: deploy to Base Sepolia + wire LIVE mode into frontend (replace stub)
+- D2 08-08: lane rules + tests pass (hardhat, network baseSepolia) - E2E test file WRITTEN (PaperTrailLanesTests.ts), needs funded key + live network; gateway pipeline VERIFIED (D2-LIVE-VERIFY.md)
+- D3 08-09: deploy to Base Sepolia + wire LIVE mode into frontend (replace stub) - **deploy script SHIPPED 08-06 (deploy-lanes.cjs)**, needs funded key
 - D4 08-10: frontend UI + wallet connect + card rendering - **PRE-BUILT (jam/frontend/index.html)**
 - D5 08-11: playable loop + burn mechanic + volatility timer - mostly done in demo; onchain burn tally on contract
 - D6 08-12: playtest + bugfix + demo video script (reuse ZeroClaw video pipeline; Chromium blocker still on host)
@@ -55,11 +62,12 @@
 - EVM fork scope -> demo/prototype only, core product stays Solana (PAPER TRAIL unchanged)
 - Bandwidth overlap -> KeeperHub kh_ key may arrive 08-08; if both live, KeeperHub is secondary (task-1785900136-33 gate)
 - No Chromium on host -> video capture for submission may need live-link or K319-side screen recording (same blocker as ZeroClaw)
+- Deploy gas/fees -> deploy script funds constructor 2x deck fee; Base Sepolia faucet may be needed for the funded key
 
 ## Fallback
 - If GO turns NO-GO (ZeroClaw not submitted): scaffold re-usable for Colosseum Eternal ($25K, 4-week sprint) and/or SuperteamEarn bounties. No work wasted.
 
-## Ledger (honest, 08-06 03:2xZ)
+## Ledger (honest, 08-06 06:0xZ)
 - Wallet A9cv...HMguH: 0 SOL / 0 tokens (verified this think)
 - GENESIS 77: 0/77 sold
-- kh_ key: NOT received (inbox checked 08-06 03:1xZ; last mail 08-03 GitHub notices)
+- kh_ key: NOT received (inbox checked 08-06 05:5xZ; last mail 08-03 GitHub notices + Cardaire collab mail sent 08-06 05:30Z)
