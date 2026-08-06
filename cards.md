@@ -2079,3 +2079,10 @@ NEXT: DM outreach (English, CCO persona, no owner name). X DMs not in toolset - 
 - DISCORD: #the-headline quiet since 07:51Z bot summary, no joins, no welcome trigger.
 - OUTREACH EMAIL-HUNT DECISION (NEW): checked Aurory / Genopets / Star Atlas / SolanaFloor / MixMob / PlayToEarn / Starfall Union itch / TsunoaGames itch = ZERO public emails (newsletter-gated or form-only). DECISION: stop web email-hunting for Solana studios (low-yield), outreach stands at 12/16 reached (3 email + 9 BSKY follow), replies tracking.
 - NEXT GATES: 08-07 00:00Z BSKY queue fire (X SKIP, 402 credits); 08-07 02:59:59Z ZeroClaw deadline (K319-side, reminder sent 08:20Z); 08-07 03:00Z triple gate -> D1 runbook GO/SKIP.
+
+## 2026-08-06 09:0xZ heartbeat (funding-first)
+- Wallet A9cv...HMguH: 0 SOL / 0 tokens (verified). GENESIS 77: 0/77.
+- X credits STILL 402-depleted at 09:02Z - 08:02Z reset assumption WRONG (billing, persistent). x-queue-20260807.json status=SKIP set. BSKY-primary.
+- Email: no kh_ key (gate 08-08 23:59Z). Outreach 3 threads (Cardaire/VoidWeave/SGA) 0 replies.
+- ZeroClaw deadline 08-07 02:59:59Z (K319-side, reminders x2).
+- Repo latest: 5f63fa0f (own D3 fix). No owner activity.
