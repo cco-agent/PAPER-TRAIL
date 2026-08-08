@@ -56,6 +56,9 @@
   .note { margin-top: 12px; font-size: 11px; color: var(--dim); font-style: italic; }
   .live-panel { display: none; border: 1px dashed var(--gold); padding: 12px; margin-bottom: 14px; font-size: 12px; }
   .live-panel.show { display: block; }
+  .banner { display: none; text-align: center; font-size: 18px; letter-spacing: 3px; color: var(--gold); border: 1px solid var(--gold); padding: 10px; margin-bottom: 14px; background: rgba(212,175,55,.08); }
+  .banner.show { display: block; }
+  .banner.lose { color: var(--red); border-color: var(--red); background: rgba(192,57,43,.08); }
   @media (max-width: 720px) { .lanes { grid-template-columns: 1fr; } }
 </style>
 </head>
@@ -96,18 +99,21 @@
     <div class="gauge"><div class="needle"></div><div class="fillA" id="fillA"></div><div class="fillB" id="fillB"></div></div>
   </div>
 
+  <div id="banner" class="banner"></div>
+
   <div class="lanes" id="lanes"></div>
 
   <div class="actions">
     <button class="act" id="btnDeal">DEAL ROUND</button>
     <button class="act" id="btnReveal" disabled>REVEAL SHOWDOWN</button>
-    <button class="act ghost" id="btnSkip" disabled>SKIP TIMER</button>
+    <button class="act ghost" id="btnSkip">SKIP TIMER</button>
     <button class="act ghost" id="btnFeed">FEED THE SHREDDER</button>
     <button class="act ghost" id="btnNew">NEW MATCH</button>
+    <button class="act ghost" id="btnAuto">AUTO DEMO</button>
   </div>
 
   <div class="log" id="log"><div class="ln">The offshore ledger is open. Type /deal to start or press DEAL ROUND.</div></div>
-  <div class="note">DEMO MODE: all values below are simulated locally. Onchain mode will settle lanes with covalidator-signed attestations (Model A) on Inco Lightning — hidden until showdown, provably fair after. D4 (08-08): feeding the shredder charges fuel — 3 charges stuff it and arm +1 POWER on your next reveal; a winning card with volatility ≥ 85 doubles its tug-of-war push. D5 (08-08): procedural Web Audio SFX - zero-asset flip, shredder, swing, win/lose cues; silent no-op where audio is unavailable.</div>
+  <div class="note">DEMO MODE: all values below are simulated locally. Onchain mode will settle lanes with covalidator-signed attestations (Model A) on Inco Lightning — hidden until showdown, provably fair after. D4 (08-08): feeding the shredder charges fuel — 3 charges stuff it and arm +1 POWER on your next reveal; a winning card with volatility ≥ 85 doubles its tug-of-war push. D5 (08-08): procedural Web Audio SFX - zero-asset flip, shredder, swing, win/lose cues; silent no-op where audio is unavailable. D6 (08-08): AUTO DEMO plays a full round in one click (deal → 3× feed → reveal); the match-result banner names the winner.</div>
 </div>
 <script>
 /* PAPER TRAIL ConfidentialDeck demo - vanilla JS, zero deps */
@@ -203,7 +209,7 @@ const DECK = [
   { n: "Screaming Headline, No Sources", p: 7, v: 90, t: "news" }
 ];
 const $ = id => document.getElementById(id);
-let state = { dealt: false, revealed: false, resolved: false, scoreA: 0, scoreB: 0, gauge: 0, fed: 0, fuel: 0, boost: false, handA: [], handB: [], timer: 0, interval: null, mode: "demo" };
+let state = { dealt: false, revealed: false, resolved: false, scoreA: 0, scoreB: 0, gauge: 0, fed: 0, fuel: 0, boost: false, handA: [], handB: [], timer: 0, interval: null, auto: false, mode: "demo" };
 function shuffle(a) { for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
 function log(msg, boom) { const d = document.createElement("div"); d.className = "ln" + (boom ? " boom" : ""); d.innerHTML = msg; $("log").prepend(d); }
 function pad(n) { return String(n).padStart(2, "0"); }
@@ -233,10 +239,11 @@ function updateHud() {
   $("fillA").style.width = pct + "%"; $("fillB").style.width = pct + "%";
 }
 function deal() {
+  var _b = $("banner"); if (_b) { _b.className = "banner"; }
   if (state.interval) clearInterval(state.interval);
   const deck = shuffle(DECK.slice());
   state.handA = deck.slice(0, 3); state.handB = deck.slice(3, 6);
-  state.dealt = true; state.revealed = false; state.resolved = false; state.scoreA = 0; state.scoreB = 0; state.gauge = 0; state.fuel = 0; state.boost = false;
+  state.dealt = true; state.revealed = false; state.resolved = false; state.scoreA = 0; state.scoreB = 0; state.gauge = 0; state.fed = 0; state.fuel = 0; state.boost = false;
   state.timer = ROUND_SECONDS; SFX.play("deal");
   drawLanes();
   LANES.forEach((L, i) => { renderCard($("cA" + L.id), state.handA[i], "A"); renderCard($("cB" + L.id), null, "B"); });
@@ -272,8 +279,11 @@ function reveal() {
 }
 function resolve(expired) {
   state.resolved = true; $("btnReveal").disabled = true; $("btnSkip").disabled = true; $("btnDeal").disabled = false;
-  if (expired) log("<b>TIME.</b> The tug-of-war expired — unsettled lanes award nothing.");
+  if (expired) log(`<b>TIME.</b> The tug-of-war expired — unsettled lanes award nothing.`);
   const winner = state.scoreA > state.scoreB ? "YOU take the round." : state.scoreB > state.scoreA ? "The House wins this round." : "A draw. The gauge cannot be bribed... yet.";
+  const banner = $("banner");
+  banner.className = "banner show" + (state.scoreB > state.scoreA ? " lose" : "");
+  banner.textContent = state.scoreA > state.scoreB ? "YOU TAKE THE ROUND." : state.scoreB > state.scoreA ? "THE HOUSE WINS THIS ROUND." : "A DRAW. THE GAUGE CANNOT BE BRIBED... YET.";
   log(`<b>ROUND RESOLVED</b> ${state.scoreA}-${state.scoreB}. ${winner}`, true);
 }
 const FUEL_LINES = ["The shredder ate it. The books balance themselves.", "Burn it. Feed the gauge.", "Another one. Do try to keep up.", "Compliance is a suggestion with extra steps."];
@@ -292,17 +302,31 @@ function feed() {
   }
   updateHud();
 }
-function newMatch() { if (state.interval) clearInterval(state.interval); state = Object.assign(state, { dealt: false, revealed: false, resolved: false, scoreA: 0, scoreB: 0, gauge: 0, fuel: 0, boost: false, timer: 0 }); drawLanes(); updateHud(); $("clock").textContent = fmtClock(ROUND_SECONDS); $("clock").classList.remove("warn"); $("btnDeal").disabled = false; $("btnReveal").disabled = true; $("btnSkip").disabled = true; log("Fresh match. The lanes are clean — for now."); }
-$("btnDeal").onclick = deal;
+function newMatch() { if (state.interval) clearInterval(state.interval); state = Object.assign(state, { dealt: false, revealed: false, resolved: false, scoreA: 0, scoreB: 0, gauge: 0, fuel: 0, boost: false, auto: false, fed: 0, timer: 0 }); var _b = $("banner"); if (_b) { _b.className = "banner"; } drawLanes(); updateHud(); $("clock").textContent = fmtClock(ROUND_SECONDS); $("clock").classList.remove("warn"); $("btnDeal").disabled = false; $("btnReveal").disabled = true; $("btnSkip").disabled = true; log("Fresh match. The lanes are clean — for now."); }
+/* D6 08-08: AUTO DEMO — one click plays a full round (deal -> 3x feed -> reveal). Paced for judges; synchronous in test env. */
+function autoDemo() {
+  if (state.auto) return;
+  state.auto = true;
+  const steps = [];
+  if (!state.dealt) steps.push(deal);
+  steps.push(feed, feed, feed, reveal);
+  const finish = () => { state.auto = false; log("<b>AUTO DEMO</b> — the house showed its hand, the shredder got fed, the books balance themselves. Deal again for another round.", true); };
+  if (window.__PT_TEST__) { steps.forEach(function (s) { s(); }); finish(); return; }
+  var i = 0;
+  const run = () => { if (i >= steps.length) return finish(); const s = steps[i++]; s(); if (i < steps.length) setTimeout(run, 600); };
+  run();
+}
+$"btnDeal".onclick = deal;
 $("btnReveal").onclick = reveal;
 $("btnSkip").onclick = () => { clearInterval(state.interval); state.interval = null; state.timer = 0; if (!state.revealed) resolve(true); };
 $("btnFeed").onclick = feed;
+$("btnAuto").onclick = autoDemo;
 $("btnNew").onclick = newMatch;
 $("modeDemo").onclick = () => { state.mode = "demo"; $("modeDemo").classList.add("active"); $("modeLive").classList.remove("active"); $("livePanel").classList.remove("show"); log("Demo mode. All hands simulated locally — onchain FHE comes with LIVE mode."); };
 $("modeLive").onclick = () => { state.mode = "live"; $("modeDemo").classList.remove("active"); $("modeLive").classList.add("active"); $("livePanel").classList.add("show"); var st = document.getElementById("liveStatus"); if (st) st.textContent = "armed — bind the deployed address. Flow: play() -> attestedReveal -> settle()."; log("LIVE mode. Verified Inco Lightning flow (incasino template): 1) play locks wager + sealed seed 2) zap.attestedReveal 3) settle verifies on-chain. Deploy-gated until a funded key exists."); };
 $("connectBtn").onclick = () => { const addr = $("ctAddr").value.trim(); if (!addr) { log("No contract address — stub holds the seat warm."); return; } if (!/^0x[a-fA-F0-9]{40}$/.test(addr)) { log("That is not a 40-hex 0x address. The books cannot balance on a typo."); return; } state.ct = addr; var st = document.getElementById("liveStatus"); if (st) st.textContent = "bound to " + addr.slice(0,10) + "… — first reveal will run the attested settle flow once deployed & funded."; log("LIVE bind: <code>" + addr + "</code>. On reveal: play() -> zap.attestedReveal(seedHandle) -> settle(attestation, signatures) -> outcome event."); };
 drawLanes(); updateHud();
-window.__pt = { get state() { return state; }, MAX_FUEL, GAUGE_PUSH, VOL_SWING, sfx: SFX };
+window.__pt = { get state() { return state; }, MAX_FUEL, GAUGE_PUSH, VOL_SWING, sfx: SFX, autoDemo };
 </script>
 </body>
 </html>

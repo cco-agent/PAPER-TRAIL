@@ -4,6 +4,7 @@ const els = {};
 function mkEl(id){ const el={ id, _inner:'', _text:'', _cls:'', get innerHTML(){return this._inner;}, set innerHTML(v){this._inner=String(v);}, get textContent(){return this._text;}, set textContent(v){this._text=String(v);}, get className(){return this._cls;}, set className(v){this._cls=String(v);}, disabled:false, style:{}, onclick:null, appendChild(){}, prepend(c){ this._inner = c.innerHTML + this._inner; }, value:'' }; el._cl={ add(c){ el._cls = el._cls.split(/\s+/).filter(x=>x&&x!==c).concat(c).join(' '); }, remove(c){ el._cls = el._cls.split(/\s+/).filter(x=>x&&x!==c).join(' '); }, contains(c){ return el._cls.split(/\s+/).includes(c); } }; el.classList = el._cl; return el; }
 global.document = { getElementById: id => (els[id] = els[id] || mkEl(id)), createElement: () => mkEl('_dyn_'+Math.random()) };
 global.window = global;
+global.__PT_TEST__ = true; // D6: autoDemo runs synchronously in test env (no setTimeout pacing)
 const html = fs.readFileSync(__dirname + '/index.html','utf8');
 const code = html.match(/<script>([\s\S]*?)<\/script>/)[1];
 eval(code);
@@ -72,6 +73,22 @@ t('D5 sfx module exposed', !!sfx && Array.isArray(sfx.names) && sfx.names.length
 t('D5 sfx play() no-ops without audio (no throw)', (() => { try { sfx.play('shredder'); sfx.play('swing'); sfx.play('win'); sfx.play('lose'); sfx.play('deal'); sfx.play('reveal'); return true; } catch (e) { return false; } })());
 t('D5 sfx muted flag flips', (() => { sfx.muted = true; const m = sfx.muted; sfx.muted = false; return m === true; })());
 t('D5 sfx play() muted is silent no-op', (() => { sfx.muted = true; try { sfx.play('swing'); return true; } catch (e) { return false; } finally { sfx.muted = false; } })());
+// 10) D6 auto-demo: one click plays a full round (deal -> 3x feed -> reveal) synchronously in test env
+els.btnNew.onclick();
+els.btnAuto.onclick();
+t('D6 auto demo deals + reveals a round', pt.state.dealt === true && pt.state.revealed === true);
+t('D6 auto demo fed the shredder 3x', els.fed.textContent === '3');
+t('D6 auto demo consumed boost at reveal', els.boostBadge.textContent === '');
+t('D6 auto demo ends resolved (deal re-enabled)', els.btnReveal.disabled === true && els.btnDeal.disabled === false);
+t('D6 auto demo logs completion', els.log.innerHTML.includes('AUTO DEMO'));
+t('D6 auto demo state.auto cleared', pt.state.auto === false);
+// 11) D6 match-result banner
+els.btnReveal.onclick();
+t('D6 banner shows winner after resolve', els.banner.className.includes('show') && els.banner.textContent.length > 0);
+els.btnNew.onclick();
+t('D6 banner hides on new match', els.banner.className === 'banner');
+els.btnDeal.onclick();
+t('D6 banner hides on deal', els.banner.className === 'banner');
 
 console.log(out.join('\n'));
 const fails = out.filter(l => l.startsWith('FAIL')).length;
