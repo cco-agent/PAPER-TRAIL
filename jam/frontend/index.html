@@ -73,7 +73,7 @@
     <div class="hud">
       <div>Score: <span class="num" id="scoreA">0</span> : <span class="num" id="scoreB">0</span></div>
       <div class="timer">Tug-of-war: <span id="clock">03:00</span></div>
-      <div>Shredder fed: <span class="num" id="fed">0</span></div>
+      <div>Shredder: fed <span class="num" id="fed">0</span> · fuel <span class="num" id="fuel">0/3</span><span id="boostBadge" style="display:none;color:var(--gold);border:1px solid var(--gold);font-size:10px;padding:1px 6px;margin-left:8px"></span></div>
     </div>
   </div>
 
@@ -107,7 +107,7 @@
   </div>
 
   <div class="log" id="log"><div class="ln">The offshore ledger is open. Type /deal to start or press DEAL ROUND.</div></div>
-  <div class="note">DEMO MODE: all values below are simulated locally. Onchain mode will settle lanes with covalidator-signed attestations (Model A) on Inco Lightning — hidden until showdown, provably fair after.</div>
+  <div class="note">DEMO MODE: all values below are simulated locally. Onchain mode will settle lanes with covalidator-signed attestations (Model A) on Inco Lightning — hidden until showdown, provably fair after. D4 (08-08): feeding the shredder charges fuel — 3 charges stuff it and arm +1 POWER on your next reveal; a winning card with volatility ≥ 85 doubles its tug-of-war push.</div>
 </div>
 <script>
 /* PAPER TRAIL ConfidentialDeck demo - vanilla JS, zero deps */
@@ -126,6 +126,8 @@ const LANES = [
 ];
 const ROUND_SECONDS = 180;
 const GAUGE_PUSH = 10;
+const MAX_FUEL = 3;
+const VOL_SWING = 85; // D4 08-08: winning card volatility >= this doubles your gauge push
 // 24-card PAPER TRAIL subset (GENESIS 77 stats: power/fuel/volatility)
 const DECK = [
   { n: "The Shredder's First Meal", p: 8, v: 90, t: "scandal" },
@@ -154,7 +156,7 @@ const DECK = [
   { n: "Screaming Headline, No Sources", p: 7, v: 90, t: "news" }
 ];
 const $ = id => document.getElementById(id);
-let state = { dealt: false, revealed: false, resolved: false, scoreA: 0, scoreB: 0, gauge: 0, fed: 0, handA: [], handB: [], timer: 0, interval: null, mode: "demo" };
+let state = { dealt: false, revealed: false, resolved: false, scoreA: 0, scoreB: 0, gauge: 0, fed: 0, fuel: 0, boost: false, handA: [], handB: [], timer: 0, interval: null, mode: "demo" };
 function shuffle(a) { for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
 function log(msg, boom) { const d = document.createElement("div"); d.className = "ln" + (boom ? " boom" : ""); d.innerHTML = msg; $("log").prepend(d); }
 function pad(n) { return String(n).padStart(2, "0"); }
@@ -178,6 +180,8 @@ function renderCard(el, card, who, win) {
 }
 function updateHud() {
   $("scoreA").textContent = state.scoreA; $("scoreB").textContent = state.scoreB; $("fed").textContent = state.fed;
+  $("fuel").textContent = state.fuel + "/" + MAX_FUEL;
+  const badge = $("boostBadge"); badge.textContent = state.boost ? "BOOST ARMED +1 POWER" : ""; badge.style.display = state.boost ? "inline" : "none";
   const half = 50; const pct = Math.max(0, Math.min(half, state.gauge * 2));
   $("fillA").style.width = pct + "%"; $("fillB").style.width = pct + "%";
 }
@@ -185,7 +189,7 @@ function deal() {
   if (state.interval) clearInterval(state.interval);
   const deck = shuffle(DECK.slice());
   state.handA = deck.slice(0, 3); state.handB = deck.slice(3, 6);
-  state.dealt = true; state.revealed = false; state.resolved = false; state.scoreA = 0; state.scoreB = 0; state.gauge = 0;
+  state.dealt = true; state.revealed = false; state.resolved = false; state.scoreA = 0; state.scoreB = 0; state.gauge = 0; state.fuel = 0; state.boost = false;
   state.timer = ROUND_SECONDS;
   drawLanes();
   LANES.forEach((L, i) => { renderCard($("cA" + L.id), state.handA[i], "A"); renderCard($("cB" + L.id), null, "B"); });
@@ -203,16 +207,21 @@ function reveal() {
   state.revealed = true; clearInterval(state.interval); state.interval = null;
   LANES.forEach((L, i) => {
     const a = state.handA[i], b = state.handB[i];
+    const aP = a.p + (state.boost ? 1 : 0);
     let win = null;
-    if (a.p > b.p) { win = true; state.scoreA++; state.gauge += GAUGE_PUSH; }
-    else if (b.p > a.p) { win = false; state.scoreB++; state.gauge -= GAUGE_PUSH; }
+    if (aP > b.p) {
+      win = true; state.scoreA++;
+      let push = GAUGE_PUSH;
+      if (a.v >= VOL_SWING) { push = GAUGE_PUSH * 2; log(`<b>VOLATILITY SWING:</b> ${a.n} (vol ${a.v}) hits the needle twice as hard.`, true); }
+      state.gauge += push;
+    } else if (b.p > aP) { win = false; state.scoreB++; state.gauge -= GAUGE_PUSH; }
     renderCard($("cA" + L.id), a, "A", win === true);
     renderCard($("cB" + L.id), b, "B", win === false);
     const winner = win === true ? "You" : win === false ? "The House" : "Nobody";
     const verb = win === null ? "— push, the needle holds." : (win === true ? "+10 to you." : "-10 against you.");
-    log(`<b>${L.name}:</b> ${a.n} (${a.p}) vs ${b.n} (${b.p}) — ${winner} wins. ${verb}`, win !== null);
+    log(`<b>${L.name}:</b> ${a.n} (${a.p}${state.boost ? "+1" : ""}) vs ${b.n} (${b.p}) — ${winner} wins. ${verb}`, win !== null);
   });
-  updateHud(); resolve(false);
+  state.boost = false; updateHud(); resolve(false);
 }
 function resolve(expired) {
   state.resolved = true; $("btnReveal").disabled = true; $("btnSkip").disabled = true; $("btnDeal").disabled = false;
@@ -220,12 +229,23 @@ function resolve(expired) {
   const winner = state.scoreA > state.scoreB ? "YOU take the round." : state.scoreB > state.scoreA ? "The House wins this round." : "A draw. The gauge cannot be bribed... yet.";
   log(`<b>ROUND RESOLVED</b> ${state.scoreA}-${state.scoreB}. ${winner}`, true);
 }
+const FUEL_LINES = ["The shredder ate it. The books balance themselves.", "Burn it. Feed the gauge.", "Another one. Do try to keep up.", "Compliance is a suggestion with extra steps."];
 function feed() {
-  state.fed += 1; updateHud();
-  const lines = ["The shredder ate it. The books balance themselves.", "Burn it. Feed the gauge.", "Another one. Do try to keep up.", "Compliance is a suggestion with extra steps."];
-  log(`<b>SHREDDER:</b> ${lines[Math.floor(Math.random() * lines.length)]}`, true);
+  state.fed += 1;
+  if (state.boost) {
+    log(`<b>SHREDDER:</b> Already stuffed — the +1 POWER bonus is armed and waiting for the showdown.`, true);
+  } else {
+    state.fuel += 1;
+    if (state.fuel >= MAX_FUEL) {
+      state.boost = true; state.fuel = 0;
+      log(`<b>SHREDDER STUFFED.</b> The grist powers the machine — next reveal hits with +1 POWER across all three lanes.`, true);
+    } else {
+      log(`<b>SHREDDER:</b> ${FUEL_LINES[Math.floor(Math.random() * FUEL_LINES.length)]} (fuel ${state.fuel}/${MAX_FUEL})`, true);
+    }
+  }
+  updateHud();
 }
-function newMatch() { if (state.interval) clearInterval(state.interval); state = Object.assign(state, { dealt: false, revealed: false, resolved: false, scoreA: 0, scoreB: 0, gauge: 0, timer: 0 }); drawLanes(); updateHud(); $("clock").textContent = fmtClock(ROUND_SECONDS); $("clock").classList.remove("warn"); $("btnDeal").disabled = false; $("btnReveal").disabled = true; $("btnSkip").disabled = true; log("Fresh match. The lanes are clean — for now."); }
+function newMatch() { if (state.interval) clearInterval(state.interval); state = Object.assign(state, { dealt: false, revealed: false, resolved: false, scoreA: 0, scoreB: 0, gauge: 0, fuel: 0, boost: false, timer: 0 }); drawLanes(); updateHud(); $("clock").textContent = fmtClock(ROUND_SECONDS); $("clock").classList.remove("warn"); $("btnDeal").disabled = false; $("btnReveal").disabled = true; $("btnSkip").disabled = true; log("Fresh match. The lanes are clean — for now."); }
 $("btnDeal").onclick = deal;
 $("btnReveal").onclick = reveal;
 $("btnSkip").onclick = () => { clearInterval(state.interval); state.interval = null; state.timer = 0; if (!state.revealed) resolve(true); };
@@ -235,6 +255,7 @@ $("modeDemo").onclick = () => { state.mode = "demo"; $("modeDemo").classList.add
 $("modeLive").onclick = () => { state.mode = "live"; $("modeDemo").classList.remove("active"); $("modeLive").classList.add("active"); $("livePanel").classList.add("show"); var st = document.getElementById("liveStatus"); if (st) st.textContent = "armed — bind the deployed address. Flow: play() -> attestedReveal -> settle()."; log("LIVE mode. Verified Inco Lightning flow (incasino template): 1) play locks wager + sealed seed 2) zap.attestedReveal 3) settle verifies on-chain. Deploy-gated until a funded key exists."); };
 $("connectBtn").onclick = () => { const addr = $("ctAddr").value.trim(); if (!addr) { log("No contract address — stub holds the seat warm."); return; } if (!/^0x[a-fA-F0-9]{40}$/.test(addr)) { log("That is not a 40-hex 0x address. The books cannot balance on a typo."); return; } state.ct = addr; var st = document.getElementById("liveStatus"); if (st) st.textContent = "bound to " + addr.slice(0,10) + "… — first reveal will run the attested settle flow once deployed & funded."; log("LIVE bind: <code>" + addr + "</code>. On reveal: play() -> zap.attestedReveal(seedHandle) -> settle(attestation, signatures) -> outcome event."); };
 drawLanes(); updateHud();
+window.__pt = { get state() { return state; }, MAX_FUEL, GAUGE_PUSH, VOL_SWING };
 </script>
 </body>
 </html>
