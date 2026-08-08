@@ -17,12 +17,15 @@ t('deal disables deal btn', els.btnDeal.disabled === true);
 t('player hand rendered (POWER)', els.cA0.innerHTML.includes('POWER') && els.cA1.innerHTML.includes('POWER') && els.cA2.innerHTML.includes('POWER'));
 t('house hand face-down FHE hidden', ['cB0','cB1','cB2'].every(i => els[i].className.includes('face-down')));
 const dealtHands = els.cA0.innerHTML + els.cA1.innerHTML + els.cA2.innerHTML;
-// 2) reveal showdown
+// 2) reveal showdown (draw-aware: equal-power lanes award nobody, so sum = 3 minus draws)
+const cntPush = str => (str.match(/push, the needle holds/g) || []).length;
+const drawsBefore = cntPush(els.log.innerHTML);
 els.btnReveal.onclick();
 t('reveal re-enables deal btn', els.btnDeal.disabled === false);
 t('house cards now shown', ['cB0','cB1','cB2'].every(i => els[i].innerHTML.includes('POWER')));
 const s = parseInt(els.scoreA.textContent) + parseInt(els.scoreB.textContent);
-t('scores sum to 3 lanes', s === 3);
+const draws = cntPush(els.log.innerHTML) - drawsBefore;
+t('scores sum to 3 lanes minus draws', s === 3 - draws);
 t('gauge moved (fillA width set)', els.fillA.style.width !== '' || els.fillB.style.width !== '');
 t('round resolved logged', els.log.innerHTML.includes('ROUND RESOLVED'));
 // 3) shredder
