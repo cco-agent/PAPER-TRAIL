@@ -2,7 +2,7 @@
 
 > Inco x Megapot Summer Game Jam (Hackathon: Submissions)
 > Typeform: https://taglg1ysk8z.typeform.com/to/HCv1A79i
-> Deadline: 2026-08-14 22:00Z — submit on/after 08-13 re-verify (form pre-verified live 08-07 04:4xZ; re-verified live 08-08 04:3xZ; final re-verify 08-13 before submit)
+> Deadline: 2026-08-14 22:00Z — submit on/after 08-13 re-verify (form pre-verified live 08-07 04:4xZ; re-verified live 08-08 04:3xZ AND 08-08 11:1xZ; final re-verify 08-13 before submit)
 > Track: Inco (hidden mechanics) — PAPER TRAIL archetype-3 hidden-hand scores on all four judging criteria (Hidden mechanics 25% / Completeness 25% / Creativity 25% / Fun 25%)
 
 ## Project name
@@ -22,6 +22,7 @@ PAPER TRAIL is a Solana-native card battle game played across three lanes of inf
 - **D5 (08-08): procedural Web Audio SFX** — zero-asset flip/shredder/swing/win/lose cues generated with the Web Audio API (no files, no deps); silent no-op where audio is unavailable; guarded so it can never break the headless test harness.
 - **D6 (08-08): AUTO DEMO + match-result banner** — one click plays a full round (deal → 3× shredder feed → reveal), pacing each step for the demo video; the banner announces YOU TAKE THE ROUND / THE HOUSE WINS THIS ROUND / A DRAW after resolution. Playtest bugfix: the fed counter now resets on deal/new match (found by the D6 smoke additions).
 - **D7 (08-08): draw-aware smoke harness** — showdown scoring is by design: equal-power lanes award NOBODY (the needle holds), so scoreA+scoreB can be 2 or 1 with draws. The harness now counts draw lanes from the log and asserts `sum === 3 - draws` instead of a fixed 3 (the old assertion was flaky on random deals). **39/39 checks PASS across 5 consecutive runs, 0 FAIL** (re-verified 08-08 09:0xZ).
+- **D8 (08-08): live re-verification** — smoke harness re-run on current main HEAD commit `0c122c10` (privacy-policy.html added for PlayGate/PSG1 listing requirement; not jam evidence). **39/39 PASS, 0 FAIL** (verified 08-08 ~14:0xZ, drawn from raw.githubusercontent.com/cco-agent/PAPER-TRAIL/main).
 - **jam/frontend/smoke-test.cjs** — DOM-faithful headless harness (node, zero deps): deal → reveal → showdown → shredder feed → fuel economy → boost → volatility swing → mode switch → live-bind validation → new match → SFX module guards → auto-demo full loop → match-result banner → **draw-aware score accounting**. **39/39 checks PASS, draw-aware, stable across repeated runs.**
 - Playable now: https://raw.githubusercontent.com/cco-agent/PAPER-TRAIL/main/jam/frontend/index.html
 
@@ -29,7 +30,7 @@ PAPER TRAIL is a Solana-native card battle game played across three lanes of inf
 Card hands are hidden with encrypted state until the reveal step; the demo validates that the wrong key/address cannot read the hand pre-reveal. Live-mode stub documents the on-chain FHE integration path (Inco confidential compute) for the full game: `play(value = wager + fee)` seals the bet -> `zap.attestedReveal([seedHandle])` covalidator-signed reveal -> `settle(attestation, signatures)` resolves lanes. Integration pattern verified against Inco-fhevm/incasino client (08-06).
 
 ## Repo
-https://github.com/cco-agent/PAPER-TRAIL (public) — see jam/ for build docs (D1-PREFLIGHT, D2-LIVE-VERIFY, SUMMER-JAM-BUILD) and this draft. Latest commit 29f3cbef (D7: draw-aware smoke harness, 39/39 x5 runs).
+https://github.com/cco-agent/PAPER-TRAIL (public) — see jam/ for build docs (D1-PREFLIGHT, D2-LIVE-VERIFY, SUMMER-JAM-BUILD) and this draft. Latest commit `0c122c10` (privacy-policy.html; D7 evidence commit `29f3cbef` — draw-aware harness 39/39 x5 runs).
 
 ## Pre-existing disclosure (official rules: "start fresh, disclose pre-existing")
 - PRE-EXISTING: `jam/hangman-main/` scaffold (pre-jam) and PAPER TRAIL's game design docs / Solana lore predate the jam window. The hangman scaffold is NOT part of the submission evidence.
