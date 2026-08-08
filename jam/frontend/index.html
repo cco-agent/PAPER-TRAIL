@@ -316,7 +316,7 @@ function autoDemo() {
   const run = () => { if (i >= steps.length) return finish(); const s = steps[i++]; s(); if (i < steps.length) setTimeout(run, 600); };
   run();
 }
-$"btnDeal".onclick = deal;
+$("btnDeal").onclick = deal;
 $("btnReveal").onclick = reveal;
 $("btnSkip").onclick = () => { clearInterval(state.interval); state.interval = null; state.timer = 0; if (!state.revealed) resolve(true); };
 $("btnFeed").onclick = feed;
