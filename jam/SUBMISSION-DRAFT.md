@@ -19,14 +19,15 @@ PAPER TRAIL is a Solana-native card battle game played across three lanes of inf
 
 ## What was built (this jam)
 - **jam/frontend/index.html** — self-contained static prototype (zero deps, zero build step). DEMO mode (simulated) + LIVE mode (stub wiring for on-chain state). 24 cards, 3 lanes, 180s hold-to-charge tug-of-war gauge, **shredder fuel economy (burn 3 cards to stuff the shredder)**, **volatility swing (5s random event doubles gauge push)**, ELO-ready match flow.
-- **jam/frontend/smoke-test.cjs** — DOM-faithful headless harness (node, zero deps): deal -> reveal -> showdown -> shredder feed -> fuel economy -> boost -> volatility swing -> mode switch -> live-bind validation -> new match. **26/26 checks PASS** (re-verified 08-08 06:5xZ).
+- **D5 (08-08): procedural Web Audio SFX** — zero-asset flip/shredder/swing/win/lose cues generated with the Web Audio API (no files, no deps); silent no-op where audio is unavailable; guarded so it can never break the headless test harness.
+- **jam/frontend/smoke-test.cjs** — DOM-faithful headless harness (node, zero deps): deal -> reveal -> showdown -> shredder feed -> fuel economy -> boost -> volatility swing -> mode switch -> live-bind validation -> new match -> **SFX module guards**. **30/30 checks PASS** (re-verified 08-08 07:4xZ).
 - Playable now: https://raw.githubusercontent.com/cco-agent/PAPER-TRAIL/main/jam/frontend/index.html
 
 ## ConfidentialDeck / FHE angle
 Card hands are hidden with encrypted state until the reveal step; the demo validates that the wrong key/address cannot read the hand pre-reveal. Live-mode stub documents the on-chain FHE integration path (Inco confidential compute) for the full game: `play(value = wager + fee)` seals the bet -> `zap.attestedReveal([seedHandle])` covalidator-signed reveal -> `settle(attestation, signatures)` resolves lanes. Integration pattern verified against Inco-fhevm/incasino client (08-06).
 
 ## Repo
-https://github.com/cco-agent/PAPER-TRAIL (public) — see jam/ for build docs (D1-PREFLIGHT, D2-LIVE-VERIFY, SUMMER-JAM-BUILD) and this draft. Latest commit fa77dfa (D4: shredder fuel economy + volatility swing, 26/26 PASS).
+https://github.com/cco-agent/PAPER-TRAIL (public) — see jam/ for build docs (D1-PREFLIGHT, D2-LIVE-VERIFY, SUMMER-JAM-BUILD) and this draft. Latest commit 78ba07a1 (D5: procedural Web Audio SFX, 30/30 PASS).
 
 ## Pre-existing disclosure (official rules: "start fresh, disclose pre-existing")
 - PRE-EXISTING: `jam/hangman-main/` scaffold (pre-jam) and PAPER TRAIL's game design docs / Solana lore predate the jam window. The hangman scaffold is NOT part of the submission evidence.
@@ -37,7 +38,7 @@ https://github.com/cco-agent/PAPER-TRAIL (public) — see jam/ for build docs (D
 
 ## Demo video
 PLACEHOLDER: 4-scene screen-record per docs/jam-demo-video-script.md requires Chromium (not available on CCO host). K319-side screen capture before submission.
-VIDEO FALLBACK POLICY: if no owner-side Chromium capture by 08-13, submit WITHOUT a video field link — primary evidence (playable public prototype + 26/26 runtime smoke-test) is a confirmed MET rule requirement; repo + runtime proof stand as the demonstration. The video is enhancement, not a blocker.
+VIDEO FALLBACK POLICY: if no owner-side Chromium capture by 08-13, submit WITHOUT a video field link — primary evidence (playable public prototype + 30/30 runtime smoke-test) is a confirmed MET rule requirement; repo + runtime proof stand as the demonstration. The video is enhancement, not a blocker.
 
 ## Notes for the actual Typeform
 - Fill with: project name above, repo URL, prototype URL (raw GitHub is live; GitHub Pages pending owner enablement — NOT a blocker), demo video link (once recorded, else omit), track = confidential compute / FHE, team size = 1 (+1 human advisor).
