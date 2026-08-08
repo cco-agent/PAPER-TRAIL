@@ -21,14 +21,15 @@ PAPER TRAIL is a Solana-native card battle game played across three lanes of inf
 - **jam/frontend/index.html** — self-contained static prototype (zero deps, zero build step). DEMO mode (simulated) + LIVE mode (stub wiring for on-chain state). 24 cards, 3 lanes, 180s hold-to-charge tug-of-war gauge, **shredder fuel economy (burn 3 cards to stuff the shredder)**, **volatility swing (5s random event doubles gauge push)**, ELO-ready match flow.
 - **D5 (08-08): procedural Web Audio SFX** — zero-asset flip/shredder/swing/win/lose cues generated with the Web Audio API (no files, no deps); silent no-op where audio is unavailable; guarded so it can never break the headless test harness.
 - **D6 (08-08): AUTO DEMO + match-result banner** — one click plays a full round (deal → 3× shredder feed → reveal), pacing each step for the demo video; the banner announces YOU TAKE THE ROUND / THE HOUSE WINS THIS ROUND / A DRAW after resolution. Playtest bugfix: the fed counter now resets on deal/new match (found by the D6 smoke additions).
-- **jam/frontend/smoke-test.cjs** — DOM-faithful headless harness (node, zero deps): deal -> reveal -> showdown -> shredder feed -> fuel economy -> boost -> volatility swing -> mode switch -> live-bind validation -> new match -> SFX module guards -> **auto-demo full loop -> match-result banner**. **39/39 checks PASS** (re-verified 08-08 08:0xZ).
+- **D7 (08-08): draw-aware smoke harness** — showdown scoring is by design: equal-power lanes award NOBODY (the needle holds), so scoreA+scoreB can be 2 or 1 with draws. The harness now counts draw lanes from the log and asserts `sum === 3 - draws` instead of a fixed 3 (the old assertion was flaky on random deals). **39/39 checks PASS across 5 consecutive runs, 0 FAIL** (re-verified 08-08 09:0xZ).
+- **jam/frontend/smoke-test.cjs** — DOM-faithful headless harness (node, zero deps): deal → reveal → showdown → shredder feed → fuel economy → boost → volatility swing → mode switch → live-bind validation → new match → SFX module guards → auto-demo full loop → match-result banner → **draw-aware score accounting**. **39/39 checks PASS, draw-aware, stable across repeated runs.**
 - Playable now: https://raw.githubusercontent.com/cco-agent/PAPER-TRAIL/main/jam/frontend/index.html
 
 ## ConfidentialDeck / FHE angle
 Card hands are hidden with encrypted state until the reveal step; the demo validates that the wrong key/address cannot read the hand pre-reveal. Live-mode stub documents the on-chain FHE integration path (Inco confidential compute) for the full game: `play(value = wager + fee)` seals the bet -> `zap.attestedReveal([seedHandle])` covalidator-signed reveal -> `settle(attestation, signatures)` resolves lanes. Integration pattern verified against Inco-fhevm/incasino client (08-06).
 
 ## Repo
-https://github.com/cco-agent/PAPER-TRAIL (public) — see jam/ for build docs (D1-PREFLIGHT, D2-LIVE-VERIFY, SUMMER-JAM-BUILD) and this draft. Latest commit b6999acf (D6: AUTO DEMO + banner, 39/39 PASS).
+https://github.com/cco-agent/PAPER-TRAIL (public) — see jam/ for build docs (D1-PREFLIGHT, D2-LIVE-VERIFY, SUMMER-JAM-BUILD) and this draft. Latest commit 29f3cbef (D7: draw-aware smoke harness, 39/39 x5 runs).
 
 ## Pre-existing disclosure (official rules: "start fresh, disclose pre-existing")
 - PRE-EXISTING: `jam/hangman-main/` scaffold (pre-jam) and PAPER TRAIL's game design docs / Solana lore predate the jam window. The hangman scaffold is NOT part of the submission evidence.
@@ -39,7 +40,7 @@ https://github.com/cco-agent/PAPER-TRAIL (public) — see jam/ for build docs (D
 
 ## Demo video
 PLACEHOLDER: 4-scene screen-record per docs/jam-demo-video-script.md requires Chromium (not available on CCO host). K319-side screen capture before submission.
-VIDEO FALLBACK POLICY: if no owner-side Chromium capture by 08-13, submit WITHOUT a video field link — primary evidence (playable public prototype + 39/39 runtime smoke-test) is a confirmed MET rule requirement; repo + runtime proof stand as the demonstration. The video is enhancement, not a blocker.
+VIDEO FALLBACK POLICY: if no owner-side Chromium capture by 08-13, submit WITHOUT a video field link — primary evidence (playable public prototype + 39/39 runtime smoke-test, draw-aware and repeatable) is a confirmed MET rule requirement; repo + runtime proof stand as the demonstration. The video is enhancement, not a blocker.
 
 ## Notes for the actual Typeform
 - Fill with: project name above, repo URL, prototype URL (raw GitHub is live; GitHub Pages pending owner enablement — NOT a blocker), demo video link (once recorded, else omit), track = confidential compute / FHE, team size = 1 (+1 human advisor).
