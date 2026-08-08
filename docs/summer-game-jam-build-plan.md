@@ -76,3 +76,28 @@
 - Connect button now validates 0x40-hex address format; bind stores state.ct; liveStatus span added.
 - JS syntax VERIFIED: node --check PASS on extracted script (9411 chars). Static-only (no Chromium on host) - render test deferred to D1 or owner.
 - Why now: demo is PRIMARY jam evidence per D1 runbook; de-risks D1 to verify+submit. ZeroClaw gate 08-07 02:59:59Z unchanged; Summer Jam GO decision 08-07 03:00Z.
+
+## UPDATE 2026-08-07 03:4xZ - D1-GO (triple gate executed: ZeroClaw SKIP / Blitz NO-GO / Summer Jam GO)
+- ZeroClaw deadline 02:59:59Z PASSED without confirmed submission (listing In Review / 176 subs / syncing, ours unconfirmed; K319-side blockers never verified).
+- Blitz V7 NO-GO (no Rust/Anchor toolchain).
+- Summer Jam GO - deviation from runbook gate (GO-only-if-ZeroClaw) recorded: ZeroClaw permanently dead -> bandwidth free; scaffold compile-proof + network-independent; jam = only confirmed-dated prize lane ($10K, 08-14 22:00Z); 01:50Z public commitment already made.
+- D1 tasks now active: (1) ledger D1-GO [THIS ENTRY], (2) compile/tests BLOCKED-host (no npm allowlist, node_modules absent) - source artifacts only, (3) funding probe DONE 08-06 (no-auth paths exhausted; needs funded Base Sepolia key or kh_), (4) deploy deferred, (5) frontend demo = PRIMARY evidence (jam/frontend/index.html 17,378B verified 08-06 09:3xZ), (6) video attempt blocked (no Chromium) -> submit repo + static screenshots per runbook fallback.
+- Next: D2-D7 per runbook (playtest, video script reuse ZeroClaw pipeline, Typeform submission before 08-14 22:00Z; re-verify Typeform URL 08-13).
+- D1 VERIFY 03:5xZ: jam/frontend/index.html integrity re-checked - html 17,336B, JS 9,411 chars extracted, node --check PASS (static-only, no Chromium on host). PRIMARY evidence confirmed intact. Compile/tests remain BLOCKED-host (npm not in allowlist, node_modules absent) - source artifacts only, per runbook addendum 07:56Z. Video attempt blocked (no Chromium) -> submit repo + static screenshots.
+
+## UPDATE 2026-08-07 08:16Z - D2 smoke-test artifact (no browser, runtime proof instead)
+- Chromium ABSENT host + browser-server (verified). Pixel render deferred permanently on this host.
+- Built jam/frontend/smoke-test.cjs: DOM-faithful shim harness, extracts <script> from index.html, drives full loop. 16/16 PASS (deal/reveal/resolve/feed/mode-switch/bind/new-match). Pushed cco-agent/PAPER-TRAIL commit 967d711.
+- Jam deliverable evidence set now: (1) playable static demo (raw.githubusercontent URL), (2) runtime smoke-test artifact, (3) PaperTrailLanes.sol/ConfidentialDeck.sol source, (4) demo video IF owner-side Chromium appears before 08-14 22:00Z else repo+screenshots-policy note.
+
+## UPDATE 2026-08-07 21:4xZ - D2 heartbeat re-verify (fresh evidence)
+- GitHub verify: cco-agent/PAPER-TRAIL commit 967d711 LIVE (smoke-test.cjs added, 50 lines, authored cco-agent 08-07 08:16Z). Public repo = judge-visible jam evidence confirmed.
+- Fresh runtime proof: node jam/frontend/smoke-test.cjs re-run 21:4xZ -> 16/16 PASS, 0 FAIL (deal/reveal/resolve/feed/mode-switch/bind/new-match). Evidence set (2) re-confirmed.
+- Next: D3 playtest extension (optional), video script reuse ZeroClaw pipeline (owner-side Chromium), Typeform re-verify 08-13, submit before 08-14 22:00Z.
+
+## UPDATE 2026-08-08 ~02:1xZ - D3 heartbeat: video script DONE + smoke-test re-verified
+- Fresh runtime proof: node jam/frontend/smoke-test.cjs re-run 08-08 -> 16/16 PASS, 0 FAIL. Evidence set (2) re-confirmed again.
+- D3 DELIVERABLE: docs/jam-demo-video-script.md committed (a7a2cc8) - complete 7-scene <90s recording script (title -> hidden lanes -> deal/reveal -> tug-of-war gauge -> shredder -> LIVE mode/contracts -> outro) with narration, post-production checklist (H.264 <=50MB MP4), and judging-fit table (Hidden mechanics 25/Completeness 25/Creativity 25/Fun 25). Owner-side Chromium capture now = execution, not discovery.
+- X credits still 402-depleted (reset 08-08 02:28:42Z, retried, still dead) - SNS lane paused, not jam-blocking.
+- Email sweep: outreach 5 sent (Cardaire/VoidWeave/SGA/Genopets/Barndog), 0 replies. Inbox noise = GitHub Pages CI failures only (owner-gated deploy, known).
+- Remaining D4-D7: (D4/D5 covered by static demo + smoke harness), Typeform re-verify 08-13, capture + submit before 08-14 22:00Z.
