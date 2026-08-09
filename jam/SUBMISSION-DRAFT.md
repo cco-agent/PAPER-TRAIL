@@ -24,7 +24,7 @@ PAPER TRAIL is a Solana-native card battle game played across three lanes of inf
 - **D7 (08-08): draw-aware smoke harness** — showdown scoring is by design: equal-power lanes award NOBODY (the needle holds), so scoreA+scoreB can be 2 or 1 with draws. The harness now counts draw lanes from the log and asserts `sum === 3 - draws` instead of a fixed 3 (the old assertion was flaky on random deals). **39/39 checks PASS across 5 consecutive runs, 0 FAIL** (re-verified 08-08 09:0xZ).
 - **D8 (08-08): live re-verification** — smoke harness re-run on current main HEAD commit `0c122c10` (privacy-policy.html added for PlayGate/PSG1 listing requirement; not jam evidence). **39/39 PASS, 0 FAIL** (verified 08-08 ~14:0xZ, drawn from raw.githubusercontent.com/cco-agent/PAPER-TRAIL/main).
 - **jam/frontend/smoke-test.cjs** — DOM-faithful headless harness (node, zero deps): deal → reveal → showdown → shredder feed → fuel economy → boost → volatility swing → mode switch → live-bind validation → new match → SFX module guards → auto-demo full loop → match-result banner → **draw-aware score accounting**. **39/39 checks PASS, draw-aware, stable across repeated runs.**
-- Playable now: https://raw.githubusercontent.com/cco-agent/PAPER-TRAIL/main/jam/frontend/index.html
+- Playable now: https://rawcdn.githack.com/cco-agent/PAPER-TRAIL/main/jam/frontend/index.html (verified 08-09 01:4xZ: serves `text/html`, 200 — renders and plays in a browser; self-contained, zero external assets, so the githack mirror is safe). Backup mirror: https://raw.githubusercontent.com/cco-agent/PAPER-TRAIL/main/jam/frontend/index.html (text/plain — content source, not the playable link).
 
 ## ConfidentialDeck / FHE angle
 Card hands are hidden with encrypted state until the reveal step; the demo validates that the wrong key/address cannot read the hand pre-reveal. Live-mode stub documents the on-chain FHE integration path (Inco confidential compute) for the full game: `play(value = wager + fee)` seals the bet -> `zap.attestedReveal([seedHandle])` covalidator-signed reveal -> `settle(attestation, signatures)` resolves lanes. Integration pattern verified against Inco-fhevm/incasino client (08-06).
@@ -44,7 +44,7 @@ PLACEHOLDER: 4-scene screen-record per docs/jam-demo-video-script.md requires Ch
 VIDEO FALLBACK POLICY: if no owner-side Chromium capture by 08-13, submit WITHOUT a video field link — primary evidence (playable public prototype + 39/39 runtime smoke-test, draw-aware and repeatable) is a confirmed MET rule requirement; repo + runtime proof stand as the demonstration. The video is enhancement, not a blocker.
 
 ## Notes for the actual Typeform
-- Fill with: project name above, repo URL, prototype URL (raw GitHub is live; GitHub Pages pending owner enablement — NOT a blocker), demo video link (once recorded, else omit), track = confidential compute / FHE, team size = 1 (+1 human advisor).
+- Fill with: project name above, repo URL, prototype URL (githack mirror verified text/html = playable; raw GitHub backup; GitHub Pages pending owner enablement — NOT a blocker), demo video link (once recorded, else omit), track = confidential compute / FHE, team size = 1 (+1 human advisor).
 - Re-verify form is still live on 08-13 before final submit.
 - Submit on/after 08-13 00:00Z, before 08-14 22:00Z. Late submissions rejected (official).
 
