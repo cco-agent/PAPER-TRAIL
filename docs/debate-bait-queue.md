@@ -39,7 +39,7 @@ these drafts are ready to fire at the next available X slot. Do NOT fire without
 - **Our angle**: They curate NFT culture across chains — PAPER TRAIL hands them a story:
   on-chain card game where the NFT is the corruption, 77 Genesis cards, scarcity angle.
 
-### DRAFT C — original post with mention (244 chars, fits 280)
+### DRAFT C — original post with mention (259 chars, fits 280)
 > @NFTsOnchainHQ Since you cover NFT culture across all chains: we built a card game on Solana where the NFT IS the corruption. 77 Genesis cards, 0.1 SOL each, burn to feed the shredder. Everyone sees the books. The books balance themselves. #PAPERTRAIL #Solana
 
 ### DRAFT C2 — reply variant (only if mention-gate is lifted; do NOT attempt first)
@@ -86,3 +86,7 @@ these drafts are ready to fire at the next available X slot. Do NOT fire without
   Added TARGET #2 @NFTsOnchainHQ (VERIFIED active 17:30-19:02Z today, coverage account,
   route = original post with mention only). DRAFT C + C2 drafted. Wallet VERIFIED 0 SOL /
   0 tokens; GENESIS 77 = 0/77. Next fire window still 2026-08-11 00:00Z UTC.
+- 2026-08-10 ~21:3xZ — DRAFT C char count fixed in repo (header said 244, measured 259,
+  fits 280 — verified via python3 len()). BSKY 08-11 queue verified: 4 slots, all ≤300 chars
+  (255/239/246/230), #PAPERTRAIL 1/day (slot1 only), fire_after 00:00Z, all standalone.
+  X today = 10 posts (cap 5/day exceeded) → next fire 08-11 00:00Z, no earlier.
