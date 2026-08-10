@@ -2,7 +2,7 @@
 
 > Inco x Megapot Summer Game Jam (Hackathon: Submissions)
 > Typeform: https://taglg1ysk8z.typeform.com/to/HCv1A79i
-> Deadline: 2026-08-14 22:00Z — submit on/after 08-13 re-verify (form pre-verified live 08-07 04:4xZ; re-verified live 08-08 04:3xZ AND 08-08 11:1xZ; final re-verify 08-13 before submit)
+> Deadline: 2026-08-14 22:00Z — form RE-VERIFIED LIVE on 08-10 (HTTP 200, title "Summer Game Jam Hackathon: Submissions", body "Submit your project for the Inco x Megapot Summer Game Jam Hackathon."). No further form gate; submit before deadline.
 > Track: Inco (hidden mechanics) — PAPER TRAIL archetype-3 hidden-hand scores on all four judging criteria (Hidden mechanics 25% / Completeness 25% / Creativity 25% / Fun 25%)
 
 ## Project name
@@ -22,15 +22,16 @@ PAPER TRAIL is a Solana-native card battle game played across three lanes of inf
 - **D5 (08-08): procedural Web Audio SFX** — zero-asset flip/shredder/swing/win/lose cues generated with the Web Audio API (no files, no deps); silent no-op where audio is unavailable; guarded so it can never break the headless test harness.
 - **D6 (08-08): AUTO DEMO + match-result banner** — one click plays a full round (deal → 3× shredder feed → reveal), pacing each step for the demo video; the banner announces YOU TAKE THE ROUND / THE HOUSE WINS THIS ROUND / A DRAW after resolution. Playtest bugfix: the fed counter now resets on deal/new match (found by the D6 smoke additions).
 - **D7 (08-08): draw-aware smoke harness** — showdown scoring is by design: equal-power lanes award NOBODY (the needle holds), so scoreA+scoreB can be 2 or 1 with draws. The harness now counts draw lanes from the log and asserts `sum === 3 - draws` instead of a fixed 3 (the old assertion was flaky on random deals). **39/39 checks PASS across 5 consecutive runs, 0 FAIL** (re-verified 08-08 09:0xZ).
-- **D8 (08-08): live re-verification** — smoke harness re-run on current main HEAD commit `0c122c10` (privacy-policy.html added for PlayGate/PSG1 listing requirement; not jam evidence). **39/39 PASS, 0 FAIL** (verified 08-08 ~14:0xZ, drawn from raw.githubusercontent.com/cco-agent/PAPER-TRAIL/main).
-- **jam/frontend/smoke-test.cjs** — DOM-faithful headless harness (node, zero deps): deal → reveal → showdown → shredder feed → fuel economy → boost → volatility swing → mode switch → live-bind validation → new match → SFX module guards → auto-demo full loop → match-result banner → **draw-aware score accounting**. **39/39 checks PASS, draw-aware, stable across repeated runs.**
+- **D8 (08-08): live re-verification** — smoke harness re-run on commit `0c122c10` (privacy-policy.html added for PlayGate/PSG1 listing requirement; not jam evidence). **39/39 PASS, 0 FAIL** (verified 08-08 ~14:0xZ, drawn from raw.githubusercontent.com/cco-agent/PAPER-TRAIL/main).
+- **D9 (08-10): submission gate de-risked early** — Typeform re-verification pulled forward from 08-13 to 08-10 (LIVE confirmed, see header); smoke-test re-run fresh on current main: **39 checks / 0 FAIL**; evidence logged in jam/D3-REVERIFY-20260810.md (commit `88e1f220`).
+- **jam/frontend/smoke-test.cjs** — DOM-faithful headless harness (node, zero deps): deal → reveal → showdown → shredder feed → fuel economy → boost → volatility swing → mode switch → live-bind validation → new match → SFX module guards → auto-demo full loop → match-result banner → **draw-aware score accounting**. **39/39 checks PASS, draw-aware, stable across repeated runs** (re-verified 08-10).
 - Playable now: https://rawcdn.githack.com/cco-agent/PAPER-TRAIL/main/jam/frontend/index.html (verified 08-09 01:4xZ: serves `text/html`, 200 — renders and plays in a browser; self-contained, zero external assets, so the githack mirror is safe). Backup mirror: https://raw.githubusercontent.com/cco-agent/PAPER-TRAIL/main/jam/frontend/index.html (text/plain — content source, not the playable link).
 
 ## ConfidentialDeck / FHE angle
 Card hands are hidden with encrypted state until the reveal step; the demo validates that the wrong key/address cannot read the hand pre-reveal. Live-mode stub documents the on-chain FHE integration path (Inco confidential compute) for the full game: `play(value = wager + fee)` seals the bet -> `zap.attestedReveal([seedHandle])` covalidator-signed reveal -> `settle(attestation, signatures)` resolves lanes. Integration pattern verified against Inco-fhevm/incasino client (08-06).
 
 ## Repo
-https://github.com/cco-agent/PAPER-TRAIL (public) — see jam/ for build docs (D1-PREFLIGHT, D2-LIVE-VERIFY, SUMMER-JAM-BUILD) and this draft. Latest commit `0c122c10` (privacy-policy.html; D7 evidence commit `29f3cbef` — draw-aware harness 39/39 x5 runs).
+https://github.com/cco-agent/PAPER-TRAIL (public) — see jam/ for build docs (D1-PREFLIGHT, D2-LIVE-VERIFY, D3-REVERIFY-20260810, SUMMER-JAM-BUILD) and this draft. Latest commit `88e1f220` (D3-REVERIFY-20260810.md; D7 evidence commit `29f3cbef` — draw-aware harness 39/39 x5 runs).
 
 ## Pre-existing disclosure (official rules: "start fresh, disclose pre-existing")
 - PRE-EXISTING: `jam/hangman-main/` scaffold (pre-jam) and PAPER TRAIL's game design docs / Solana lore predate the jam window. The hangman scaffold is NOT part of the submission evidence.
@@ -45,8 +46,8 @@ VIDEO FALLBACK POLICY: if no owner-side Chromium capture by 08-13, submit WITHOU
 
 ## Notes for the actual Typeform
 - Fill with: project name above, repo URL, prototype URL (githack mirror verified text/html = playable; raw GitHub backup; GitHub Pages pending owner enablement — NOT a blocker), demo video link (once recorded, else omit), track = confidential compute / FHE, team size = 1 (+1 human advisor).
-- Re-verify form is still live on 08-13 before final submit.
+- Form re-verified LIVE 08-10 (early gate pulled forward from 08-13). No re-verify needed on 08-13.
 - Submit on/after 08-13 00:00Z, before 08-14 22:00Z. Late submissions rejected (official).
 
 ## Ledger
-Wallet A9cv...HMguH: 0 SOL / 0 tokens (honest: 0 is 0). GENESIS 77 presale: 0/77 — not part of this submission.
+Wallet A9cv...HMguH: 0 SOL / 0 tokens (re-confirmed 08-10 via TOKEN_BALANCE_ACTION; honest: 0 is 0). GENESIS 77 presale: 0/77 — not part of this submission.
