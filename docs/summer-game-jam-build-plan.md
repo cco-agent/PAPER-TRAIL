@@ -101,3 +101,21 @@
 - X credits still 402-depleted (reset 08-08 02:28:42Z, retried, still dead) - SNS lane paused, not jam-blocking.
 - Email sweep: outreach 5 sent (Cardaire/VoidWeave/SGA/Genopets/Barndog), 0 replies. Inbox noise = GitHub Pages CI failures only (owner-gated deploy, known).
 - Remaining D4-D7: (D4/D5 covered by static demo + smoke harness), Typeform re-verify 08-13, capture + submit before 08-14 22:00Z.
+
+## UPDATE 2026-08-10 21:1xZ - D6/D7 COMPLETE: demo video CAPTURED + quality-verified (CCO side fully done)
+
+- **Demo video captured 08-10 21:02:14Z**: `/opt/cco/data/videos/jam/jam-demo-1786395646689.mp4` — duration 85.48s, size 1,686,155 bytes, H.264 1280x800, no audio track (UI demo, acceptable per script).
+- **Capture route**: local `file:///opt/cco/jam/frontend/index.html` (bypasses githack interstitial "Open the page" screen that broke earlier capture attempts). record-jam-demo.mjs detached-spawned (run_command 30s cap kills 60s+ captures; detached spawn or pre-completed artifact verification is the correct approach - LESSON).
+- **Quality verification (vision model, 3 samples)**: 80s frame + 8-frame contact sheet + final frame — ALL frames show PAPER TRAIL game UI; zero interstitial/blank/error frames. 7 scenes completed: title -> lanes -> DEAL -> shredder -> REVEAL -> gauge -> LIVE mode -> header.
+- **Fresh runtime proof 08-10 21:1xZ**: node jam/frontend/smoke-test.cjs -> **39/39 PASS, 0 FAIL** (expanded: D5 sfx + D6 auto-demo + D6 banner + boost/fuel/shredder-stuffing paths).
+- **Evidence set FINAL (judge-visible)**:
+  1. Playable static demo: jam/frontend/index.html (raw.githubusercontent URL)
+  2. Runtime smoke-test artifact: 39/39 PASS
+  3. Contract source: PaperTrailLanes.sol / ConfidentialDeck.sol
+  4. Demo video: jam-demo-1786395646689.mp4 (85.48s, verified)
+  5. Video script: docs/jam-demo-video-script.md
+  6. Submission draft kit committed (04bc9f4) + DM handoff to K319 17:1xZ (4 days before deadline)
+- **REMAINING (owner-side only, 2 steps)**:
+  1. Optional: higher-fidelity screen capture per jam-demo-video-script.md (fallback: current mp4 is submission-valid)
+  2. Typeform submit: https://taglg1ysk8z.typeform.com/to/HCv1A79i (window 08-13 00:00Z -> 08-14 22:00Z; late = rejected)
+- **Blocker measured**: host has NO Chromium (browser_navigate fails "Chromium distribution 'chrome' is not found") -> CCO cannot self-submit via browser. Submission is a human-gated single point of failure (same as ZeroClaw). Nudge DM scheduled 08-13 + final check before 08-14 22:00Z.
