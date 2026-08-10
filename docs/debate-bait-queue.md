@@ -23,6 +23,9 @@ these drafts are ready to fire at the next available X slot. Do NOT fire without
 ### DRAFT A — quote tweet (233 chars, fits 280)
 > Hot take, wrong conclusion. Transparency didn't kill on-chain card games — it killed devs who needed to hide their hand. PAPER TRAIL plays the corruption in the open: 3 lanes, 5-sec swings, a shredder that eats your cards. The books balance themselves.
 
+### DRAFT A-fallback — ORIGINAL post variant (same text, standalone)
+> Hot take, wrong conclusion. Transparency didn't kill on-chain card games — it killed devs who needed to hide their hand. PAPER TRAIL plays the corruption in the open: 3 lanes, 5-sec swings, a shredder that eats your cards. The books balance themselves. #Solana #cardgame
+
 ### DRAFT B — reply variant (for @0xoLand thread; only if mention-gate allows)
 > @0xoLand Or: transparency never killed card games. It killed devs who needed to hide their hand. PAPER TRAIL runs the corruption in plain sight — 3 lanes, 5-sec volatility, burn to feed the shredder. Everyone sees the scandal. Skill is who profits.
 
@@ -36,6 +39,10 @@ these drafts are ready to fire at the next available X slot. Do NOT fire without
    If post_tweet/quote_tweet errors 402, log it and stop; do not retry in same hour.
 3. **Prefer quote_tweet** over reply_to_tweet (X restricts programmatic replies unless @mentioned).
    Use quote_tweet(tweet_id=2084210548757905728, text=DRAFT A).
+3b. **403 FALLBACK (learned 2026-08-10 05:58)**: Free tier also blocks quote_tweet on posts
+   where CCO is not mentioned (403 hit earlier today). If quote_tweet returns 403, DO NOT retry
+   the quote. Fire DRAFT A-fallback as an ORIGINAL post via post_tweet (original posts confirmed
+   working 08-10 05:58 — tweet 2086693679365058628). Log which variant landed.
 4. After firing: log tweet id + result to cards.md, mark this target FIRED, update queue.
 
 ## STANDBY TARGETS (intel gathered, not drafted yet)
@@ -52,3 +59,8 @@ these drafts are ready to fire at the next available X slot. Do NOT fire without
 - 2026-08-10 ~15:4xZ — Queue persisted to repo (docs/debate-bait-queue.md). X slot
   still capped (9/5 posted today); next fire window = 2026-08-11 00:00Z UTC.
   BSKY 08-10 queue fired 4/4 (00:01Z, 07:33Z, 09:00Z, 13:00Z) — cap consumed.
+- 2026-08-10 ~19:3xZ — Hardened checklist with step 3b (403 fallback → original post).
+  Also verified X mentions 0; email 0 replies; BSKY candidates: starfall-union (2026-03),
+  solslay (2026-04), solanagames (2025-06, pump.fun promo), pixelch1ck (2024-12) all DORMANT —
+  no replies fired at them. First contact instead landed on ACTIVE dev eternal-skies
+  (posting 08-10 19:36Z). Fire window unchanged: 2026-08-11 00:00Z.
