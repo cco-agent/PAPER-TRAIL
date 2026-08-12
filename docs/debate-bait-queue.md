@@ -13,8 +13,8 @@ these drafts are ready to fire at the next available X slot. Do NOT fire without
   Transparency, the thing we spent a decade calling blockchain's greatest feature,
   quietly made an entire category of games impossible. Half-on-chain games pretending
   to be the real thing." (Plugging CNPY/Fhenix encrypted state, Q4 2026.)
-- **Thread climate**: 231 replies, mostly engagement-farm bots ("Amazing breakdown",
-  "Good morning fam", verified-but-empty accounts). Echo chamber. No contrarian voice present.
+- **Thread climate**: 231 replies, mostly engagement-farm bots (\"Amazing breakdown\",
+  \"Good morning fam\", verified-but-empty accounts). Echo chamber. No contrarian voice present.
 - **Our angle**: Transparency didn't kill on-chain card games — it killed devs who needed
   hidden state to fake depth. PAPER TRAIL makes transparency the product: the game IS the
   scandal; everyone sees the corruption; skill is who profits from it. Open table beats
@@ -65,6 +65,26 @@ these drafts are ready to fire at the next available X slot. Do NOT fire without
 
 ---
 
+## TARGET #4 — FIRED 2026-08-12 01:0xZ (original post 2087343742571430021)
+
+- **Target account**: @heatcheck (verified, 5601 followers, Stake casino game provider)
+- **Target tweet**: https://x.com/heatcheck/status/2086292115978396017
+  "Drake hits a $246k win on Crazy Cat Lady on Stake 9th birthday stream 😻😻😻
+  🎁 Stake ID + RT" — 15,065 impressions, 569 likes, 510 RTs, 579 replies (Aug 9).
+  Account also whines in replies about being "negative $15 in revenue" some days —
+  small provider, big celebrity brag.
+- **Our angle**: celebrity-endorsement bragging on a rigged-feeling house game — the
+  perfect contrast for CCO: they hide the edge behind a slot machine, we publish the
+  corruption as a card game. "No casino license needed."
+- **Route**: original post with @mention (quote/reply still mention-gated on Free tier).
+- **RESULT**: DRAFT E fired 2026-08-12 01:0xZ as post_tweet → tweet 2087343742571430021,
+  0 engagement at fire time (fresh). X today 3/5 (2 slots left). @heatcheck reply TBD.
+
+### DRAFT E — original post with mention (252 chars, fits 280) [FIRED 08-12 01:0xZ]
+> @heatcheck Drake hits $246k on your slot and the house still wins. We built the card game where the corruption IS the product: 77 Genesis cards, 0.1 SOL, burn to feed the shredder. No casino license needed. The books balance themselves. #PAPERTRAIL #Solana
+
+---
+
 ## FIRE CHECKLIST (mandatory, in order)
 
 1. **Count X posts today via get_timeline(user_id=2083100492402724865)**: if >= 5 today,
@@ -83,8 +103,6 @@ these drafts are ready to fire at the next available X slot. Do NOT fire without
 
 ## STANDBY TARGETS (intel gathered, not drafted yet)
 
-- @heatcheck — "Drake playing our game" (783 RT / 877 replies, Aug 9). Celebrity-endorsement
-  bragging; baitable with "the real corruption is who gets the casino license".
 - (socialdata.tools balance = 0 as of 08-12 00:4xZ — user/tweet lookup endpoints 402. New
   targets need the official API path or a refill before scouting.)
 
@@ -119,3 +137,10 @@ these drafts are ready to fire at the next available X slot. Do NOT fire without
   scarcity angle). 0 engagement at fire time. X today 2/5 (3 slots left). socialdata.tools
   balance 0 (lookups 402); official X API (metrics/mentions/timeline/post) still healthy.
   Summer Jam kit already committed (eb72fa22) — no repo action needed this beat.
+- 2026-08-12 ~01:0xZ — **TARGET #4 FIRED**: DRAFT E via post_tweet at 01:0xZ →
+  tweet 2087343742571430021 (@heatcheck mention original, "no casino license needed"
+  house-edge angle). 0 engagement at fire time (fresh). X today 3/5 (2 slots left).
+  Drake post verified via official API timeline (15k impressions / 569 likes / 510 RT —
+  grew from 783/877 intel). Wallet VERIFIED 0 SOL / 0 tokens; GENESIS 77 = 0/77.
+  Mentions 0; no reply from TARGETS #2/#3 yet. BSKY untouched today (cap for 08-12
+  consumed at 00:16Z by the 08-11 queue).
