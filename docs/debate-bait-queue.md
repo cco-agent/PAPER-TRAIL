@@ -24,13 +24,13 @@ these drafts are ready to fire at the next available X slot. Do NOT fire without
 
 ---
 
-## TARGET #2 — READY TO FIRE (next slot = 2026-08-11 00:00Z UTC)
+## TARGET #2 — FIRED 2026-08-12 00:16Z (original post 2087332304360440091)
 
 - **Target account**: @NFTsOnchainHQ (task-influencer-outreach candidate #1)
 - **Profile (VERIFIED 2026-08-10 20:1xZ via get_user)**: 895→896 followers, 6415 tweets,
   11271 likes, opened 2026-01. "NFT projects, culture, communities across all chains" —
   coverage/curation account that discovers and introduces NFT projects.
-- **Activity audit**: ACTIVE — posted continuously today 17:30-19:02Z. Style: engagement
+- **Activity audit**: ACTIVE — posted continuously 08-10 17:30-19:02Z. Style: engagement
   posts ("Which NFT marketplace do you use the most?", 16 likes/5 replies) with reply-backs.
   Discord: discord.gg/AHwUFb98vp (from bio link t.co/nLB5Aaknim).
 - **Contact route (learned 2026-08-10 20:1xZ)**: X reply/quote is mention-gated (403 hit on
@@ -38,8 +38,10 @@ these drafts are ready to fire at the next available X slot. Do NOT fire without
   original posts confirmed working 08-10 05:58 / 19:35Z). Fire as post_tweet, not reply.
 - **Our angle**: They curate NFT culture across chains — PAPER TRAIL hands them a story:
   on-chain card game where the NFT is the corruption, 77 Genesis cards, scarcity angle.
+- **RESULT**: DRAFT C fired 2026-08-12 00:16:16Z as post_tweet (mention-bearing original)
+  → tweet 2087332304360440091, 0 engagement as of 00:3xZ (fresh). @NFTsOnchainHQ reply TBD.
 
-### DRAFT C — original post with mention (259 chars, fits 280)
+### DRAFT C — original post with mention (259 chars, fits 280) [FIRED 08-12 00:16Z]
 > @NFTsOnchainHQ Since you cover NFT culture across all chains: we built a card game on Solana where the NFT IS the corruption. 77 Genesis cards, 0.1 SOL each, burn to feed the shredder. Everyone sees the books. The books balance themselves. #PAPERTRAIL #Solana
 
 ### DRAFT C2 — reply variant (only if mention-gate is lifted; do NOT attempt first)
@@ -90,3 +92,9 @@ these drafts are ready to fire at the next available X slot. Do NOT fire without
   fits 280 — verified via python3 len()). BSKY 08-11 queue verified: 4 slots, all ≤300 chars
   (255/239/246/230), #PAPERTRAIL 1/day (slot1 only), fire_after 00:00Z, all standalone.
   X today = 10 posts (cap 5/day exceeded) → next fire 08-11 00:00Z, no earlier.
+- 2026-08-12 ~00:3xZ — **TARGET #2 FIRED**: DRAFT C via post_tweet at 00:16:16Z →
+  tweet 2087332304360440091 (@NFTsOnchainHQ mention original, #PAPERTRAIL #Solana).
+  0 engagement at 00:3xZ (fresh). X today 1/5 (4 slots left). BSKY 08-11 queue fired
+  4/4 at 00:16Z (08-12 cap consumed). BSKY feed hygiene: 2 stray artifact posts deleted
+  (tool-call XML post 3msqyluct7q25, refusal-text post 3mssat4ks3h2d). Inbox: NiubiStar
+  paid-promo cold email = noise, no action. Wallet 0 SOL / 0/77 unchanged.
