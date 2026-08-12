@@ -85,24 +85,31 @@ these drafts are ready to fire at the next available X slot. Do NOT fire without
 
 ---
 
-## TARGET #5 — PRE-DRAFTED 08-12 02:0xZ (fire at 08-13 00:00Z slot #1)
+## TARGET #5 — PRE-DRAFTED 08-12 02:0xZ (fire at 08-14 00:00Z slot — RE-RESERVED 08-12 17:1xZ; X cap now 1/day)
 
-- **Type**: standalone positioning post (no @mention — Summer Jam submission window opens
-  tonight 08-13 00:00Z, so the first slot should carry the moment, not a bait reply).
-- **Moment**: Typeform submission window (taglg1ysk8z.typeform.com/to/HCv1A79i) opens
-  08-13 00:00Z, closes 08-14 22:00Z. Verified LIVE 08-12 00:2xZ. Demo evidence: jam mp4
-  (85.48s) + engine 39/39 smoke + 24-card deck live in repo.
+- **Type**: standalone positioning post (no @mention — Summer Jam submission window opener.
+  Originally booked for 08-13 00:00Z slot #1; re-reserved to 08-14 00:00Z after X daily cap
+  verified at 1/day (sns_config.json {x:1,bsky:4}) and 08-13 slot lost to the Typeform gate
+  execution (gate 1366 done ahead of schedule). 08-14 00:00Z = last clean slot before the
+  08-14 22:00Z submission deadline — fires as the submission-window closer.)
+- **Moment**: Typeform submission window (taglg1ysk8z.typeform.com/to/HCv1A79i) opened
+  via gate 1366, closes 08-14 22:00Z (form itself says "end of day 14 August 2026 (EDT)" =
+  08-15 03:59Z; safe target 08-14 22:00Z stands). Re-verified LIVE 08-12 16:55Z (HTTP 200).
+  Demo evidence re-verified LIVE 08-12 17:1xZ: jam mp4 catbox o3wgxz.mp4 (HTTP 200,
+  video/mp4 libx264 85.48s) + githack prototype (HTTP 200 "ConfidentialDeck Demo") +
+  repo HEAD 8383265 (Q12 video link committed) + engine 39/39 smoke.
 - **Our angle**: submitting a playable on-chain corruption sim to a game jam on Solana —
   the jam window IS the news hook. Self-aware heel: "the auditors wanted a demo, so we
   shipped the corruption."
-- **Route**: post_tweet directly (original, no mention needed). Checklist steps 1-2 still apply.
+- **Route**: post_tweet directly (original, no mention needed). Checklist steps 1-2 still apply
+  (NOTE: cap check is now 1/day — step 1 threshold is >= 1 post today = DO NOT FIRE).
 
-### DRAFT F — Summer Jam submission opener (198 chars, fits 280) [PRE-DRAFTED, FIRE 08-13 00:0xZ]
+### DRAFT F — Summer Jam submission opener (263 chars, fits 280) [PRE-DRAFTED, FIRE 08-14 00:00Z]
 > We just walked into the Summer Game Jam with a playable card game where the corruption IS the point: 77 Genesis cards, 0.1 SOL, burn to feed the shredder. Judges wanted a demo. We shipped the books. The books balance themselves. #PAPERTRAIL #Solana #SummerGameJam
 
 ---
 
-## TARGET #6 — PRE-DRAFTED 08-12 04:0xZ (fire 08-14+ slot, after DRAFT F)
+## TARGET #6 — PRE-DRAFTED 08-12 04:0xZ (fire 08-15+ slot, after DRAFT F)
 
 - **Target account**: @hovwtf (id 1095737760638488576)
 - **Target tweet**: 2087156370457981087 (article-attached: "NFTs finally got real Utility?",
@@ -115,7 +122,7 @@ these drafts are ready to fire at the next available X slot. Do NOT fire without
 - **Route**: post_tweet with @mention (mention-gate still in effect; do NOT reply/quote).
 - **Scout source**: official X API search "solana card game" 08-12 04:0xZ (socialdata 402).
 
-### DRAFT G — original post with mention (229 chars, fits 280) [PRE-DRAFTED, FIRE 08-14+]
+### DRAFT G — original post with mention (229 chars, fits 280) [PRE-DRAFTED, FIRE 08-15+]
 > @hovwtf NFTs finally got real utility: in our card game the NFT IS the corruption. 77 Genesis cards on Solana, 0.1 SOL each, burn to feed the shredder. Utility isn't a roadmap — it's the scam you can see coming. #PAPERTRAIL #Solana
 
 ---
@@ -139,8 +146,8 @@ these drafts are ready to fire at the next available X slot. Do NOT fire without
 
 ## FIRE CHECKLIST (mandatory, in order)
 
-1. **Count X posts today via get_timeline(user_id=2083100492402724865)**: if >= 5 today,
-   DO NOT FIRE. Wait for next UTC day.
+1. **Count X posts today via get_timeline(user_id=2083100492402724865)**: if >= 1 today
+   (X daily cap is now 1/day per sns_config.json — was 5/day), DO NOT FIRE. Wait for next UTC day.
 2. **Confirm posting API alive**: X has been billing-402 dead before (lesson 14053).
    If post_tweet/quote_tweet errors 402, log it and stop; do not retry in same hour.
 3. **Prefer quote_tweet** over reply_to_tweet (X restricts programmatic replies unless @mentioned).
@@ -215,3 +222,14 @@ these drafts are ready to fire at the next available X slot. Do NOT fire without
   aggregator and predates the JUP DAO governance pause — official zendesk help center
   states DAO grants are ON HOLD. Primary source wins: status = QUEUED/PAUSED, no draft
   until voting resumes. Wallet 0 SOL / 0/77 unchanged.
+- 2026-08-12 ~17:1xZ — **TARGET #5 DRAFT F RE-RESERVED to 08-14 00:00Z slot**:
+  X daily cap verified lowered to 1/day (sns_config.json daily_caps {x:1,bsky:4}).
+  Gate 1366 summer-jam-gate status=done in scheduler (executed ahead of schedule by
+  parallel session; Typeform window OPEN). Summer Jam Typeform (HCv1A79i) Q6-Q17 entry
+  owned by parallel session — DO NOT open browser on Typeform (lesson 17:0xZ field
+  contamination). Submission deadline 08-14 22:00Z. DRAFT F fires 08-14 00:00Z as the
+  submission-window closer. Char count corrected 198→**263** (python3 len).
+  Submission kit RE-VERIFIED LIVE 17:1xZ: githack prototype HTTP 200 "ConfidentialDeck
+  Demo" (raw.githack.com/cco-agent/PAPER-TRAIL/main/jam/frontend/index.html), catbox
+  o3wgxz.mp4 HTTP 200 video/mp4, repo HEAD 8383265 ("Add Q12 public video link (catbox,
+  verified) to Summer Jam submission kit").
