@@ -29,6 +29,11 @@
 > surface: https://cco-agent.github.io/PAPER-TRAIL/ (marketing + GENESIS ledger,
 > also verified live this tick). Use the githack URL as the Q11 answer.
 
+> **UPDATE 2026-08-12 ~05:1xZ — Q12 "Demo video link" PUBLIC URL LOCKED.**
+> CCO mp4 uploaded to catbox (anonymous, no expiry, 1.6MB): 
+> **https://files.catbox.moe/o3wgxz.mp4** — browser-verified HTTP 200 + 206
+> (video streaming) 08-12. Paste this into Q12. Link already DM'd to K319.
+
 ## Hard facts (VERIFIED 08-06, re-verify 08-12 DONE)
 
 - **Event**: Inco x Megapot Summer Game Jam — track: **Inco** ($3K / $1.5K / $500 USDC)
@@ -44,7 +49,7 @@
 | 1 | Playable static demo (ConfidentialDeck prototype) | https://raw.githack.com/cco-agent/PAPER-TRAIL/main/jam/frontend/index.html (browser-verified LIVE + AUTO DEMO round resolved 3-0, 08-12) |
 | 2 | Runtime proof — smoke-test harness | `jam/frontend/smoke-test.cjs`, 39/39 PASS (re-verified 08-10; expanded D5/D6 paths) |
 | 3 | Contract source | `contracts/PaperTrailLanes.sol` + `ConfidentialDeck.sol` (kit-derived, audited FHE primitives) |
-| 4 | Demo video (CCO-captured, submission-valid) | `jam-demo-1786395646689.mp4` — 85.48s, H.264 1280x800, 1.6MB (<50MB cap, verified 08-12), 7 scenes, vision-verified 08-10 (host-local at /opt/cco/data/videos/jam/; upload/attach at submit) |
+| 4 | Demo video (CCO-captured, submission-valid) | **PUBLIC: https://files.catbox.moe/o3wgxz.mp4** (uploaded 08-12, verified 200/206). Source `jam-demo-1786395646689.mp4` — 85.48s, H.264 1280x800, 1.6MB (<50MB cap, verified 08-12), 7 scenes, vision-verified 08-10 (host-local at /opt/cco/data/videos/jam/) |
 | 5 | Video script (optional higher-fidelity recapture) | `docs/jam-demo-video-script.md` (7 scenes, <90s, with narration + judging-fit table) |
 | 6 | Build plan / evidence ledger | `docs/summer-game-jam-build-plan.md` |
 
@@ -62,7 +67,7 @@ CCO-side; your machine is still fine. Script is ready:
 - Export MP4, H.264, **≤50MB** (Typeform limit)
 - Repo link visible in outro or description
 - **If capture is impossible**: fallback is allowed — submit repo + static screenshots + the script (policy documented in build plan). Do NOT let video block submission.
-- NOTE: CCO's own captured mp4 (85.48s, 1.6MB, verified 08-12) is submission-valid — use it if your recapture doesn't happen.
+- NOTE: CCO's own captured mp4 is ALREADY PUBLIC (https://files.catbox.moe/o3wgxz.mp4) — paste into Q12 and done. Recapture only if you want a fancier cut.
 
 ## Owner-side step 2 — Typeform submit (window 08-13 00:00Z → 08-14 22:00Z)
 
@@ -71,7 +76,7 @@ Adapt these into the Typeform fields:
 - **Game title**: PAPER TRAIL
 - **One-liner**: A three-lane card-battle game about scandal, news & influence — with encrypted hands on Inco's confidential EVM.
 - **Description (short)**: PAPER TRAIL is a 3-lane card battler (The Headline / The Media / The Underground) where players commit cards with FHE-encrypted values and the truth only decodes at showdown. Core loop: deal → reveal → lane resolution → 3-minute tug-of-war gauge; burn cards to feed the shredder. Built on Inco's ConfidentialDeck kit (archetype 3: hidden hand / shuffled deck), so the FHE primitives are audited and our lane rules sit on top. Solana main game unchanged; this prototype is EVM for the jam.
-- **Links**: repo https://github.com/cco-agent/PAPER-TRAIL · live prototype https://raw.githack.com/cco-agent/PAPER-TRAIL/main/jam/frontend/index.html (browser-verified, AUTO DEMO plays full round) · marketing https://cco-agent.github.io/PAPER-TRAIL/ · video [paste your MP4 URL or attach — CCO mp4 is 1.6MB, attachable]
+- **Links**: repo https://github.com/cco-agent/PAPER-TRAIL · live prototype https://raw.githack.com/cco-agent/PAPER-TRAIL/main/jam/frontend/index.html (browser-verified, AUTO DEMO plays full round) · marketing https://cco-agent.github.io/PAPER-TRAIL/ · video https://files.catbox.moe/o3wgxz.mp4 (public, verified 08-12)
 - **Track**: Inco
 
 ## Judging fit (lead with the hidden-lane reveal)
@@ -88,13 +93,13 @@ Adapt these into the Typeform fields:
 - [x] 08-12: re-verify Typeform URL (HCv1A79i) — DONE early, LIVE confirmed
 - [x] 08-12: video gate verified — CCO mp4 = 1.6MB < 50MB cap, attachable as-is
 - [x] 08-12: Q11 live prototype URL browser-verified (githack render + AUTO DEMO 3-0; GH Pages backup live)
-- [ ] 08-14 before 22:00Z: video attached (CCO mp4 valid; recapture optional)
+- [x] 08-12: Q12 video PUBLIC LINK — https://files.catbox.moe/o3wgxz.mp4 (verified 200/206; DM'd to K319)
 - [ ] 08-14 before 22:00Z: Typeform submitted, confirmation screenshot saved
 - [ ] Post-submission: DM CCO the confirmation + screenshot for the ledger
 
-## Ledger (honest, 08-12 ~05:0xZ)
+## Ledger (honest, 08-12 ~05:1xZ)
 
 - Wallet A9cv...HMguH: 0 SOL / 0 tokens (unchanged; GENESIS 77 = 0/77)
-- CCO-side jam evidence: all present and verified (items 1-6 above; video gate closed 08-12; Q11 URL browser-verified 08-12)
+- CCO-side jam evidence: all present and verified (items 1-6 above; video gate closed 08-12; Q11 URL browser-verified 08-12; Q12 public link live 08-12)
 - Typeform URL: LIVE (HCv1A79i, verified 08-12)
-- Owner-side remaining: video attach (optional recapture) + Typeform submit (window 08-13 00:00Z → 08-14 22:00Z)
+- Owner-side remaining: Typeform submit (window 08-13 00:00Z → 08-14 22:00Z)
