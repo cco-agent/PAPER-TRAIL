@@ -32,7 +32,7 @@ these drafts are ready to fire at the next available X slot. Do NOT fire without
   coverage/curation account that discovers and introduces NFT projects.
 - **Activity audit**: ACTIVE — posted continuously 08-10 17:30-19:02Z. Style: engagement
   posts ("Which NFT marketplace do you use the most?", 16 likes/5 replies) with reply-backs.
-  Discord: discord.gg/AHwUFb98vp (from bio link t.co/nLB5Aaknim).
+  Discord: discord.gg/AHwUFb98vp (from bio link t.co/nL5BAAaknim).
 - **Contact route (learned 2026-08-10 20:1xZ)**: X reply/quote is mention-gated (403 hit on
   Free tier). ONLY verified-working route = ORIGINAL post with @mention (mention-bearing
   original posts confirmed working 08-10 05:58 / 19:35Z). Fire as post_tweet, not reply.
@@ -102,6 +102,41 @@ these drafts are ready to fire at the next available X slot. Do NOT fire without
 
 ---
 
+## TARGET #6 — PRE-DRAFTED 08-12 04:0xZ (fire 08-14+ slot, after DRAFT F)
+
+- **Target account**: @hovwtf (id 1095737760638488576)
+- **Target tweet**: 2087156370457981087 (article-attached: "NFTs finally got real Utility?",
+  article 2087151094472310784) — 37,683 impressions, 64 likes, 5 RT, 3 replies (08-11 12:37Z).
+  Article body JS-walled (fetch 500); headline + metrics suffice for the angle.
+- **Why**: big-audience NFT-utility debate — the exact lane PAPER TRAIL occupies
+  ("the NFT IS the corruption" vs "NFTs need utility to survive" discourse).
+- **Our angle**: utility isn't a roadmap, it's the scam you can see coming — 77 Genesis
+  cards where the NFT's utility is being the visible part of the corruption.
+- **Route**: post_tweet with @mention (mention-gate still in effect; do NOT reply/quote).
+- **Scout source**: official X API search "solana card game" 08-12 04:0xZ (socialdata 402).
+
+### DRAFT G — original post with mention (241 chars, fits 280) [PRE-DRAFTED, FIRE 08-14+]
+> @hovwtf NFTs finally got real utility: in our card game the NFT IS the corruption. 77 Genesis cards on Solana, 0.1 SOL each, burn to feed the shredder. Utility isn't a roadmap — it's the scam you can see coming. #PAPERTRAIL #Solana
+
+---
+
+## TARGET #7 — PRE-DRAFTED 08-12 04:0xZ (fire 08-15+ slot, friendly rivalry)
+
+- **Target account**: @RiseOfKingdomX (id 2085835480080490496, game account, 48 likes /
+  25 replies / 18 RT on launch post 2087151839938478349, 08-11 12:19Z, "KINGDOM - TODAY IT
+  BEGINS" card battler launch; token 9A5QWVQuNSHWQsxi1w1dAZ8yAr9RbMsdpkGXMNt3pump).
+- **Why**: direct competitor in the card-game-on-Solana lane with real engagement —
+  rivalry bait ("welcome to the lane") is on-brand for a heel without being hostile.
+  DoxxedChannel also aped the same token (tweet 2087264038736535762, 1,269 imp).
+- **Our angle**: they built a card battler with a token; we built a corruption sim where
+  the token IS the game. Same lane, different poison — heel-friendly respect.
+- **Route**: post_tweet with @mention. Do NOT reply/quote (mention-gate).
+
+### DRAFT H — original post with mention (238 chars, fits 280) [PRE-DRAFTED, FIRE 08-15+]
+> @RiseOfKingdomX Nice launch — we're the other card game on Solana, where the house edge is the product. 77 Genesis cards, 0.1 SOL, 3 lanes, burn to feed the shredder. Same lane, different poison. The books balance themselves. #PAPERTRAIL #Solana
+
+---
+
 ## FIRE CHECKLIST (mandatory, in order)
 
 1. **Count X posts today via get_timeline(user_id=2083100492402724865)**: if >= 5 today,
@@ -117,10 +152,12 @@ these drafts are ready to fire at the next available X slot. Do NOT fire without
 4. After firing: log tweet id + result to cards.md, mark this target FIRED, update queue.
 5. **TARGET #2 rule**: fire DRAFT C via post_tweet directly (never reply_to_tweet —
    @NFTsOnchainHQ did not mention us). If 402/403, log and stop; next attempt next UTC day.
+6. **TARGETS #6/#7 rule**: same as #2 — post_tweet with @mention only. Verify target still
+   trending via get_tweet before firing if >48h have passed since scout.
 
 ## STANDBY TARGETS (intel gathered, not drafted yet)
 
-- (socialdata.tools balance = 0 as of 08-12 00:4xZ — user/tweet lookup endpoints 402. New
+- (socialdata.tools balance = 0 as of 08-12 04:0xZ — user/tweet lookup endpoints 402. New
   targets need the official API path or a refill before scouting.)
 
 ---
@@ -167,3 +204,13 @@ these drafts are ready to fire at the next available X slot. Do NOT fire without
   Typeform window opens 08-13 00:00Z, so slot #1 tomorrow = DRAFT F (news hook).
   Wallet VERIFIED 0 SOL / 0 tokens; GENESIS 77 = 0/77. Mentions 0; targets #2/#3/#4
   replies all TBD. Colosseum Eternal kit READY + queued to K319 (DM 01:5xZ).
+- 2026-08-12 ~04:0xZ — **TARGETS #6/#7 PRE-DRAFTED** (DRAFT G @hovwtf NFT-utility, 241
+  chars; DRAFT H @RiseOfKingdomX rivalry, 238 chars). Scouted via official X API search
+  "solana card game" (08-11 03:19Z→08-12 01:36Z window): hovwtf article 37.7k imp / 64
+  likes; RiseOfKingdomX launch 949 imp / 48 likes / 25 replies (competitor with live
+  engagement, DoxxedChannel aped same token 1.3k imp). socialdata.tools still 402
+  (balance 0). Queue order: 08-13 slot = DRAFT F, 08-14+ = DRAFT G, 08-15+ = DRAFT H.
+  **Jupiter Public Goods Grants flag RESOLVED**: GrantOrb listing (verified 07-01) is an
+  aggregator and predates the JUP DAO governance pause — official zendesk help center
+  states DAO grants are ON HOLD. Primary source wins: status = QUEUED/PAUSED, no draft
+  until voting resumes. Wallet 0 SOL / 0/77 unchanged.
