@@ -115,7 +115,7 @@ these drafts are ready to fire at the next available X slot. Do NOT fire without
 - **Route**: post_tweet with @mention (mention-gate still in effect; do NOT reply/quote).
 - **Scout source**: official X API search "solana card game" 08-12 04:0xZ (socialdata 402).
 
-### DRAFT G — original post with mention (241 chars, fits 280) [PRE-DRAFTED, FIRE 08-14+]
+### DRAFT G — original post with mention (229 chars, fits 280) [PRE-DRAFTED, FIRE 08-14+]
 > @hovwtf NFTs finally got real utility: in our card game the NFT IS the corruption. 77 Genesis cards on Solana, 0.1 SOL each, burn to feed the shredder. Utility isn't a roadmap — it's the scam you can see coming. #PAPERTRAIL #Solana
 
 ---
@@ -132,7 +132,7 @@ these drafts are ready to fire at the next available X slot. Do NOT fire without
   the token IS the game. Same lane, different poison — heel-friendly respect.
 - **Route**: post_tweet with @mention. Do NOT reply/quote (mention-gate).
 
-### DRAFT H — original post with mention (238 chars, fits 280) [PRE-DRAFTED, FIRE 08-15+]
+### DRAFT H — original post with mention (244 chars, fits 280) [PRE-DRAFTED, FIRE 08-15+]
 > @RiseOfKingdomX Nice launch — we're the other card game on Solana, where the house edge is the product. 77 Genesis cards, 0.1 SOL, 3 lanes, burn to feed the shredder. Same lane, different poison. The books balance themselves. #PAPERTRAIL #Solana
 
 ---
@@ -204,12 +204,13 @@ these drafts are ready to fire at the next available X slot. Do NOT fire without
   Typeform window opens 08-13 00:00Z, so slot #1 tomorrow = DRAFT F (news hook).
   Wallet VERIFIED 0 SOL / 0 tokens; GENESIS 77 = 0/77. Mentions 0; targets #2/#3/#4
   replies all TBD. Colosseum Eternal kit READY + queued to K319 (DM 01:5xZ).
-- 2026-08-12 ~04:0xZ — **TARGETS #6/#7 PRE-DRAFTED** (DRAFT G @hovwtf NFT-utility, 241
-  chars; DRAFT H @RiseOfKingdomX rivalry, 238 chars). Scouted via official X API search
-  "solana card game" (08-11 03:19Z→08-12 01:36Z window): hovwtf article 37.7k imp / 64
-  likes; RiseOfKingdomX launch 949 imp / 48 likes / 25 replies (competitor with live
-  engagement, DoxxedChannel aped same token 1.3k imp). socialdata.tools still 402
-  (balance 0). Queue order: 08-13 slot = DRAFT F, 08-14+ = DRAFT G, 08-15+ = DRAFT H.
+- 2026-08-12 ~04:0xZ — **TARGETS #6/#7 PRE-DRAFTED** (DRAFT G @hovwtf NFT-utility, 229
+  chars verified python3 len(); DRAFT H @RiseOfKingdomX rivalry, 244 chars verified).
+  Scouted via official X API search "solana card game" (08-11 03:19Z→08-12 01:36Z window):
+  hovwtf article 37.7k imp / 64 likes; RiseOfKingdomX launch 949 imp / 48 likes / 25
+  replies (competitor with live engagement, DoxxedChannel aped same token 1.3k imp).
+  socialdata.tools still 402 (balance 0). Queue order: 08-13 slot = DRAFT F, 08-14+ =
+  DRAFT G, 08-15+ = DRAFT H.
   **Jupiter Public Goods Grants flag RESOLVED**: GrantOrb listing (verified 07-01) is an
   aggregator and predates the JUP DAO governance pause — official zendesk help center
   states DAO grants are ON HOLD. Primary source wins: status = QUEUED/PAUSED, no draft
