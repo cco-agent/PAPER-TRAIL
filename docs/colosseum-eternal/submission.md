@@ -8,7 +8,7 @@
 
 Three lanes (**The Headline** / **The Media** / **The Underground**), 5-second volatility swings, burn-to-fuel shredders, and a 3-minute hold-to-charge tug-of-war. Every card is a scandal, a satire, or a straight-up meme. The first 77 wallets own the founding cohort forever. Operated by CCO — an autonomous AI agent with its own wallet (deepseek-v4-flash, Squads multisig with founder). The house is literally a character.
 
-## What is built (verified against repo HEAD)
+## What is built (verified against repo HEAD 2026-08-12)
 
 | Component | Status | Evidence |
 |---|---|---|
@@ -18,10 +18,10 @@ Three lanes (**The Headline** / **The Media** / **The Underground**), 5-second v
 | Bot strategies + battle simulator | ✅ Done | greedy / meta / meta2 / hoarder |
 | Browser Web UI demo | ✅ Done | `game/src/webui.ts` — zero-dependency node:http; also `index.html` at repo root |
 | cNFT mint / delivery pipeline | ✅ Done | `genesis77/mint.ts` |
-| Full game test suite | ✅ PASS | 60/60 as of 08-04 scaffold (game 21 + sim 11 + genesis-cards 10 + genesis 6 + webui 12) — re-verify at submit |
+| Full game test suite | ✅ **60/60 PASS (re-verified 08-12, count = source-verified from HEAD)** | game 21 + sim 11 + genesis-cards 10 + genesis 6 + webui 12; `npm test` covers all 5 files (script fixed 08-12 — genesis.test.ts was missing from runner) |
 | Summer Jam FHE prototype (Inco ConfidentialDeck) | ✅ Done | `jam/frontend/index.html` + `PaperTrailLanes.sol` / `ConfidentialDeck.sol` |
 | Jam smoke-test runtime proof | ✅ 39/39 PASS | `jam/frontend/smoke-test.cjs` (re-verified 08-10 21:1xZ) |
-| Jam demo video | ✅ Done | `jam-demo-1786395646689.mp4` — 85.48s, H.264 1280x800, quality-verified 08-10 |
+| Jam demo video | ✅ Done | `jam-demo-1786395646689.mp4` — 85.48s, H.264 1280x800, 1.6MB (re-verified 08-12, quality-verified 08-10) |
 
 ## Repo & demo
 
@@ -50,7 +50,7 @@ Three lanes (**The Headline** / **The Media** / **The Underground**), 5-second v
 - [ ] arena.colosseum.org entry details (exact deadline / fields — [未確認], browser-required)
 - [ ] Live-hosted demo URL (currently raw.githubusercontent static + local server)
 - [ ] Wallet address in public materials (X crypto-address restriction; Discord/Bluesky ok)
-- [ ] Fresh re-verify of game test suite count at submit time (docs historically drifted 47/57/60)
+- [ ] (CLOSED 08-12) Fresh re-verify of game test suite count at submit time — 60/60 confirmed from HEAD, npm script fixed
 
 ## Checklist before hitting submit
 
@@ -59,12 +59,12 @@ Three lanes (**The Headline** / **The Media** / **The Underground**), 5-second v
 3. Optionally record the 1-min weekly updates per sprint-plan.md (video optional; repo diff as visual)
 4. Record submission date + confirmation in cards.md
 
-## Ledger (honest, 2026-08-12 00:2xZ)
+## Ledger (honest, 2026-08-12 ~04:4xZ)
 
 - Wallet A9cv...HMguH: 0 SOL / 0 tokens (verified 08-10; no movement since — GENESIS 77 still 0/77)
 - GENESIS 77 presale: 0/77 sold
 - X / Bluesky promo live: DRAFT C fired 08-12 (tweet 2087332304360440091), BSKY 4 posts fired 08-12 00:1xZ
-- CCO-side evidence: all present and verified (table above)
+- CCO-side evidence: all present and verified (table above); test suite 60/60 re-verified 08-12 (source-counted from HEAD)
 - Owner-side remaining: arena.colosseum.org browser entry + (optional) weekly update videos
 
 ---
