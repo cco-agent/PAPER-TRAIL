@@ -12,6 +12,11 @@
 > Submit window opens 08-13 00:00Z. Owner-side: capture video (or fallback) +
 > submit any time in window. Nudge DM sent to K319 08-12.
 
+> **UPDATE 2026-08-12 ~04:2xZ — Video gate CLOSED.** CCO's mp4 verified on host:
+> 1,686,155 bytes (~1.6MB), valid MP4 (ISO 14496-12), H.264 1280x800, 85.48s —
+> comfortably under Typeform's 50MB attach limit. No compression needed. The
+> CCO-captured video is submission-valid as-is; recapture remains optional.
+
 ## Hard facts (VERIFIED 08-06, re-verify 08-12 DONE)
 
 - **Event**: Inco x Megapot Summer Game Jam — track: **Inco** ($3K / $1.5K / $500 USDC)
@@ -27,7 +32,7 @@
 | 1 | Playable static demo (ConfidentialDeck prototype) | https://raw.githubusercontent.com/cco-agent/PAPER-TRAIL/main/jam/frontend/index.html (open in browser; githack mirror renders best) |
 | 2 | Runtime proof — smoke-test harness | `jam/frontend/smoke-test.cjs`, 39/39 PASS (re-verified 08-10; expanded D5/D6 paths) |
 | 3 | Contract source | `contracts/PaperTrailLanes.sol` + `ConfidentialDeck.sol` (kit-derived, audited FHE primitives) |
-| 4 | Demo video (CCO-captured, submission-valid) | `jam-demo-1786395646689.mp4` — 85.48s, H.264 1280x800, 7 scenes, vision-verified 08-10 (host-local at /opt/cco/data/videos/jam/; upload/attach at submit) |
+| 4 | Demo video (CCO-captured, submission-valid) | `jam-demo-1786395646689.mp4` — 85.48s, H.264 1280x800, 1.6MB (<50MB cap, verified 08-12), 7 scenes, vision-verified 08-10 (host-local at /opt/cco/data/videos/jam/; upload/attach at submit) |
 | 5 | Video script (optional higher-fidelity recapture) | `docs/jam-demo-video-script.md` (7 scenes, <90s, with narration + judging-fit table) |
 | 6 | Build plan / evidence ledger | `docs/summer-game-jam-build-plan.md` |
 
@@ -44,7 +49,7 @@ Host has no Chromium, so capture must happen on your machine. Script is ready:
 - Export MP4, H.264, **≤50MB** (Typeform limit)
 - Repo link visible in outro or description
 - **If capture is impossible**: fallback is allowed — submit repo + static screenshots + the script (policy documented in build plan). Do NOT let video block submission.
-- NOTE: CCO's own captured mp4 (85.48s, verified) is submission-valid — use it if your recapture doesn't happen.
+- NOTE: CCO's own captured mp4 (85.48s, 1.6MB, verified 08-12) is submission-valid — use it if your recapture doesn't happen.
 
 ## Owner-side step 2 — Typeform submit (window 08-13 00:00Z → 08-14 22:00Z)
 
@@ -53,7 +58,7 @@ Adapt these into the Typeform fields:
 - **Game title**: PAPER TRAIL
 - **One-liner**: A three-lane card-battle game about scandal, news & influence — with encrypted hands on Inco's confidential EVM.
 - **Description (short)**: PAPER TRAIL is a 3-lane card battler (The Headline / The Media / The Underground) where players commit cards with FHE-encrypted values and the truth only decodes at showdown. Core loop: deal → reveal → lane resolution → 3-minute tug-of-war gauge; burn cards to feed the shredder. Built on Inco's ConfidentialDeck kit (archetype 3: hidden hand / shuffled deck), so the FHE primitives are audited and our lane rules sit on top. Solana main game unchanged; this prototype is EVM for the jam.
-- **Links**: repo https://github.com/cco-agent/PAPER-TRAIL · demo https://raw.githubusercontent.com/cco-agent/PAPER-TRAIL/main/jam/frontend/index.html · video [paste your MP4 URL or attach]
+- **Links**: repo https://github.com/cco-agent/PAPER-TRAIL · demo https://raw.githubusercontent.com/cco-agent/PAPER-TRAIL/main/jam/frontend/index.html · video [paste your MP4 URL or attach — CCO mp4 is 1.6MB, attachable]
 - **Track**: Inco
 
 ## Judging fit (lead with the hidden-lane reveal)
@@ -68,13 +73,14 @@ Adapt these into the Typeform fields:
 ## Checklist
 
 - [x] 08-12: re-verify Typeform URL (HCv1A79i) — DONE early, LIVE confirmed
-- [ ] 08-14 before 22:00Z: video captured (or fallback chosen; CCO mp4 is valid fallback)
+- [x] 08-12: video gate verified — CCO mp4 = 1.6MB < 50MB cap, attachable as-is
+- [ ] 08-14 before 22:00Z: video attached (CCO mp4 valid; recapture optional)
 - [ ] 08-14 before 22:00Z: Typeform submitted, confirmation screenshot saved
 - [ ] Post-submission: DM CCO the confirmation + screenshot for the ledger
 
-## Ledger (honest, 08-12 00:2xZ)
+## Ledger (honest, 08-12 ~04:2xZ)
 
 - Wallet A9cv...HMguH: 0 SOL / 0 tokens (unchanged; GENESIS 77 = 0/77)
-- CCO-side jam evidence: all present and verified (items 1-6 above)
+- CCO-side jam evidence: all present and verified (items 1-6 above; video gate closed 08-12)
 - Typeform URL: LIVE (HCv1A79i, verified 08-12)
-- Owner-side remaining: video capture (optional) + Typeform submit (window 08-13 00:00Z → 08-14 22:00Z)
+- Owner-side remaining: video attach (optional recapture) + Typeform submit (window 08-13 00:00Z → 08-14 22:00Z)
