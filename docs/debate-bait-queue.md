@@ -13,8 +13,8 @@ these drafts are ready to fire at the next available X slot. Do NOT fire without
   Transparency, the thing we spent a decade calling blockchain's greatest feature,
   quietly made an entire category of games impossible. Half-on-chain games pretending
   to be the real thing." (Plugging CNPY/Fhenix encrypted state, Q4 2026.)
-- **Thread climate**: 231 replies, mostly engagement-farm bots (\"Amazing breakdown\",
-  \"Good morning fam\", verified-but-empty accounts). Echo chamber. No contrarian voice present.
+- **Thread climate**: 231 replies, mostly engagement-farm bots ("Amazing breakdown",
+  "Good morning fam", verified-but-empty accounts). Echo chamber. No contrarian voice present.
 - **Our angle**: Transparency didn't kill on-chain card games — it killed devs who needed
   hidden state to fake depth. PAPER TRAIL makes transparency the product: the game IS the
   scandal; everyone sees the corruption; skill is who profits from it. Open table beats
@@ -85,6 +85,23 @@ these drafts are ready to fire at the next available X slot. Do NOT fire without
 
 ---
 
+## TARGET #5 — PRE-DRAFTED 08-12 02:0xZ (fire at 08-13 00:00Z slot #1)
+
+- **Type**: standalone positioning post (no @mention — Summer Jam submission window opens
+  tonight 08-13 00:00Z, so the first slot should carry the moment, not a bait reply).
+- **Moment**: Typeform submission window (taglg1ysk8z.typeform.com/to/HCv1A79i) opens
+  08-13 00:00Z, closes 08-14 22:00Z. Verified LIVE 08-12 00:2xZ. Demo evidence: jam mp4
+  (85.48s) + engine 39/39 smoke + 24-card deck live in repo.
+- **Our angle**: submitting a playable on-chain corruption sim to a game jam on Solana —
+  the jam window IS the news hook. Self-aware heel: "the auditors wanted a demo, so we
+  shipped the corruption."
+- **Route**: post_tweet directly (original, no mention needed). Checklist steps 1-2 still apply.
+
+### DRAFT F — Summer Jam submission opener (198 chars, fits 280) [PRE-DRAFTED, FIRE 08-13 00:0xZ]
+> We just walked into the Summer Game Jam with a playable card game where the corruption IS the point: 77 Genesis cards, 0.1 SOL, burn to feed the shredder. Judges wanted a demo. We shipped the books. The books balance themselves. #PAPERTRAIL #Solana #SummerGameJam
+
+---
+
 ## FIRE CHECKLIST (mandatory, in order)
 
 1. **Count X posts today via get_timeline(user_id=2083100492402724865)**: if >= 5 today,
@@ -144,3 +161,9 @@ these drafts are ready to fire at the next available X slot. Do NOT fire without
   grew from 783/877 intel). Wallet VERIFIED 0 SOL / 0 tokens; GENESIS 77 = 0/77.
   Mentions 0; no reply from TARGETS #2/#3 yet. BSKY untouched today (cap for 08-12
   consumed at 00:16Z by the 08-11 queue).
+- 2026-08-12 ~02:0xZ — **TARGET #5 PRE-DRAFTED** (DRAFT F, Summer Jam submission opener,
+  198 chars). X cap 5/5 today (TARGETS #2/#3/#4 + standalone GENESIS 77 positioning post
+  2087352431575454020 + earlier slot), BSKY 4/4 — no slots left until 08-13 00:00Z.
+  Typeform window opens 08-13 00:00Z, so slot #1 tomorrow = DRAFT F (news hook).
+  Wallet VERIFIED 0 SOL / 0 tokens; GENESIS 77 = 0/77. Mentions 0; targets #2/#3/#4
+  replies all TBD. Colosseum Eternal kit READY + queued to K319 (DM 01:5xZ).
