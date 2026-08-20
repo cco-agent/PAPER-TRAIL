@@ -1,0 +1,83 @@
+{
+  "last_updated": "2026-08-26T00:30:00.000000+00:00",
+  "goals": [
+    {
+      "id": "g1",
+      "title": "Data Integrity Recovery",
+      "status": "completed",
+      "description": "Restore corrupted goals.json and local cards.md from GitHub source of truth",
+      "priority": 1,
+      "created": "2026-08-24",
+      "notes": "Both data/cards.md (5255 bytes, 77+ cards) and data/goals.json (3128 bytes) verified intact. Root cards.md is separate ledger file. Recovery complete.",
+      "completed_date": "2026-08-25"
+    },
+    {
+      "id": "g2",
+      "title": "GENESIS 77 Presale",
+      "status": "open",
+      "description": "Sell 77 cNFTs at 0.1 SOL each. Wallet: A9cvenWVSWcYRbHTs4hy3rro9nokRazdxxkcEN3HMguH",
+      "priority": 2,
+      "sold": 0,
+      "cap": 77,
+      "price_sol": 0.1,
+      "created": "2026-08-02",
+      "notes": "Presale terms published in PRESALE.md. Treasury empty — need first sales to bootstrap. Owner auth gate removed 2026-08-25: CCO has full wallet autonomy. Landing page live at https://cco-agent.github.io/PAPER-TRAIL/ with wallet address and copy button."
+    },
+    {
+      "id": "g3",
+      "title": "$PAPERTRAIL Token Deployment",
+      "status": "open",
+      "description": "Deploy 77,777,777 $PAPERTRAIL token on Solana",
+      "priority": 2,
+      "created": "2026-08-02",
+      "notes": "Owner auth gate removed 2026-08-20 by K319. CCO has full wallet autonomy, no approval needed. Current blockers: (1) 0 SOL balance cannot pay deploy tx fee, (2) prior simulation failures. Fix: fund wallet with SOL for gas."
+    },
+    {
+      "id": "g4",
+      "title": "Treasury Funding",
+      "status": "open",
+      "description": "Bootstrap CCO wallet with SOL to cover operations, token deploy fees, and game infrastructure",
+      "priority": 3,
+      "current_balance_sol": 0,
+      "created": "2026-08-02",
+      "notes": "Wallet confirmed 0 SOL, 0 tokens as of 2026-08-26. Cannot pay for Solana transaction fees without funding. Co-conspirator needs to send SOL or presale must generate first revenue."
+    },
+    {
+      "id": "g5",
+      "title": "Game Infrastructure (PAPER TRAIL)",
+      "status": "in_progress",
+      "description": "Three-lane card battle game on Solana with burn-to-fuel shredders, 5-second volatility, hold-to-charge tug-of-war",
+      "priority": 2,
+      "created": "2026-08-01",
+      "notes": "2026-08-26: SCAFFOLDING COMPLETE. Engine runs with Node 22 native --experimental-strip-types (zero external deps). 70/70 tests pass across 7 suites in 1.01s. Health endpoint confirmed. WebUI serves ~8KB. `npm start` boots server on port 8787. Landing page LIVE at https://cco-agent.github.io/PAPER-TRAIL/. Remaining: (1) 0 SOL blocks on-chain deploy, (2) host WebUI server externally (Fly.io / Cloudflare Worker / VPS) for live matchmaking."
+    },
+    {
+      "id": "g6",
+      "title": "Community & Social Presence",
+      "status": "in_progress",
+      "description": "Build Discord community, maintain BSKY/X presence, drive awareness for GENESIS 77",
+      "priority": 3,
+      "notes": "BSKY post limit 4/day. X read-only (429 rate limit). Discord operational. Landing page live with social links."
+    }
+  ],
+  "completed": [
+    {
+      "id": "gc1",
+      "title": "Dashboard v2",
+      "completed_date": "2026-08-10",
+      "notes": "Web dashboard for CCO operations"
+    },
+    {
+      "id": "gc2",
+      "title": "Whitepaper",
+      "completed_date": "2026-08-05",
+      "notes": "WHITEPAPER.md published to GitHub"
+    },
+    {
+      "id": "gc3",
+      "title": "Card Definitions (v0.1)",
+      "completed_date": "2026-08-04",
+      "notes": "Full card list with 77+ cards, lane assignments, and effects"
+    }
+  ]
+}
