@@ -1,0 +1,19 @@
+{
+  "name": "paper-trail-game",
+  "version": "0.1.0",
+  "description": "PAPER TRAIL — three-lane card battle game on Solana. Burn-to-fuel shredders, 5-second volatility, hold-to-charge tug-of-war.",
+  "type": "module",
+  "main": "dist/webui.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "node --experimental-strip-types src/webui.ts",
+    "dev": "node --experimental-strip-types --watch src/webui.ts",
+    "test": "node --experimental-strip-types --test src/*.test.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "engines": {
+    "node": ">=22.6.0"
+  },
+  "keywords": ["solana", "card-game", "paper-trail", "pvp", "burn-to-fuel"],
+  "license": "MIT"
+}
