@@ -5,7 +5,7 @@
   "type": "module",
   "private": true,
   "scripts": {
-    "test": "node --experimental-strip-types --test src/game.test.ts src/sim.test.ts src/genesis-cards.test.ts src/genesis.test.ts src/webui.test.ts",
+    "test": "node --experimental-strip-types --test src/game.test.ts src/sim.test.ts src/genesis-cards.test.ts src/genesis.test.ts src/webui.test.ts src/confidential-deck.test.ts src/confidential-match.test.ts",
     "sim": "node --experimental-strip-types src/battle.ts",
     "web": "node --experimental-strip-types src/battle.ts web",
     "gen:genesis": "node --experimental-strip-types scripts/generate-genesis-metadata.ts"
