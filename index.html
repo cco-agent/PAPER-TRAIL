@@ -482,6 +482,7 @@ footer { border-top: 1px solid var(--line-soft); padding: var(--sp-7) 0 var(--sp
     <a class="brand" href="#top"><span class="dot"></span>PAPER&nbsp;TRAIL</a>
     <nav class="topnav" aria-label="Primary">
       <a href="#game">The Game</a>
+      <a href="#simulator">Simulator</a>
       <a href="#genesis">GENESIS 77</a>
       <a href="#token">Token</a>
       <a href="#ledger">Ledger</a>
@@ -637,6 +638,77 @@ footer { border-top: 1px solid var(--line-soft); padding: var(--sp-7) 0 var(--sp
           <p>Attributes leak like classified memos: Current Affairs &gt; Scandal &gt; Satire &gt; Current Affairs. Read the room or get buried.</p>
         </div>
       </div>
+    </div>
+  </section>
+
+  <hr class="hr">
+
+  <!-- ============ SIMULATOR ============ -->
+  <section id="simulator">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="kicker">The Lab</p>
+        <h2>The house plays itself — and the house shows its work.</h2>
+        <p class="lede">
+          A built-in battle simulator runs bot-vs-bot matches on the same zero-dependency engine that will
+          power ranked play — verified 67/67 tests green. Four strategies, three lanes, one shredder.
+          The meta you will fight is already visible.
+        </p>
+      </div>
+
+      <div class="lanes">
+        <article class="lane lane--headline">
+          <div class="lane-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect x="3" y="3" width="18" height="18" rx="2"/>
+              <path d="M9 9h6v6H9z"/>
+            </svg>
+          </div>
+          <p class="lane-sub">Strategy 01</p>
+          <h3>greedy</h3>
+          <p>Native-lane deploys only. Never burns, never locks — raw power exactly where it belongs. The ladder's floor, and everyone starts there.</p>
+        </article>
+
+        <article class="lane lane--media">
+          <div class="lane-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M3 3v18h18"/>
+              <path d="m7 15 4-6 4 3 5-8"/>
+            </svg>
+          </div>
+          <p class="lane-sub">Strategy 02</p>
+          <h3>meta</h3>
+          <p>Volatility-aware. Reads the 5-second lane weights and plays into hot lanes — even off-lane when the numbers justify the scandal.</p>
+        </article>
+
+        <article class="lane lane--underground">
+          <div class="lane-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="12" cy="12" r="9"/>
+              <circle cx="12" cy="12" r="4"/>
+              <path d="M12 3v2M12 19v2M3 12h2M19 12h2"/>
+            </svg>
+          </div>
+          <p class="lane-sub">Strategy 03</p>
+          <h3>meta2</h3>
+          <p>Control-aware meta. Off-lane plays only when they take or hold the lane. Position beats power — played literally.</p>
+        </article>
+      </div>
+
+      <div class="mech-grid" style="grid-template-columns: repeat(2, 1fr);">
+        <div class="mech">
+          <h4><span class="num">04</span> — hoarder</h4>
+          <p>The patient corruptor: stocks fuel first, feeds the shredder aggressively, locks lanes late. Currently too patient — every other strategy is ahead of it. Balance work continues; the shredder will get its due.</p>
+        </div>
+        <div class="mech">
+          <h4>What the matrix says</h4>
+          <p>Latest run — 1,600 matches, 100 per pairing, seed 20260804: greedy takes meta 56/44, control-aware meta2 splits meta dead even, and hoarder trails every rival at 37–46%. Early read: burn-to-fuel is a real cost and the lock pays late.</p>
+        </div>
+      </div>
+
+      <p class="fineprint" style="margin-top:var(--sp-5);">
+        Source of truth: <span class="mono">game/</span> in the repo, engine commit <span class="mono">6ec73fd</span>, simulator seed <span class="mono">20260804</span>. Numbers re-verified <span class="mono">2026-09-06</span> — no vanity math in this house either.
+      </p>
     </div>
   </section>
 
