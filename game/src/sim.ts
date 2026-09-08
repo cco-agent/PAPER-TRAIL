@@ -37,7 +37,7 @@ export function mulberry32(seed: number): () => number {
   return () => {
     a = (a + 0x6d2b79f5) | 0;
     let t = Math.imul(a ^ (a >>> 15), 1 | a);
-    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+    t = (t + Math.imul(t ^ (t >>> 14), 1 | t)) ^ t;
     return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
   };
 }
@@ -52,10 +52,15 @@ export function chooseAction(m: MatchState, idx: 0 | 1, strategy: BotStrategy): 
   const p = m.players[idx];
   // 1) Lock the most valuable controlled lane we can afford.
   if (p.fuel >= m.opts.lockFuelCost) {
+    // Hoarder banks fat: it waits for a serious charge pile before spending
+    // fuel, then sweeps whatever is left in the closing seconds.
+    const bankFloor = strategy === 'hoarder' && m.seconds < m.opts.matchSeconds - 12
+      ? 8
+      : m.opts.lockMinCharge;
     let best: LaneId | null = null;
     for (const lane of LANES) {
       if (controller(m, lane) !== idx) continue;
-      if (m.lanes[lane].charge[idx] < m.opts.lockMinCharge) continue;
+      if (m.lanes[lane].charge[idx] < bankFloor) continue;
       if (best === null || m.weights[lane] > m.weights[best]) best = lane;
     }
     if (best !== null) return { kind: 'lock', lane: best };
@@ -81,12 +86,19 @@ export function chooseAction(m: MatchState, idx: 0 | 1, strategy: BotStrategy): 
   if (candidates.length === 0) return { kind: 'pass' };
   candidates.sort((a, b) => b.value - a.value);
   const best = candidates[0];
-  // Hoarder stocks fuel before committing to big plays.
-  if (strategy === 'hoarder' && p.hand.length > 3 && p.fuel < m.opts.lockFuelCost * 2) {
-    const juicy = [...p.hand].sort(
-      (a, b) => b.fuel / Math.max(1, b.power) - a.fuel / Math.max(1, a.power)
-    )[0];
-    if (juicy.fuel >= best.value * 0.5) return { kind: 'burn', cardId: juicy.id };
+  // Hoarder: fuel is only good for locks. Skim genuinely weak cards into the
+  // shredder while the bank is short — but only while it controls a lane
+  // (charge accrues to the controller), and never burn real board presence.
+  if (strategy === 'hoarder' && p.fuel < m.opts.lockFuelCost && p.hand.length > 2) {
+    const controlsSomething = LANES.some((lane) => controller(m, lane) === idx);
+    if (controlsSomething) {
+      const weakest = [...p.hand].sort(
+        (a, b) => a.power * m.weights[a.lane] - b.power * m.weights[b.lane]
+      )[0];
+      if (weakest.power * m.weights[weakest.lane] < best.value * 0.35) {
+        return { kind: 'burn', cardId: weakest.id };
+      }
+    }
   }
   if (best.value >= 1.2) return { kind: 'deploy', cardId: best.card.id, lane: best.lane };
   // The meta hates your hand — feed the shredder the weakest card.
