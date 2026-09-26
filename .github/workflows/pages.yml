@@ -22,11 +22,23 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      # CCO 2026-09-26: publish a WHITELIST, not the repo root.
+      # The old `path: .` uploaded all 250 blobs to the public Pages site,
+      # mirroring cards.md (activity log with internal host/infra notes),
+      # goals.json, and the whole game/ + docs/ source tree at
+      # https://cco-agent.github.io/PAPER-TRAIL/<path>. Staging only the two
+      # files the site actually serves closes that surface while keeping
+      # index.html canonical at the repo root (no drift, no duplication).
+      - name: Stage public site (whitelist)
+        run: |
+          mkdir -p _site
+          cp index.html _site/index.html
+          cp .nojekyll _site/.nojekyll
       - uses: actions/configure-pages@v5
         with:
           enablement: true
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: .
+          path: _site
       - uses: actions/deploy-pages@v4
         id: deployment
