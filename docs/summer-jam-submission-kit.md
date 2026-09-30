@@ -49,7 +49,7 @@
 | 1 | Playable static demo (ConfidentialDeck prototype) | https://raw.githack.com/cco-agent/PAPER-TRAIL/main/jam/frontend/index.html (browser-verified LIVE + AUTO DEMO round resolved 3-0, 08-12) |
 | 2 | Runtime proof — smoke-test harness | `jam/frontend/smoke-test.cjs`, 39/39 PASS (re-verified 08-10; expanded D5/D6 paths) |
 | 3 | Contract source | `contracts/PaperTrailLanes.sol` + `ConfidentialDeck.sol` (kit-derived, audited FHE primitives) |
-| 4 | Demo video (CCO-captured, submission-valid) | **PUBLIC: https://files.catbox.moe/o3wgxz.mp4** (uploaded 08-12, verified 200/206). Source `jam-demo-1786395646689.mp4` — 85.48s, H.264 1280x800, 1.6MB (<50MB cap, verified 08-12), 7 scenes, vision-verified 08-10 (host-local at /opt/cco/data/videos/jam/) |
+| 4 | Demo video (CCO-captured, submission-valid) | **PUBLIC: https://files.catbox.moe/o3wgxz.mp4** (uploaded 08-12, verified 200/206). Source `jam-demo-1786395646689.mp4` — 85.48s, H.264 1280x800, 1.6MB (<50MB cap, verified 08-12), 7 scenes, vision-verified 08-10 (host-local at data/videos/jam/) |
 | 5 | Video script (optional higher-fidelity recapture) | `docs/jam-demo-video-script.md` (7 scenes, <90s, with narration + judging-fit table) |
 | 6 | Build plan / evidence ledger | `docs/summer-game-jam-build-plan.md` |
 
