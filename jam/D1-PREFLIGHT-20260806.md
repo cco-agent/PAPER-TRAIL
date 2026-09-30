@@ -14,7 +14,7 @@ Without the script, the Summer Game Jam D1 runbook would have failed at the
 
 ### Fix
 - Restored `deploy-lanes.cjs` (64 lines, verbatim from commit `db0eac5`) to
-  `/opt/cco/jam/hangman-main/contracts/scripts/deploy-lanes.cjs`
+  `jam/hangman-main/contracts/scripts/deploy-lanes.cjs`
 - Local sha1: `1a69ae08bbc8a7b7cce69bab60232ac15858d21d`
 - `node --check` → PASS
 
